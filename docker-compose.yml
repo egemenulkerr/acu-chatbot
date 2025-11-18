@@ -1,0 +1,18 @@
+services:
+  backend:
+    # 'backend' klasöründeki Dockerfile'ı kullanarak imajı oluştur
+    build: ./backend
+    
+    # Konteynerdeki 8000 portunu, kendi bilgisayarımızdaki 8000 portuna bağla
+    ports:
+      - "8000:8000"
+      
+    # CANLI KOD SENKRONİZASYONU
+    # ./backend/app klasöründeki her değişikliği,
+    # konteyner içindeki /app/app klasörüne anında yansıt.
+    volumes:
+      - ./backend/app:/app/app
+      
+    # FastAPI'yi --reload ile çalıştır
+    # --host 0.0.0.0 -> Konteynerin dışından erişime izin ver
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

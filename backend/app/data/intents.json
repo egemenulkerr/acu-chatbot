@@ -1,0 +1,29 @@
+{
+  "classification_threshold": 10,
+  "intents": [
+    {
+      "intent_name": "akademik_takvim",
+      "keywords": {
+        "akademik": 5,
+        "takvim": 5,
+        "final": 4,
+        "sınav": 3,
+        "tarih": 3,
+        "yarıyıl": 2
+      },
+      "response_type": "URL",
+      "response_content": "https://oidb.artvin.edu.tr/akademik-takvim"
+    },
+    {
+      "intent_name": "yemek_listesi",
+      "keywords": {
+        "yemek": 5,
+        "liste": 4,
+        "sks": 3,
+        "bugün": 2
+      },
+      "response_type": "DATA_LOOKUP",
+      "response_content": "SKS yemek listesi veritabanından çekilecek."
+    }
+  ]
+}

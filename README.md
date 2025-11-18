@@ -1,4 +1,0 @@
-# chatbot-uni
-Graduation project
-
--
