@@ -1,29 +1,113 @@
 {
-  "classification_threshold": 10,
+  "keyword_threshold": 10,
+  "similarity_threshold": 0.7,
   "intents": [
     {
-      "intent_name": "akademik_takvim",
+      "intent_name": "selamlasma",
       "keywords": {
-        "akademik": 5,
-        "takvim": 5,
-        "final": 4,
-        "sınav": 3,
-        "tarih": 3,
-        "yarıyıl": 2
+        "merhaba": 5, "selam": 5, "nasılsın": 3, "hey": 2, "günaydın": 4, "tünaydın": 4, "iyi": 1,
+        "nasıl gidiyor" : 5, "hello" :5, "keke" : 5, "napisen" : 5
       },
-      "response_type": "URL",
-      "response_content": "https://oidb.artvin.edu.tr/akademik-takvim"
+      "examples": [
+        "merhaba",
+        "selam bot",
+        "nasılsın nasıl gidiyor",
+        "merhabalar kolay gelsin",
+        "selamun aleyküm"
+      ],
+      "response_type": "RANDOM_TEXT", 
+      "response_content": [
+        "Merhaba! AÇÜ Asistan'a hoş geldin. Bugün sana nasıl yardımcı olabilirim? 😊",
+        "Selamlar! Kampüs, yemekhane veya dersler hakkında ne bilmek istersin?",
+        "Merhaba! Ben dijital asistanın. Sorularını bekliyorum. 🚀",
+        "Hoş geldin! Akademik takvimden yemek listesine kadar her şeyi bana sorabilirsin.",
+        "Selam! Hızlı ve doğru bilgi için doğru yerdesin. Seni dinliyorum.",
+        "Merhabalar! Artvin Çoruh Üniversitesi ile ilgili aklına takılan bir şey var mı?",
+        "Selam! Bugün hava güzel mi bilmiyorum ama ben sana yardım etmeye hazırım. ☀️",
+        "AÇÜ Asistan hizmetinizde! Nasıl yardımcı olabilirim?",
+        "Merhaba! Bir sorun mu var, yoksa sadece sohbet mi ediyoruz? Her ikisine de varım!",
+        "Selamlar, nasılsın? Bugün hangi bilgiye ihtiyacın var?",
+        "Merhaba! Senin için buradayım. Sormaktan çekinme. 🎓",
+        "Selam! Üniversite hayatını biraz daha kolaylaştırmak için buradayım."
+      ]
     },
     {
       "intent_name": "yemek_listesi",
       "keywords": {
         "yemek": 5,
         "liste": 4,
+        "menü": 4,
+        "bugün": 3,
         "sks": 3,
-        "bugün": 2
+        "açım": 3
       },
-      "response_type": "DATA_LOOKUP",
-      "response_content": "SKS yemek listesi veritabanından çekilecek."
+      "examples": [
+        "karnım çok aç",
+        "bugün ne yesem acaba",
+        "öğle yemeği çıktı mı",
+        "yemek listesi"
+      ],
+      "response_type": "TEXT",
+      "response_content": "🍽️ **Günün Menüsü:**\n\nHAFTA SONU\n\nAfiyet olsun! 😋"
+    },
+    {
+      "intent_name": "akademik_takvim",
+      "keywords": {
+        "akademik": 5,
+        "takvim": 5,
+        "sınav": 3,
+        "tarih": 3,
+        "final": 4
+      },
+      "examples": [
+        "okullar ne zaman kapanıyor",
+        "yaz tatili ne zaman başlıyor",
+        "ders kaydı kaçırınca ne olur"
+      ],
+      "response_type": "URL",
+      "response_content": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/v5-2025-2026_Akademik_Takvim_10_09_2025.pdf",
+      "extra_data": {
+        "2025-2026": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/v5-2025-2026_Akademik_Takvim_10_09_2025.pdf",
+        "2024-2025": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2025/2024-2025_Akademik_Takvim%2015_05_2025%20De%C4%9Fi%C5%9Fiklik.pdf",
+        "2023-2024": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/duyuru/Akademik_Takvim-28_08_2023%20-%20Kopya.pdf",
+        "2022-2023": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/2022-2023_Bahar_D%C3%B6nemi_Akademik_Takvim_18_05_2023.pdf",
+        "2021-2022": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2021-2022%2004_10_2021%20Sitede%20Yay%C4%B1nlanacak.pdf",
+        "2020-2021": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2020-2021%20AKADEM%C4%B0K%20TAKV%C4%B0M%C4%B0%20SON%20SON.pdf",
+        "2019-2020": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/2019-2020%20Akademik%20Takvim%20De%C4%9Fi%C5%9Fiklik-Final-B%C3%BCt%20Son%20%C5%9Fekli-21_05_2020.pdf",
+        "2018-2019": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2018-2019%20AKADEM%C4%B0K%20TAKV%C4%B0M%C4%B0-Y%C3%96K-ilan-1.pdf",
+        "2017-2018": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2017-2018%20AKADEMI%CC%87K%20TAKVI%CC%87MI%CC%87-ilan-3-1%20(1).pdf",
+        "2016-2017": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2016-2017AkademikTakvim.pdf",
+        "2015-2016": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2015-2016%20AKADEMI%CC%87K%20TAKVI%CC%87M.pdf",
+        "2014-2015": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/2014-2015%20AKADEMI%CC%87K%20TAKVI%CC%87M.pdf",
+        "2013-2014": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/13_14akademiktakvim.pdf",
+        "2012-2013": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/12_13akademiktakvim.pdf",
+        "2011-2012": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/11_12akademiktakvim.pdf",
+        "2010-2011": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/AkademikTakvim/10_11akademiktakvim.pdf",
+        "current": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/v5-2025-2026_Akademik_Takvim_10_09_2025.pdf"
+      }
+    },
+    {
+      "intent_name": "cihaz_bilgisi",
+      "keywords": {
+        "cihaz": 3,
+        "özellik": 3,
+        "fiyat": 3,
+        "stok": 3,
+        "mikroskop": 5,
+        "laboratuvar": 4,
+        "etüv": 5,
+        "cihazı": 3,
+        "var": 1
+      },
+      "examples": [
+        "mikroskop var mı",
+        "laboratuvarda hangi cihazlar var",
+        "etüv cihazı özellikleri",
+        "spektrofotometre nerede",
+        "bu cihazın özellikleri neler"
+      ],
+      "response_type": "CUSTOM_LOGIC",
+      "response_content": "DEVICE_REGISTRY"
     }
   ]
 }

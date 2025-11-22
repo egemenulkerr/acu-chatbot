@@ -12,6 +12,7 @@ services:
     # konteyner içindeki /app/app klasörüne anında yansıt.
     volumes:
       - ./backend/app:/app/app
+      - ./backend/.env:/app/.env
       
     # FastAPI'yi --reload ile çalıştır
     # --host 0.0.0.0 -> Konteynerin dışından erişime izin ver
