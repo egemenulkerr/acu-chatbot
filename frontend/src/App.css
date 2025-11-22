@@ -1,0 +1,184 @@
+/* Sayfa genelini etkilemesin, sadece widget'ı konumlandırsın */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent; /* Arkaplan şeffaf olsun */
+}
+
+/* --- WIDGET KONTEYNERİ --- */
+.widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999; /* Diğer her şeyin üstünde */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Sağa yasla */
+  gap: 15px;
+}
+
+/* --- AÇMA/KAPAMA BUTONU (LAUNCHER) --- */
+.launcher-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #2c3e50; /* AÇÜ Kurumsal Renk */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s;
+}
+
+.launcher-btn:hover {
+  transform: scale(1.1);
+  background-color: #34495e;
+}
+
+.launcher-icon {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+
+/* --- SOHBET PENCERESİ --- */
+.chat-window {
+  width: 350px;
+  height: 500px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  /* Açılış Animasyonu */
+  transform-origin: bottom right;
+  animation: openPopup 0.3s ease-out forwards;
+}
+
+@keyframes openPopup {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- HEADER (Başlık ve Kapat Butonu) --- */
+.chat-header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify_content: space-between;
+  align_items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* --- MESAJ ALANI (Eski kodla aynı) --- */
+.messages-area {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f9f9f9;
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.message-bubble.user {
+  background-color: #3498db;
+  color: white;
+  align_self: flex-end;
+  border-bottom-right-radius: 2px;
+  margin-left: auto;
+}
+
+.message-bubble.bot {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  align_self: flex-start;
+  border-bottom-left-radius: 2px;
+  margin-right: auto;
+}
+
+.message-source {
+  display: block;
+  font-size: 9px;
+  opacity: 0.7;
+  margin-top: 4px;
+  text-align: right;
+  font-style: italic;
+}
+
+.loading { color: #7f8c8d; font-style: italic; font-size: 12px; }
+
+/* --- GİRİŞ ALANI --- */
+.input-area {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+  background-color: white;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+
+button {
+  padding: 0 15px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* --- LİNKLER --- */
+.message-bubble a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Kullanıcı balonundaki linkler (Zemin mavi -> Link beyaz) */
+.message-bubble.user a {
+  color: #ecf0f1; 
+}
+
+/* Bot balonundaki linkler (Zemin gri -> Link mavi) */
+.message-bubble.bot a {
+  color: #2980b9;
+}

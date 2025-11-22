@@ -1,0 +1,3566 @@
+{
+  "3 nokta eğme test cihazı": {
+    "original_name": "3 Nokta Eğme Test Cihazı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: Emko, Sorumlu: Fatin SÖNMEZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "8 kanallı otomatik pipet (100-1200 ul)": {
+    "original_name": "8 kanallı otomatik pipet (100-1200 ul)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: ULMETTLERTOLEDO, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "8 kanallı otomatik pipet (30-300 ul)": {
+    "original_name": "8 kanallı otomatik pipet (30-300 ul)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: ULMETTLERTOLEDO, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "8 kanallı otomatik pipet (5-50 ul)": {
+    "original_name": "8 kanallı otomatik pipet (5-50 ul)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: ULMETTLERTOLEDO, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ac motor": {
+    "original_name": "AC Motor",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "açısal çalkalayıcı": {
+    "original_name": "Açısal çalkalayıcı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: HEİDOLPH 541, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ahşap kalınlık makinesi (63 lük)": {
+    "original_name": "Ahşap Kalınlık Makinesi (63 Lük)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Netmak, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ahşap yakma makinesi": {
+    "original_name": "Ahşap Yakma Makinesi",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Razertip - D 100 Profesyonel, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "akarsularda su akış hızı ölçüm cihazı": {
+    "original_name": "Akarsularda su akış hızı ölçüm cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "aldatan görüntü": {
+    "original_name": "Aldatan Görüntü",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "alev fotometresi": {
+    "original_name": "Alev Fotometresi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: BWB, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "aljinat karıştırıcı": {
+    "original_name": "Aljinat karıştırıcı",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "altın kaplama cihazı": {
+    "original_name": "Altın Kaplama Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: SEM Lab., Marka: Cressington 108 Auto, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ambulans sedyesi": {
+    "original_name": "Ambulans Sedyesi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Xıehe, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ampermetre": {
+    "original_name": "Ampermetre",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Expech, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "anahtar tipi matkap": {
+    "original_name": "Anahtar Tipi Matkap",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: 5M32-G, Sorumlu: Erman AYDIN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "analitik terazi": {
+    "original_name": "Analitik Terazi",
+    "description": "Birim: Orman Fakültesi, Lab: Havza Yönetimi Labaratuvarı, Marka: Radwag, Sorumlu: Saim YILDIRIMER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "anali̇ti̇k terazi̇": {
+    "original_name": "ANALİTİK TERAZİ",
+    "description": "Birim: Orman Fakültesi, Lab: ORMAN ENTOMOLOJİSİ VE KORUMA, Marka: RADWAG AS 200R2, Sorumlu: Hazan ALKAN AKINCI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "analiz tartısı": {
+    "original_name": "Analiz Tartısı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Arzum, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "analog darbe test": {
+    "original_name": "Analog Darbe Test",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: Impact, Sorumlu: Çiğdem UĞURLU KÖSEOĞLU",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "analog multimetre": {
+    "original_name": "Analog Multimetre",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Protek, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "analog uygulamalar eğitim seti": {
+    "original_name": "Analog Uygulamalar Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Yıldırım, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "ankastre fırın": {
+    "original_name": "Ankastre Fırın",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "ankastre ocak": {
+    "original_name": "Ankastre Ocak",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik - Yes 0706, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "antropometrik ölçüm seti": {
+    "original_name": "Antropometrik ölçüm seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Lafayette 01290, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "armband": {
+    "original_name": "Armband",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "asansör eğitim seti": {
+    "original_name": "Asansör Eğitim Seti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Siemens, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "aşındırma cihazı": {
+    "original_name": "Aşındırma Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: Los Angeles, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "askıda katı madde tayin seti": {
+    "original_name": "Askıda Katı Madde Tayin Seti",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: -, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "atölye sehpaları": {
+    "original_name": "Atölye Sehpaları",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Dremel, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "avuç i̇çi taşlama": {
+    "original_name": "Avuç İçi Taşlama",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "avuçlama makinesi": {
+    "original_name": "Avuçlama Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Bosch, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ayarlı havya": {
+    "original_name": "Ayarlı Havya",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "azot protein tayin cihazı": {
+    "original_name": "Azot Protein Tayin Cihazı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: Velp, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bakteriyolojik etüv": {
+    "original_name": "Bakteriyolojik Etüv",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: MMM Incucell56, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "balon isıtıcı": {
+    "original_name": "balon Isıtıcı",
+    "description": "Birim: Orman Fakültesi, Lab: Ekoloji - Toprak Labaratuvarı, Marka: Mtops, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "balon isıtıcı (1000 ml)": {
+    "original_name": "Balon Isıtıcı (1000 Ml)",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: Mtops, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "balon isıtıcı (250 ml)": {
+    "original_name": "Balon Isıtıcı (250 Ml)",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: Mtops, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "balon isıtıcı (mantolu)": {
+    "original_name": "Balon Isıtıcı (Mantolu)",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Entomolojisi ve Koruma, Marka: Finetech, Sorumlu: Bülent SAĞLAM",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bant ve disk zımpara makinesi": {
+    "original_name": "Bant ve Disk Zımpara Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Scheppach - Şerit Bd 7500, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bant zımpara makinesi": {
+    "original_name": "Bant Zımpara Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "bebek boy ölçer": {
+    "original_name": "Bebek Boy Ölçer",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bebek entübasyon maketi": {
+    "original_name": "Bebek Entübasyon Maketi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bebek temel yaşam desteği mankeni": {
+    "original_name": "Bebek Temel Yaşam Desteği Mankeni",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bernoulli topu": {
+    "original_name": "Bernoulli Topu",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "beton hava boşluk ölçer": {
+    "original_name": "Beton Hava Boşluk Ölçer",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "beton test çekici": {
+    "original_name": "Beton Test Çekici",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "beton test presi": {
+    "original_name": "Beton Test Presi",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bıçaklı matkap": {
+    "original_name": "Bıçaklı Matkap",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "bileme ve taşlama makinesi": {
+    "original_name": "Bileme ve Taşlama Makinesi",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: GMS 500, Sorumlu: Fatin SÖNMEZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "binoküler öğrenci mikroskobu": {
+    "original_name": "Binoküler öğrenci mikroskobu",
+    "description": "Birim: Fen Edebiyat Fakültesi, Lab: Biyoloji, Marka: Zeis, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "binoküler öğrenci mikroskopu": {
+    "original_name": "Binoküler öğrenci mikroskopu",
+    "description": "Birim: Fen Edebiyat Fakültesi, Lab: Biyoloji, Marka: Zeis, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "biot - sav art deney seti": {
+    "original_name": "BIOT - SAV ART Deney Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "bitki yetiştirme kabini": {
+    "original_name": "Bitki yetiştirme kabini",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: ARALAB FİTOCLİMA 600, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "biyogüvenlik kabini": {
+    "original_name": "Biyogüvenlik kabini",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: FASTER CLASS II-A, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "blender": {
+    "original_name": "Blender",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "böhme aşındırma test cihazı": {
+    "original_name": "Böhme Aşındırma Test Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "buharlı kurutucu": {
+    "original_name": "Buharlı Kurutucu",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: Tefal, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bulanık ölçer": {
+    "original_name": "Bulanık Ölçer",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler, Marka: WTWTUR, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bulaşık makinesi": {
+    "original_name": "Bulaşık makinesi",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: PROFİLO, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "bulaşık yıkama makinesi": {
+    "original_name": "Bulaşık Yıkama Makinesi",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "büretler": {
+    "original_name": "Büretler",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Brand, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "buzdolabı": {
+    "original_name": "Buzdolabı",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: Bosch, Sorumlu: Melahat ÖZCAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "buzdolabı (nofrost, 435 lt)": {
+    "original_name": "Buzdolabı (Nofrost, 435 Lt)",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: Arçelik, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "buzdolapları": {
+    "original_name": "Buzdolapları",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Arçelik 5231 MFY, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çalkalamalı inkübatör": {
+    "original_name": "Çalkalamalı inkübatör",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: -, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çalkalayıcı": {
+    "original_name": "Çalkalayıcı",
+    "description": "Birim: Eğitim Fakültesi, Lab: Biyoloji, Marka: Heidolph, Sorumlu: Mesude ÇALIŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çalkalayıcı su banyosu": {
+    "original_name": "Çalkalayıcı Su Banyosu",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Thermal, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çanta tipi plc eğitim seti": {
+    "original_name": "Çanta Tipi PLC Eğitim Seti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Siemens, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "çap ölçer": {
+    "original_name": "Çap Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: -, Sorumlu: Yoktur",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "çeker ocak": {
+    "original_name": "Çeker ocak",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Biokim, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çeker ocak (130*75*240 cm)": {
+    "original_name": "Çeker Ocak (130*75*240 Cm)",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çekme aparatı seti": {
+    "original_name": "Çekme Aparatı seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Mekanik, Marka: Zwick, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çelik metre": {
+    "original_name": "Çelik metre",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 7"
+  },
+  "chns": {
+    "original_name": "CHNS",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Macro-Cube, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çift diskli yüzey zımparalama makinesi": {
+    "original_name": "Çift Diskli Yüzey Zımparalama Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Bulupol, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çimento eğilme ve basınç test cihazı": {
+    "original_name": "Çimento eğilme ve basınç test cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çimento mikseri": {
+    "original_name": "Çimento Mikseri",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çipli kırlangıç açma makinesi": {
+    "original_name": "Çipli Kırlangıç Açma Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Özçelik, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çizilme sertliği ölçme cihazı": {
+    "original_name": "Çizilme Sertliği Ölçme Cihazı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Scractch Biu Ged Tes Ter, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "classic mini modüler sistem": {
+    "original_name": "Classic Mini Modüler Sistem",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "clevenger düzeneği": {
+    "original_name": "Clevenger Düzeneği",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "cnc ahşap i̇şleme makinesi unimat cnc set": {
+    "original_name": "CNC Ahşap İşleme Makinesi Unimat CNC Set",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "cnc freze tezgahı": {
+    "original_name": "CNC Freze Tezgahı",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Jetco, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "cnc i̇şlem merkezi": {
+    "original_name": "CNC İşlem Merkezi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "cnc torna tezgahı": {
+    "original_name": "CNC Torna Tezgahı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: NG 400, Sorumlu: Fatin SÖNMEZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çocuk laringoskop seti": {
+    "original_name": "Çocuk Laringoskop Seti",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çocuk temel yaşam desteği mankeni": {
+    "original_name": "Çocuk Temel Yaşam Desteği Mankeni",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "çok kanallı mikropipert seti": {
+    "original_name": "Çok kanallı mikropipert seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Sokarex, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "cryostat": {
+    "original_name": "Cryostat",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Thermo Shandon Crytotom, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "daire testere": {
+    "original_name": "Daire Testere",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Örnek Hazırlama, Marka: Bosch Gts 10 XC, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dairesel hareketli çalkalayıcı": {
+    "original_name": "Dairesel Hareketli Çalkalayıcı",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Nüve SL350, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dc motor": {
+    "original_name": "DC Motor",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Femsan, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "de iyonize-bi distile saf su cihazı": {
+    "original_name": "De iyonize-Bi distile saf su cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: MiliQ Direct 8, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dekopaj testere": {
+    "original_name": "Dekopaj Testere",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "delici - kırıcı (akülü)": {
+    "original_name": "Delici - Kırıcı (Akülü)",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Artvin Meslek Yüksekokulu, Marka: -, Sorumlu: Kemal TORPUŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "derin dondurucu": {
+    "original_name": "Derin Dondurucu",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: New Brunswick Sci, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "destile su cihazı": {
+    "original_name": "Destile Su Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: Labaratuvar Malzemesi Ambarı, Marka: GFL, Sorumlu: Orman Fakültesi Dekanlığı",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "difarensiyel": {
+    "original_name": "Difarensiyel",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "diğer araştırma ve üretim amaçlı labaratuvar cihaz ve aletleri": {
+    "original_name": "Diğer Araştırma ve Üretim Amaçlı Labaratuvar Cihaz ve Aletleri",
+    "description": "Birim: Orman Fakültesi, Lab: Botanik Anatomi Labaratuvarı, Marka: -, Sorumlu: Melahat ÖZCAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "diğer fiziksel özellikleri ölçme ve test cihazları": {
+    "original_name": "Diğer Fiziksel Özellikleri Ölçme ve Test Cihazları",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: Haglöf, Sorumlu: Aydın KAHRİMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "diğer hassas ölçü aletleri": {
+    "original_name": "Diğer Hassas Ölçü Aletleri",
+    "description": "Birim: Orman Fakültesi, Lab: Havza Yönetimi Labaratuvarı, Marka: -, Sorumlu: Esin ERDOĞAN YÜKSEL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "diğer karıştırma sıkma ve dilimleme amaçlı cihazlar": {
+    "original_name": "Diğer Karıştırma Sıkma ve Dilimleme Amaçlı Cihazlar",
+    "description": "Birim: Orman Fakültesi, Lab: Labaratuvar Malzemesi Ambarı, Marka: -, Sorumlu: Orman Fakültesi Dekanlığı",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "diğer labaratuvar ve hastane tipi ısıtıcılar ve soğutucular": {
+    "original_name": "Diğer Labaratuvar ve Hastane Tipi ısıtıcılar ve Soğutucular",
+    "description": "Birim: Orman Fakültesi, Lab: Botanik Anatomi Labaratuvarı, Marka: -, Sorumlu: Melahat ÖZCAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "digital terazi": {
+    "original_name": "Digital Terazi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Depo, Marka: Ohasus, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital bebek tartısı": {
+    "original_name": "Dijital Bebek Tartısı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital büret": {
+    "original_name": "Dijital büret",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital el dinamometresi": {
+    "original_name": "Dijital El Dinamometresi",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital firewire gör. sistemi": {
+    "original_name": "Dijital Firewire Gör. sistemi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Görüntüleme, Marka: Leıca, Sorumlu: Funda ERŞENBAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital fokometre": {
+    "original_name": "Dijital Fokometre",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "dijital kronometre": {
+    "original_name": "Dijital Kronometre",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital kumpas": {
+    "original_name": "Dijital Kumpas",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital matkap (otomatik)": {
+    "original_name": "Dijital Matkap (Otomatik)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital mikrometre": {
+    "original_name": "Dijital Mikrometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: L&W, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital nivo": {
+    "original_name": "Dijital Nivo",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Harita, Marka: leica, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital osiloskop (20 mhz)": {
+    "original_name": "Dijital Osiloskop (20 Mhz)",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Tekolab, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital osiloskop (50 mhz)": {
+    "original_name": "Dijital Osiloskop (50 Mhz)",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Tekolab, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital refraktometre": {
+    "original_name": "Dijital refraktometre",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital terazi": {
+    "original_name": "Dijital Terazi",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Markasız, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital termometre": {
+    "original_name": "Dijital Termometre",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 6"
+  },
+  "dijital termometre ve nem ölçer": {
+    "original_name": "Dijital Termometre ve Nem Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dijital uygulamalar eğitim seti": {
+    "original_name": "Dijital Uygulamalar Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Yıldırım, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "dikey jel elektroforez seti": {
+    "original_name": "Dikey jel Elektroforez seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: BioRad, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dikey şerit testere": {
+    "original_name": "Dikey Şerit Testere",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Proxon, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "direnç serisi": {
+    "original_name": "Direnç Serisi",
+    "description": "Birim: Eğitim Fakültesi, Lab: Eğit. Fizik, Marka: -, Sorumlu: Cafer Mert YEŞİLKANAT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 7"
+  },
+  "distilasyon cihazı": {
+    "original_name": "Distilasyon Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Markasız, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "distile su cihazı": {
+    "original_name": "Distile su cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "doğru akım taşıyan tele etkiyen kuvvet deney seti": {
+    "original_name": "Doğru Akım Taşıyan Tele Etkiyen Kuvvet Deney Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "doldurma hunisi": {
+    "original_name": "Doldurma Hunisi",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "donatı çekme cihazı": {
+    "original_name": "Donatı Çekme Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "donatı tespit cihazı": {
+    "original_name": "Donatı Tespit Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "döner tabla ve tekerlekli jiroskop": {
+    "original_name": "Döner Tabla ve Tekerlekli Jiroskop",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dört zamanlı motor seti": {
+    "original_name": "Dört Zamanlı Motor Seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "drone": {
+    "original_name": "Drone",
+    "description": "Birim: Mühendislik Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "drum tipi beton mikseri": {
+    "original_name": "Drum Tipi Beton Mikseri",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dsc": {
+    "original_name": "DSC",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Perkin Elmer, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "dürometreler": {
+    "original_name": "Dürometreler",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Blue GED 509, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "düşük sıcaklık i̇nkübatörü": {
+    "original_name": "Düşük Sıcaklık İnkübatörü",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Lovibond, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "düz kenar bantlama makinesi": {
+    "original_name": "Düz Kenar Bantlama Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Biesse - Streama, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "edu eğitim torna tezgahı": {
+    "original_name": "Edu Eğitim Torna Tezgahı",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: NG 400, Sorumlu: Erman AYDIN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "eğitim defibirilatör cihazı": {
+    "original_name": "Eğitim Defibirilatör Cihazı",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "eğitim mankeni": {
+    "original_name": "Eğitim Mankeni",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İş Sağlığı, Marka: -, Sorumlu: Burcu YERLİKAYA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "eğri kenar bantlama makinesi": {
+    "original_name": "Eğri Kenar Bantlama Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ei gps": {
+    "original_name": "EI GPS",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Harita, Marka: Magellan Explorist, Sorumlu: Ayşe YAVUZ ÖZALP",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ekg cihazı": {
+    "original_name": "EKG cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Polly Apektrum 8/E, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "el arabası": {
+    "original_name": "El Arabası",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "el dinamometresi": {
+    "original_name": "El dinamometresi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Nort Coast, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "el dopleri": {
+    "original_name": "El Dopleri",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Obstetri ve Jinekoloji, Marka: -, Sorumlu: Zeynep TEMİZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "el mengenesi": {
+    "original_name": "El Mengenesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Saitd, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "el motoru": {
+    "original_name": "El Motoru",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Dremel - 4000 65 AKS, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "el tipi ağaç ölçer": {
+    "original_name": "El Tipi Ağaç Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "el tipi dijital multimetre": {
+    "original_name": "El Tipi Dijital Multimetre",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Protek, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "el tipi eğim ölçer": {
+    "original_name": "El Tipi Eğim Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elek seti": {
+    "original_name": "Elek Seti",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Örnek Hazırlama, Marka: Fristch, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektrik - elektronik eğitim seti dc uygulama modülleri": {
+    "original_name": "Elektrik - Elektronik Eğitim seti DC Uygulama Modülleri",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektrik ark kaynak makinesi": {
+    "original_name": "Elektrik Ark Kaynak Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: RS400M, Sorumlu: Erman AYDIN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektrik makineleri ve kumanda eğitim seti": {
+    "original_name": "Elektrik Makineleri ve Kumanda Eğitim seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Yıldırım, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektrikli matkap": {
+    "original_name": "Elektrikli Matkap",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektro physik dijital açı ölçer": {
+    "original_name": "Elektro Physik Dijital Açı Ölçer",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Bosch Glm 150, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "elektromekanik kumanda eğitim seti": {
+    "original_name": "Elektromekanik Kumanda Eğitim seti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "elektron mikroskobu": {
+    "original_name": "Elektron Mikroskobu",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: SEM Lab., Marka: Zeiss Evo LS 10, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektronik ayarlı çizicili yatar daire": {
+    "original_name": "Elektronik Ayarlı Çizicili Yatar daire",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Mızrak - 380, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektronik kumpas": {
+    "original_name": "Elektronik Kumpas",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Stainless, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "elektronik mikrometre": {
+    "original_name": "Elektronik Mikrometre",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Max, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektronik tartı": {
+    "original_name": "Elektronik Tartı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elektronik uzaklık ölçer": {
+    "original_name": "Elektronik Uzaklık Ölçer",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Harita, Marka: Topcon, Sorumlu: Ayşe YAVUZ ÖZALP",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "elisa okuyucu": {
+    "original_name": "Elisa Okuyucu",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Biorad, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "emprenye sistemi": {
+    "original_name": "Emprenye Sistemi",
+    "description": "Birim: Orman Fakültesi, Lab: Lif ve Kağıt Labaratuvarı -2-, Marka: Altes, Sorumlu: Türker GÜLEÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "enjeksiyon modeli": {
+    "original_name": "Enjeksiyon Modeli",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "enjeksiyon ve i̇mjeksiyon modeli": {
+    "original_name": "Enjeksiyon ve İmjeksiyon Modeli",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ergonomi bisikleti": {
+    "original_name": "Ergonomi Bisikleti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Monarx 928 E, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "erime noktası tayin cihazı": {
+    "original_name": "Erime Noktası Tayin Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Labart, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "erişkin entübasyon mankeni": {
+    "original_name": "Erişkin Entübasyon Mankeni",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "etüv": {
+    "original_name": "Etüv",
+    "description": "Birim: Eğitim Fakültesi, Lab: Kimya, Marka: Memmert, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "evaparatör": {
+    "original_name": "Evaparatör",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Ika Rv10, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "evaparatör buharlaştırıcı": {
+    "original_name": "Evaparatör Buharlaştırıcı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: Heidolph, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "evaporator": {
+    "original_name": "Evaporator",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Odun Kimyası, Marka: Heidolph, Sorumlu: Şule CEYLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "faraday yasası deney seti": {
+    "original_name": "Faraday Yasası Deney seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "faraş kaşık sedye": {
+    "original_name": "Faraş Kaşık Sedye",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Xıehe, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "faz kontrast mikroskop": {
+    "original_name": "Faz kontrast mikroskop",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Görüntüleme, Marka: Zeıss, Sorumlu: Funda ERŞENBAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "fotoğraf makinesi": {
+    "original_name": "Fotoğraf Makinesi",
+    "description": "Birim: Orman Fakültesi, Lab: Labaratuvar Malzemesi Ambarı, Marka: Nikon, Sorumlu: Melahat ÖZCAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "fotoselli el taşı": {
+    "original_name": "Fotoselli El Taşı",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "fotosentez ölçüm chz.": {
+    "original_name": "Fotosentez ölçüm chz.",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Licor, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "frekans jeneratörü": {
+    "original_name": "Frekans Jeneratörü",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "freze makinesi": {
+    "original_name": "Freze Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Makine, Marka: Netmak, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "freze tezgahları ve makineleri eğrisel - düz kenar bandı yapılmış malzeme i̇çin": {
+    "original_name": "Freze Tezgahları ve Makineleri Eğrisel - Düz Kenar Bandı Yapılmış Malzeme İçin",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ftir-atr spektrofotometre": {
+    "original_name": "FTIR-ATR Spektrofotometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Spektroskopi, Marka: Shimatzu IR Prestıge-21, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gaz ölçüm cihazı": {
+    "original_name": "Gaz Ölçüm Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İş Sağlığı Labaratuvarı, Marka: PCE, Sorumlu: Burcu YERLİKAYA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gc-ms": {
+    "original_name": "GC-MS",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Aggilent, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gıda termometresi": {
+    "original_name": "Gıda Termometresi",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "giyotin": {
+    "original_name": "Giyotin",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: Mapicut, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gloss metre": {
+    "original_name": "Gloss Metre",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Bosch, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gönye kesme makinesi": {
+    "original_name": "Gönye Kesme Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Dewalt, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "göz maketi": {
+    "original_name": "Göz Maketi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gözlük standı": {
+    "original_name": "Gözlük Standı",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gprs cihazı": {
+    "original_name": "GPRS Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: Labaratuvar Malzemesi Ambarı, Marka: -, Sorumlu: Melahat ÖZCAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gprs cihazları": {
+    "original_name": "Gprs cihazları",
+    "description": "Birim: Fen Edebiyat Fakültesi, Lab: Kişilerde, Marka: Markasız, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gps": {
+    "original_name": "GPS",
+    "description": "Birim: Orman Fakültesi, Lab: Orman İnşaatı Geodezi ve Fotogrametri, Marka: -, Sorumlu: Mustafa ACAR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gradiyentli pcr": {
+    "original_name": "Gradiyentli PCR",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Thermal Cycler, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gravür matkap": {
+    "original_name": "Gravür Matkap",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Dramel, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "güç kaynağı": {
+    "original_name": "Güç Kaynağı",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 15"
+  },
+  "güneş işını ölçerler piranometreler": {
+    "original_name": "Güneş Işını Ölçerler Piranometreler",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Markasız, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "gürültü ölçer": {
+    "original_name": "Gürültü Ölçer",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Çalışma Yerinde, Marka: Cesva, Sorumlu: İsmail Serden BAŞAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "gürültü ölçüm cihazı": {
+    "original_name": "Gürültü Ölçüm Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Extech, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hassas terazi": {
+    "original_name": "Hassas Terazi",
+    "description": "Birim: Orman Fakültesi, Lab: Ekoloji - Toprak Labaratuvarı, Marka: Ohaus, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hassas terazi̇": {
+    "original_name": "HASSAS TERAZİ",
+    "description": "Birim: Orman Fakültesi, Lab: TOPRAK Z1-42, Marka: RADWAG PS 4500.C/2, Sorumlu: Bülent TURGUT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hava debimetresi": {
+    "original_name": "Hava Debimetresi",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: Özel, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hava i̇stasyonları": {
+    "original_name": "Hava İstasyonları",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Markasız, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hava i̇stasyonlari(meteoroloji̇)": {
+    "original_name": "HAVA İSTASYONLARI(METEOROLOJİ)",
+    "description": "Birim: Orman Fakültesi, Lab: ORMAN ENTOMOLOJİSİ VE KORUMA, Marka: IMETOS TNS30-PRO2014, Sorumlu: Bülent SAĞLAM",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hava i̇stasyonu": {
+    "original_name": "Hava İstasyonu",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Weller, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "havya": {
+    "original_name": "Havya",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 9"
+  },
+  "headspace analiz cihazı": {
+    "original_name": "Headspace analiz cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: AGİLENT, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "heart rate monitör": {
+    "original_name": "Heart Rate Monitör",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Garmin, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hematokrit santrifüj": {
+    "original_name": "Hematokrit Santrifüj",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Hemşirelik Esasları, Marka: Nüve / Nf-048, Sorumlu: Zeynep TEMİZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hidrodinamik kavitasyon sistemi": {
+    "original_name": "Hidrodinamik Kavitasyon Sistemi",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: -, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hidrolik - elektrohidrolik elektrik eğitim seti": {
+    "original_name": "Hidrolik - Elektrohidrolik Elektrik Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Tekolab, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "homajenizatör (sonicator)": {
+    "original_name": "Homajenizatör (Sonicator)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Heidolph, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "homojeni̇zatör": {
+    "original_name": "HOMOJENİZATÖR",
+    "description": "Birim: Orman Fakültesi, Lab: TOHUM VE AĞAÇLANDIRMA, Marka: QİAGEN LT, Sorumlu: Murat Sabri SADIKLAR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "homojenizatör": {
+    "original_name": "Homojenizatör",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hplc": {
+    "original_name": "HPLC",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Shımatzu, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "hplc cihazı": {
+    "original_name": "HPLC cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: AGİLENT, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇breliler i̇çin gaz değişim ölçüm başlığı": {
+    "original_name": "İbreliler İçin Gaz Değişim Ölçüm Başlığı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültürü ve Bitki Fizyolojisi, Marka: Li-Cor, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "icp -ms sistemi": {
+    "original_name": "ICP -MS Sistemi",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: AGİLENT, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "icp-oes": {
+    "original_name": "ICP-OES",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Pelkin Elmer, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "icp/mikrodalga": {
+    "original_name": "ICP/Mikrodalga",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: Bergorf, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇drar kateter eğitim mankeni (erkek)": {
+    "original_name": "İdrar Kateter Eğitim Mankeni (Erkek)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇drar kateter eğitim mankeni (kadın)": {
+    "original_name": "İdrar Kateter Eğitim Mankeni (Kadın)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇klimlendirme dolabı-test kabini": {
+    "original_name": "İklimlendirme Dolabı-Test Kabini",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Nüve, Sorumlu: Murat Sabri SADIKLAR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇klimlendirme kabini": {
+    "original_name": "İklimlendirme kabini",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: ARALAB ARLF CS601, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇leri kardiyak yaşam destek simülatörü (yetişkin)": {
+    "original_name": "İleri Kardiyak Yaşam Destek Simülatörü (Yetişkin)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇lkyardım boyunluğu": {
+    "original_name": "İlkyardım Boyunluğu",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Elif Ortopedi, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇nkübatör": {
+    "original_name": "İnkübatör",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Markasız, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇nsan dolaşım sistemi maketi": {
+    "original_name": "İnsan Dolaşım Sistemi Maketi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇nsan kas sistemi maketi": {
+    "original_name": "İnsan Kas Sistemi Maketi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇nvertör ti̇p çanta kaynak makinesi": {
+    "original_name": "İnvertör Tİp Çanta Kaynak Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: WM, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "isıtıcı": {
+    "original_name": "Isıtıcı",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "isıtıcı ceket(100ml)": {
+    "original_name": "Isıtıcı Ceket(100ml)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Daihan, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "isıtıcı ceket(2000ml)": {
+    "original_name": "Isıtıcı Ceket(2000ml)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Daihan, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "isıtıcı ceket(500ml)": {
+    "original_name": "Isıtıcı Ceket(500ml)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Daihan, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "isıtıcılı manyetik karıştırıcı": {
+    "original_name": "Isıtıcılı manyetik karıştırıcı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: HEİDOLPH MS 300, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "isıtıcılı manyetik karıştırıcı (hacim:10 lt)": {
+    "original_name": "Isıtıcılı Manyetik karıştırıcı (Hacim:10 Lt)",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: Ika, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "isıtıcılı manyetik karıştırıcı (hacim:7 lt)": {
+    "original_name": "Isıtıcılı Manyetik karıştırıcı (Hacim:7 Lt)",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: Ika, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "isıtıcılı mekanik karıştırıcı": {
+    "original_name": "Isıtıcılı Mekanik Karıştırıcı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Heidolph, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇skelet": {
+    "original_name": "İskelet",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: İlk ve Acil Yardım, Marka: ---, Sorumlu: Nesibe Yıldız",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "i̇skelet, kemik veya kabuk örnekleri": {
+    "original_name": "İskelet, Kemik veya Kabuk Örnekleri",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: -, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "istıcılı manyetik karıştırıcı": {
+    "original_name": "Istıcılı Manyetik Karıştırıcı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Depo, Marka: Heidolph, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "jalon": {
+    "original_name": "Jalon",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 30"
+  },
+  "jar testi cihazı": {
+    "original_name": "Jar Testi Cihazı",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler, Marka: Daihan/JT-M6C, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "jel görünütüleme dök. sistemi": {
+    "original_name": "Jel Görünütüleme Dök. Sistemi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Biorad Moleculer Imager, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kabuk ölçer": {
+    "original_name": "Kabuk Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: -, Sorumlu: Yoktur",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "kafes": {
+    "original_name": "Kafes",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Depo, Marka: Özel, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 24"
+  },
+  "kafese rakları": {
+    "original_name": "Kafese Rakları",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Depo, Marka: Özel, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kağıt mukavemet cihazı": {
+    "original_name": "Kağıt Mukavemet Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Testometric, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kar buz makinesi": {
+    "original_name": "Kar Buz Makinesi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: IFV, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kar-buz maki̇nesi̇ (kirik buz)": {
+    "original_name": "KAR-BUZ MAKİNESİ (KIRIK BUZ)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: ITVIQ 85C, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "karbondioksit ölçüm cihazı": {
+    "original_name": "Karbondioksit Ölçüm Cihazı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Çalışma Yerinde, Marka: -, Sorumlu: İsmail Serden BAŞAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kardiyak yaşam destek simülatörü (çocuk)": {
+    "original_name": "Kardiyak Yaşam Destek Simülatörü (Çocuk)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "karot cihazı": {
+    "original_name": "Karot Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kaşık sedye": {
+    "original_name": "Kaşık Sedye",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: İlk ve Acil Yardım, Marka: XIEHRE, Sorumlu: Nesibe Yıldız",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "katlı pres makinesi": {
+    "original_name": "Katlı Pres Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ked kurtarma yeleği seti": {
+    "original_name": "Ked Kurtarma Yeleği Seti",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Xıehe, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kesintisiz güç kaynağı": {
+    "original_name": "Kesintisiz Güç Kaynağı",
+    "description": "Birim: Eğitim Fakültesi, Lab: Eğit. Fizik, Marka: -, Sorumlu: Cafer Mert YEŞİLKANAT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "kesintisiz güç kaynağı (20 kva)": {
+    "original_name": "Kesintisiz Güç Kaynağı (20 KVA)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kıl testere": {
+    "original_name": "Kıl Testere",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Excalibur, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "kıl testere makinesi sehpası": {
+    "original_name": "Kıl Testere Makinesi Sehpası",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "kimyasal saklama dolabı": {
+    "original_name": "Kimyasal Saklama Dolabı",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kızaklı mikroton": {
+    "original_name": "Kızaklı Mikroton",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Leica, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kjeldahl azot tayin cihazı -destilasyon": {
+    "original_name": "Kjeldahl Azot Tayin Cihazı -Destilasyon",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Behr, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kjeldahl azot tayin cihazı -yakma": {
+    "original_name": "Kjeldahl Azot Tayin Cihazı -Yakma",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Behr, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "klavuz pafta takımı": {
+    "original_name": "Klavuz Pafta Takımı",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Format, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "klizimetre": {
+    "original_name": "Klizimetre",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "klorofil florometresi": {
+    "original_name": "Klorofil Florometresi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Hansatech Hpea, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "klorofil flouresans ölçüm cihazı": {
+    "original_name": "Klorofil flouresans ölçüm cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: OPTİ-SCİENCESOS 5P, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "klorofil i̇çerik ölçer": {
+    "original_name": "Klorofil İçerik Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: ADC CCM 300, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "klorofil ölçer": {
+    "original_name": "Klorofil ölçer",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: KONİCA MİNOLTA SPAD 502 PLUS, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "koagülometre": {
+    "original_name": "Koagülometre",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kök yaprak ve tohum görüntüleme cihazı": {
+    "original_name": "Kök yaprak ve tohum görüntüleme cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: -, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "koloni sayıcı": {
+    "original_name": "Koloni Sayıcı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: Funke Gerber, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kombinasyon sedye": {
+    "original_name": "Kombinasyon Sedye",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Xıehe, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "komparatör saati": {
+    "original_name": "Komparatör Saati",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Odun Mekaniği, Marka: Mitutoyo, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kompresör": {
+    "original_name": "Kompresör",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Soma, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kondaktivite ölçüm cihazı": {
+    "original_name": "Kondaktivite Ölçüm Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: Jenco, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kromototron": {
+    "original_name": "Kromototron",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Cyclograph, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kronometre": {
+    "original_name": "Kronometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Hıtrax, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "küçük el mengenesi": {
+    "original_name": "Küçük El Mengenesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Statley, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "kül fırını": {
+    "original_name": "Kül Fırını",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kültür ortam cihazları": {
+    "original_name": "Kültür Ortam Cihazları",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Markasız, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kumpas": {
+    "original_name": "Kumpas",
+    "description": "Birim: Orman Fakültesi, Lab: Silvikültür labaratuvarı, Marka: -, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kumpaslar": {
+    "original_name": "Kumpaslar",
+    "description": "Birim: Fen Edebiyat Fakültesi, Lab: Biyoloji, Marka: Markasız, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kür tankı": {
+    "original_name": "Kür Tankı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "kuru sıcak hava sterilazötörü": {
+    "original_name": "Kuru sıcak hava sterilazötörü",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: MEMMERT 260 L, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kurutma fırını( etüv)": {
+    "original_name": "Kurutma Fırını( Etüv)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Termal, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kurutma etüvü": {
+    "original_name": "Kurutma Etüvü",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Nüve, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "kurutma fırını (etüv)": {
+    "original_name": "Kurutma Fırını (Etüv)",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler, Marka: Memmert, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "labaratuvar tipi fırınlar": {
+    "original_name": "Labaratuvar Tipi Fırınlar",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Markasız, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "labaratuvar tipi soğutucular": {
+    "original_name": "Labaratuvar Tipi Soğutucular",
+    "description": "Birim: Orman Fakültesi, Lab: Labaratuvar Malzemesi Ambarı, Marka: -, Sorumlu: Orman Fakültesi Dekanlığı",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "laboratuar extruder hattıkarıştırıcı": {
+    "original_name": "Laboratuar Extruder HattıKarıştırıcı",
+    "description": "Birim: Orman Fakültesi, Lab: Lif ve Kağıt Labaratuvarı -2-, Marka: RondolShini, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "laboratuar presi": {
+    "original_name": "Laboratuar Presi",
+    "description": "Birim: Orman Fakültesi, Lab: Lif ve Kağıt Labaratuvarı -2-, Marka: Karaltay-Q1 1, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "laminar çalışma kabini (biyogüvenlik emniyet kabini)": {
+    "original_name": "Laminar Çalışma Kabini (Biyogüvenlik Emniyet Kabini)",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "laminer çalışma kabini": {
+    "original_name": "Laminer Çalışma Kabini",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Mikoloji, Marka: Esco, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "lazer kazıma ve kesme makinesi": {
+    "original_name": "Lazer Kazıma ve Kesme Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Universal - Pls 6.75, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "lazermetre": {
+    "original_name": "Lazermetre",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Bosch GLM 250 VF, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "lehimleme i̇stasyonu": {
+    "original_name": "Lehimleme İstasyonu",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Elektrik Atölyesi, Marka: Weller - Vhs 81, Sorumlu: Vildan ÇERİBAŞI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "liyofilizatör": {
+    "original_name": "Liyofilizatör",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: MARTİN CHRİST 1-2 LD PLUS, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "magnetik i̇ndüksiyon deney seti": {
+    "original_name": "Magnetik İndüksiyon deney Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "mantolu isıtıcı": {
+    "original_name": "Mantolu Isıtıcı",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Odun Kimyası, Marka: Falc, Sorumlu: Şule CEYLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "manuel çimento mikseri": {
+    "original_name": "Manuel Çimento Mikseri",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "manuel fokometre": {
+    "original_name": "Manuel Fokometre",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "manuel kumpas": {
+    "original_name": "Manuel Kumpas",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: D&W, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 6"
+  },
+  "manyetik alanda dönme hareketleri": {
+    "original_name": "Manyetik Alanda Dönme Hareketleri",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "manyetik karıştırıcı": {
+    "original_name": "Manyetik karıştırıcı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: Heidolph, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "manyetik karıştırıcı (isıtıcılı)": {
+    "original_name": "Manyetik Karıştırıcı (Isıtıcılı)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "manyetik tabanlı mikrometre": {
+    "original_name": "Manyetik Tabanlı Mikrometre",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Shan, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "masa tipi çoklu ölçüm cihazı": {
+    "original_name": "Masa tipi çoklu ölçüm cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: -, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "masa tipi dijital multimetre": {
+    "original_name": "Masa Tipi Dijital Multimetre",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "masa üstü ph metre": {
+    "original_name": "Masa Üstü pH Metre",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: Hama pH 211, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "masa üstü santrifüj": {
+    "original_name": "Masa Üstü Santrifüj",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: Hettich - Rotofix 32a, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "masa üstü soğutmalı santrifüj": {
+    "original_name": "Masa Üstü Soğutmalı Santrifüj",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "masaüstü manuel taşlama makinesi": {
+    "original_name": "Masaüstü Manuel Taşlama Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Lider, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "matkap makinesi (dijital göstergeli tezgah tipi)": {
+    "original_name": "Matkap Makinesi (Dijital Göstergeli Tezgah Tipi)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Bosch, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "matkap makinesi (şarjlı)": {
+    "original_name": "Matkap Makinesi (Şarjlı)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 7"
+  },
+  "matkap makinesi (tek sütunlu)": {
+    "original_name": "Matkap Makinesi (Tek Sütunlu)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Proxon, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mekanik çap ölçer": {
+    "original_name": "Mekanik çap ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mekanik karıştırıcı": {
+    "original_name": "Mekanik Karıştırıcı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Heidolph, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mengene": {
+    "original_name": "Mengene",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "mengeneler": {
+    "original_name": "Mengeneler",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Proxxon, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "merkez kalınlık ölçer": {
+    "original_name": "Merkez Kalınlık Ölçer",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "mesafe ölçer": {
+    "original_name": "Mesafe Ölçer",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilgi Teknolojiler, Marka: Vertex, Sorumlu: Mehmet YAVUZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mesafe ve yükseklik ölçme cihaz ve aletleri": {
+    "original_name": "Mesafe ve Yükseklik Ölçme Cihaz ve Aletleri",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: Leica, Sorumlu: Aydın KAHRİMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "mesleki yetenekler seti": {
+    "original_name": "Mesleki Yetenekler Seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: The Lafayette, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "metal mikroskobu": {
+    "original_name": "Metal Mikroskobu",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: AOB, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "meteoroloji i̇stasyonu": {
+    "original_name": "Meteoroloji İstasyonu",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Entomolojisi ve Koruma, Marka: Veutage Uwe, Sorumlu: Bülent SAĞLAM",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "micro motor": {
+    "original_name": "Micro Motor",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Marathon - Multi 600, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mi̇g- mag kaynak makinesi": {
+    "original_name": "MİG- MAG Kaynak Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Magma, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikro destilasyon seti": {
+    "original_name": "Mikro Destilasyon Seti",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Entomolojisi ve Koruma, Marka: Markasız, Sorumlu: Bülent SAĞLAM",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikro motor": {
+    "original_name": "Mikro Motor",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Marathon-Multi 600, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikrodalga fırın": {
+    "original_name": "Mikrodalga Fırın",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik - 8901, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikrodalga örnek hazırlama sistemi": {
+    "original_name": "Mikrodalga örnek hazırlama sistemi",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Anton paar, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikrodalga sentez cihazı": {
+    "original_name": "Mikrodalga Sentez Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya Laboratuvarı, Marka: Antonpaar Monowava 200, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikrometre": {
+    "original_name": "Mikrometre",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Max, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "mikropipet setleri": {
+    "original_name": "Mikropipet setleri",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Avegene 618ag1, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikroskop": {
+    "original_name": "Mikroskop",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: No0908960, Sorumlu: Ahmet ÖZTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "mikser": {
+    "original_name": "Mikser",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arzum, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "mira": {
+    "original_name": "Mira",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "mobile mapper 100 cbs veri toplayıcısı": {
+    "original_name": "Mobile Mapper 100 CBS Veri Toplayıcısı",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Harita, Marka: Astech, Sorumlu: Halil AKINCI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "modüler kompanzasyon eğitim seti": {
+    "original_name": "Modüler Kompanzasyon Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Yıldırım, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "motorlu taşlama ve bileme": {
+    "original_name": "Motorlu Taşlama ve Bileme",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: Bosch, Sorumlu: Ahmet ÖZTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "motorlu testere": {
+    "original_name": "Motorlu Testere",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Stihl - Ms 361, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "muayene masası": {
+    "original_name": "Muayene Masası",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "multi set (ph, i̇letkenlik ve i̇yon ölçer)": {
+    "original_name": "Multi Set (PH, İletkenlik ve İyon Ölçer)",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: Hach-Lange, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "multimetre": {
+    "original_name": "Multimetre",
+    "description": "Birim: Eğitim Fakültesi, Lab: Eğit. Fizik, Marka: -, Sorumlu: Cafer Mert YEŞİLKANAT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "mutfak robotu": {
+    "original_name": "Mutfak Robotu",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nabız kalori ölçüm cihazı": {
+    "original_name": "Nabız Kalori Ölçüm Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nabız saati": {
+    "original_name": "Nabız Saati",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Garmın 310 Xt, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "nano drop okuyucu": {
+    "original_name": "Nano drop okuyucu",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: THERMO SCİENTİFİC ONE, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nebulizatör cihazı (kompresörlü)": {
+    "original_name": "Nebulizatör Cihazı (Kompresörlü)",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Hemşirelik Esasları, Marka: -, Sorumlu: Zeynep TEMİZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nem alici": {
+    "original_name": "NEM ALICI",
+    "description": "Birim: Orman Fakültesi, Lab: HERBARYUM, Marka: TROTEC TTK 350, Sorumlu: Hayal AKYILDIRIM BEĞEN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nem tayin cihazı": {
+    "original_name": "Nem Tayin Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Mekanik, Marka: Shimadzu, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nem ve yoğunluk ölçme ve kontrol cihazları": {
+    "original_name": "Nem ve Yoğunluk Ölçme ve Kontrol Cihazları",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Entomolojisi Labaratuvarı, Marka: Witronics, Sorumlu: Bülent SAĞLAM",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nilör": {
+    "original_name": "Nilör",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "nivo": {
+    "original_name": "Nivo",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "nivo aletleri": {
+    "original_name": "Nivo Aletleri",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Sun Dsc 232, Sorumlu: Mustafa ACAR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 4"
+  },
+  "nivo ve jalon sehpaları": {
+    "original_name": "Nivo ve Jalon Sehpaları",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "nmr": {
+    "original_name": "NMR",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Nanalysis, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "numune kesme aracı": {
+    "original_name": "Numune Kesme Aracı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: Jetco, Sorumlu: Ahmet ÖZTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "numune kesme makinesi": {
+    "original_name": "Numune Kesme Makinesi",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Bulucut, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "odiometre": {
+    "original_name": "Odiometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Maico Ma-25, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "odun eleme cihazı": {
+    "original_name": "Odun Eleme Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Örnek Hazırlama, Marka: Fristch, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "odun öğütme": {
+    "original_name": "Odun Öğütme",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Örnek Hazırlama, Marka: Fristch, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "odun rutubet ölçer": {
+    "original_name": "Odun Rutubet Ölçer",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Mekanik, Marka: Gann, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "odun tomografi": {
+    "original_name": "Odun Tomografi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Mekanik, Marka: Pakoff, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ölçü aleti": {
+    "original_name": "Ölçü Aleti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 17"
+  },
+  "omurga tahtası": {
+    "original_name": "Omurga Tahtası",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Xıehe, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "orbital shaker": {
+    "original_name": "Orbital shaker",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: -, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "organ maketi": {
+    "original_name": "Organ Maketi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "osiloskop": {
+    "original_name": "Osiloskop",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "osmometre cihazı": {
+    "original_name": "Osmometre cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: GONOTECOSMOMAT 3000, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "otoklav": {
+    "original_name": "Otoklav",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: Hirayama - Hv 50l, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "otomatik cam kesme makinesi": {
+    "original_name": "Otomatik Cam Kesme Makinesi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "otomatik komansatörü nivo": {
+    "original_name": "Otomatik Komansatörü Nivo",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Harita, Marka: Pentax, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "otomatik kumanda eğitim seti": {
+    "original_name": "Otomatik Kumanda Eğitim seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Yıldırım, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "otomatik pipet": {
+    "original_name": "Otomatik pipet",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: Eppendorf, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "otomatik pipet seti": {
+    "original_name": "Otomatik pipet Seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Sokarex, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "özgül ağırlık sehpası": {
+    "original_name": "Özgül Ağırlık Sehpası",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "palanyalar": {
+    "original_name": "Palanyalar",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Tokuz Makn. San., Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pandüllü sarkaç": {
+    "original_name": "Pandüllü Sarkaç",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "paralel plakalarda elekrtrik alandeney seti": {
+    "original_name": "Paralel Plakalarda Elekrtrik AlanDeney Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "parlaklık ölçme cihazı": {
+    "original_name": "Parlaklık Ölçme Cihazı",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Bosch, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "parsinoskop": {
+    "original_name": "Parsinoskop",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pedometre": {
+    "original_name": "Pedometre",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pensampermetre": {
+    "original_name": "Pensampermetre",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Elektrik Atölyesi, Marka: Expech - EX 820, Sorumlu: Vildan ÇERİBAŞI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "peristaltik çok kanallı pompa": {
+    "original_name": "Peristaltik Çok Kanallı Pompa",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler Labaratuvarı, Marka: -, Sorumlu: K. Onur DEMİRARSLAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pfi kağıt hamurudeğirmeni": {
+    "original_name": "PFI Kağıt HamuruDeğirmeni",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Özel, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ph metre": {
+    "original_name": "PH Metre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: İnolab ph 7110, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ph metre (el tipi)": {
+    "original_name": "PH Metre (El Tipi)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Bosch, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ph metre(masa üstü)": {
+    "original_name": "Ph Metre(Masa Üstü)",
+    "description": "Birim: Eğitim Fakültesi, Lab: Biyoloji, Marka: Hanna, Sorumlu: Mesude ÇALIŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pipet dispenser": {
+    "original_name": "Pipet Dispenser",
+    "description": "Birim: Orman Fakültesi, Lab: Ekoloji - Toprak Labaratuvarı, Marka: Isolab, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pipet dispenser (bataryalı)": {
+    "original_name": "Pipet Dispenser (Bataryalı)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Ependorff, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pistonlu hava kompresörü": {
+    "original_name": "Pistonlu Hava Kompresörü",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Stanley, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "planimetre": {
+    "original_name": "Planimetre",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Artvin Meslek Yüksekokulu, Marka: Placon - KD 90 N, Sorumlu: Tolga ODABAŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "planimetreler": {
+    "original_name": "Planimetreler",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "plate okuyucu": {
+    "original_name": "Plate okuyucu",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: THERMOMIB, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "plc eğitim seti": {
+    "original_name": "PLC Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "plotter tarayıcı ve yazıcı": {
+    "original_name": "Plotter Tarayıcı ve Yazıcı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilgi Teknolojiler, Marka: HP Designjet T 2300, Sorumlu: Mehmet YAVUZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pnömatik - elektropnömatik elektrik seti": {
+    "original_name": "Pnömatik - Elektropnömatik Elektrik Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Tekolab, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pnömatik deney seti": {
+    "original_name": "Pnömatik Deney Seti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: ---, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "portatif aspiratör": {
+    "original_name": "Portatif Aspiratör",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Hemşirelik Esasları, Marka: -, Sorumlu: Zeynep TEMİZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif basınç ölçüm cihazı": {
+    "original_name": "Portatif Basınç Ölçüm Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Testo 512, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif çoklu ölçüm cihazı": {
+    "original_name": "Portatif Çoklu Ölçüm Cihazı",
+    "description": "Birim: Orman Fakültesi, Lab: Havza Araştırma Labaratuvarı, Marka: -, Sorumlu: Yoktur",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif gürültü ölçüm cihazı": {
+    "original_name": "Portatif Gürültü Ölçüm Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Testo 815, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif lavabo": {
+    "original_name": "Portatif Lavabo",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: -, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif nem ve ısı ölçüm cihazı": {
+    "original_name": "Portatif nem ve ısı ölçüm Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Testo 610, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif oksijen ünitesi": {
+    "original_name": "Portatif Oksijen Ünitesi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif oksijenmetre": {
+    "original_name": "Portatif Oksijenmetre",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler, Marka: Hach, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "portatif oksjen ünitesi": {
+    "original_name": "Portatif Oksjen Ünitesi",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: İlk ve Acil Yardım, Marka: ---, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "prizma": {
+    "original_name": "Prizma",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 6"
+  },
+  "problu doku blender": {
+    "original_name": "Problu doku blender",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: STUART SHM-1, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "profosyonel gis data toplayıcı el gps": {
+    "original_name": "Profosyonel GIS data Toplayıcı El GPS",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilgi Teknolojiler, Marka: Garmin Montana 650, Sorumlu: Mehmet YAVUZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 15"
+  },
+  "promark 500 cors-tr uyumlu gnss alıcı seti": {
+    "original_name": "Promark 500 CORS-TR Uyumlu GNSS Alıcı Seti",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Harita, Marka: Astech, Sorumlu: Halil AKINCI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "puerdue pegboard seti": {
+    "original_name": "Puerdue Pegboard Seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Puerdue Pegboard, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pulp designatör": {
+    "original_name": "Pulp Designatör",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Estanit, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "pupillometre (normal)": {
+    "original_name": "Pupillometre (Normal)",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "pusula": {
+    "original_name": "Pusula",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: Sight Master, Sorumlu: Aydın KAHRİMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "pusulalı eğim ölçer": {
+    "original_name": "Pusulalı Eğim Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "radyometre": {
+    "original_name": "Radyometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "rapid köthen kağıt makinası": {
+    "original_name": "Rapid Köthen Kağıt Makinası",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Estanit, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "real time pcr": {
+    "original_name": "Real Time PCR",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Roche, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "real time pcr sistemi": {
+    "original_name": "Real time PCR sistemi",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Biorad CFX 96 Touch, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "renk spotları": {
+    "original_name": "Renk Spotları",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "rondo": {
+    "original_name": "Rondo",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Beslenme İlkeleri, Marka: Arçelik, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "rotary digester (reaktör)": {
+    "original_name": "Rotary Digester (Reaktör)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Universal En99 Co., Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "rotary eveperatör": {
+    "original_name": "Rotary eveperatör",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: HEİDOLPH 591, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "rüzgar jeneratörü": {
+    "original_name": "Rüzgar Jeneratörü",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Enerji Sistemleri, Marka: İsta Breeze, Sorumlu: Sabit KORCAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "rüzgar ölçüm seti anemometre": {
+    "original_name": "Rüzgar Ölçüm Seti Anemometre",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Enerji Sistemleri, Marka: Qoe Fennel, Sorumlu: Sabit KORCAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "saç kurutma makinesi": {
+    "original_name": "Saç Kurutma Makinesi",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Av ve Yaban Hayatı Labaratuvarı, Marka: -, Sorumlu: Gökçe Ali KELEŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "saf su cihazı": {
+    "original_name": "Saf su cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: HPLC GRADE, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sandalye sedye": {
+    "original_name": "Sandalye Sedye",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: İlk ve Acil Yardım, Marka: XIEHRE, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "santrifüj": {
+    "original_name": "Santrifüj",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: Hettich Rotofix 32 A, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "saplı çelik şerit metre": {
+    "original_name": "Saplı Çelik Şerit Metre",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 6"
+  },
+  "şarjlı matkap": {
+    "original_name": "Şarjlı Matkap",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Hilti, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "şarjlı vidalama": {
+    "original_name": "Şarjlı Vidalama",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Bosch, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sarsak elek takımı": {
+    "original_name": "Sarsak Elek Takımı",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Örnek Hazırlama, Marka: Fristch, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sarsma tablası": {
+    "original_name": "Sarsma Tablası",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "scada eğitim seti": {
+    "original_name": "Scada Eğitim Seti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Siemens, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "schopper riegler": {
+    "original_name": "Schopper Riegler",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Estanit, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sensör uygulamaları eğitim seti": {
+    "original_name": "Sensör Uygulamaları Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "sertlik ölçer": {
+    "original_name": "Sertlik Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Odun Mekaniği, Marka: Leeb-Mh310, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sertlik ölçme cihazı": {
+    "original_name": "Sertlik Ölçme Cihazı",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Bulut, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ses kalibratörü": {
+    "original_name": "Ses Kalibratörü",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Çalışma Yerinde, Marka: -, Sorumlu: İsmail Serden BAŞAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sferometre": {
+    "original_name": "Sferometre",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 5"
+  },
+  "sıcaklık ölçme cihazı": {
+    "original_name": "Sıcaklık Ölçme Cihazı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: Hc, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıcaklık ölçüm cihazı": {
+    "original_name": "Sıcaklık Ölçüm Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İş Sağlığı Labaratuvarı, Marka: PCE, Sorumlu: Burcu YERLİKAYA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıcaklık ve nem kontrol ünitesi": {
+    "original_name": "Sıcaklık ve nem kontrol ünitesi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: Stulz, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıcaklık ve nem ölçme cihazı": {
+    "original_name": "Sıcaklık ve Nem Ölçme Cihazı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Çalışma Yerinde, Marka: -, Sorumlu: İsmail Serden BAŞAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıkıştırma faktörü tayin cihazı": {
+    "original_name": "Sıkıştırma Faktörü Tayin Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sırt çantası": {
+    "original_name": "Sırt Çantası",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: -, Sorumlu: Yoktur",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "şişme atel seti": {
+    "original_name": "Şişme Atel Seti",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Elif Ortopedi, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıvı azot saklama kabı": {
+    "original_name": "Sıvı Azot Saklama Kabı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Kimya, Marka: Cryogenice, Sorumlu: Mustafa Kemal GÜMÜŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıvı azot tankı (10 lt)": {
+    "original_name": "Sıvı azot tankı (10 lt)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Kabiworthington CY0034, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıvı azot tankı (20 lt)": {
+    "original_name": "Sıvı azot tankı (20 lt)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Kabiworthington 20XTB5, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıvı azot tankı (34 lt)": {
+    "original_name": "Sıvı azot tankı (34 lt)",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Kabiworthington 34XTB/11, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sıvı azot taşıma ve saklama kabı": {
+    "original_name": "Sıvı Azot Taşıma ve Saklama Kabı",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: Thermo Kriyojenik, Sorumlu: Aşkın GÖKTÜRK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "skinfold kaliper": {
+    "original_name": "Skinfold Kaliper",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "soğutmalı etüv": {
+    "original_name": "Soğutmalı Etüv",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Markasız, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "soğutmalı etüv (i̇nkübatör)": {
+    "original_name": "Soğutmalı Etüv (İnkübatör)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Termal, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "soğutmalı inkübatör": {
+    "original_name": "Soğutmalı inkübatör",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: MEMMERT POLECO ILV 11, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "soğutmalı mini santrifüj": {
+    "original_name": "Soğutmalı mini santrifüj",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: HERMLE, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "soğutmalı santrifüj": {
+    "original_name": "Soğutmalı Santrifüj",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Awel, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "solunum cihazı": {
+    "original_name": "Solunum Cihazı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Artvin Meslek Yüksekokulu, Marka: -, Sorumlu: Gürkan YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "sondalı anemometre": {
+    "original_name": "Sondalı Anemometre",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Çalışma Yerinde, Marka: Hotwire, Sorumlu: İsmail Serden BAŞAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sonikatör": {
+    "original_name": "Sonikatör",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Sonics Vibra Cell, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "spektrofotometre": {
+    "original_name": "Spektrofotometre",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: Shimadzu, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "spektrofotometre (renk ölçer)": {
+    "original_name": "Spektrofotometre (Renk ölçer)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Spektroskopi, Marka: Konica Minolta, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "spiralli hava hortumu (tabancalı takım)": {
+    "original_name": "Spiralli Hava Hortumu (Tabancalı Takım)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "spirometre": {
+    "original_name": "Spirometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Thor, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "stereo mikroskop": {
+    "original_name": "Stereo Mikroskop",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültürü ve Bitki Fizyolojisi, Marka: Zeiss, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "stereo mi̇kroskop": {
+    "original_name": "STEREO MİKROSKOP",
+    "description": "Birim: Orman Fakültesi, Lab: HERBARYUM, Marka: NİKON SMZ 745 T, Sorumlu: Hayal AKYILDIRIM BEĞEN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sterilizatör": {
+    "original_name": "Sterilizatör",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Termal, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "stero mikroskop": {
+    "original_name": "Stero Mikroskop",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Mikrobiyoloji, Marka: Zeiss, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 9"
+  },
+  "stomatal i̇letkenlik ölçüm chz.": {
+    "original_name": "Stomatal İletkenlik ölçüm chz.",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Delta T, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "su banyosu": {
+    "original_name": "Su Banyosu",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "su isıtıcısı": {
+    "original_name": "Su Isıtıcısı",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Lif-Kağıt, Marka: King, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "su potansiyeli ölçüm chz.": {
+    "original_name": "Su potansiyeli ölçüm chz.",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Doku Kültür ve Fizyoloji, Marka: Wescor, Sorumlu: Fahrettin TİLKİ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "su potansiyeli ölçüm cihazı": {
+    "original_name": "Su potansiyeli ölçüm cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: PMS 1505D-EXP, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "su spektrofotometresi": {
+    "original_name": "Su spektrofotometresi",
+    "description": "Birim: Fen Edebiyat Fakültesi, Lab: Biyoloji, Marka: Hach-lange dr 3900, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "su ve atık su analiz cihazları": {
+    "original_name": "Su ve Atık Su Analiz Cihazları",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Temel İşlemler, Marka: Hach - Lange, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sütunlu matkap": {
+    "original_name": "Sütunlu Matkap",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Özbay, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sutunlu matkap tezgahı": {
+    "original_name": "Sutunlu Matkap Tezgahı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: Guantum, Sorumlu: Çiğdem UĞURLU KÖSEOĞLU",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "sütunlu matkap tezgahı matkap makinesi": {
+    "original_name": "Sütunlu Matkap Tezgahı matkap Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Optimum B-32, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "tablet pres": {
+    "original_name": "Tablet Pres",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Eczane Hizmetleri Labaratuvarı, Marka: -, Sorumlu: Yasemin CAMADAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "takım asma panosu": {
+    "original_name": "Takım Asma Panosu",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "takip eden enstein maskesi": {
+    "original_name": "Takip Eden Enstein Maskesi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "takometre": {
+    "original_name": "Takometre",
+    "description": "Birim: Mühendislik Fakültesi, Lab: Enerji Sistemleri, Marka: Extech, Sorumlu: Sabit KORCAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "tank zımpara": {
+    "original_name": "Tank Zımpara",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Makita, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "tansiyon ölçme aleti": {
+    "original_name": "Tansiyon Ölçme Aleti",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: -, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "tarla kapasitesi ve solma noktası tayin cihazı": {
+    "original_name": "Tarla Kapasitesi ve Solma Noktası Tayin Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Soil Mouisture, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "taş kesme makinesi": {
+    "original_name": "Taş Kesme Makinesi",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "taşınabilir boy ölçer": {
+    "original_name": "Taşınabilir Boy Ölçer",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "taşınabilir fotosentez ölçüm cihazı": {
+    "original_name": "Taşınabilir fotosentez ölçüm cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: LICORLI -6800P, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "taşlama makinesi": {
+    "original_name": "Taşlama Makinesi",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "tek katlı pres": {
+    "original_name": "Tek Katlı Pres",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Odun Mekaniği, Marka: Cemil Usta, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "temel elektrik elektronik eğitim seti dc uygulama modülleri": {
+    "original_name": "Temel Elektrik Elektronik Eğitim Seti DC Uygulama Modülleri",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "temel elektrik elektronik eğitim uygulama seti": {
+    "original_name": "Temel Elektrik Elektronik Eğitim Uygulama Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Yıldırım, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "terazi": {
+    "original_name": "Terazi",
+    "description": "Birim: Orman Fakültesi, Lab: OEM/Odun Mekaniği, Marka: Denver/Sartorius, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "tereadmill koşu bandı": {
+    "original_name": "Tereadmill Koşu Bandı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Maytime, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "termal kurutma fırını": {
+    "original_name": "Termal Kurutma Fırını",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Markasız, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "termometre": {
+    "original_name": "Termometre",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: -, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 10"
+  },
+  "termometre seti": {
+    "original_name": "Termometre Seti",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: -, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "test çekici": {
+    "original_name": "Test Çekici",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "testere tezgahı testere makinesi": {
+    "original_name": "Testere Tezgahı Testere Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Makita - Lb 1200, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "tezgah testere": {
+    "original_name": "Tezgah Testere",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Proxon, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "tezgah üstü bileme makinesi": {
+    "original_name": "Tezgah Üstü Bileme Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "tga": {
+    "original_name": "TGA",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Enstrümental, Marka: Perkin Elmer, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "toprak deği̇rmeni̇": {
+    "original_name": "TOPRAK DEĞİRMENİ",
+    "description": "Birim: Orman Fakültesi, Lab: TOPRAK Z1-42, Marka: PROTEK, Sorumlu: Bülent TURGUT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "toprak direnci ve toprak özgül direnci ölçüm cihazı": {
+    "original_name": "Toprak Direnci ve Toprak Özgül Direnci Ölçüm Cihazı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Elektrik Atölyesi, Marka: Magger - Det3td, Sorumlu: Vildan ÇERİBAŞI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "toprak ölçüm araçları": {
+    "original_name": "Toprak Ölçüm Araçları",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Orman İnş. Geo. Fotog., Marka: Markasız, Sorumlu: Rahmi YILMAZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "toprak örneği alma seti": {
+    "original_name": "Toprak Örneği Alma Seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Eijkelkamp, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "toprak solunum ölçüm cihazı": {
+    "original_name": "Toprak Solunum ölçüm Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Çevre ve Orman, Marka: Licor, Sorumlu: Mehmet KÜÇÜK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "total station": {
+    "original_name": "Total station",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "total stati̇on": {
+    "original_name": "TOTAL STATİON",
+    "description": "Birim: Mühendislik Fakültesi, Lab: HARİTA, Marka: TOPCON TKS 202, Sorumlu: Ayşe YAVUZ ÖZALP",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "toz emme makinesi": {
+    "original_name": "Toz Emme Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "toz toplama ünitesi": {
+    "original_name": "Toz Toplama Ünitesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "transformatör deney seti": {
+    "original_name": "Transformatör Deney Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "transpalet": {
+    "original_name": "Transpalet",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Techlift, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "travma girişim mankeni": {
+    "original_name": "Travma Girişim Mankeni",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: G. Doctor, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "trinoküler": {
+    "original_name": "Trinoküler",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Görüntüleme, Marka: Olimpus Bx-43, Sorumlu: Funda ERŞENBAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "trinoküler araş. mikroskobu": {
+    "original_name": "Trinoküler Araş. mikroskobu",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Görüntüleme, Marka: Olimpus Bx-53, Sorumlu: Funda ERŞENBAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "trinoküler mikroskop": {
+    "original_name": "Trinoküler Mikroskop",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: Olympus, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "üç gözlü kalıp": {
+    "original_name": "Üç Gözlü Kalıp",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "uçan dünya": {
+    "original_name": "Uçan Dünya",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ultra saf su cihazi (icp ile birlikte)": {
+    "original_name": "Ultra saf su cihazi (ICP ile birlikte)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: Human, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ultrasonik banyo": {
+    "original_name": "Ultrasonik banyo",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: FİSCHER BRAND FSR, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ultrasonik test cihazı": {
+    "original_name": "Ultrasonik Test Cihazı",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "üniversal test cihazı": {
+    "original_name": "Üniversal Test Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Mekanik, Marka: Zwick, Sorumlu: Hüseyin PEKER",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "universal tonra tezgahı": {
+    "original_name": "Universal Tonra Tezgahı",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Borsan, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "üniversal torna tezgahı": {
+    "original_name": "Üniversal Torna Tezgahı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Makine, Marka: Shenyang, Sorumlu: Çiğdem UĞURLU KÖSEOĞLU",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 3"
+  },
+  "ups (3kva)": {
+    "original_name": "UPS (3kVA)",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Spektroskopi, Marka: Optimum, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "üriner sistem maketi": {
+    "original_name": "Üriner Sistem Maketi",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "ütü": {
+    "original_name": "Ütü",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 6"
+  },
+  "uv spektrofotometre": {
+    "original_name": "UV Spektrofotometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Spektroskopi, Marka: Shimatzu 1800, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "uv spektrofotometre b13": {
+    "original_name": "UV Spektrofotometre B13",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Spektroskopi, Marka: Beckman Coulter Uv-730, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "uv-vis-nir spektrofotometre": {
+    "original_name": "UV-VIS-NIR Spektrofotometre",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Spektroskopi, Marka: Shimatzu UV-3600, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "uzak görme eseli": {
+    "original_name": "Uzak Görme Eseli",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Optisyenlik Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "uzunluk ölçme cihaz ve araçları": {
+    "original_name": "Uzunluk Ölçme Cihaz ve Araçları",
+    "description": "Birim: Orman Fakültesi, Lab: Orman Amenajmanı Labaratuvarı, Marka: Weiss, Sorumlu: Aydın KAHRİMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "vakum düzeneği": {
+    "original_name": "Vakum Düzeneği",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Mikrobiyolojisi, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vakum motoru": {
+    "original_name": "Vakum Motoru",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Ekoloji-Toprak, Marka: Markasız, Sorumlu: Musa AKBAŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vakum pompası": {
+    "original_name": "Vakum Pompası",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Besin Kimyası, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vakum sedye": {
+    "original_name": "Vakum Sedye",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: Xıehe, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "van de graff jeneratorü": {
+    "original_name": "Van de Graff Jeneratorü",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilim Uygulama, Marka: Renco, Sorumlu: Ertuğrul ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "veri toplayıcı (gnss alıcısı)": {
+    "original_name": "Veri Toplayıcı (GNSS Alıcısı)",
+    "description": "Birim: Mühendislik Fakültesi, Lab: -, Marka: Promark, Sorumlu: Halil AKINCI",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vibrasyon ölçüm cihazı": {
+    "original_name": "Vibrasyon ölçüm Cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Ergonomi, Marka: Delta Hd-2030, Sorumlu: Ayla BİLGİN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vibrasyonlu hamuru eleği": {
+    "original_name": "Vibrasyonlu Hamuru Eleği",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: TMI, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vibratör (şişeli)": {
+    "original_name": "Vibratör (Şişeli)",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vidalama makinesi (akülü 14.4 w)": {
+    "original_name": "Vidalama Makinesi (Akülü 14.4 W)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vidalama makinesi (akülü)": {
+    "original_name": "Vidalama Makinesi (Akülü)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Bosch, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vikat seti": {
+    "original_name": "Vikat Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vitesli matkap": {
+    "original_name": "Vitesli Matkap",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Bosch, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "vizkolite kapı": {
+    "original_name": "Vizkolite Kapı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Bluged BGD 130, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "vizkosite kabı": {
+    "original_name": "Vizkosite Kabı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Evren Osman ÇAKIROĞLU",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "vizkozite kapı": {
+    "original_name": "Vizkozite Kapı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Bluged BGD 130, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "vorteks": {
+    "original_name": "Vorteks",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vorteks cihazı": {
+    "original_name": "Vorteks cihazı",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: HEİDOLPH HEİ 541, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "vorteks karıştırıcı": {
+    "original_name": "Vorteks karıştırıcı",
+    "description": "Birim: Orman Fakültesi, Lab: -, Marka: -, Sorumlu: -",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "vorteks mikser": {
+    "original_name": "Vorteks mikser",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Örnek Hazırlama, Marka: Wisemix WM-10, Sorumlu: Mustafa Umut KONANÇ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 2"
+  },
+  "vücut analiz cihazı": {
+    "original_name": "Vücut Analiz cihazı",
+    "description": "Birim: Sağlık Bilimleri Fakültesi, Lab: Antropometri, Marka: -, Sorumlu: Evrim ÖZKAYNAK",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "western blot komfirmasyon sistemi": {
+    "original_name": "Western blot komfirmasyon sistemi",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Biorad chemidoc MP, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "western blot sistemi": {
+    "original_name": "Western Blot Sistemi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Trans Blot Turbo, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "wheatsone köprüsü deney seti": {
+    "original_name": "Wheatsone Köprüsü Deney Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: PHYWE, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 8"
+  },
+  "wi̇ndendro ağaç halka anali̇z si̇stemi̇": {
+    "original_name": "WİNDENDRO AĞAÇ HALKA ANALİZ SİSTEMİ",
+    "description": "Birim: Orman Fakültesi, Lab: ORMAN AMENAJMANI, Marka: WİNDENDRO BASİC LA2400, Sorumlu: Aydın KAHRİMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yağ akstraksiyon sistemi": {
+    "original_name": "Yağ akstraksiyon sistemi",
+    "description": "Birim: TIBBİ-AROMATİK BİTKİLER UYGULAMA VE ARAŞTIRMA MERKEZİ, Lab: Tıbbi-Aromatik Bitkiler Uygulama ve Araştırma Merkezi Laboratuvarı, Marka: Buchıe -800, Sorumlu: Mehmet DEMİRALAY",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yağsız kompresör": {
+    "original_name": "Yağsız Kompresör",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: Puma, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yangın battaniye": {
+    "original_name": "Yangın Battaniye",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İş Sağlığı, Marka: -, Sorumlu: Burcu YERLİKAYA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yaprak alan ölçer": {
+    "original_name": "Yaprak Alan Ölçer",
+    "description": "Birim: Orman Fakültesi, Lab: ORM/Tohum Ağaçlandırma, Marka: ADC AM 350, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yarı otomatik testere": {
+    "original_name": "Yarı Otomatik Testere",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Makine, Marka: Jetco, Sorumlu: Musa MARUL",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yaş film kalınlığı ölçer": {
+    "original_name": "Yaş Film Kalınlığı Ölçer",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya, Marka: Elektro Physik, Sorumlu: Gökhan BAYYURT",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yaş film kalınlığı ölçme cihazı": {
+    "original_name": "Yaş Film Kalınlığı Ölçme Cihazı",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Mobilya Atölyesi, Marka: -, Sorumlu: Evren Osman ÇAKIROĞLU",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yaşlı bakım eğitim maketi": {
+    "original_name": "Yaşlı Bakım Eğitim Maketi",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: İlk ve Acil Yardım, Marka: G. Doctor, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yaşlı bakım eğitim mankeni": {
+    "original_name": "Yaşlı Bakım Eğitim Mankeni",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: G. Doctor, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yatay derin dondurcu": {
+    "original_name": "Yatay derin dondurcu",
+    "description": "Birim: Fen Edebiyat Fakültesi, Lab: Kişilerde, Marka: Markasız, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yatay derin dondurucu": {
+    "original_name": "Yatay Derin Dondurucu",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: Av ve Yaban Hayatı Labaratuvarı, Marka: -, Sorumlu: Gökçe Ali KELEŞ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yatay jel elektroforez sistemi": {
+    "original_name": "Yatay jel Elektroforez Sistemi",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Moleküler Biyoloji, Marka: Biorad, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yayılma tablası": {
+    "original_name": "Yayılma Tablası",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İnşaat Labaratuvarı, Marka: -, Sorumlu: İlknur BEKEM KARA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yenilenebilir enerji eğitim seti": {
+    "original_name": "Yenilenebilir Enerji Eğitim Seti",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: -, Sorumlu: Şükrü ÖZDEMİR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yer altı radar sistemi seti": {
+    "original_name": "Yer altı Radar Sistemi Seti",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Bilgi Teknolojiler, Marka: Mala-Geoscience, Sorumlu: Mehmet YAVUZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yetişkin hasta karyolaları": {
+    "original_name": "yetişkin Hasta Karyolaları",
+    "description": "Birim: Artvin Meslek Yüksekokulu, Lab: İlk ve Acil Yardım, Marka: ----, Sorumlu: ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yetişkin i̇ndikatörlü eğitim mankeni": {
+    "original_name": "Yetişkin İndikatörlü Eğitim Mankeni",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yetişkin karyolası": {
+    "original_name": "Yetişkin Karyolası",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: Yaşlı Bakımı Labaratuvarı, Marka: -, Sorumlu: Nesibe YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yetişkin laringoskop seti": {
+    "original_name": "Yetişkin Laringoskop Seti",
+    "description": "Birim: Sağlık Hizmetleri Meslek Yüksekokulu, Lab: İlk ve Acil Yardım Labaratuvarı, Marka: -, Sorumlu: Bakiye ÇAKIR",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yetişkin tam boy cpr eğitim mankeni": {
+    "original_name": "Yetişkin Tam Boy CPR Eğitim Mankeni",
+    "description": "Birim: Borçka Acarlar Meslek Yüksekokulu, Lab: İş Sağlığı, Marka: -, Sorumlu: Burcu YERLİKAYA",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yırtılma test cihazı": {
+    "original_name": "Yırtılma Test cihazı",
+    "description": "Birim: Bilim Teknoloji Uygulama ve Araştırma Merkezi, Lab: Lif ve Kağıt, Marka: TMI, Sorumlu: Emrah PEŞMAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "yürüyen bant eğitim seti": {
+    "original_name": "Yürüyen Bant Eğitim Seti",
+    "description": "Birim: Hopa Meslek Yüksekokulu, Lab: Elektrik Laboratuvarı, Marka: Ferma, Sorumlu: İsmail YILDIZ",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "zımparalama makinesi": {
+    "original_name": "Zımparalama Makinesi",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Scheppach - Bts 90X, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "zımparalama makinesi (dairesel)": {
+    "original_name": "Zımparalama Makinesi (Dairesel)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Dewalt, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  },
+  "zımparalama makinesi (titreşimli)": {
+    "original_name": "Zımparalama Makinesi (Titreşimli)",
+    "description": "Birim: Genel Sekreterlik, Lab: Mobilya Atölyesi, Marka: Dewalt, Sorumlu: Recep AYKAN",
+    "price": "Fiyat bilgisi yok",
+    "stock": "Adet: 1"
+  }
+}
