@@ -5,12 +5,11 @@ services:
     repo: egemenulkerr/chatbot-uni
     branch: main
     deploy_on_push: true
-  source_dir: backend
   dockerfile_path: Dockerfile
   http_port: 8080
   envs:
-  - key: PORT
-    value: "8080"
+  - key: GOOGLE_API_KEY
+    scope: RUN_TIME
   health_check:
     http_path: /health
 static_sites: []
