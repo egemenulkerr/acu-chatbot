@@ -46,7 +46,7 @@ async def handle_chat_message(request: ChatRequest):
             if device_data:
                 info = device_data["info"]
                 return ChatResponse(
-                    response=f"✅ Anlaşıldı. İşte bilgiler:\n\n🔧 **{device_data['name']}**\n📝 {info['description']}\n💰 {info['price']}\n📦 {info['stock']}",
+                    response=f"Anlaşıldı. İşte bilgiler:\n\n **{device_data['name']}**\n\n {info['description']}\n\n {info['stock']}",
                     source="Cihaz Katalogu (Onaylı)",
                     intent_name="cihaz_bilgisi"
                 )
@@ -87,7 +87,7 @@ async def handle_chat_message(request: ChatRequest):
             if device_data:
                 info = device_data["info"]
                 return ChatResponse(
-                    response=f"🔧 **{device_data['name']}**\n📝 {info['description']}\n💰 {info['price']}\n📦 {info['stock']}",
+                    response=f"\n\n*{device_data['name']}*\n\n{info['description']}\n\n{info['stock']}",
                     source="Cihaz Katalogu",
                     intent_name="cihaz_bilgisi"
                 )
