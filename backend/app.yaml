@@ -1,0 +1,13 @@
+name: chatbot-uni-backend
+services:
+- name: chatbot-uni-backend
+  github:
+    repo: egemenulkerr/chatbot-uni
+    branch: main
+    deploy_on_push: true
+  dockerfile_path: backend/Dockerfile
+  source_dir: backend
+  build_command: docker build -t chatbot-uni-backend .
+  envs:
+  - key: GOOGLE_API_KEY
+    scope: RUN_TIME
