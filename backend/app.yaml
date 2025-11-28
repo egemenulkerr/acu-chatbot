@@ -5,9 +5,9 @@ services:
     repo: egemenulkerr/chatbot-uni
     branch: main
     deploy_on_push: true
-  dockerfile_path: backend/Dockerfile
+  dockerfile_path: Dockerfile
   source_dir: backend
-  build_command: docker build -t chatbot-uni-backend .
   envs:
   - key: GOOGLE_API_KEY
     scope: RUN_TIME
+  http_port: 8080
