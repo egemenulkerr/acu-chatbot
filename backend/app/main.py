@@ -14,7 +14,13 @@ app = FastAPI()
 # --- CORS AYARLARI ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Geliştirme: tüm kaynaklara izin ver
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "https://egemenulker.com",
+        "https://www.egemenulker.com",
+        "https://king-prawn-app-t5y4u.ondigitalocean.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
