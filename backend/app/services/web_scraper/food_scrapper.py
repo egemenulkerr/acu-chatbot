@@ -39,7 +39,7 @@ def scrape_daily_menu():
                 
                 # Menü resmi URL'ini döndür (bot bu URL'i gösterebilir)
                 today = datetime.now().strftime("%d.%m.%Y")
-                response_text = f"""🍽️ **Günün Menüsü** ({today})
+                response_text = f"""**Günün Menüsü** ({today})
 
 Menü resmi: {menu_image_url}
 
