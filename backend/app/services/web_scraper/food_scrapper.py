@@ -26,6 +26,7 @@ def scrape_daily_menu():
 
         # Yeni yapı: Menü image-container içinde resim olarak saklanıyor
         # Örnek: <img src="/storage/yemekMenuResimleri/menu.jpg?v=1764370132" alt="menu" />
+        menu_image_url = None
         image_container = soup.find("div", class_="image-container")
         
         if image_container:
@@ -37,20 +38,12 @@ def scrape_daily_menu():
                 if menu_image_url.startswith("/"):
                     menu_image_url = "https://www.artvin.edu.tr" + menu_image_url
                 
-                # Menü resmi URL'ini döndür (bot bu URL'i gösterebilir)
-                today = datetime.now().strftime("%d.%m.%Y")
-                response_text = f"""**Günün Menüsü** ({today})
-
-Menü resmi: {menu_image_url}
-
-*Not: Yemek menüsü artık resim formatında gösterilmektedir. 
-Detaylı bilgi için lütfen: https://www.artvin.edu.tr/tr/yemek adresini ziyaret edin."""
-                
                 logger.info("Yemek menüsü resmi URL'i başarıyla elde edildi.")
-                return response_text
         
-        # Fallback: Eski yapı (tablo) hala varsa bunu dene
+        # Tablo yapısını ara (menü metnini almak için)
         tds = soup.find_all("td")
+        menu_text = None
+        
         if len(tds) > 1:
             raw_text = tds[1].text.strip()
             
@@ -59,13 +52,27 @@ Detaylı bilgi için lütfen: https://www.artvin.edu.tr/tr/yemek adresini ziyare
             cleaned_lines = [line.strip() for line in lines if line.strip()]
             
             # Listeyi birleştir
-            menu_text = "\n".join(cleaned_lines)
-            
-            logger.info("Yemek listesi (tablo verisi) başarıyla çekildi.")
-            return menu_text
+            if cleaned_lines:
+                menu_text = "\n".join(cleaned_lines)
+                logger.info("Yemek listesi (tablo verisi) başarıyla çekildi.")
         
-        # Her iki yöntem de başarısız
-        logger.warning("Yemek menüsü bulunamadı - website yapısı tamamen değişmiş olabilir.")
+        # Sonuç: Resim URL varsa veya menü metni varsa, formatla ve döndür
+        if menu_image_url or menu_text:
+            today = datetime.now().strftime("%d.%m.%Y")
+            response_parts = [f"**Günün Menüsü** ({today})"]
+            
+            if menu_text:
+                response_parts.append(f"\n{menu_text}")
+            
+            if menu_image_url:
+                response_parts.append(f"\n🖼️ Menü Resmi: {menu_image_url}")
+            
+            response_text = "\n".join(response_parts)
+            logger.info("Yemek verisi (metin + resim URL) başarıyla elde edildi.")
+            return response_text
+        
+        # Fallback: Eğer resim de menü metni de yoksa None döndür
+        logger.warning("Yemek menüsü (resim ve metin) bulunamadı.")
         return None
 
     except Exception as e:
