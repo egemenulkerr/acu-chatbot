@@ -22,8 +22,9 @@ app.add_middleware(
         "https://king-prawn-app-t5y4u.ondigitalocean.app",
     ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    max_age=86400,
 )
 
 scheduler = AsyncIOScheduler()
