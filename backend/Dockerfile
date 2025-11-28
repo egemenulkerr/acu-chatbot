@@ -1,28 +1,33 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
-# 1. Gerekli Paketleri Kur (Java 21 + Firefox + Temel Araçlar)
+# Install dependencies (minimal - only what's needed)
 ENV GECKODRIVER_VERSION=0.33.0
+ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
     openjdk-21-jre-headless \
     firefox-esr \
     wget \
     ca-certificates \
-    tar \
-    && rm -rf /var/lib/apt/lists/* \
-    # geckodriver indir ve kur
-    && wget -q "https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz" \
-    && tar -xzf geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz \
-    && mv geckodriver /usr/local/bin/ \
-    && chmod +x /usr/local/bin/geckodriver \
-    && rm geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
+    && rm -rf /var/lib/apt/lists/* && \
+    # Download and install geckodriver
+    wget -q "https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz" && \
+    tar -xzf geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz -C /usr/local/bin/ && \
+    rm geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz && \
+    chmod +x /usr/local/bin/geckodriver
 
 WORKDIR /app
 
+# Copy and install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt && \
+    find /usr/local/lib/python3.11/site-packages -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true && \
+    find /usr/local/lib/python3.11/site-packages -type f -name "*.pyc" -delete && \
+    find /usr/local/lib/python3.11/site-packages -type f -name "*.pyo" -delete
 
 COPY ./app /app/app
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
