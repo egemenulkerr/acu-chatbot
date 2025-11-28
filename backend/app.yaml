@@ -1,0 +1,23 @@
+name: chatbot-uni-backend
+services:
+- name: chatbot-uni-backend
+  github:
+    repo: egemenulkerr/chatbot-uni
+    branch: main
+    deploy_on_push: true
+  build_command: pip install -r requirements.txt
+  source_dir: backend
+  http_port: 8080
+  envs:
+  - key: PORT
+    value: "8080"
+  - key: GOOGLE_API_KEY
+    scope: RUN_TIME
+  health_check:
+    http_path: /health
+    http_port: 8080
+    initial_delay_seconds: 60
+    period_seconds: 10
+    timeout_seconds: 10
+    success_threshold: 1
+    failure_threshold: 5
