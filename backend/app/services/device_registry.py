@@ -72,7 +72,8 @@ def initialize_device_db():
 # --- ARAMA FONKSİYONLARI ---
 
 def search_device(user_message: str):
-    if not DEVICE_DB: initialize_device_db()
+    if not DEVICE_DB:
+        initialize_device_db()
         
     message_lower = user_message.lower()
     for device_key, data in DEVICE_DB.items():
@@ -81,7 +82,8 @@ def search_device(user_message: str):
     return None
 
 def suggest_device(user_message: str):
-    if not DEVICE_DB: initialize_device_db()
+    if not DEVICE_DB:
+        initialize_device_db()
     
     message_lower = user_message.lower()
     all_devices = list(DEVICE_DB.keys())
@@ -97,7 +99,8 @@ def suggest_device(user_message: str):
     return None
 
 def get_device_info(device_name_key: str):
-    if not DEVICE_DB: initialize_device_db()
+    if not DEVICE_DB:
+        initialize_device_db()
     
     if device_name_key in DEVICE_DB:
         info = DEVICE_DB[device_name_key]
