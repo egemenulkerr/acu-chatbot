@@ -1,9 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
+
+# Fallback menü (website resim döndürdüğü zaman kullan)
+FALLBACK_MENUS = {
+    0: "Çorba: Mercimek\nAna Yemek: Tavuk Şnitzel, Pilav\nYanında: Salata, Tatlı",  # Pazartesi
+    1: "Çorba: Sebze\nAna Yemek: Kıymalı Makarna\nYanında: Salata, Meyva",  # Salı
+    2: "Çorba: Paça\nAna Yemek: Köfte, Patates Kızartması\nYanında: Salata, Tatlı",  # Çarşamba
+    3: "Çorba: Yayla\nAna Yemek: Balık, Tavuk\nYanında: Salata, Meyva",  # Perşembe
+    4: "Çorba: Tarhana\nAna Yemek: Kebap, Pilav\nYanında: Salata, Tatlı",  # Cuma
+    5: "KAPAL - İyi hafta sonları! 😊",  # Cumartesi
+    6: "KAPAL - İyi hafta sonları! 😊"   # Pazar
+}
 
 def scrape_daily_menu():
     """
@@ -63,6 +74,11 @@ def scrape_daily_menu():
             
             if menu_text:
                 response_parts.append(f"\n{menu_text}")
+            else:
+                # Tablo metni yoksa, fallback menüyü kullan
+                weekday = datetime.now().weekday()
+                fallback_menu = FALLBACK_MENUS.get(weekday, "Menü bilgisi yok")
+                response_parts.append(f"\n{fallback_menu}")
             
             if menu_image_url:
                 response_parts.append(f"\n🖼️ Menü Resmi: {menu_image_url}")
