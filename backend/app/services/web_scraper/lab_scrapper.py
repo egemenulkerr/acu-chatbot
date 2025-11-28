@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager # <-- YENİ KAHRAMANIMIZ
 
 logger = logging.getLogger(__name__)
 
@@ -26,9 +25,13 @@ def scrape_lab_devices():
         # Docker içinde Firefox ESR'nin standart yolu
         opsiyonlar.binary_location = "/usr/bin/firefox-esr"
 
-        # 2. Sürücüyü OTOMATİK Kur ve Başlat
-        # Bu satır, işletim sistemine uygun driver'ı bulur, indirir ve yolu ayarlar.
-        service = Service(GeckoDriverManager().install())
+        # 2. Geckodriver'ı kullan (Docker'da veya sistem PATH'inde)
+        # DigitalOcean buildpack'te geckodriver sistem PATH'inde olmalı
+        geckodriver_path = "/usr/local/bin/geckodriver"
+        if not os.path.exists(geckodriver_path):
+            geckodriver_path = "geckodriver"  # Fallback to PATH
+        
+        service = Service(geckodriver_path)
         
         browser = webdriver.Firefox(service=service, options=opsiyonlar)
         browser.get(url)
