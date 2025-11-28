@@ -37,9 +37,36 @@ function App() {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   
   // Otomatik kaydırma için referans
   const messagesEndRef = useRef(null);
+  const recognitionRef = useRef(null);
+
+  // Web Speech API başlat (component mount olduğunda)
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.lang = 'tr-TR';
+      
+      recognitionRef.current.onstart = () => setIsListening(true);
+      recognitionRef.current.onend = () => setIsListening(false);
+      
+      recognitionRef.current.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        setInput(transcript);
+      };
+      
+      recognitionRef.current.onerror = (event) => {
+        console.error('Ses tanıma hatası:', event.error);
+        setIsListening(false);
+      };
+    }
+  }, []);
 
   // Mesaj geldiğinde en alta kaydır
   const scrollToBottom = () => {
@@ -91,6 +118,18 @@ function App() {
     if (e.key === 'Enter') sendMessage();
   };
 
+  const toggleListening = () => {
+    if (!recognitionRef.current) return;
+    
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      setInput('');
+      recognitionRef.current.start();
+    }
+  };
+
   // --- RENDER ---
   return (
     <div className="widget-container">
@@ -123,9 +162,16 @@ function App() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Sorunuzu yazın..."
+              placeholder="Sorunuzu yazın veya 🎤 sesle söyleyin..."
               autoFocus
             />
+            <button 
+              className={`mic-btn ${isListening ? 'listening' : ''}`}
+              onClick={toggleListening}
+              title={isListening ? 'Dinlemeyi durdur' : 'Sesle konuş'}
+            >
+              🎤
+            </button>
             <button onClick={sendMessage}>➤</button>
           </div>
         </div>
