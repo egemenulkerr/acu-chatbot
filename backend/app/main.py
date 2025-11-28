@@ -52,6 +52,12 @@ async def startup_event():
 async def _background_initialization():
     """Ağır initialization işlemlerini arka planda yap."""
     try:
+        # 0) Zemberek'i yükle (JVM başlatma - ilk kez uzun sürer)
+        print("⚙️ NLP motorunu yükleniyor (Zemberek JVM)...")
+        from .core.nlp import get_morphology
+        await asyncio.to_thread(get_morphology)
+        print("✅ NLP motoru başarıyla yüklendi.")
+
         # 1) Intent verilerini yükle
         print("📚 Intent verileri ve modeller yükleniyor...")
         await asyncio.to_thread(load_intent_data)
