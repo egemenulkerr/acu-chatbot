@@ -3,6 +3,7 @@ FROM python:3.11-slim
 # Install dependencies (minimal - only what's needed)
 ENV GECKODRIVER_VERSION=0.33.0
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
