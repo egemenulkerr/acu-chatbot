@@ -106,4 +106,10 @@ def read_root():
 @app.get("/health")
 def health_check():
     """Hızlı health check - başlatma tamamlanmamış olsa da OK döner."""
-    return {"status": "ok", "startup_complete": STARTUP_COMPLETE}
+    import os
+    use_emb = os.getenv("USE_EMBEDDINGS", "false").lower() == "true"
+    return {
+        "status": "ok", 
+        "startup_complete": STARTUP_COMPLETE,
+        "use_embeddings": use_emb
+    }
