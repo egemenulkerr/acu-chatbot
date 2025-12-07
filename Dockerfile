@@ -1,29 +1,21 @@
 FROM python:3.11-slim
 
-# Install only runtime dependencies, minimize image size
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
+# Minimal dependencies - no Firefox/geckodriver (scheduled jobs run separately)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     openjdk-21-jre-headless \
-    firefox-esr \
     && rm -rf /var/lib/apt/lists/*
-
-# Get geckodriver from container registry to save disk space
-RUN wget -q "https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz" -O /tmp/geckodriver.tar.gz && \
-    tar -xzf /tmp/geckodriver.tar.gz -C /usr/local/bin/ && \
-    rm /tmp/geckodriver.tar.gz && \
-    chmod +x /usr/local/bin/geckodriver
 
 WORKDIR /app
 
-# Copy and install dependencies
+# Install Python dependencies with minimal overhead
 COPY backend/requirements.txt .
 RUN pip config set global.no-cache-dir true && \
     pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir --default-timeout=1000 -r requirements.txt && \
-    rm -rf /root/.cache/pip /tmp/* /var/tmp/*
+    pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 COPY backend/app /app/app
 
