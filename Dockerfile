@@ -15,7 +15,9 @@ WORKDIR /app
 COPY backend/requirements.txt .
 RUN pip config set global.no-cache-dir true && \
     pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
+    pip install --no-cache-dir --default-timeout=1000 -r requirements.txt && \
+    rm -rf /root/.cache/pip /tmp/* /var/tmp/* && \
+    find /usr/local/lib/python3.11 -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 
 COPY backend/app /app/app
 
