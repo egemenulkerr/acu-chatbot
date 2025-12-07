@@ -7,10 +7,41 @@ services:
     deploy_on_push: true
   dockerfile_path: Dockerfile
   http_port: 8080
+  
+  # Resource limits for DigitalOcean
+  resource_limits:
+    cpus: 1
+    memory_mb: 1024
+  
+  # Environment variables (set in DigitalOcean console)
   envs:
   - key: GOOGLE_API_KEY
     scope: RUN_TIME
+  - key: ENVIRONMENT
+    value: production
+    scope: RUN_TIME
+  - key: LOG_LEVEL
+    value: INFO
+    scope: RUN_TIME
+  - key: USE_EMBEDDINGS
+    value: "true"
+    scope: RUN_TIME
+  
+  # Health check configuration
   health_check:
     http_path: /health
+    http_port: 8080
+    initial_delay_seconds: 30
+    period_seconds: 10
+    timeout_seconds: 5
+    failure_threshold: 3
+  
+  # Auto-scaling (optional)
+  autoscaling:
+    enabled: true
+    min_instance_count: 1
+    max_instance_count: 3
+    target_cpu_utilization: 70
+
 static_sites: []
 databases: []
