@@ -22,11 +22,13 @@ WORKDIR /app
 
 # Copy and install dependencies
 COPY backend/requirements.txt .
-RUN pip install --no-cache-dir --disable-pip-version-check --default-timeout=1000 --upgrade pip && \
-    pip install --no-cache-dir --disable-pip-version-check --default-timeout=1000 -r requirements.txt && \
+RUN pip config set global.no-cache-dir true && \
+    pip install --disable-pip-version-check --default-timeout=1000 --upgrade pip && \
+    pip install --disable-pip-version-check --default-timeout=1000 -r requirements.txt && \
     find /usr/local/lib/python3.11/site-packages -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true && \
     find /usr/local/lib/python3.11/site-packages -type f -name "*.pyc" -delete && \
-    find /usr/local/lib/python3.11/site-packages -type f -name "*.pyo" -delete
+    find /usr/local/lib/python3.11/site-packages -type f -name "*.pyo" -delete && \
+    rm -rf /root/.cache/pip
 
 COPY backend/app /app/app
 
