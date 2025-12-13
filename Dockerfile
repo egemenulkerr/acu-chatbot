@@ -13,11 +13,13 @@ WORKDIR /app
 
 # Install Python dependencies with minimal overhead
 COPY backend/requirements.txt .
-RUN pip config set global.no-cache-dir true && \
-    pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir --default-timeout=1000 -r requirements.txt && \
-    rm -rf /root/.cache/pip /tmp/* /var/tmp/* && \
-    find /usr/local/lib/python3.11 -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --upgrade pip && \
+    pip install --default-timeout=1000 -r requirements.txt && \
+    python -m pip cache purge && \
+    find /usr/local/lib/python3.11 -type d -name __pycache__ -delete && \
+    find /usr/local/lib/python3.11 -type f -name "*.pyc" -delete && \
+    rm -rf /root/.cache /tmp/* /var/tmp/*
 
 COPY backend/app /app/app
 
