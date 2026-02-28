@@ -1,238 +1,505 @@
-/* Sayfa genelini etkilemesin, sadece widget'ı konumlandırsın */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: transparent; /* Arkaplan şeffaf olsun */
-}
+/* ============================================================
+   AÇÜ Chatbot — Premium Redesign
+   Inspired by: Claude, Intercom, Linear, Arc
+   ============================================================ */
 
-/* --- WIDGET KONTEYNERİ --- */
-.widget-container {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── WIDGET SHELL ─────────────────────────────────────────── */
+
+.acu-widget {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999; /* Diğer her şeyin üstünde */
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Sağa yasla */
-  gap: 15px;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* --- AÇMA/KAPAMA BUTONU (LAUNCHER) --- */
-.launcher-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1B4D3E 0%, #0F3028 100%);
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+/* ── CHAT WINDOW ──────────────────────────────────────────── */
+
+.acu-window {
+  width: min(400px, calc(100vw - 48px));
+  height: min(620px, calc(100vh - 110px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+
+  /* Çok katmanlı gölge — derinlik hissi */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 2px 4px rgba(0, 0, 0, 0.03),
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 32px 64px rgba(0, 0, 0, 0.10),
+    0 64px 120px rgba(0, 0, 0, 0.07);
+
+  animation: windowIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: bottom right;
+}
+
+@keyframes windowIn {
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+/* ── HEADER ───────────────────────────────────────────────── */
+
+.acu-header {
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0b2e17;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Aurora arka plan efekti */
+.acu-header-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120px 80px at 15% 50%, rgba(16, 185, 129, 0.3) 0%, transparent 100%),
+    radial-gradient(ellipse 80px 100px at 80% -20%, rgba(52, 211, 153, 0.2) 0%, transparent 100%),
+    radial-gradient(ellipse 60px 60px at 95% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.acu-header-left {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Avatar */
+.acu-avatar {
+  position: relative;
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #064e1c, #10b981);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease, box-shadow 0.3s;
+  font-size: 1.2rem;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.12),
+    0 4px 12px rgba(0,0,0,0.3);
+  flex-shrink: 0;
 }
 
-.launcher-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(27, 77, 62, 0.4);
+.acu-badge {
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid #0b2e17;
 }
+.acu-badge.on  { background: #34d399; }
+.acu-badge.off { background: #f87171; }
 
-.launcher-icon {
-  width: 30px;
-  height: 30px;
-  fill: white;
-}
+.acu-title-group { display: flex; flex-direction: column; gap: 2px; }
 
-/* --- SOHBET PENCERESİ --- */
-.chat-window {
-  width: 350px;
-  height: 500px;
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  
-  /* Açılış Animasyonu */
-  transform-origin: bottom right;
-  animation: openPopup 0.3s ease-out forwards;
-}
-
-@keyframes openPopup {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* --- HEADER (Başlık ve Kapat Butonu) --- */
-.chat-header {
-  background: linear-gradient(135deg, #1B4D3E 0%, #0F3028 100%);
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chat-header h3 {
-  margin: 0;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
+.acu-title {
+  font-weight: 700;
+  font-size: 0.93rem;
+  color: #ffffff;
+  letter-spacing: -0.01em;
   line-height: 1;
-  transition: opacity 0.2s;
 }
 
-.close-btn:hover {
-  opacity: 0.8;
+.acu-subtitle {
+  font-size: 0.7rem;
+  color: #6ee7b7;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
-/* --- MESAJ ALANI --- */
-.messages-area {
+.acu-header-right {
+  display: flex;
+  gap: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.acu-icon-btn {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.acu-icon-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ── MESSAGE LOG ──────────────────────────────────────────── */
+
+.acu-log {
   flex: 1;
-  padding: 15px;
   overflow-y: auto;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background-color: #f8faf9;
+  gap: 2px;
+
+  /* Çok ince nokta ızgara arka planı — Notion / Linear tarzı */
+  background-color: #fafafa;
+  background-image: radial-gradient(circle, #e4e4e7 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
-.message-bubble {
-  max-width: 80%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  line-height: 1.4;
-  position: relative;
-  word-wrap: break-word;
-  animation: messageSlide 0.3s ease-out;
-}
+.acu-log::-webkit-scrollbar { width: 3px; }
+.acu-log::-webkit-scrollbar-thumb { background: #e4e7ec; border-radius: 99px; }
 
-@keyframes messageSlide {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.message-bubble.user {
-  background: linear-gradient(135deg, #1B4D3E 0%, #0F3028 100%);
-  color: white;
-  align-self: flex-end;
-  border-bottom-right-radius: 2px;
-  margin-left: auto;
-}
-
-.message-bubble.bot {
-  background-color: #e8f4f1;
-  color: #1B4D3E;
-  align-self: flex-start;
-  border-bottom-left-radius: 2px;
-  margin-right: auto;
-}
-
-.message-source {
-  display: block;
-  font-size: 9px;
-  opacity: 0.7;
-  margin-top: 4px;
-  text-align: right;
-  font-style: italic;
-}
-
-.loading { 
-  color: #7f8c8d; 
-  font-style: italic; 
-  font-size: 12px; 
-}
-
-/* --- GİRİŞ ALANI --- */
-.input-area {
-  padding: 10px;
-  border-top: 1px solid #eee;
+/* Mesaj satırı */
+.acu-msg {
   display: flex;
+  align-items: flex-end;
   gap: 8px;
-  background-color: white;
+  animation: msgIn 0.2s ease-out both;
+  margin-bottom: 4px;
+}
+.acu-msg--cont { margin-bottom: 1px; }
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  outline: none;
-  font-size: 14px;
-  transition: border-color 0.2s;
+/* Bot mesajı — sola */
+.acu-msg--bot { flex-direction: row; }
+
+/* Kullanıcı mesajı — sağa */
+.acu-msg--user {
+  flex-direction: row-reverse;
 }
 
-input:focus {
-  border-color: #1B4D3E;
+/* Avatar */
+.acu-msg-avatar {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #064e1c, #10b981);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  margin-bottom: 2px;
 }
 
-button {
-  padding: 0 15px;
-  background: linear-gradient(135deg, #D4AF37 0%, #C4931A 100%);
-  color: #1B4D3E;
-  border: none;
-  border-radius: 20px;
+.acu-msg-avatar-spacer {
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.acu-msg-body {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 44px);
+}
+
+.acu-msg--user .acu-msg-body { align-items: flex-end; }
+
+/* Baloncuk */
+.acu-bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  letter-spacing: 0.008em;
+  word-break: break-word;
+  position: relative;
+}
+
+/* Bot baloncuğu */
+.acu-msg--bot .acu-bubble {
+  background: #ffffff;
+  color: #18181b;
+  border-radius: 4px 16px 16px 16px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.06),
+    0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Kullanıcı baloncuğu */
+.acu-msg--user .acu-bubble {
+  background: linear-gradient(145deg, #065f46, #059669);
+  color: #ffffff;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow:
+    0 4px 12px rgba(5, 150, 105, 0.3),
+    0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Ardışık mesajlar — köşeleri değiştir */
+.acu-msg--cont.acu-msg--bot .acu-bubble  { border-radius: 4px 16px 16px 16px; }
+.acu-msg--cont.acu-msg--user .acu-bubble { border-radius: 16px 4px 16px 16px; }
+
+/* Zaman */
+.acu-time {
+  font-size: 0.65rem;
+  color: #a1a1aa;
+  margin-top: 3px;
+  padding: 0 2px;
+  letter-spacing: 0.02em;
+}
+
+/* ── TYPING INDICATOR ─────────────────────────────────────── */
+
+.acu-typing {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 14px 16px !important;
+  width: 60px !important;
+}
+
+.acu-typing span {
+  width: 6px; height: 6px;
+  background: #a1a1aa;
+  border-radius: 50%;
+  display: block;
+  animation: dot 1.4s infinite ease-in-out;
+}
+.acu-typing span:nth-child(1) { animation-delay: 0s;    }
+.acu-typing span:nth-child(2) { animation-delay: 0.18s; }
+.acu-typing span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes dot {
+  0%, 60%, 100% { transform: translateY(0);    background: #d4d4d8; }
+  30%            { transform: translateY(-6px); background: #71717a; }
+}
+
+/* ── QUICK REPLY CHIPS ────────────────────────────────────── */
+
+.acu-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
+.acu-chip {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #3f3f46;
+  border-radius: 99px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+  transition: all 0.16s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  letter-spacing: 0.01em;
+}
+.acu-chip:hover {
+  background: #052e16;
+  border-color: #052e16;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(5, 46, 22, 0.25);
 }
 
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+/* ── ERROR BAR ────────────────────────────────────────────── */
+
+.acu-error {
+  background: #fffbeb;
+  border-top: 1px solid #fde68a;
+  padding: 8px 16px;
+  font-size: 0.78rem;
+  color: #78350f;
+  font-weight: 500;
+  flex-shrink: 0;
 }
 
-/* --- MİKROFON BUTONU --- */
-.mic-btn {
-  padding: 0 12px !important;
-  background-color: #95a5a6 !important;
-  color: white !important;
-  border-radius: 20px !important;
-  transition: all 0.3s ease;
-  font-size: 16px;
+/* ── INPUT BAR ────────────────────────────────────────────── */
+
+.acu-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #ffffff;
+  border-top: 1px solid #f4f4f5;
+  flex-shrink: 0;
 }
 
-.mic-btn:hover {
-  background-color: #7f8c8d !important;
+.acu-input-bar input {
+  flex: 1;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  background: #fafafa;
+  color: #18181b;
+  outline: none;
+  transition: all 0.18s;
+  letter-spacing: 0.008em;
+}
+.acu-input-bar input:focus {
+  border-color: #059669;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+.acu-input-bar input::placeholder {
+  color: #a1a1aa;
+  font-size: 0.85rem;
 }
 
-.mic-btn.listening {
-  background: linear-gradient(135deg, #D4AF37, #C4931A) !important;
-  color: #1B4D3E !important;
-  animation: pulse 0.6s infinite;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+/* Mikrofon */
+.acu-mic {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: 1.5px solid #e4e4e7;
+  background: #fafafa;
+  color: #71717a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.16s;
+  flex-shrink: 0;
+}
+.acu-mic:hover:not(:disabled) {
+  border-color: #059669;
+  background: #f0fdf4;
+  color: #059669;
+}
+.acu-mic.active {
+  background: #fff1f2;
+  border-color: #fca5a5;
+  color: #ef4444;
+  animation: micGlow 1s infinite;
+}
+.acu-mic:disabled { opacity: 0.3; cursor: not-allowed; }
+
+@keyframes micGlow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); }
+  50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+/* Gönder */
+.acu-send {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(145deg, #047857, #059669);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(5,150,105,0.35);
+}
+.acu-send:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 6px 16px rgba(5,150,105,0.42);
+}
+.acu-send:active:not(:disabled) { transform: scale(0.96); }
+.acu-send:disabled {
+  background: #f4f4f5;
+  color: #a1a1aa;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
-/* --- LİNKLER --- */
-.message-bubble a {
-  text-decoration: underline;
-  font-weight: bold;
+/* ── LAUNCHER BUTTON ──────────────────────────────────────── */
+
+.acu-launcher {
+  position: relative;
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(145deg, #064e1c, #059669);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.15),
+    0 10px 24px rgba(5, 150, 105, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
-/* Kullanıcı balonundaki linkler (Zemin yeşil -> Link altın) */
-.message-bubble.user a {
-  color: #D4AF37; 
+.acu-launcher:hover {
+  transform: scale(1.08) translateY(-2px);
+  border-radius: 18px;
+  box-shadow:
+    0 8px 16px rgba(0,0,0,0.18),
+    0 18px 36px rgba(5, 150, 105, 0.48),
+    inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* Bot balonundaki linkler (Zemin açık yeşil -> Link koyu yeşil) */
-.message-bubble.bot a {
-  color: #0F3028;
-  font-weight: bold;
+.acu-launcher:active { transform: scale(0.96); }
+
+/* Unread badge */
+.acu-unread {
+  position: absolute;
+  top: -6px; right: -6px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px; height: 18px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid #fff;
+  font-family: inherit;
+  animation: badgePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badgePop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .acu-widget { bottom: 0; right: 0; left: 0; align-items: stretch; }
+
+  .acu-window {
+    width: 100%;
+    height: calc(100svh - 72px);
+    border-radius: 20px 20px 0 0;
+    animation: mobileIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes mobileIn {
+    from { transform: translateY(100%); opacity: 0.5; }
+    to   { transform: translateY(0);    opacity: 1;   }
+  }
+
+  .acu-launcher {
+    position: fixed;
+    bottom: 18px; right: 18px;
+  }
 }

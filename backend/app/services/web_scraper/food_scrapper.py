@@ -10,11 +10,15 @@ def scrape_daily_menu():
     """
     AÇÜ Yemek sayfasından günün menüsünü çeker.
 
-    Hafta sonu kontrol edilir ve 'KAPAL' sentinel döndürülür.
+    Site tablosunda satırlar: (tarih_td, menü_td) çiftleri olarak sıralanır.
+    Bugünün tarihini tabloda bulup o güne ait menüyü döndürür.
+
+    Hafta sonu: 'KAPAL' sentinel döner.
     Scraping başarısız olursa None döner — uydurma veri ASLA döndürülmez.
     """
-    # Hafta sonu kontrolü (0=Pazartesi, 5=Cumartesi, 6=Pazar)
-    weekday = datetime.now().weekday()
+    now = datetime.now()
+    weekday = now.weekday()  # 0=Pazartesi, 5=Cumartesi, 6=Pazar
+
     if weekday >= 5:
         return "KAPAL"
 
@@ -29,19 +33,39 @@ def scrape_daily_menu():
             return None
 
         soup = BeautifulSoup(r.content, "html.parser")
-        today = datetime.now().strftime("%d.%m.%Y")
-        response_parts = [f"**Günün Menüsü** ({today})"]
+        today_str = now.strftime("%d.%m.%Y")
+        response_parts = [f"**Günün Menüsü** ({today_str})"]
 
-        # Menü tablo metni
+        # -- Tablo yaklaşımı: (tarih, menü) çiftleri --
         tds = soup.find_all("td")
-        if len(tds) > 1:
-            raw_text = tds[1].text.strip()
-            lines = [line.strip() for line in raw_text.split("\n") if line.strip()]
+        menu_text = None
+
+        # Önce bugünün tarihini tabloda ara, sonraki hücreyi menü olarak al
+        for i, td in enumerate(tds):
+            cell_text = td.text.strip()
+            if today_str in cell_text and i + 1 < len(tds):
+                candidate = tds[i + 1].text.strip()
+                if candidate and "hafta sonu" not in candidate.lower():
+                    menu_text = candidate
+                    logger.info(f"Tarih eşleşmesi bulundu (td[{i}]): {cell_text}")
+                break
+
+        # Tarihe göre bulunamadıysa, ilk çifti dene (sitenin ilk satırı genellikle bugün)
+        if not menu_text and len(tds) > 1:
+            candidate = tds[1].text.strip()
+            # Hafta sonu sentinel
+            if "hafta sonu" in candidate.lower() or candidate.upper() == "HAFTA SONU":
+                return "KAPAL"
+            if candidate:
+                menu_text = candidate
+                logger.info("Tarih eşleşmesi yok, tds[1] kullanıldı.")
+
+        if menu_text:
+            lines = [line.strip() for line in menu_text.split("\n") if line.strip()]
             if lines:
                 response_parts.append("\n" + "\n".join(lines))
-                logger.info("Yemek listesi (tablo verisi) başarıyla çekildi.")
 
-        # Menü resim URL'i
+        # -- Menü resim URL'i --
         image_container = soup.find("div", class_="image-container")
         if image_container:
             img = image_container.find("img")
@@ -55,7 +79,6 @@ def scrape_daily_menu():
         if len(response_parts) > 1:
             return "\n".join(response_parts)
 
-        # Ne tablo metni ne resim bulundu — dürüstçe None döndür
         logger.warning("Yemek menüsü (resim ve metin) bulunamadı.")
         return None
 

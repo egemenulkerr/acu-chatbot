@@ -8,6 +8,7 @@ import asyncio
 import logging
 import random
 from time import time
+from datetime import date
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Header, Request
@@ -15,7 +16,8 @@ from fastapi import APIRouter, Depends, HTTPException, Header, Request
 from ...schemas.chat import ChatRequest, ChatResponse
 from ...core.classifier import classify_intent
 from ...core.limiter import limiter
-from ...services.web_scraper.manager import update_system_data
+from ...services.web_scraper.manager import update_system_data, _format_menu_message
+from ...services.web_scraper.food_scrapper import scrape_daily_menu
 from ...services.llm_client import get_llm_response
 from ...services.device_registry import (
     search_device,
@@ -45,6 +47,13 @@ router: APIRouter = APIRouter()
 # session_id → (cihaz_adı, timestamp)
 PENDING_CONFIRMATIONS: dict[str, tuple[str, float]] = {}
 CONFIRMATION_TTL: float = 300.0  # 5 dakika
+
+# ============================================================================
+# STATE: YEMEK GÜNLÜK CACHE
+# ============================================================================
+
+# Her gün ilk istekte scrape yapılır, gün değişene kadar cache'de tutulur
+_FOOD_CACHE: dict = {"date": None, "response": None}
 
 
 def _cleanup_expired_confirmations() -> None:
@@ -162,6 +171,42 @@ def _handle_device_query(message: str, user_id: str) -> ChatResponse:
     )
 
 
+async def _handle_food_query() -> ChatResponse:
+    """
+    Yemek menüsünü live olarak scrape et. Günlük in-memory cache kullanır:
+    aynı gün tekrar sorulursa scrape yapılmaz, cache'den döner.
+    """
+    today = date.today()
+    if _FOOD_CACHE["date"] == today and _FOOD_CACHE["response"] is not None:
+        return ChatResponse(
+            response=_FOOD_CACHE["response"],
+            source="Yemek Servisi (cache)",
+            intent_name="yemek_listesi"
+        )
+
+    try:
+        daily_menu: Optional[str] = await asyncio.wait_for(
+            asyncio.to_thread(scrape_daily_menu),
+            timeout=12.0
+        )
+    except asyncio.TimeoutError:
+        logger.warning("⏱️ Yemek scraper zaman aşımı.")
+        daily_menu = None
+    except Exception as e:
+        logger.error(f"❌ Yemek scraper hatası: {e}", exc_info=True)
+        daily_menu = None
+
+    formatted: str = _format_menu_message(daily_menu)
+    _FOOD_CACHE["date"] = today
+    _FOOD_CACHE["response"] = formatted
+
+    return ChatResponse(
+        response=formatted,
+        source="Yemek Servisi",
+        intent_name="yemek_listesi"
+    )
+
+
 def _handle_generic_intent(intent: dict) -> ChatResponse:
     raw_response = intent["response_content"]
     final_response: str = random.choice(raw_response) if isinstance(raw_response, list) else raw_response
@@ -247,6 +292,8 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
 
         if intent_name == "akademik_takvim":
             return _handle_academic_calendar(intent, body.message)
+        elif intent_name == "yemek_listesi":
+            return await _handle_food_query()
         elif intent_name == "cihaz_bilgisi":
             return _handle_device_query(body.message, user_id)
         else:
