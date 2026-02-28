@@ -15,7 +15,7 @@ def scrape_all_calendars():
     
     try:
         logger.info(f"{base_url} adresinden takvim arşivi taranıyor...")
-        response = requests.get(base_url, timeout=10, verify=False)
+        response = requests.get(base_url, timeout=10)
         soup = BeautifulSoup(response.content, "html.parser")
         
         # Tüm linkleri al

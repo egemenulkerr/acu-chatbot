@@ -71,23 +71,32 @@ body {
 }
 
 /* Bot Mesajları */
-.message.bot {
-  align-self: flex-start; /* Sola yasla */
+.message-bot {
+  align-self: flex-start;
 }
-.message.bot .message-bubble {
+.message-bot .message-bubble {
   background-color: #e9ecef;
   color: #333;
   border-bottom-left-radius: 5px;
 }
 
 /* Kullanıcı Mesajları */
-.message.user {
-  align-self: flex-end; /* Sağa yasla */
+.message-user {
+  align-self: flex-end;
 }
-.message.user .message-bubble {
+.message-user .message-bubble {
   background-color: #197e00;
   color: white;
   border-bottom-right-radius: 5px;
+}
+
+/* Inline Hata Mesajı */
+.inline-error {
+  background-color: #fff3cd;
+  color: #856404;
+  border-top: 1px solid #ffc107;
+  padding: 8px 15px;
+  font-size: 0.85rem;
 }
 
 /* 3. Giriş Alanı (Input Area) */
