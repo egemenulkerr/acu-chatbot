@@ -253,13 +253,64 @@
 .acu-msg--cont.acu-msg--bot .acu-bubble  { border-radius: 4px 16px 16px 16px; }
 .acu-msg--cont.acu-msg--user .acu-bubble { border-radius: 16px 4px 16px 16px; }
 
+/* Mesaj alt satırı: saat + feedback */
+.acu-msg-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+  padding: 0 2px;
+}
+
 /* Zaman */
 .acu-time {
   font-size: 0.65rem;
   color: #a1a1aa;
-  margin-top: 3px;
-  padding: 0 2px;
   letter-spacing: 0.02em;
+}
+
+/* Feedback butonları */
+.acu-feedback {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.acu-msg--bot:hover .acu-feedback { opacity: 1; }
+
+.acu-fb-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: background 0.15s, transform 0.1s;
+  line-height: 1;
+}
+.acu-fb-btn:hover { background: #f4f4f5; transform: scale(1.15); }
+.acu-fb-btn.active-up  { background: #dcfce7; }
+.acu-fb-btn.active-down { background: #fee2e2; }
+
+/* Link stili */
+.acu-link {
+  color: #059669;
+  text-decoration: underline;
+  word-break: break-all;
+}
+.acu-link:hover { color: #047857; }
+
+/* Streaming cursor */
+.acu-cursor {
+  display: inline-block;
+  animation: blink 0.7s step-start infinite;
+  font-weight: 300;
+  color: #71717a;
+  margin-left: 1px;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 /* ── TYPING INDICATOR ─────────────────────────────────────── */

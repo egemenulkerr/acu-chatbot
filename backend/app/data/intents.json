@@ -166,6 +166,229 @@
       }
     },
     {
+      "intent_name": "veda",
+      "keywords": {
+        "güle": 5, "güle güle": 8, "hoşça": 6, "hoşçakal": 8, "görüşürüz": 8,
+        "bye": 7, "goodbye": 7, "teşekkür": 5, "teşekkürler": 6, "sağol": 6,
+        "sağolasın": 6, "eyvallah": 7, "tamam": 3, "iyi": 2, "günler": 3,
+        "geceler": 4, "akşamlar": 4, "çıkıyorum": 6, "kapatıyorum": 5
+      },
+      "examples": [
+        "görüşürüz", "hoşça kal", "bye bye", "teşekkürler çok yardımcı oldun",
+        "sağol", "güle güle", "eyvallah", "teşekkür ederim", "iyi günler",
+        "iyi akşamlar", "iyi geceler"
+      ],
+      "response_type": "RANDOM_TEXT",
+      "response_content": [
+        "Görüşürüz! 😊 Başka bir sorun olursa buradayım.",
+        "Hoşça kal! Umarım yardımcı olabilmişimdir. 🎓",
+        "İyi çalışmalar! Bir sonraki sorunda görüşmek üzere.",
+        "Güle güle! AÇÜ'de başarılar dilerim. 🍀",
+        "Teşekkür ederim, iyi günler! 😊"
+      ]
+    },
+    {
+      "intent_name": "iletisim",
+      "keywords": {
+        "iletişim": 7, "telefon": 6, "numara": 5, "email": 6, "mail": 6,
+        "adres": 5, "nerede": 3, "rektör": 6, "rektörlük": 7, "öğrenci işleri": 8,
+        "dekan": 6, "fakülte": 4, "birim": 4, "ulaş": 5, "ara": 4,
+        "faks": 5, "web": 3, "site": 3, "bölüm": 4, "sekreter": 5
+      },
+      "examples": [
+        "üniversitenin telefon numarası ne",
+        "öğrenci işleri iletişim",
+        "rektörlük nerede",
+        "bölümün mail adresi",
+        "fakülte telefonu",
+        "üniversiteye nasıl ulaşırım",
+        "öğrenci işleri telefon numarası",
+        "iletişim bilgileri"
+      ],
+      "response_type": "TEXT",
+      "response_content": "📞 **AÇÜ İletişim Bilgileri**\n\n🏛️ **Rektörlük**\nTel: +90 (466) 215 10 00\nFaks: +90 (466) 215 10 03\nE-posta: rektorluk@artvin.edu.tr\n\n🎓 **Öğrenci İşleri Dairesi**\nTel: +90 (466) 215 10 00 (Dahili: 1350)\nE-posta: ogrenciisleri@artvin.edu.tr\n\n📍 **Adres:** AÇÜ Şehir Yerleşkesi, 08000 Artvin Merkez\n\n🌐 **Web:** https://www.artvin.edu.tr"
+    },
+    {
+      "intent_name": "ulasim_servis",
+      "keywords": {
+        "servis": 7, "ulaşım": 6, "ring": 7, "otobüs": 6, "minibüs": 6,
+        "kampüs": 4, "saat": 3, "kalkış": 6, "geliyor": 4, "gidiyor": 4,
+        "yerleşke": 5, "dolmuş": 6, "şehir": 3, "merkez": 3, "taşıma": 5,
+        "araç": 4, "güzergah": 7, "durak": 5, "ne zaman": 3
+      },
+      "examples": [
+        "kampüs servisi kaçta kalkıyor",
+        "ring servisi saatleri",
+        "üniversiteye nasıl gidilir",
+        "servis güzergahı nedir",
+        "şehir merkezine servis var mı",
+        "otobüs saatleri",
+        "kampüse ulaşım"
+      ],
+      "response_type": "TEXT",
+      "response_content": "🚌 **AÇÜ Kampüs Ulaşım Bilgileri**\n\n**Şehir Yerleşkesi ↔ Merkez Ring Servisi**\n⏰ Sabah: 08:00, 08:30, 09:00\n⏰ Öğlen: 12:00, 13:00\n⏰ Akşam: 17:00, 17:30, 18:00\n\n**Orman Fakültesi Yerleşkesi ↔ Şehir**\n⏰ Sabah: 08:15, 09:15\n⏰ Akşam: 17:15, 18:15\n\n💡 Güncel saatler değişebilir. Detaylar için Öğrenci İşleri'ni arayın: +90 (466) 215 10 00\n\n🚕 Artvin'de taksi ve dolmuş hizmeti de mevcuttur."
+    },
+    {
+      "intent_name": "kutuphane",
+      "keywords": {
+        "kütüphane": 8, "kitap": 6, "kaynak": 5, "ödünç": 7, "iade": 6,
+        "veritabanı": 6, "e-kaynak": 7, "dergi": 5, "makale": 5, "tez": 6,
+        "okuma salonu": 7, "bilgi merkezi": 7, "bibliyoteka": 5,
+        "katalog": 6, "borç": 4, "uzatma": 5
+      },
+      "examples": [
+        "kütüphane saat kaçta açılıyor",
+        "kitap ödünç almak istiyorum",
+        "kütüphane çalışma saatleri",
+        "e-kaynaklara nasıl erişebilirim",
+        "tez veritabanı",
+        "okuma salonu kaçta kapanıyor",
+        "kitap iade tarihi"
+      ],
+      "response_type": "TEXT",
+      "response_content": "📚 **AÇÜ Merkez Kütüphanesi**\n\n⏰ **Çalışma Saatleri**\nPazartesi – Cuma: 08:00 – 21:00\nCumartesi: 09:00 – 17:00\nPazar: Kapalı\n\n📖 **Ödünç Alma**\nÖğrenciler: 7 gün (3 kitaba kadar)\nAkademisyenler: 30 gün (10 kitaba kadar)\nUzatma: Kütüphane kartı veya web portalı üzerinden\n\n💻 **E-Kaynaklar:** https://kutuphane.artvin.edu.tr\n(YÖK Ulusal Tez Merkezi, EBSCO, Springer vb.)\n\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1200)"
+    },
+    {
+      "intent_name": "yurt_bilgisi",
+      "keywords": {
+        "yurt": 8, "konut": 5, "barınak": 4, "kalacak": 5, "yer": 2,
+        "kyk": 8, "yatakhane": 6, "oda": 4, "konaklama": 5, "yaşam": 3,
+        "kiracı": 4, "ucret": 4, "ücret": 4, "başvuru": 4, "öğrenci evi": 6,
+        "apart": 4, "pansiyon": 4, "şehir içi": 3
+      },
+      "examples": [
+        "yurt başvurusu nasıl yapılır",
+        "kyk yurt ücretleri",
+        "üniversitede yurt var mı",
+        "öğrenci yurdu nerede",
+        "yurt kapasitesi",
+        "barınma imkanları",
+        "kyk başvurusu"
+      ],
+      "response_type": "TEXT",
+      "response_content": "🏠 **AÇÜ Yurt Bilgileri**\n\n**KYK (Kredi Yurtlar Kurumu) Yurtları**\n📍 Artvin KYK Yurdu, şehir merkezinde hizmet vermektedir.\n💰 Güncel ücretler için: https://www.kyk.gov.tr\n\n**Başvuru**\n📅 Yurt başvuruları her yıl Ağustos-Eylül aylarında açılır.\n🌐 Başvuru: https://basvuru.kyk.gov.tr\n\n**Özel Yurtlar**\nŞehir merkezinde çeşitli özel yurtlar ve apart daireler mevcuttur.\n\n💡 Detaylı bilgi için Öğrenci Konseyi veya Öğrenci İşleri'ne danışabilirsiniz.\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1350)"
+    },
+    {
+      "intent_name": "burs_bilgisi",
+      "keywords": {
+        "burs": 8, "burslar": 8, "destek": 4, "maddi": 5, "finansal": 4,
+        "yardım": 4, "tbmm": 4, "tübitak": 6, "aselsan": 5, "vakıf": 5,
+        "başarı": 4, "ihtiyaç": 4, "gelir": 3, "başvur": 5, "kredi": 5,
+        "devlet": 4, "öğrenci bursu": 8, "burs başvurusu": 8
+      },
+      "examples": [
+        "burs başvurusu nasıl yapılır",
+        "hangi burslar var",
+        "TÜBİTAK bursu",
+        "devlet bursu şartları",
+        "burs miktarları",
+        "maddi destek imkanları",
+        "vakıf bursu"
+      ],
+      "response_type": "TEXT",
+      "response_content": "💰 **Burs İmkanları**\n\n**1. Devlet Bursları (KYK)**\n🔗 https://basvuru.kyk.gov.tr\n📅 Başvuru: Her yıl Eylül-Ekim\n\n**2. TÜBİTAK Bursları**\n🔬 Lisans: 2205 Programı\n🔗 https://e-bideb.tubitak.gov.tr\n\n**3. AÇÜ İç Burslar**\nÜniversitemiz başarı ve ihtiyaç bazlı burslar sunmaktadır.\nDetay: Öğrenci İşleri Dairesi\n\n**4. Diğer Kurum Bursları**\n• TBMM Vakfı, Türkiye Diyanet Vakfı\n• Çeşitli belediye ve özel sektör bursları\n\n📞 Burs danışmanlığı: +90 (466) 215 10 00 (Dahili: 1350)"
+    },
+    {
+      "intent_name": "ders_kaydi",
+      "keywords": {
+        "ders kaydı": 9, "kayıt": 5, "danışman": 6, "onay": 5, "müfredat": 6,
+        "ders seçimi": 8, "obs": 7, "e-öğrenci": 6, "kredi": 5, "seçmeli": 5,
+        "zorunlu ders": 6, "ekle": 4, "sil": 4, "bırak": 3, "ders bırakma": 7,
+        "ders ekleme": 7, "açılmadı": 5, "kontenjan": 6, "dönem": 4
+      },
+      "examples": [
+        "ders kaydı nasıl yapılır",
+        "danışman onayı gerekli mi",
+        "obs ders ekleme",
+        "seçmeli ders nasıl seçilir",
+        "ders kaydı ne zaman",
+        "kontenjan doldu başka ders ekleyebilir miyim",
+        "ders bırakma süresi"
+      ],
+      "response_type": "TEXT",
+      "response_content": "📝 **Ders Kaydı Rehberi**\n\n**1. OBS'ye Giriş**\n🌐 https://obs.artvin.edu.tr\nÖğrenci numarası ve şifrenizle giriş yapın.\n\n**2. Ders Seçimi**\n• Danışmanınızın açtığı dersleri görüntüleyin\n• Zorunlu derslerinizi önce ekleyin\n• Kredi limitinize dikkat edin (genellikle 30-45 AKTS)\n\n**3. Danışman Onayı**\nSeçimlerinizi tamamlayıp danışmanınıza onaylatmanız gerekir.\n\n**4. Önemli Süreler**\n📅 Ders ekleme: Dönem başı ilk 2 hafta\n📅 Ders bırakma: Dönem başı ilk 4 hafta\n\n⚠️ Süreler akademik takvimde yayınlanır. Danışmanınızla iletişimde kalın!"
+    },
+    {
+      "intent_name": "mezuniyet",
+      "keywords": {
+        "mezuniyet": 8, "mezun": 8, "diploma": 7, "tören": 5, "bitirme": 6,
+        "şart": 4, "koşul": 4, "bitirmek": 5, "son sınıf": 6, "akts": 5,
+        "transkript": 6, "çıkış belgesi": 7, "ayrılış": 5, "sertifika": 5,
+        "kep": 4, "belge": 4, "ortalama": 4, "gno": 5
+      },
+      "examples": [
+        "mezuniyet şartları neler",
+        "diploma nasıl alınır",
+        "mezuniyet töreni ne zaman",
+        "son sınıf ne yapmalıyım",
+        "GNO kaç olmalı mezun olmak için",
+        "mezun olmak için kaç kredi gerekiyor",
+        "transkript nasıl alınır"
+      ],
+      "response_type": "TEXT",
+      "response_content": "🎓 **Mezuniyet Bilgileri**\n\n**Genel Şartlar**\n✅ Müfredattaki tüm zorunlu ve seçmeli dersleri tamamlamak\n✅ Minimum AKTS kredisini doldurmak (bölüme göre 240 AKTS)\n✅ GNO: 2.00 ve üzeri olması\n✅ Bitirme projesi/tezi (bölüme göre değişir)\n\n**Mezuniyet Belgesi**\n📄 Diploma, mezuniyeti takip eden 6 ay içinde hazırlanır.\nGeçici mezuniyet belgesi aynı gün verilebilir.\n\n**Başvuru**\nSon dönemde Öğrenci İşleri'ne dilekçe verilir.\n\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1350)\n🌐 https://obs.artvin.edu.tr"
+    },
+    {
+      "intent_name": "staj",
+      "keywords": {
+        "staj": 8, "stajyer": 7, "pratik": 4, "iş yeri": 5, "işyeri eğitimi": 7,
+        "sgk": 5, "sigorta": 4, "staj defteri": 7, "zorunlu staj": 8,
+        "staj yeri": 7, "staj süresi": 7, "kabul formu": 5, "başvuru": 4,
+        "onay": 4, "şirket": 4, "kurum": 4, "çalışmak": 3, "endüstri": 4
+      },
+      "examples": [
+        "staj nasıl yapılır",
+        "zorunlu staj süresi ne kadar",
+        "staj yeri nasıl bulunur",
+        "staj belgesi nereden alınır",
+        "staj başvurusu",
+        "sgk staj sigortası",
+        "staj defteri nasıl doldurulur"
+      ],
+      "response_type": "TEXT",
+      "response_content": "💼 **Staj Bilgileri**\n\n**Zorunlu Staj**\nSüre bölüme göre değişir (genellikle 20-60 iş günü).\nStaj zamanlaması için bölüm koordinatörünüzle görüşün.\n\n**Süreç**\n1️⃣ Staj yapacağınız kurumdan kabul belgesi alın\n2️⃣ Bölüm/Fakülte Staj Komisyonu'na onaylayın\n3️⃣ Üniversite SGK sigortanızı başlatır\n4️⃣ Staj boyunca staj defteri tutun\n5️⃣ Staj sonunda defteri ve değerlendirme formunu teslim edin\n\n**SGK Sigortası**\nZorunlu stajlarda üniversite iş kazası sigortası yapar.\n\n📋 Detaylı bilgi için bölüm sekreterinizle iletişime geçin."
+    },
+    {
+      "intent_name": "duyurular",
+      "keywords": {
+        "duyuru": 8, "haber": 6, "güncel": 5, "son": 4, "yeni": 4,
+        "bilgilendirme": 6, "ilan": 7, "açıklama": 5, "karar": 4,
+        "etkinlik": 5, "toplantı": 4, "konferans": 5, "workshop": 5,
+        "seminer": 6, "ne var": 4, "neler": 4
+      },
+      "examples": [
+        "son duyurular neler",
+        "üniversitede ne var",
+        "güncel haberler",
+        "yeni ilan var mı",
+        "etkinlik duyuruları",
+        "konferans var mı",
+        "bugün bir şey var mı"
+      ],
+      "response_type": "TEXT",
+      "response_content": "📢 Güncel duyurular için resmi siteyi ziyaret edebilirsiniz:\nhttps://www.artvin.edu.tr/tr/duyurular"
+    },
+    {
+      "intent_name": "hava_durumu",
+      "keywords": {
+        "hava": 7, "hava durumu": 9, "sıcaklık": 6, "derece": 5, "yağmur": 6,
+        "yağış": 6, "kar": 5, "güneşli": 5, "bulutlu": 5, "rüzgar": 5,
+        "nem": 5, "fırtına": 6, "soğuk": 4, "sıcak": 4, "sis": 5,
+        "meteoroloji": 6, "tahmin": 5, "bugün hava": 8, "artvin hava": 8
+      },
+      "examples": [
+        "artvin hava durumu",
+        "bugün hava nasıl",
+        "yağmur yağacak mı",
+        "dışarısı soğuk mu",
+        "hava kaç derece",
+        "kar yağıyor mu",
+        "hafta sonu hava nasıl"
+      ],
+      "response_type": "CUSTOM_LOGIC",
+      "response_content": "WEATHER_LIVE"
+    },
+    {
       "intent_name": "cihaz_bilgisi",
       "keywords": {
         "cihaz": 7,

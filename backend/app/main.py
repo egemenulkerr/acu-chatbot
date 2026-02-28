@@ -6,11 +6,23 @@ import asyncio
 import os
 from contextlib import asynccontextmanager
 
+import sentry_sdk
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
+
+# Sentry — SENTRY_DSN env var varsa aktif et
+_SENTRY_DSN = os.getenv("SENTRY_DSN", "")
+if _SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=_SENTRY_DSN,
+        traces_sample_rate=0.2,   # %20 performans izleme
+        profiles_sample_rate=0.1, # %10 profil izleme
+        send_default_pii=False,
+    )
+    print("✅ Sentry hata izleme aktif.")
 
 from .api.endpoints import chat as chat_router
 from .core.classifier import load_intent_data

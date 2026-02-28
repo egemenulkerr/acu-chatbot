@@ -95,6 +95,35 @@ def _get_model() -> Optional[genai.GenerativeModel]:
 # MAIN LLM FUNCTION
 # ============================================================================
 
+def stream_llm_response(user_message: str, history: list[dict] | None = None):
+    """
+    Gemini cevabını token token yield eden sync generator.
+    asyncio.to_thread + asyncio.Queue ile async endpoint'lerden kullanılmalı.
+    """
+    model = _get_model()
+    if not model:
+        yield "⚙️ AI servisi başlatılamadı."
+        return
+
+    try:
+        gemini_history = []
+        if history:
+            for msg in history[-10:]:
+                role = "user" if msg.get("role") == "user" else "model"
+                text = msg.get("text", "").strip()
+                if text:
+                    gemini_history.append({"role": role, "parts": [text]})
+
+        chat = model.start_chat(history=gemini_history)
+        response = chat.send_message(user_message, stream=True)
+        for chunk in response:
+            if chunk.text:
+                yield chunk.text
+    except Exception as e:
+        logger.error(f"❌ Streaming LLM Hatası: {e}", exc_info=True)
+        yield "Üzgünüm, şu anda AI servisine bağlanamıyorum."
+
+
 def get_llm_response(user_message: str, history: list[dict] | None = None) -> str:
     """
     Kullanıcı mesajını Gemini'ye gönder ve cevap al.

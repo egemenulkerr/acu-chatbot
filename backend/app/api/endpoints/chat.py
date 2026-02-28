@@ -7,18 +7,23 @@ import os
 import asyncio
 import logging
 import random
+import json
 from time import time
-from datetime import date
+from datetime import date, datetime
+from pathlib import Path
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Header, Request
+from fastapi.responses import StreamingResponse
 
 from ...schemas.chat import ChatRequest, ChatResponse
 from ...core.classifier import classify_intent
 from ...core.limiter import limiter
 from ...services.web_scraper.manager import update_system_data, _format_menu_message
 from ...services.web_scraper.food_scrapper import scrape_daily_menu
-from ...services.llm_client import get_llm_response
+from ...services.web_scraper.duyurular_scraper import scrape_announcements
+from ...services.weather import get_weather
+from ...services.llm_client import get_llm_response, stream_llm_response
 from ...services.device_registry import (
     search_device,
     suggest_device,
@@ -27,10 +32,29 @@ from ...services.device_registry import (
 
 
 # ============================================================================
-# LOGGER
+# LOGGER & ANALYTICS
 # ============================================================================
 
 logger: logging.Logger = logging.getLogger("uvicorn")
+
+# Analytics logu: her soru → hangi intent, kaynak, süre
+_ANALYTICS_FILE = Path(__file__).parent.parent.parent / "data" / "analytics.jsonl"
+
+
+def _log_analytics(message: str, intent_name: str, source: str, elapsed_ms: float) -> None:
+    """Her chat isteğini analytics dosyasına JSONL formatında yaz."""
+    try:
+        entry = {
+            "ts": datetime.utcnow().isoformat(),
+            "q": message[:120],
+            "intent": intent_name,
+            "source": source,
+            "ms": round(elapsed_ms),
+        }
+        with open(_ANALYTICS_FILE, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except Exception:
+        pass  # Analytics logu asla ana akışı bozmasın
 
 
 # ============================================================================
@@ -54,6 +78,14 @@ CONFIRMATION_TTL: float = 300.0  # 5 dakika
 
 # Her gün ilk istekte scrape yapılır, gün değişene kadar cache'de tutulur
 _FOOD_CACHE: dict = {"date": None, "response": None}
+
+# Duyurular: saatlik cache
+_DUYURU_CACHE: dict = {"ts": 0.0, "response": None}
+_DUYURU_TTL: float = 3600.0  # 1 saat
+
+# Hava durumu: 30 dakikalık cache
+_WEATHER_CACHE: dict = {"ts": 0.0, "response": None}
+_WEATHER_TTL: float = 1800.0  # 30 dakika
 
 
 def _cleanup_expired_confirmations() -> None:
@@ -116,26 +148,65 @@ def _get_confirmation_response(device_name: str) -> Optional[ChatResponse]:
 
 
 def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
-    year_match: Optional[object] = re.search(r'(20\d{2})|(\d{2}-\d{2})', message)
+    msg_lower = message.lower()
     calendars: dict = intent.get("extra_data", {})
+    key_dates: dict = calendars.get("key_dates", {})
 
+    # Önemli tarih anahtar kelimeleri → direkt cevap
+    _DATE_KEYWORDS: list[tuple[list[str], str]] = [
+        (["vize", "ara sınav", "midterm"], "Vize Sınavları"),
+        (["final", "yarıyıl sonu sınav"], "Final Sınavları"),
+        (["bütünleme", "mazeret"], "Bütünleme Sınavları"),
+        (["ara tatil", "sömestr", "yarıyıl tatil"], "Ara Tatil"),
+        (["yaz tatil", "yaz dönemi", "yıl sonu"], "Yaz Tatili"),
+        (["kayıt yenile", "ders kaydı", "kayıt"], "Kayıt Yenileme"),
+        (["güz", "güz dönemi", "güz başlangıç"], "Güz Dönemi Başlangıç"),
+        (["bahar", "bahar dönemi", "bahar başlangıç"], "Bahar Dönemi Başlangıç"),
+    ]
+
+    if key_dates:
+        for keywords, label in _DATE_KEYWORDS:
+            if any(kw in msg_lower for kw in keywords):
+                if label in key_dates:
+                    return ChatResponse(
+                        response=f"📅 **{label}:** {key_dates[label]}",
+                        source="Takvim (HTML)",
+                        intent_name="akademik_takvim"
+                    )
+
+        # "ne zaman" gibi genel soru → önemli tarihlerin özeti
+        if any(kw in msg_lower for kw in ["ne zaman", "tarih", "takvim"]):
+            lines = ["📅 **2025-2026 Önemli Tarihler**\n"]
+            for label, date_val in key_dates.items():
+                lines.append(f"• **{label}:** {date_val}")
+            lines.append(f"\n🔗 Tam takvim: {calendars.get('current', intent['response_content'])}")
+            return ChatResponse(
+                response="\n".join(lines),
+                source="Takvim (HTML)",
+                intent_name="akademik_takvim"
+            )
+
+    # Belirli yıl aranıyor mu?
+    year_match = re.search(r'(20\d{2}[-–]\d{2,4}|20\d{2})', message)
     if year_match and calendars:
-        user_year: str = year_match.group(0)
+        user_year: str = year_match.group(0).replace("–", "-")
         for key, url in calendars.items():
-            if user_year in key:
+            if key in ("current", "key_dates"):
+                continue
+            if user_year[:4] in key:
                 return ChatResponse(
-                    response=f"{key} Akademik Takvimi: {url}",
+                    response=f"📅 {key} Akademik Takvimi:\n{url}",
                     source="Akıllı Arşiv",
                     intent_name="akademik_takvim"
                 )
         return ChatResponse(
-            response=f"{user_year} yılı bulunamadı. Güncel: {intent['response_content']}",
+            response=f"{user_year} yılı bulunamadı.\n📅 Güncel takvim: {intent['response_content']}",
             source="Hızlı Yol",
             intent_name="akademik_takvim"
         )
 
     return ChatResponse(
-        response=intent["response_content"],
+        response=f"📅 **Güncel Akademik Takvim (2025-2026)**\n{intent['response_content']}",
         source="Hızlı Yol",
         intent_name="akademik_takvim"
     )
@@ -207,6 +278,51 @@ async def _handle_food_query() -> ChatResponse:
     )
 
 
+async def _handle_duyurular_query() -> ChatResponse:
+    """Duyuruları live scrape et, saatlik cache kullan."""
+    now = time()
+    if _DUYURU_CACHE["response"] and now - _DUYURU_CACHE["ts"] < _DUYURU_TTL:
+        return ChatResponse(response=_DUYURU_CACHE["response"], source="Duyurular (cache)", intent_name="duyurular")
+
+    try:
+        result: Optional[str] = await asyncio.wait_for(
+            asyncio.to_thread(scrape_announcements), timeout=12.0
+        )
+    except (asyncio.TimeoutError, Exception) as e:
+        logger.warning(f"Duyurular scraper hatası: {e}")
+        result = None
+
+    if result:
+        _DUYURU_CACHE["ts"] = now
+        _DUYURU_CACHE["response"] = result
+        return ChatResponse(response=result, source="Duyurular", intent_name="duyurular")
+
+    return ChatResponse(
+        response="📢 Duyurulara şu an ulaşılamıyor.\nDetay: https://www.artvin.edu.tr/tr/duyurular",
+        source="Duyurular (hata)",
+        intent_name="duyurular"
+    )
+
+
+async def _handle_weather_query() -> ChatResponse:
+    """Hava durumunu live çek, 30 dakikalık cache kullan."""
+    now = time()
+    if _WEATHER_CACHE["response"] and now - _WEATHER_CACHE["ts"] < _WEATHER_TTL:
+        return ChatResponse(response=_WEATHER_CACHE["response"], source="Hava Durumu (cache)", intent_name="hava_durumu")
+
+    try:
+        result: str = await asyncio.wait_for(
+            asyncio.to_thread(get_weather), timeout=10.0
+        )
+    except (asyncio.TimeoutError, Exception) as e:
+        logger.warning(f"Hava durumu hatası: {e}")
+        result = "🌤️ Hava durumu bilgisi alınamadı. https://www.mgm.gov.tr"
+
+    _WEATHER_CACHE["ts"] = now
+    _WEATHER_CACHE["response"] = result
+    return ChatResponse(response=result, source="Hava Durumu", intent_name="hava_durumu")
+
+
 def _handle_generic_intent(intent: dict) -> ChatResponse:
     raw_response = intent["response_content"]
     final_response: str = random.choice(raw_response) if isinstance(raw_response, list) else raw_response
@@ -268,6 +384,7 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
     user_id: str = body.session_id or "default_user"
     message: str = body.message.lower().strip()
     history: list[dict] = body.history or []
+    t_start = time()
 
     logger.info(f"📨 Gelen Mesaj: {body.message[:80]}")
 
@@ -279,6 +396,7 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
             del PENDING_CONFIRMATIONS[user_id]
             response = _get_confirmation_response(pending_device)
             if response:
+                _log_analytics(body.message, response.intent_name, response.source, (time() - t_start) * 1000)
                 return response
         else:
             del PENDING_CONFIRMATIONS[user_id]
@@ -291,16 +409,115 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
         intent_name: str = intent["intent_name"]
 
         if intent_name == "akademik_takvim":
-            return _handle_academic_calendar(intent, body.message)
+            result = _handle_academic_calendar(intent, body.message)
         elif intent_name == "yemek_listesi":
-            return await _handle_food_query()
+            result = await _handle_food_query()
         elif intent_name == "cihaz_bilgisi":
-            return _handle_device_query(body.message, user_id)
+            result = _handle_device_query(body.message, user_id)
+        elif intent_name == "duyurular":
+            result = await _handle_duyurular_query()
+        elif intent_name == "hava_durumu":
+            result = await _handle_weather_query()
         else:
-            return _handle_generic_intent(intent)
+            result = _handle_generic_intent(intent)
+
+        _log_analytics(body.message, result.intent_name, result.source, (time() - t_start) * 1000)
+        return result
 
     # -------- ADIM 3: LLM FALLBACK --------
-    return await _fallback_to_llm(body.message, history)
+    result = await _fallback_to_llm(body.message, history)
+    _log_analytics(body.message, result.intent_name, result.source, (time() - t_start) * 1000)
+    return result
+
+
+@router.post("/chat/stream")
+@limiter.limit("20/minute")
+async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingResponse:
+    """
+    Streaming chat endpoint — Gemini cevabını SSE (text/event-stream) olarak akıtır.
+    Lokal intent'ler tek seferde, LLM token token gönderilir.
+    """
+    user_id: str = body.session_id or "default_user"
+    message: str = body.message.lower().strip()
+    history: list[dict] = body.history or []
+    t_start = time()
+
+    # Lokal intent kontrolü
+    _cleanup_expired_confirmations()
+    pending_device = _get_pending_device(user_id)
+
+    async def event_stream():
+        nonlocal t_start
+
+        # Onay kontrolü
+        if pending_device:
+            positive = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
+            if any(ans in message for ans in positive):
+                del PENDING_CONFIRMATIONS[user_id]
+                conf = _get_confirmation_response(pending_device)
+                if conf:
+                    yield _sse(conf.response, done=True)
+                    return
+
+        intent: Optional[dict] = classify_intent(body.message)
+
+        if intent:
+            intent_name = intent["intent_name"]
+            if intent_name == "akademik_takvim":
+                r = _handle_academic_calendar(intent, body.message)
+            elif intent_name == "yemek_listesi":
+                r = await _handle_food_query()
+            elif intent_name == "cihaz_bilgisi":
+                r = _handle_device_query(body.message, user_id)
+            elif intent_name == "duyurular":
+                r = await _handle_duyurular_query()
+            elif intent_name == "hava_durumu":
+                r = await _handle_weather_query()
+            else:
+                r = _handle_generic_intent(intent)
+
+            _log_analytics(body.message, r.intent_name, r.source, (time() - t_start) * 1000)
+            yield _sse(r.response, done=True)
+            return
+
+        # LLM Streaming
+        queue: asyncio.Queue = asyncio.Queue()
+
+        def _run_stream():
+            try:
+                for token in stream_llm_response(body.message, history):
+                    queue.put_nowait(token)
+            except Exception as e:
+                logger.error(f"Stream thread hatası: {e}")
+            finally:
+                queue.put_nowait(None)  # sentinel
+
+        asyncio.get_event_loop().run_in_executor(None, _run_stream)
+
+        accumulated = ""
+        try:
+            while True:
+                token = await asyncio.wait_for(queue.get(), timeout=25.0)
+                if token is None:
+                    break
+                accumulated += token
+                yield _sse(token, done=False)
+        except asyncio.TimeoutError:
+            yield _sse("\n\n⏱️ Zaman aşımı.", done=True)
+            return
+
+        _log_analytics(body.message, "genel_sohbet", "Gemini AI (stream)", (time() - t_start) * 1000)
+        yield _sse("", done=True)
+
+    return StreamingResponse(event_stream(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+def _sse(data: str, done: bool) -> str:
+    """SSE formatında event oluştur."""
+    import json as _json
+    payload = _json.dumps({"token": data, "done": done}, ensure_ascii=False)
+    return f"data: {payload}\n\n"
 
 
 @router.post("/update-data", dependencies=[Depends(_verify_admin_token)])

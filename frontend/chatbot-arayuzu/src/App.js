@@ -2,16 +2,20 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+const LS_KEY = 'acu_chat_history';
+const MAX_STORED = 50;
 
 const INITIAL_BOT_MESSAGE = {
-  id: 1, sender: 'bot',
-  text: 'Merhaba! Ben AÇÜ Asistan\'ım. Yemek menüsü, akademik takvim, laboratuvar cihazları ve kampüs hakkında sana yardımcı olabilirim. 👋',
+  id: 1, sender: 'bot', feedback: null, streaming: false,
+  text: 'Merhaba! Ben AÇÜ Asistan\'ım. Yemek menüsü, akademik takvim, laboratuvar cihazları, duyurular ve kampüs hakkında sana yardımcı olabilirim. 👋',
   timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
 };
 
 const QUICK_REPLIES = [
   { label: '🍽️ Bugünün menüsü', text: 'Bugün yemek ne?' },
-  { label: '📅 Akademik takvim', text: 'Akademik takvim ne zaman?' },
+  { label: '📅 Akademik takvim', text: 'Akademik takvim' },
+  { label: '📢 Son duyurular', text: 'Son duyurular neler?' },
+  { label: '🌤️ Hava durumu', text: 'Artvin hava durumu' },
   { label: '🔬 Lab cihazları', text: 'Laboratuvar cihazları hakkında bilgi ver' },
 ];
 
@@ -22,6 +26,8 @@ const ERROR_MESSAGES = {
   INVALID_INPUT: 'Mesaj boş olamaz.',
   RATE_LIMIT: 'Çok fazla mesaj gönderildi. Lütfen bekleyin.',
 };
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
 
 function getOrCreateSessionId() {
   const key = 'acu_session';
@@ -37,33 +43,46 @@ function nowTime() {
   return new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
 }
 
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) return null;
+    // streaming flag'leri sıfırla — sayfayı kapattıysa yarım mesaj kalabilir
+    return parsed.map(m => ({ ...m, streaming: false }));
+  } catch {
+    return null;
+  }
+}
+
+function saveHistory(messages) {
+  try {
+    const toSave = messages.slice(-MAX_STORED).map(m => ({ ...m, streaming: false }));
+    localStorage.setItem(LS_KEY, JSON.stringify(toSave));
+  } catch {
+    /* QuotaExceededError gibi hatalarda sessizce geç */
+  }
+}
+
 function renderMarkdown(text) {
   if (!text) return null;
-
-  // URL regex — http(s) ile başlayan linkleri yakala
   const URL_RE = /(https?:\/\/[^\s]+)/g;
-
   return text.split('\n').map((line, i, arr) => {
-    // Önce bold'ları, sonra URL'leri ayır
     const tokens = line.split(/(\*\*[^*]+\*\*|https?:\/\/[^\s]+)/g);
     const rendered = tokens.map((token, j) => {
-      if (token.startsWith('**') && token.endsWith('**')) {
+      if (token.startsWith('**') && token.endsWith('**'))
         return <strong key={j}>{token.slice(2, -2)}</strong>;
-      }
       if (URL_RE.test(token)) {
-        URL_RE.lastIndex = 0; // regex state sıfırla
-        // URL'yi kısalt — 45 karakterden uzunsa "…" ekle
-        const label = token.length > 45 ? token.slice(0, 45) + '…' : token;
+        URL_RE.lastIndex = 0;
+        const label = token.length > 48 ? token.slice(0, 48) + '…' : token;
         return (
           <a key={j} href={token} target="_blank" rel="noopener noreferrer"
-            style={{ color: '#059669', textDecoration: 'underline', wordBreak: 'break-all' }}>
-            🔗 {label}
-          </a>
+            className="acu-link">🔗 {label}</a>
         );
       }
       return token;
     });
-
     return (
       <React.Fragment key={i}>
         {rendered}
@@ -85,23 +104,53 @@ function initSpeech(onResult, onListening, onError) {
   return r;
 }
 
-async function callAPI(message, sessionId, history, url) {
-  const res = await fetch(`${url}/api/chat`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      message,
-      session_id: sessionId,
-      history: history.slice(-10).map(m => ({ role: m.sender === 'user' ? 'user' : 'bot', text: m.text }))
-    }),
-  });
-  if (res.status === 429) throw new Error('RATE_LIMIT');
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+// ── Streaming fetch ───────────────────────────────────────────────────────────
+
+async function streamMessage(message, sessionId, history, onToken, onDone, onError) {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/chat/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        session_id: sessionId,
+        history: history.slice(-10).map(m => ({ role: m.sender === 'user' ? 'user' : 'bot', text: m.text })),
+      }),
+    });
+
+    if (res.status === 429) { onError('RATE_LIMIT'); return; }
+    if (!res.ok) { onError('API_ERROR'); return; }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop(); // son satır tamamlanmamış olabilir
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        try {
+          const ev = JSON.parse(line.slice(6));
+          if (ev.token) onToken(ev.token);
+          if (ev.done) { onDone(); return; }
+        } catch { /* bozuk JSON — atla */ }
+      }
+    }
+    onDone();
+  } catch {
+    onError('API_ERROR');
+  }
 }
 
+// ── Component ─────────────────────────────────────────────────────────────────
+
 export default function App() {
-  const [messages, setMessages] = useState([INITIAL_BOT_MESSAGE]);
+  const stored = loadHistory();
+  const [messages, setMessages] = useState(stored || [INITIAL_BOT_MESSAGE]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
@@ -115,10 +164,15 @@ export default function App() {
   const logRef = useRef(null);
   const sessionRef = useRef(getOrCreateSessionId());
 
+  // LocalStorage sync
+  useEffect(() => { saveHistory(messages); }, [messages]);
+
+  // Auto-scroll
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [messages, loading]);
 
+  // Health check
   useEffect(() => {
     const check = () => fetch(`${BACKEND_URL}/health`, { signal: AbortSignal.timeout(3000) })
       .then(r => setOnline(r.ok)).catch(() => setOnline(false));
@@ -127,37 +181,63 @@ export default function App() {
     return () => clearInterval(t);
   }, []);
 
+  // Speech
   useEffect(() => {
     const sr = initSpeech(t => setInput(t), setListening, e => setError(e));
     if (sr) { srRef.current = sr; setSpeechOk(true); }
   }, []);
 
   useEffect(() => { if (input) setError(''); }, [input]);
-
-  // Chatbot açıkken unread sıfırla
   useEffect(() => { if (open) setUnread(0); }, [open]);
 
+  // ── Feedback ──
+  const handleFeedback = useCallback((msgId, value) => {
+    setMessages(prev => prev.map(m =>
+      m.id === msgId ? { ...m, feedback: m.feedback === value ? null : value } : m
+    ));
+  }, []);
+
+  // ── Send (streaming) ──
   const send = useCallback(async (text) => {
     const t = text.trim();
     if (!t) { setError(ERROR_MESSAGES.INVALID_INPUT); return; }
     setError('');
 
-    const userMsg = { id: Date.now(), sender: 'user', text: t, timestamp: nowTime() };
-    setMessages(prev => [...prev, userMsg]);
+    const userMsg = { id: Date.now(), sender: 'user', text: t, timestamp: nowTime(), feedback: null, streaming: false };
+    const botId = Date.now() + 1;
+    const botPlaceholder = { id: botId, sender: 'bot', text: '', timestamp: nowTime(), feedback: null, streaming: true };
+
+    setMessages(prev => [...prev, userMsg, botPlaceholder]);
     setInput('');
     setLoading(true);
 
-    try {
-      const data = await callAPI(t, sessionRef.current, [...messages, userMsg], BACKEND_URL);
-      const botMsg = { id: Date.now() + 1, sender: 'bot', text: data.response || '…', timestamp: nowTime() };
-      setMessages(prev => [...prev, botMsg]);
-      if (!open) setUnread(n => n + 1);
-    } catch (e) {
-      const msg = e.message === 'RATE_LIMIT' ? ERROR_MESSAGES.RATE_LIMIT : ERROR_MESSAGES.API_ERROR;
-      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: msg, timestamp: nowTime() }]);
-    } finally {
-      setLoading(false);
-    }
+    await streamMessage(
+      t,
+      sessionRef.current,
+      [...messages, userMsg],
+      // onToken
+      (token) => {
+        setMessages(prev => prev.map(m =>
+          m.id === botId ? { ...m, text: m.text + token } : m
+        ));
+      },
+      // onDone
+      () => {
+        setMessages(prev => prev.map(m =>
+          m.id === botId ? { ...m, streaming: false } : m
+        ));
+        setLoading(false);
+        if (!open) setUnread(n => n + 1);
+      },
+      // onError
+      (errKey) => {
+        const msg = ERROR_MESSAGES[errKey] || ERROR_MESSAGES.API_ERROR;
+        setMessages(prev => prev.map(m =>
+          m.id === botId ? { ...m, text: msg, streaming: false } : m
+        ));
+        setLoading(false);
+      }
+    );
   }, [messages, open]);
 
   const handleSubmit = useCallback(e => { e.preventDefault(); send(input); }, [input, send]);
@@ -170,6 +250,7 @@ export default function App() {
 
   const clearChat = useCallback(() => {
     setMessages([INITIAL_BOT_MESSAGE]);
+    localStorage.removeItem(LS_KEY);
     sessionStorage.removeItem('acu_session');
     sessionRef.current = getOrCreateSessionId();
     setError('');
@@ -212,32 +293,40 @@ export default function App() {
           <div className="acu-log" ref={logRef}>
             {messages.map((m, idx) => {
               const prevSame = idx > 0 && messages[idx - 1].sender === m.sender;
+              const isStreaming = m.streaming;
               return (
                 <div key={m.id} className={`acu-msg acu-msg--${m.sender} ${prevSame ? 'acu-msg--cont' : ''}`}>
-                  {m.sender === 'bot' && !prevSame && (
-                    <div className="acu-msg-avatar">🎓</div>
-                  )}
+                  {m.sender === 'bot' && !prevSame && <div className="acu-msg-avatar">🎓</div>}
                   {m.sender === 'bot' && prevSame && <div className="acu-msg-avatar-spacer" />}
                   <div className="acu-msg-body">
-                    <div className="acu-bubble">
-                      {m.sender === 'bot' ? renderMarkdown(m.text) : m.text}
+                    <div className={`acu-bubble${isStreaming && !m.text ? ' acu-typing' : ''}`}>
+                      {isStreaming && !m.text
+                        ? <><span /><span /><span /></>
+                        : (m.sender === 'bot' ? renderMarkdown(m.text) : m.text)
+                      }
+                      {isStreaming && m.text && <span className="acu-cursor">▌</span>}
                     </div>
-                    <span className="acu-time">{m.timestamp}</span>
+                    <div className="acu-msg-footer">
+                      <span className="acu-time">{m.timestamp}</span>
+                      {m.sender === 'bot' && !isStreaming && m.text && (
+                        <div className="acu-feedback">
+                          <button
+                            className={`acu-fb-btn${m.feedback === 'up' ? ' active-up' : ''}`}
+                            onClick={() => handleFeedback(m.id, 'up')}
+                            title="Yardımcı oldu"
+                          >👍</button>
+                          <button
+                            className={`acu-fb-btn${m.feedback === 'down' ? ' active-down' : ''}`}
+                            onClick={() => handleFeedback(m.id, 'down')}
+                            title="Yardımcı olmadı"
+                          >👎</button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
             })}
-
-            {loading && (
-              <div className="acu-msg acu-msg--bot">
-                <div className="acu-msg-avatar">🎓</div>
-                <div className="acu-msg-body">
-                  <div className="acu-bubble acu-typing">
-                    <span /><span /><span />
-                  </div>
-                </div>
-              </div>
-            )}
 
             {showQuickReplies && (
               <div className="acu-quick">
