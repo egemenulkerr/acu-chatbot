@@ -10,3 +10,7 @@ zemberek-python==0.2.3
 slowapi>=0.1.9
 requests>=2.28.0
 sentry-sdk>=1.40.0
+numpy>=1.24.0,<2.0.0
+sentence-transformers>=2.2.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2+cpu

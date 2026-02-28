@@ -28,7 +28,7 @@ MODEL: Optional[any] = None
 INTENTS_DATA: list[dict] = []
 INTENT_EMBEDDINGS: dict[str, any] = {}
 
-USE_EMBEDDINGS: bool = os.getenv("USE_EMBEDDINGS", "false").lower() == "true"
+USE_EMBEDDINGS: bool = os.getenv("USE_EMBEDDINGS", "true").lower() == "true"
 
 KEYWORD_THRESHOLD: float = 8.0
 SIMILARITY_THRESHOLD: float = 0.65
