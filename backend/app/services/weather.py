@@ -10,6 +10,7 @@ import logging
 import requests
 from typing import Optional
 
+
 logger = logging.getLogger(__name__)
 
 OPENWEATHER_API_KEY: Optional[str] = os.getenv("OPENWEATHER_API_KEY", "")

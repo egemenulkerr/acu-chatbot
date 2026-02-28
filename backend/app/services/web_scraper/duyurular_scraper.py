@@ -6,6 +6,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ DUYURULAR_URL = "https://www.artvin.edu.tr/tr/duyurular"
 MAX_DUYURU = 5
 
 
-def scrape_announcements() -> str | None:
+def scrape_announcements() -> Optional[str]:
     """
     AÇÜ duyurular sayfasından son MAX_DUYURU kadar duyuruyu çeker.
     Hata durumunda None döner.

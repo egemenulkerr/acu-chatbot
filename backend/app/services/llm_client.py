@@ -95,7 +95,7 @@ def _get_model() -> Optional[genai.GenerativeModel]:
 # MAIN LLM FUNCTION
 # ============================================================================
 
-def stream_llm_response(user_message: str, history: list[dict] | None = None):
+def stream_llm_response(user_message: str, history: Optional[list] = None):
     """
     Gemini cevabını token token yield eden sync generator.
     asyncio.to_thread + asyncio.Queue ile async endpoint'lerden kullanılmalı.
@@ -124,7 +124,7 @@ def stream_llm_response(user_message: str, history: list[dict] | None = None):
         yield "Üzgünüm, şu anda AI servisine bağlanamıyorum."
 
 
-def get_llm_response(user_message: str, history: list[dict] | None = None) -> str:
+def get_llm_response(user_message: str, history: Optional[list] = None) -> str:
     """
     Kullanıcı mesajını Gemini'ye gönder ve cevap al.
 

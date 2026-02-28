@@ -492,7 +492,7 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
             finally:
                 queue.put_nowait(None)  # sentinel
 
-        asyncio.get_event_loop().run_in_executor(None, _run_stream)
+        asyncio.get_running_loop().run_in_executor(None, _run_stream)
 
         accumulated = ""
         try:
