@@ -1,21 +1,20 @@
 # ============================================================================
 # backend/app/api/endpoints/chat.py - Chat API Endpoint'leri
 # ============================================================================
-# Açıklama:
-#   Ana chat endpoint'ini ve veri güncelleme endpoint'ini içerir. Intent
-#   classification, cihaz önerisi, akademik takvim ve LLM fallback logic'ini
-#   yönetir. Session-based confirmation sistemi ile cihaz önerilerini takip eder.
-# ============================================================================
 
 import re
+import os
+import asyncio
 import logging
 import random
+from time import time
 from typing import Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException, Header, Request
 
 from ...schemas.chat import ChatRequest, ChatResponse
 from ...core.classifier import classify_intent
+from ...core.limiter import limiter
 from ...services.web_scraper.manager import update_system_data
 from ...services.llm_client import get_llm_response
 from ...services.device_registry import (
@@ -26,48 +25,71 @@ from ...services.device_registry import (
 
 
 # ============================================================================
-# LOGGER CONFIGURATION
+# LOGGER
 # ============================================================================
 
 logger: logging.Logger = logging.getLogger("uvicorn")
 
 
 # ============================================================================
-# ROUTER INITIALIZATION
+# ROUTER
 # ============================================================================
 
 router: APIRouter = APIRouter()
 
 
 # ============================================================================
-# STATE MANAGEMENT
+# STATE: PENDING CONFIRMATIONS (TTL destekli)
 # ============================================================================
 
-# Cihaz önerisi onayı beklenen kullanıcıları takip eden dictionary
-PENDING_CONFIRMATIONS: dict[str, str] = {}
+# session_id → (cihaz_adı, timestamp)
+PENDING_CONFIRMATIONS: dict[str, tuple[str, float]] = {}
+CONFIRMATION_TTL: float = 300.0  # 5 dakika
+
+
+def _cleanup_expired_confirmations() -> None:
+    """Süresi geçmiş cihaz onay bekleyen oturumları temizle."""
+    now = time()
+    expired = [k for k, (_, ts) in PENDING_CONFIRMATIONS.items() if now - ts > CONFIRMATION_TTL]
+    for k in expired:
+        del PENDING_CONFIRMATIONS[k]
+
+
+def _get_pending_device(session_id: str) -> Optional[str]:
+    """Aktif ve süresi geçmemiş bir onay bekliyorsa cihaz adını döndür."""
+    if session_id in PENDING_CONFIRMATIONS:
+        device, ts = PENDING_CONFIRMATIONS[session_id]
+        if time() - ts <= CONFIRMATION_TTL:
+            return device
+        del PENDING_CONFIRMATIONS[session_id]
+    return None
+
+
+def _set_pending_device(session_id: str, device_name: str) -> None:
+    PENDING_CONFIRMATIONS[session_id] = (device_name, time())
+
+
+# ============================================================================
+# AUTH: /api/update-data için admin token
+# ============================================================================
+
+async def _verify_admin_token(x_admin_token: str = Header(...)) -> None:
+    """
+    X-Admin-Token header'ını doğrula.
+    ADMIN_SECRET_TOKEN env var ile karşılaştır.
+    """
+    expected = os.getenv("ADMIN_SECRET_TOKEN", "")
+    if not expected:
+        raise HTTPException(status_code=503, detail="Admin token yapılandırılmamış.")
+    if x_admin_token != expected:
+        raise HTTPException(status_code=403, detail="Yetkisiz erişim.")
 
 
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
 
-def _get_confirmation_response(
-    device_name: str,
-    pending_confirmations: dict[str, str]
-) -> Optional[ChatResponse]:
-    """
-    Cihaz önerisi onayı kontrolü.
-
-    Kullanıcının daha önceki bir cihaz önerisine "Evet" veya "Hayır" diye
-    cevap verip vermediğini kontrol eder.
-
-    Args:
-        device_name (str): Kontrol edilecek cihaz adı
-        pending_confirmations (dict): Pending confirmations state
-
-    Returns:
-        ChatResponse | None: Onaylı cihaz bilgisi veya None
-    """
+def _get_confirmation_response(device_name: str) -> Optional[ChatResponse]:
     device_data: Optional[dict] = get_device_info(device_name)
     if device_data:
         info = device_data.get("info", {})
@@ -85,22 +107,7 @@ def _get_confirmation_response(
 
 
 def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
-    """
-    Akademik takvim intent'ini işle.
-
-    Kullanıcının sorduğu yıl için akademik takvim linkini döndür.
-
-    Args:
-        intent (dict): Intent classification result
-        message (str): Orijinal kullanıcı mesajı
-
-    Returns:
-        ChatResponse: Akademik takvim bilgisi
-    """
-    year_match: Optional[object] = re.search(
-        r'(20\d{2})|(\d{2}-\d{2})',
-        message
-    )
+    year_match: Optional[object] = re.search(r'(20\d{2})|(\d{2}-\d{2})', message)
     calendars: dict = intent.get("extra_data", {})
 
     if year_match and calendars:
@@ -113,15 +120,11 @@ def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
                     intent_name="akademik_takvim"
                 )
         return ChatResponse(
-            response=(
-                f"{user_year} yılı bulunamadı. "
-                f"Güncel: {intent['response_content']}"
-            ),
+            response=f"{user_year} yılı bulunamadı. Güncel: {intent['response_content']}",
             source="Hızlı Yol",
             intent_name="akademik_takvim"
         )
 
-    # Fallback: Genel takvim bilgisi
     return ChatResponse(
         response=intent["response_content"],
         source="Hızlı Yol",
@@ -130,28 +133,12 @@ def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
 
 
 def _handle_device_query(message: str, user_id: str) -> ChatResponse:
-    """
-    Cihaz bilgisi intent'ini işle.
-
-    Sıra:
-      1. Tam eşleşme (search_device)
-      2. Fuzzy eşleşme (suggest_device) + confirmation pending
-      3. Cevap bulunamaz
-
-    Args:
-        message (str): Kullanıcı mesajı
-        user_id (str): Session ID
-
-    Returns:
-        ChatResponse: Cihaz bilgisi veya öneri
-    """
-    # 1. Tam eşleşme
     device_data: Optional[dict] = search_device(message)
     if device_data:
         info = device_data.get("info", {})
         return ChatResponse(
             response=(
-                f"\n\n*{device_data['name']}*\n\n"
+                f"**{device_data['name']}**\n\n"
                 f"{info.get('description', '')}\n\n"
                 f"{info.get('stock', '')}"
             ),
@@ -159,20 +146,15 @@ def _handle_device_query(message: str, user_id: str) -> ChatResponse:
             intent_name="cihaz_bilgisi"
         )
 
-    # 2. Fuzzy eşleşme + Confirmation
     suggestion: Optional[str] = suggest_device(message)
     if suggestion:
-        PENDING_CONFIRMATIONS[user_id] = suggestion
+        _set_pending_device(user_id, suggestion)
         return ChatResponse(
-            response=(
-                f"🤔 Tam bulamadım ama şunu mu demek istediniz: "
-                f"**{suggestion.title()}**? (Evet/Hayır)"
-            ),
+            response=f"Tam bulamadım ama şunu mu demek istediniz: **{suggestion.title()}**? (Evet/Hayır)",
             source="Akıllı Öneri Sistemi",
             intent_name="cihaz_bilgisi_onay"
         )
 
-    # 3. Fallback
     return ChatResponse(
         response="Maalesef o cihazı bulamadım. Başka bir şey sormak ister misiniz?",
         source="Hata",
@@ -181,25 +163,8 @@ def _handle_device_query(message: str, user_id: str) -> ChatResponse:
 
 
 def _handle_generic_intent(intent: dict) -> ChatResponse:
-    """
-    Genel intent'leri (selamlasma, yemek listesi vb.) işle.
-
-    Response list ise rastgele seç, string ise direkt döndür.
-
-    Args:
-        intent (dict): Intent classification result
-
-    Returns:
-        ChatResponse: Intent response
-    """
-    raw_response: any = intent["response_content"]
-
-    # List ise rastgele seç, string ise direkt kullan
-    if isinstance(raw_response, list):
-        final_response: str = random.choice(raw_response)
-    else:
-        final_response: str = raw_response
-
+    raw_response = intent["response_content"]
+    final_response: str = random.choice(raw_response) if isinstance(raw_response, list) else raw_response
     return ChatResponse(
         response=final_response,
         source="Hızlı Yol",
@@ -207,28 +172,28 @@ def _handle_generic_intent(intent: dict) -> ChatResponse:
     )
 
 
-async def _fallback_to_llm(message: str) -> ChatResponse:
-    """
-    Intent sınıflandırması başarısız olduğunda LLM'e yönlendir.
-
-    Google Gemini API'sini kullanarak genel sohbet cevapları oluştur.
-
-    Args:
-        message (str): Kullanıcı mesajı
-
-    Returns:
-        ChatResponse: LLM tarafından üretilen cevap veya error
-    """
-    logger.warning("⚠️  Yerel eşleşme yok. LLM'e (Gemini) yönlendiriliyor...")
+async def _fallback_to_llm(message: str, history: list[dict]) -> ChatResponse:
+    """Intent bulunamadığında Gemini'ye yönlendir. asyncio.to_thread ile event loop'u bloke etmez."""
+    logger.warning("⚠️  Yerel eşleşme yok. LLM'e yönlendiriliyor...")
     try:
-        ai_response: str = get_llm_response(message)
+        ai_response: str = await asyncio.wait_for(
+            asyncio.to_thread(get_llm_response, message, history),
+            timeout=20.0
+        )
         return ChatResponse(
             response=ai_response,
-            source="Gemini AI (Akıllı Yol)",
+            source="Gemini AI",
             intent_name="genel_sohbet"
         )
+    except asyncio.TimeoutError:
+        logger.error("❌ Gemini API 20 saniye içinde yanıt vermedi.")
+        return ChatResponse(
+            response="Üzgünüm, AI servisi şu an yanıt vermiyor. Lütfen tekrar deneyin.",
+            source="Timeout",
+            intent_name="error"
+        )
     except Exception as e:
-        logger.error(f"❌ LLM Hatası: {str(e)}")
+        logger.error(f"❌ LLM Hatası: {e}", exc_info=True)
         return ChatResponse(
             response="Üzgünüm, şu anda AI servisine bağlanamıyorum.",
             source="Error",
@@ -241,88 +206,61 @@ async def _fallback_to_llm(message: str) -> ChatResponse:
 # ============================================================================
 
 @router.post("/chat", response_model=ChatResponse)
-async def handle_chat_message(request: ChatRequest) -> ChatResponse:
+@limiter.limit("20/minute")
+async def handle_chat_message(request: Request, body: ChatRequest) -> ChatResponse:
     """
-    Ana chat endpoint'i.
+    Ana chat endpoint'i — dakikada 20 istek sınırı.
 
     İşlem sırası:
-      1. Session-based confirmation kontrolü (pending cihaz önerisi)
-      2. Intent classification (Keyword > Semantic > LLM)
-      3. Intent-specific handler'ları çağır
-      4. LLM fallback
-
-    Args:
-        request (ChatRequest): İstenen chat mesajı
-
-    Returns:
-        ChatResponse: Chatbot cevabı + metadata
+      1. Süresi geçmiş onayları temizle
+      2. Session-based cihaz onay kontrolü
+      3. Intent classification
+      4. Intent handler'ını çağır
+      5. LLM fallback (async, 20s timeout)
     """
-    user_id: str = request.session_id or "default_user"
-    message: str = request.message.lower().strip()
+    _cleanup_expired_confirmations()
 
-    logger.info(f"📨 Gelen Mesaj: {request.message}")
+    user_id: str = body.session_id or "default_user"
+    message: str = body.message.lower().strip()
+    history: list[dict] = body.history or []
+
+    logger.info(f"📨 Gelen Mesaj: {body.message[:80]}")
 
     # -------- ADIM 1: CONFIRMATION KONTROLÜ --------
-    if user_id in PENDING_CONFIRMATIONS:
-        expected_device: str = PENDING_CONFIRMATIONS[user_id]
-        positive_answers: list[str] = [
-            "evet",
-            "aynen",
-            "he",
-            "hıhı",
-            "onayla",
-            "yes",
-            "doğru",
-            "tabi"
-        ]
-
-        # Olumlu cevap gelirse cihaz bilgisini döndür
+    pending_device = _get_pending_device(user_id)
+    if pending_device:
+        positive_answers = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
         if any(ans in message for ans in positive_answers):
             del PENDING_CONFIRMATIONS[user_id]
-            confirmation_response = _get_confirmation_response(
-                expected_device,
-                PENDING_CONFIRMATIONS
-            )
-            if confirmation_response:
-                return confirmation_response
+            response = _get_confirmation_response(pending_device)
+            if response:
+                return response
         else:
-            # Olumsuz cevap: hafızayı sil, normal akışa devam et
             del PENDING_CONFIRMATIONS[user_id]
 
     # -------- ADIM 2: INTENT CLASSIFICATION --------
-    intent: Optional[dict] = classify_intent(request.message)
+    intent: Optional[dict] = classify_intent(body.message)
 
     if intent:
-        logger.info(f"✅ Intent Bulundu: {intent['intent_name']}")
-
-        # -------- ADIM 3: INTENT-SPECIFIC HANDLERS --------
+        logger.info(f"✅ Intent: {intent['intent_name']}")
         intent_name: str = intent["intent_name"]
 
         if intent_name == "akademik_takvim":
-            return _handle_academic_calendar(intent, request.message)
-
+            return _handle_academic_calendar(intent, body.message)
         elif intent_name == "cihaz_bilgisi":
-            return _handle_device_query(request.message, user_id)
-
+            return _handle_device_query(body.message, user_id)
         else:
-            # Selamlasma, yemek listesi vb.
             return _handle_generic_intent(intent)
 
-    # -------- ADIM 4: LLM FALLBACK --------
-    else:
-        return await _fallback_to_llm(request.message)
+    # -------- ADIM 3: LLM FALLBACK --------
+    return await _fallback_to_llm(body.message, history)
 
 
-@router.post("/update-data")
+@router.post("/update-data", dependencies=[Depends(_verify_admin_token)])
 async def trigger_data_update() -> dict:
     """
-    Manuel veri güncelleme trigger'ı.
-
-    Takvim, yemek listesi ve cihaz verilerini anında güncelle.
-
-    Returns:
-        dict: Güncelleme işleminin sonucu
+    Manuel veri güncelleme — X-Admin-Token header gerektirir.
     """
     logger.info("🔄 Manuel veri güncelleme başlatıldı...")
-    result: dict = update_system_data()
+    result: dict = await asyncio.to_thread(update_system_data)
     return result

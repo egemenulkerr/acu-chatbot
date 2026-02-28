@@ -7,6 +7,8 @@ selenium>=4.0.0
 beautifulsoup4>=4.12.0
 apscheduler>=3.10.0
 zemberek-python==0.2.3
+slowapi>=0.1.9
 numpy>=1.24.0,<2.0.0
-torch==1.13.1
 sentence-transformers>=2.2.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2+cpu

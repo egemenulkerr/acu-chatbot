@@ -1,44 +1,119 @@
 # ============================================================================
 # backend/app/main.py - FastAPI Ana Uygulama
 # ============================================================================
-# Açıklama:
-#   FastAPI uygulamasının ana giriş noktası. CORS yapılandırması, startup/
-#   shutdown işlemlerini ve route'ları yönetir. Background threadlerde ağır
-#   initialization işlemlerini yaparak hızlı health check sağlar.
-# ============================================================================
 
 import asyncio
 import os
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from .api.endpoints import chat as chat_router
 from .core.classifier import load_intent_data
+from .core.limiter import limiter
 from .services.device_registry import initialize_device_db, update_device_database
 from .services.web_scraper.manager import update_system_data_fast, update_system_data
 
 
 # ============================================================================
-# GLOBAL CONFIGURATION
+# GLOBAL STATE
+# ============================================================================
+
+scheduler: AsyncIOScheduler = AsyncIOScheduler()
+
+
+# ============================================================================
+# BACKGROUND INITIALIZATION
+# ============================================================================
+
+async def _load_nlp_module() -> None:
+    print("⚙️  NLP motoru yükleniyor (Zemberek JVM)...")
+    from .core.nlp import get_morphology
+    await asyncio.to_thread(get_morphology)
+    print("✅ NLP motoru yüklendi.")
+
+
+async def _load_intent_data_module() -> None:
+    print("📚 Intent verileri yükleniyor...")
+    await asyncio.to_thread(load_intent_data)
+    print("✅ Intent verileri yüklendi.")
+
+
+async def _load_device_registry() -> None:
+    print("🔧 Cihaz veritabanı yükleniyor...")
+    await asyncio.to_thread(initialize_device_db)
+    print("✅ Cihaz veritabanı yüklendi.")
+
+
+async def _load_menu_data() -> None:
+    print("🍽️  Yemek listesi güncelleniyor...")
+    await asyncio.to_thread(update_system_data_fast)
+    print("✅ Yemek listesi güncellendi.")
+
+
+def _setup_scheduled_jobs() -> None:
+    scheduler.add_job(update_device_database, 'interval', hours=24, id='update_devices')
+    scheduler.add_job(update_system_data, 'interval', hours=6, id='update_system_data')
+    scheduler.start()
+    print("⏰ Zamanlayıcılar başlatıldı: Cihazlar 24h, Web verileri 6h")
+
+
+async def _background_initialization() -> None:
+    """
+    Startup'ta ağır initialization'ı arka planda yap.
+    NLP + Intent sıralı (bağımlı), ardından Cihaz + Yemek paralel.
+    """
+    try:
+        await _load_nlp_module()
+        await _load_intent_data_module()
+        # Cihaz ve yemek birbirinden bağımsız — paralel çalıştır
+        await asyncio.gather(
+            _load_device_registry(),
+            _load_menu_data(),
+        )
+        _setup_scheduled_jobs()
+    except Exception as e:
+        print(f"❌ Background initialization hatası: {e}")
+
+
+# ============================================================================
+# LIFESPAN (FastAPI 0.93+ önerilen yöntem — on_event deprecated)
+# ============================================================================
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("⚡ Uygulama başlatıldı, background yükleme devam ediyor...")
+    asyncio.create_task(_background_initialization())
+    yield
+    # Shutdown
+    try:
+        scheduler.shutdown()
+        print("✅ Scheduler kapatıldı.")
+    except Exception as e:
+        print(f"⚠️  Scheduler kapatma hatası: {e}")
+
+
+# ============================================================================
+# APP INITIALIZATION
 # ============================================================================
 
 app: FastAPI = FastAPI(
     title="AÇÜ Chatbot API",
     description="Artvin Çoruh Üniversitesi Asistan Chatbotu",
-    version="1.0.0"
+    version="1.1.0",
+    lifespan=lifespan
 )
 
-# Scheduler örneği - background job'ları yönetir
-scheduler: AsyncIOScheduler = AsyncIOScheduler()
+# Rate limiting
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Startup tamamlandı mı? (health check için)
-STARTUP_COMPLETE: bool = False
-
-# ============================================================================
-# CORS MIDDLEWARE YAPLANDIRMASI
-# ============================================================================
-
+# CORS
 ALLOWED_ORIGINS: list[str] = [
     "http://localhost:3000",
     "http://localhost:5173",
@@ -58,187 +133,28 @@ app.add_middleware(
 
 
 # ============================================================================
-# BACKGROUND INITIALIZATION FUNCTIONS
+# ROUTES
 # ============================================================================
 
-async def _load_nlp_module() -> None:
-    """
-    Zemberek NLP motorunu arka planda yükle.
-
-    Not: İlk yüklenişte 2-3 saniye sürer (JVM başlatılması).
-    """
-    print("⚙️  NLP motorunu yükleniyor (Zemberek JVM)...")
-    try:
-        from .core.nlp import get_morphology
-        await asyncio.to_thread(get_morphology)
-        print("✅ NLP motoru başarıyla yüklendi.")
-    except Exception as e:
-        print(f"❌ NLP yükleme hatası: {e}")
-        raise
-
-
-async def _load_intent_data_module() -> None:
-    """Intent verilerini ve embeddings modelini arka planda yükle."""
-    print("📚 Intent verileri yükleniyor...")
-    try:
-        await asyncio.to_thread(load_intent_data)
-        print("✅ Intent verileri yüklendi.")
-    except Exception as e:
-        print(f"❌ Intent yükleme hatası: {e}")
-        raise
-
-
-async def _load_device_registry() -> None:
-    """Cihaz katalog veritabanını arka planda yükle."""
-    print("🔧 Cihaz veritabanı yükleniyor...")
-    try:
-        await asyncio.to_thread(initialize_device_db)
-        print("✅ Cihaz veritabanı yüklendi.")
-    except Exception as e:
-        print(f"❌ Cihaz veritabanı yükleme hatası: {e}")
-        raise
-
-
-async def _load_menu_data() -> None:
-    """Günlük yemek listesini hızlı şekilde yükle."""
-    print("🍽️  Yemek listesi güncelleniyor...")
-    try:
-        await asyncio.to_thread(update_system_data_fast)
-        print("✅ Yemek listesi güncellendi.")
-    except Exception as e:
-        print(f"❌ Yemek listesi güncelleme hatası: {e}")
-        raise
-
-
-def _setup_scheduled_jobs() -> None:
-    """
-    APScheduler'da periyodik background job'larını ayarla.
-
-    Jobs:
-      - update_device_database: Her 24 saatte bir (Selenium scraper)
-      - update_system_data: Her 6 saatte bir (Takvim + Yemek)
-    """
-    try:
-        scheduler.add_job(
-            update_device_database,
-            'interval',
-            hours=24,
-            id='update_devices'
-        )
-        scheduler.add_job(
-            update_system_data,
-            'interval',
-            hours=6,
-            id='update_system_data'
-        )
-        scheduler.start()
-        print("⏰ Otomatik güncelleme zamanlayıcıları başlatıldı:")
-        print("   - Cihazlar: Her 24 saatte")
-        print("   - Web Verileri: Her 6 saatte")
-    except Exception as e:
-        print(f"❌ Scheduler başlatma hatası: {e}")
-
-
-async def _background_initialization() -> None:
-    """
-    Tüm ağır initialization işlemlerini arka planda paralel yap.
-
-    Sıra:
-      1. NLP motorunu yükle
-      2. Intent verilerini yükle
-      3. Cihaz veritabanını yükle
-      4. Yemek listesini güncelle
-      5. Scheduler'ı başlat
-    """
-    try:
-        await _load_nlp_module()
-        await _load_intent_data_module()
-        await _load_device_registry()
-        await _load_menu_data()
-        _setup_scheduled_jobs()
-    except Exception as e:
-        print(f"❌ Background initialization hatası: {e}")
+app.include_router(chat_router.router, prefix="/api", tags=["chat"])
 
 
 # ============================================================================
-# APPLICATION LIFECYCLE EVENTS
-# ============================================================================
-
-@app.on_event("startup")
-async def startup_event() -> None:
-    """
-    FastAPI startup event handler.
-
-    İşlemler:
-      - Hızlı health check için STARTUP_COMPLETE = True ayarla
-      - Ağır işlemleri arka planda başlat (non-blocking)
-    """
-    global STARTUP_COMPLETE
-
-    print("⚡ App başlatıldı (background loading devam ediyor)...")
-    asyncio.create_task(_background_initialization())
-    STARTUP_COMPLETE = True
-
-
-@app.on_event("shutdown")
-async def shutdown_event() -> None:
-    """
-    FastAPI shutdown event handler.
-
-    İşlemler:
-      - APScheduler'ı düzgün şekilde kapat
-    """
-    try:
-        scheduler.shutdown()
-        print("✅ Scheduler kapatıldı.")
-    except Exception as e:
-        print(f"⚠️  Scheduler kapatma hatası: {e}")
-
-
-# ============================================================================
-# ROUTE REGISTRATION
-# ============================================================================
-
-app.include_router(
-    chat_router.router,
-    prefix="/api",
-    tags=["chat"]
-)
-
-
-# ============================================================================
-# HEALTH & INFO ENDPOINTS
+# HEALTH & INFO
 # ============================================================================
 
 @app.get("/", tags=["info"])
 def read_root() -> dict:
-    """
-    Kök endpoint - proje bilgisini döndür.
-
-    Returns:
-        dict: Proje adı ve açıklaması
-    """
     return {
-        "Proje": "AÇÜ Hibrit Sohbet Robotu API",
-        "Versiyon": "1.0.0",
-        "Durum": "Hazır"
+        "proje": "AÇÜ Hibrit Sohbet Robotu API",
+        "versiyon": "1.1.0",
+        "durum": "Hazır"
     }
 
 
 @app.get("/health", tags=["health"])
 def health_check() -> dict:
-    """
-    Health check endpoint.
-
-    Returns:
-        dict: Sistem durumu ve configuration bilgileri
-    """
-    use_embeddings: bool = (
-        os.getenv("USE_EMBEDDINGS", "false").lower() == "true"
-    )
-
     return {
         "status": "ok",
-        "startup_complete": STARTUP_COMPLETE,
-        "use_embeddings": use_embeddings
+        "use_embeddings": os.getenv("USE_EMBEDDINGS", "false").lower() == "true"
     }

@@ -3,34 +3,27 @@
 # ============================================================================
 # Açıklama:
 #   Google Generative AI (Gemini) API'sini kullanarak sohbet cevapları
-#   oluşturur. Intent sınıflandırması başarısız olduğunda fallback olarak
-#   çalışır. Model seçimi dinamik ve API key tabanlıdır.
-#
-#   Supported Models:
-#     - gemini-1.5-flash (hızlı, düşük cost)
-#     - gemini-1.5-pro (daha güçlü)
-#     - gemini-2.0-flash (en yeni)
+#   oluşturur. Model örneği module seviyesinde cache'lenir — her istekte
+#   yeniden oluşturulmaz. Konuşma geçmişini destekler.
 # ============================================================================
 
 import os
-from typing import Optional
-from dotenv import load_dotenv
 import logging
+from typing import Optional
 
+from dotenv import load_dotenv
 import google.generativeai as genai
 
 
 # ============================================================================
-# LOGGING & CONFIGURATION
+# CONFIGURATION
 # ============================================================================
 
 logger: logging.Logger = logging.getLogger(__name__)
 
-# Environment variables'dan API key'i yükle
 load_dotenv()
 GOOGLE_API_KEY: Optional[str] = os.getenv("GOOGLE_API_KEY")
 
-# Sistem prompt (bot kimliği)
 SYSTEM_PROMPT: str = """
 Sen Artvin Çoruh Üniversitesi (AÇÜ) asistanısın.
 Kullanıcıların akademik, idari ve kampüs-ilgili sorularına cevap verirsin.
@@ -38,146 +31,105 @@ Samimi, yardımsever ve kısa cevaplar ver.
 Eğer sorunun konu dışı ise nazikçe konuya döndürmeye çalış.
 """
 
+# Module-level singleton — model yalnızca bir kez başlatılır
+_CACHED_MODEL: Optional[genai.GenerativeModel] = None
+
 
 # ============================================================================
-# HELPER FUNCTIONS
+# MODEL INITIALIZATION (CACHED)
 # ============================================================================
 
-def _validate_api_key() -> bool:
+def _get_model() -> Optional[genai.GenerativeModel]:
     """
-    API key'in mevcut ve geçerli olup olmadığını kontrol et.
+    Gemini model örneğini döndür. İlk çağrıda başlatır, sonrasında cache'den verir.
+    """
+    global _CACHED_MODEL
 
-    Returns:
-        bool: API key mevcutsa True, yoksa False
-    """
+    if _CACHED_MODEL is not None:
+        return _CACHED_MODEL
+
     if not GOOGLE_API_KEY:
-        logger.error("❌ GOOGLE_API_KEY environment variable'ı eksik!")
-        return False
-    return True
+        logger.error("❌ GOOGLE_API_KEY environment variable eksik!")
+        return None
 
-
-def _find_available_model() -> Optional[str]:
-    """
-    Gemini API'den mevcut olan ve generateContent destekleyen modeli bul.
-
-    Preference Order:
-      1. gemini-*-flash (hızlı, düşük maliyet)
-      2. gemini-*-pro (daha güçlü)
-      3. Herhangi bir gemini modeli
-
-    Returns:
-        str | None: Model adı veya None (model bulunamadı)
-
-    Error Handling:
-      - API hatası olursa: varsayılan model (gemini-1.5-flash) döndür
-    """
     try:
-        logger.info("🔍 Mevcut Gemini modelleri aranıyor...")
+        genai.configure(api_key=GOOGLE_API_KEY)
 
-        # API'den modelleri listele
-        available_models: list = list(genai.list_models())
+        logger.info("🔍 Gemini modelleri aranıyor...")
+        available_models = list(genai.list_models())
 
-        # generateContent destekleyen gemini modellerini filtrele
-        gemini_models: list = [
+        gemini_models = [
             m for m in available_models
             if 'generateContent' in m.supported_generation_methods
             and 'gemini' in m.name
         ]
 
-        if not gemini_models:
-            logger.warning("⚠️  Mevcut Gemini modeli bulunamadı!")
-            return None
+        model_name = "models/gemini-1.5-flash"
 
-        # Flash modelini tercih et (daha hızlı ve daha ucuz)
-        for model in gemini_models:
-            if 'flash' in model.name:
-                logger.info(f"✅ Seçilen model: {model.name}")
-                return model.name
+        for m in gemini_models:
+            if 'flash' in m.name:
+                model_name = m.name
+                break
+        else:
+            for m in gemini_models:
+                if 'pro' in m.name:
+                    model_name = m.name
+                    break
+            else:
+                if gemini_models:
+                    model_name = gemini_models[0].name
 
-        # Flash yoksa pro'yu dene
-        for model in gemini_models:
-            if 'pro' in model.name:
-                logger.info(f"✅ Seçilen model: {model.name}")
-                return model.name
-
-        # Yoksa herhangi bir Gemini modeli seç
-        logger.info(f"✅ Seçilen model: {gemini_models[0].name}")
-        return gemini_models[0].name
+        logger.info(f"✅ Gemini modeli seçildi ve cache'lendi: {model_name}")
+        _CACHED_MODEL = genai.GenerativeModel(
+            model_name,
+            system_instruction=SYSTEM_PROMPT
+        )
+        return _CACHED_MODEL
 
     except Exception as e:
-        logger.error(f"❌ Model listeleme hatası: {e}")
-        logger.info("⚠️  Varsayılan model (gemini-1.5-flash) kullanılıyor...")
-        return "models/gemini-1.5-flash"
+        logger.error(f"❌ Model başlatma hatası: {e}", exc_info=True)
+        return None
 
 
 # ============================================================================
 # MAIN LLM FUNCTION
 # ============================================================================
 
-def get_llm_response(user_message: str) -> str:
+def get_llm_response(user_message: str, history: list[dict] | None = None) -> str:
     """
-    Kullanıcı mesajını Google Gemini'ye gönder ve cevap al.
+    Kullanıcı mesajını Gemini'ye gönder ve cevap al.
 
-    Process:
-      1. API key kontrol et
-      2. Gemini API'yi ayarla
-      3. Uygun modeli bul
-      4. Sistemsel talimatları (system prompt) ekle
-      5. Cevap oluştur
+    Bu fonksiyon sync'tir — async endpoint'lerden asyncio.to_thread ile çağrılmalı.
 
     Args:
-        user_message (str): Kullanıcı tarafından yazılan mesaj
+        user_message : Kullanıcının son mesajı
+        history      : [{role: "user"|"bot", text: "..."}] formatında geçmiş
 
     Returns:
-        str: Gemini tarafından üretilen cevap veya error message
-
-    Error Handling:
-      - API key eksik → Error message döndür
-      - Model bulunamadı → Error message döndür
-      - API call hatası → Error message döndür
+        str: Gemini'nin yanıtı veya hata mesajı
     """
-    # -------- ADIM 1: API KEY KONTROL --------
-    if not _validate_api_key():
-        return (
-            "⚙️  Sistem yapılandırma hatası: API anahtarı eksik. "
-            "Lütfen yöneticiye başvurun."
-        )
+    model = _get_model()
+
+    if not model:
+        return "⚙️ Sistem yapılandırma hatası: AI servisi başlatılamadı. Lütfen yöneticiye başvurun."
 
     try:
-        # -------- ADIM 2: API AYARLA --------
-        genai.configure(api_key=GOOGLE_API_KEY)
+        # Geçmişi Gemini'nin beklediği formata dönüştür
+        gemini_history = []
+        if history:
+            for msg in history[-10:]:  # Son 5 tur (10 mesaj)
+                role = "user" if msg.get("role") == "user" else "model"
+                text = msg.get("text", "").strip()
+                if text:
+                    gemini_history.append({"role": role, "parts": [text]})
 
-        # -------- ADIM 3: MODELI BUL --------
-        target_model_name: Optional[str] = _find_available_model()
+        chat = model.start_chat(history=gemini_history)
+        response = chat.send_message(user_message)
+        response_text = response.text.strip()
 
-        if not target_model_name:
-            logger.error("❌ Uygun Gemini modeli bulunamadı.")
-            return (
-                "Maalesef şu anda AI servisine erişilemiyor. "
-                "Lütfen daha sonra tekrar deneyin."
-            )
-
-        logger.info(f"📊 Kullanılan Model: {target_model_name}")
-
-        # -------- ADIM 4: MODELİ BAŞLAT --------
-        model: any = genai.GenerativeModel(target_model_name)
-
-        # -------- ADIM 5: CEVAP OLUŞTUR --------
-        full_prompt: str = (
-            f"{SYSTEM_PROMPT}\n\n"
-            f"Kullanıcı: {user_message}\n"
-            f"Asistan:"
-        )
-
-        response: any = model.generate_content(full_prompt)
-        response_text: str = response.text.strip()
-
-        logger.info(f"✅ LLM cevabı oluşturuldu ({len(response_text)} karakter)")
+        logger.info(f"✅ LLM yanıtı oluşturuldu ({len(response_text)} karakter)")
         return response_text
 
     except Exception as e:
-        logger.error(f"❌ LLM Hatası: {str(e)}")
-        return (
-            f"Üzgünüm, şu anda AI servisine bağlanamıyorum. "
-            f"Hata: {str(e)[:50]}..."
-        )
+        logger.error(f"❌ LLM Hatası: {e}", exc_info=True)
+        return "Üzgünüm, şu anda AI servisine bağlanamıyorum. Lütfen daha sonra tekrar deneyin."

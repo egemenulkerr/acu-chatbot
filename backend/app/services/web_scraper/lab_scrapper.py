@@ -5,8 +5,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 logger = logging.getLogger(__name__)
+
+# Scraping başarılı sayılabilmesi için minimum beklenen cihaz sayısı
+MIN_EXPECTED_DEVICES = 10
+
 
 def scrape_lab_devices():
     url = 'https://www.artvin.edu.tr/laboratuvar-cihazlari'
@@ -16,48 +22,54 @@ def scrape_lab_devices():
 
     browser = None
     try:
-        # 1. Tarayıcı Ayarları
         opsiyonlar = Options()
-        opsiyonlar.add_argument("--headless") 
+        opsiyonlar.add_argument("--headless")
         opsiyonlar.add_argument("--no-sandbox")
         opsiyonlar.add_argument("--disable-dev-shm-usage")
-        
-        # Docker içinde Firefox ESR'nin standart yolu
         opsiyonlar.binary_location = "/usr/bin/firefox-esr"
 
-        # 2. Geckodriver'ı kullan (Docker'da veya sistem PATH'inde)
-        # DigitalOcean buildpack'te geckodriver sistem PATH'inde olmalı
         geckodriver_path = "/usr/local/bin/geckodriver"
         if not os.path.exists(geckodriver_path):
-            geckodriver_path = "geckodriver"  # Fallback to PATH
-        
+            geckodriver_path = "geckodriver"
+
         service = Service(geckodriver_path)
-        
         browser = webdriver.Firefox(service=service, options=opsiyonlar)
         browser.get(url)
 
-        # 3. Tabloyu Genişletme
+        # Tabloyu genişlet: absolute XPath yerine CSS/attribute-based selectors kullan
         try:
-            click_button = browser.find_element(By.XPATH, "/html/body/div[1]/section/div/div/div/div[2]/div[3]/div/span/div/button")
-            click_button.click()
+            wait = WebDriverWait(browser, 10)
+            # DataTables "Göster" dropdown butonu — class tabanlı, DOM değişiminden etkilenmez
+            show_btn = wait.until(
+                EC.element_to_be_clickable(
+                    (By.CSS_SELECTOR, "div.dataTables_length button, .dt-buttons button")
+                )
+            )
+            show_btn.click()
             time.sleep(1)
-            click_button1 = browser.find_element(By.XPATH, "/html/body/div[1]/section/div/div/div/div[2]/div[3]/div/span/div/div/ul/li[4]/a")
-            click_button1.click()
+
+            # "Tümünü Göster" seçeneği — text tabanlı arama
+            all_option = browser.find_element(
+                By.XPATH, "//ul[contains(@class,'dropdown-menu')]//a[contains(text(),'Tüm') or contains(text(),'All') or contains(text(),'-1')]"
+            )
+            all_option.click()
             logger.info("Tablo genişletiliyor...")
             time.sleep(5)
         except Exception as e:
-            logger.warning(f"Tablo genişletme uyarısı: {e}")
+            logger.warning(f"Tablo genişletme uyarısı (devam ediliyor): {e}")
 
-        # 4. Veriyi Çekme
+        # Veri çekme
         rows = browser.find_elements(By.XPATH, "//table[@id='datatable_ajax']/tbody/tr")
-        logger.info(f"Toplam {len(rows)} cihaz bulundu.")
+        logger.info(f"Toplam {len(rows)} satır bulundu.")
 
-        for i in range(len(rows)):
+        for row in rows:
             try:
-                cols = rows[i].find_elements(By.TAG_NAME, "td")
+                cols = row.find_elements(By.TAG_NAME, "td")
                 if len(cols) >= 8:
                     cihaz_adi = cols[0].text.strip()
-                    # Diğer sütunlar...
+                    if not cihaz_adi:
+                        continue
+
                     birimi = cols[1].text.strip()
                     lab = cols[2].text.strip()
                     adet = cols[3].text.strip()
@@ -65,22 +77,31 @@ def scrape_lab_devices():
                     sorumlu = cols[7].text.strip()
 
                     device_key = cihaz_adi.lower()
-                    
                     device_db[device_key] = {
                         "original_name": cihaz_adi,
                         "description": f"Birim: {birimi}, Lab: {lab}, Marka: {marka}, Sorumlu: {sorumlu}",
                         "price": "Fiyat bilgisi yok",
                         "stock": f"Adet: {adet}"
                     }
-            except:
+            except Exception as e:
+                logger.warning(f"Satır parse hatası (atlanıyor): {e}")
                 continue
 
+        # Veri kalite kontrolü — minimum cihaz sayısını kontrol et
+        if len(device_db) < MIN_EXPECTED_DEVICES:
+            logger.warning(
+                f"⚠️  Beklenen minimum cihaz sayısına ({MIN_EXPECTED_DEVICES}) ulaşılamadı. "
+                f"Bulunan: {len(device_db)}. Eski veri korunacak."
+            )
+            return {}
+
+        logger.info(f"✅ {len(device_db)} cihaz başarıyla tarandı.")
         return device_db
 
     except Exception as e:
-        logger.error(f"Selenium Kritik Hata: {e}")
+        logger.error(f"Selenium Kritik Hata: {e}", exc_info=True)
         return {}
-        
+
     finally:
         if browser:
             browser.quit()

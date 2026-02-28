@@ -1,33 +1,19 @@
 # ============================================================================
 # backend/app/schemas/chat.py - Pydantic Data Models
 # ============================================================================
-# Açıklama:
-#   Chat API'nin request/response şemalarını tanımlar. Pydantic ile
-#   type validation ve automatic documentation sağlar.
-# ============================================================================
 
 from pydantic import BaseModel, Field
 from typing import Optional
 
-
-# ============================================================================
-# REQUEST SCHEMA
-# ============================================================================
 
 class ChatRequest(BaseModel):
     """
     POST /api/chat endpoint'ine gelen request body modeli.
 
     Fields:
-        message (str): Kullanıcı tarafından yazılan metin mesajı
-        session_id (str | None): Opsiyonel session identifier
-                                  (conversation history için)
-
-    Example:
-        {
-            "message": "Merhaba, nasıl yardımcı olabilirsin?",
-            "session_id": "user-123"
-        }
+        message    : Kullanıcı mesajı
+        session_id : Opsiyonel session identifier (cihaz onay akışı için)
+        history    : Son konuşma geçmişi — LLM'e bağlam sağlar
     """
 
     message: str = Field(
@@ -45,36 +31,28 @@ class ChatRequest(BaseModel):
         max_length=100
     )
 
+    history: list[dict] = Field(
+        default_factory=list,
+        title="Konuşma Geçmişi",
+        description='Son mesajlar [{role: "user"|"bot", text: "..."}] — max 20 öğe',
+    )
+
     class Config:
-        """Pydantic configuration"""
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "message": "Bugün yemek nedir?",
-                "session_id": "user-456"
+                "session_id": "session_abc123",
+                "history": [
+                    {"role": "user", "text": "Merhaba"},
+                    {"role": "bot", "text": "Merhaba! Size nasıl yardımcı olabilirim?"}
+                ]
             }
         }
 
 
-# ============================================================================
-# RESPONSE SCHEMA
-# ============================================================================
-
 class ChatResponse(BaseModel):
     """
     POST /api/chat endpoint'ından dönen response body modeli.
-
-    Fields:
-        response (str): Chatbot'un cevap metni
-        source (str): Cevabın kaynağı (debug/analytics için)
-                      Değerleri: "Hızlı Yol", "Gemini AI", "Cihaz Katalogu" vb.
-        intent_name (str | None): Sınıflandırılan intent adı (opsiyonel)
-
-    Example:
-        {
-            "response": "Bugün pasta ve salata var. Afiyet olsun!",
-            "source": "Hızlı Yol",
-            "intent_name": "yemek_listesi"
-        }
     """
 
     response: str = Field(
@@ -99,10 +77,9 @@ class ChatResponse(BaseModel):
     )
 
     class Config:
-        """Pydantic configuration"""
-        schema_extra = {
+        json_schema_extra = {
             "example": {
-                "response": "Merhaba! AÇÜ Asistan'a hoş geldin. 😊",
+                "response": "Merhaba! AÇÜ Asistan'a hoş geldin.",
                 "source": "Hızlı Yol",
                 "intent_name": "selamlasma"
             }
