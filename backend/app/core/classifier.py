@@ -49,12 +49,12 @@ def load_model() -> None:
         return
 
     try:
-        from sentence_transformers import SentenceTransformer
-        logger.info("📊 Semantic model yükleniyor...")
-        MODEL = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+        from fastembed import TextEmbedding
+        logger.info("📊 Semantic model yükleniyor (fastembed/ONNX)...")
+        MODEL = TextEmbedding(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
         logger.info("✅ Semantic model yüklendi.")
     except ImportError as e:
-        logger.error(f"❌ Sentence-transformers import hatası: {e}")
+        logger.error(f"❌ Fastembed import hatası: {e}")
     except Exception as e:
         logger.error(f"❌ Model yükleme hatası: {e}")
 
@@ -83,12 +83,13 @@ def load_intent_data() -> None:
         )
 
         if USE_EMBEDDINGS and MODEL:
+            import numpy as np
             logger.info("📊 Intent embedding'leri oluşturuluyor...")
             for intent in INTENTS_DATA:
                 intent_name: str = intent["intent_name"]
                 examples: list[str] = intent.get("examples", [])
                 if examples:
-                    INTENT_EMBEDDINGS[intent_name] = MODEL.encode(examples)
+                    INTENT_EMBEDDINGS[intent_name] = np.array(list(MODEL.embed(examples)))
             logger.info(f"✅ {len(INTENT_EMBEDDINGS)} intent embedding'i oluşturuldu.")
 
         logger.info(f"✅ {len(INTENTS_DATA)} intent yüklendi.")
@@ -140,7 +141,17 @@ def _classify_by_keywords(user_message: str) -> Optional[dict]:
 @lru_cache(maxsize=256)
 def _encode_user_message(message: str):
     """Kullanıcı mesajı vektörünü cache'le — aynı mesaj tekrar encode edilmez."""
-    return MODEL.encode(message)
+    import numpy as np
+    return np.array(list(MODEL.embed([message])))[0]
+
+
+def _cosine_similarity(a, b_matrix) -> float:
+    """a: (dim,), b_matrix: (n, dim) — maksimum cosine similarity döndürür."""
+    import numpy as np
+    a_norm = a / (np.linalg.norm(a) + 1e-10)
+    norms = np.linalg.norm(b_matrix, axis=1, keepdims=True) + 1e-10
+    b_normed = b_matrix / norms
+    return float(np.dot(b_normed, a_norm).max())
 
 
 def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
@@ -148,8 +159,6 @@ def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
         return None
 
     try:
-        from sentence_transformers import util
-
         user_embedding = _encode_user_message(user_message)
 
         best_similarity: float = -1.0
@@ -160,8 +169,7 @@ def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
             if intent_name not in INTENT_EMBEDDINGS:
                 continue
 
-            similarities = util.cos_sim(user_embedding, INTENT_EMBEDDINGS[intent_name])[0]
-            max_sim = float(similarities.max())
+            max_sim = _cosine_similarity(user_embedding, INTENT_EMBEDDINGS[intent_name])
 
             if max_sim > best_similarity:
                 best_similarity = max_sim
