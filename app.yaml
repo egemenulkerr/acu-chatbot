@@ -1,8 +1,8 @@
-name: chatbot-uni-backend
+name: acu-chatbot-backend
 services:
 - name: backend
   github:
-    repo: egemenulkerr/chatbot-uni
+    repo: egemenulkerr/acu-chatbot
     branch: main
     deploy_on_push: true
   dockerfile_path: Dockerfile
