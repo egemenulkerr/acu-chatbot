@@ -27,7 +27,8 @@ from ...services.llm_client import get_llm_response, stream_llm_response
 from ...services.device_registry import (
     search_device,
     suggest_device,
-    get_device_info
+    get_device_info,
+    get_all_devices,
 )
 
 
@@ -212,7 +213,40 @@ def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
     )
 
 
+_GENERAL_DEVICE_KEYWORDS: list[str] = [
+    "cihazlar", "cihazları", "tüm cihaz", "hangi cihaz", "mevcut cihaz",
+    "laboratuvar cihaz", "lab cihaz", "ne var", "neler var", "listele"
+]
+
+
+def _list_all_devices() -> ChatResponse:
+    """Tüm kayıtlı cihazları listele."""
+    devices = get_all_devices()
+    if not devices:
+        return ChatResponse(
+            response="Cihaz veritabanı henüz yüklenmedi. Lütfen biraz sonra tekrar deneyin.",
+            source="Sistem",
+            intent_name="cihaz_bilgisi_hata"
+        )
+    lines = ["🔬 **Laboratuvar Cihazları**\n"]
+    for key, data in devices.items():
+        name = data.get("original_name", key.title())
+        lines.append(f"• {name}")
+    lines.append("\nBelirli bir cihaz hakkında bilgi almak için cihaz adını yazabilirsiniz.")
+    return ChatResponse(
+        response="\n".join(lines),
+        source="Cihaz Katalogu",
+        intent_name="cihaz_bilgisi"
+    )
+
+
 def _handle_device_query(message: str, user_id: str) -> ChatResponse:
+    msg_lower = message.lower()
+
+    # Genel liste sorusu mu?
+    if any(kw in msg_lower for kw in _GENERAL_DEVICE_KEYWORDS):
+        return _list_all_devices()
+
     device_data: Optional[dict] = search_device(message)
     if device_data:
         info = device_data.get("info", {})
@@ -236,7 +270,7 @@ def _handle_device_query(message: str, user_id: str) -> ChatResponse:
         )
 
     return ChatResponse(
-        response="Maalesef o cihazı bulamadım. Başka bir şey sormak ister misiniz?",
+        response="Maalesef o cihazı bulamadım. Kayıtlı tüm cihazları görmek için 'cihazları listele' yazabilirsiniz.",
         source="Hata",
         intent_name="cihaz_bilgisi_hata"
     )
@@ -392,14 +426,20 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
     pending_device = _get_pending_device(user_id)
     if pending_device:
         positive_answers = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
+        del PENDING_CONFIRMATIONS[user_id]
         if any(ans in message for ans in positive_answers):
-            del PENDING_CONFIRMATIONS[user_id]
             response = _get_confirmation_response(pending_device)
             if response:
                 _log_analytics(body.message, response.intent_name, response.source, (time() - t_start) * 1000)
                 return response
         else:
-            del PENDING_CONFIRMATIONS[user_id]
+            result = ChatResponse(
+                response="Anlaşıldı, başka bir konuda yardımcı olabilir miyim?",
+                source="Sistem",
+                intent_name="cihaz_bilgisi_red"
+            )
+            _log_analytics(body.message, result.intent_name, result.source, (time() - t_start) * 1000)
+            return result
 
     # -------- ADIM 2: INTENT CLASSIFICATION --------
     intent: Optional[dict] = classify_intent(body.message)
@@ -452,12 +492,15 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
         # Onay kontrolü
         if pending_device:
             positive = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
+            del PENDING_CONFIRMATIONS[user_id]
             if any(ans in message for ans in positive):
-                del PENDING_CONFIRMATIONS[user_id]
                 conf = _get_confirmation_response(pending_device)
                 if conf:
                     yield _sse(conf.response, done=True)
                     return
+            else:
+                yield _sse("Anlaşıldı, başka bir konuda yardımcı olabilir miyim?", done=True)
+                return
 
         intent: Optional[dict] = classify_intent(body.message)
 

@@ -120,6 +120,17 @@ def search_device(user_message: str) -> Optional[dict]:
     return None
 
 
+_DEVICE_SEARCH_STOPWORDS: set[str] = {
+    "cihaz", "cihazı", "cihazlar", "cihazları", "hakkında", "hakkinda",
+    "bilgi", "bilgisi", "bilgisini", "ver", "verir", "verin",
+    "istiyorum", "istiyormusunuz", "söyle", "söyleyin", "anlat", "anlatin",
+    "nedir", "nelerdir", "nasıl", "nasil", "nerede", "nereden",
+    "laboratuvar", "laboratuvarda", "laboratuvarlar", "laboratuvarlari",
+    "üniversite", "universite", "okul", "fakülte", "fakulte",
+    "mevcut", "olan", "hangi", "hangileri",
+}
+
+
 def suggest_device(user_message: str) -> Optional[str]:
     if not DEVICE_DB:
         initialize_device_db()
@@ -128,13 +139,22 @@ def suggest_device(user_message: str) -> Optional[str]:
     all_devices = list(DEVICE_DB.keys())
 
     for word in message_lower.split():
-        if len(word) < 4:
+        if len(word) < 5:
             continue
-        matches = get_close_matches(word, all_devices, n=1, cutoff=0.6)
+        if word in _DEVICE_SEARCH_STOPWORDS:
+            continue
+        matches = get_close_matches(word, all_devices, n=1, cutoff=0.75)
         if matches:
             return matches[0]
 
     return None
+
+
+def get_all_devices() -> dict[str, dict]:
+    """Tüm cihaz veritabanını döndür. Boşsa disk/scrape'den yükle."""
+    if not DEVICE_DB:
+        initialize_device_db()
+    return DEVICE_DB
 
 
 def get_device_info(device_name_key: str) -> Optional[dict]:
