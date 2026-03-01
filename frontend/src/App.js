@@ -275,6 +275,7 @@ export default function App() {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [atBottom, setAtBottom] = useState(true);
   const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
+  const [showMenu, setShowMenu] = useState(false);
 
   const srRef = useRef(null);
   const logRef = useRef(null);
@@ -364,6 +365,7 @@ export default function App() {
     setInput('');
     setLoading(true);
     setAtBottom(true);
+    setShowMenu(false);
 
     await streamMessage(
       t, sessionRef.current,
@@ -417,11 +419,22 @@ export default function App() {
     sessionRef.current = getOrCreateSessionId();
     setError('');
     setUnread(0);
+    setShowMenu(false);
+    setActiveCategory(0);
+  }, []);
+
+  const goToMenu = useCallback(() => {
+    setShowMenu(true);
+    setActiveCategory(0);
+    setTimeout(() => {
+      if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
+    }, 50);
   }, []);
 
   const charCount = input.length;
   const showCharWarning = charCount > MAX_CHARS * 0.8;
-  const showQuickReplies = messages.length <= 2 && !loading;
+  const isNewChat = messages.length <= 2;
+  const showQuickReplies = (isNewChat || showMenu) && !loading;
 
   const currentCategory = QUICK_REPLY_CATEGORIES[activeCategory];
 
@@ -455,6 +468,15 @@ export default function App() {
               </div>
             </div>
             <div className="acu-header-right">
+              {messages.length > 2 && (
+                <button
+                  className="acu-icon-btn"
+                  onClick={goToMenu}
+                  title="Ana Menü"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+              )}
               <button
                 className="acu-icon-btn"
                 onClick={() => setDarkMode(d => !d)}
@@ -528,6 +550,14 @@ export default function App() {
             {/* Quick replies */}
             {showQuickReplies && (
               <div className="acu-quick-wrap">
+                <div className="acu-quick-header">
+                  <span className="acu-quick-title">Ne sormak istersin?</span>
+                  {showMenu && (
+                    <button className="acu-quick-close" onClick={() => setShowMenu(false)} title="Kapat">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  )}
+                </div>
                 <div className="acu-quick-tabs">
                   {QUICK_REPLY_CATEGORIES.map((cat, i) => (
                     <button

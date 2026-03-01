@@ -426,14 +426,47 @@
 
 .acu-quick-wrap {
   padding: 10px 0 6px;
+  border-top: 1px solid var(--border-chip);
+  margin-top: 6px;
+  animation: menuSlideIn 0.22s cubic-bezier(0.16,1,0.3,1) both;
 }
+
+@keyframes menuSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.acu-quick-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.acu-quick-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.acu-quick-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted);
+  display: flex; align-items: center;
+  padding: 2px 4px; border-radius: 4px;
+  transition: color 0.14s, background 0.14s;
+}
+.acu-quick-close:hover { color: var(--text-primary); background: var(--bg-chip); }
 
 .acu-quick-tabs {
   display: flex;
   gap: 4px;
   margin-bottom: 8px;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   border-bottom: 1px solid var(--border-chip);
+  flex-wrap: wrap;
 }
 
 .acu-tab {
