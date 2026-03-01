@@ -953,7 +953,7 @@
         "bugün bir şey var mı"
       ],
       "response_type": "TEXT",
-      "response_content": "📢 Güncel duyurular için resmi siteyi ziyaret edebilirsiniz:\nhttps://www.artvin.edu.tr/tr/duyurular"
+      "response_content": "📢 Güncel duyurular için resmi siteyi ziyaret edebilirsiniz:\nhttps://www.artvin.edu.tr/tr/duyuru/tumu"
     },
     {
       "intent_name": "hava_durumu",

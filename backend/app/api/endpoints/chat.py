@@ -332,7 +332,7 @@ async def _handle_duyurular_query() -> ChatResponse:
         return ChatResponse(response=result, source="Duyurular", intent_name="duyurular")
 
     return ChatResponse(
-        response="📢 Duyurulara şu an ulaşılamıyor.\nDetay: https://www.artvin.edu.tr/tr/duyurular",
+        response="📢 Duyurulara şu an ulaşılamıyor.\nDetay: https://www.artvin.edu.tr/tr/duyuru/tumu",
         source="Duyurular (hata)",
         intent_name="duyurular"
     )
