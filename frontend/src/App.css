@@ -1,11 +1,117 @@
 /* ============================================================
-   AÇÜ Chatbot — Premium Redesign
-   Inspired by: Claude, Intercom, Linear, Arc
+   AÇÜ Chatbot — Complete Redesign v3
+   Dark mode, suggestions, tabs, copy, scroll-to-bottom
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── CSS VARIABLES (Light) ──────────────────────────────── */
+
+:root {
+  --bg-window:      #ffffff;
+  --bg-log:         #f8fafc;
+  --bg-log-dot:     #e2e8f0;
+  --bg-input:       #f4f4f5;
+  --bg-input-focus: #ffffff;
+  --bg-bubble-bot:  #ffffff;
+  --bg-bubble-user: linear-gradient(145deg, #065f46, #059669);
+  --bg-chip:        #ffffff;
+  --bg-chip-hover:  #052e16;
+  --bg-header:      #0b2e17;
+  --bg-footer:      #fafafa;
+  --bg-suggestion:  #ffffff;
+  --bg-tab:         transparent;
+  --bg-tab-active:  rgba(255,255,255,0.15);
+
+  --text-primary:   #18181b;
+  --text-secondary: #71717a;
+  --text-muted:     #a1a1aa;
+  --text-bot:       #18181b;
+  --text-user:      #ffffff;
+  --text-chip:      #3f3f46;
+  --text-chip-h:    #ffffff;
+  --text-link:      #059669;
+  --text-footer:    #a1a1aa;
+  --text-tab:       rgba(255,255,255,0.6);
+  --text-tab-act:   #ffffff;
+
+  --border-bubble:  rgba(0,0,0,0.06);
+  --border-input:   #e4e4e7;
+  --border-chip:    #e4e4e7;
+  --border-window:  rgba(0,0,0,0.05);
+  --border-footer:  #f4f4f5;
+
+  --accent:         #059669;
+  --accent-dark:    #047857;
+  --accent-light:   rgba(5,150,105,0.12);
+  --accent-glow:    rgba(5,150,105,0.35);
+
+  --shadow-window:
+    0 0 0 1px var(--border-window),
+    0 4px 12px rgba(0,0,0,0.06),
+    0 16px 40px rgba(0,0,0,0.10),
+    0 48px 100px rgba(0,0,0,0.08);
+
+  --shadow-bubble-bot:
+    0 0 0 1px var(--border-bubble),
+    0 1px 4px rgba(0,0,0,0.05);
+
+  --shadow-chip:    0 1px 3px rgba(0,0,0,0.06);
+  --shadow-send:    0 2px 8px var(--accent-glow);
+
+  --radius-window:  22px;
+  --radius-bubble:  18px;
+  --radius-chip:    99px;
+  --radius-input:   13px;
+  --radius-btn:     10px;
+}
+
+/* ── CSS VARIABLES (Dark) ───────────────────────────────── */
+
+[data-theme="dark"], .acu-widget.dark {
+  --bg-window:      #18181b;
+  --bg-log:         #121214;
+  --bg-log-dot:     #2a2a2e;
+  --bg-input:       #27272a;
+  --bg-input-focus: #2e2e32;
+  --bg-bubble-bot:  #27272a;
+  --bg-bubble-user: linear-gradient(145deg, #065f46, #059669);
+  --bg-chip:        #27272a;
+  --bg-chip-hover:  #047857;
+  --bg-header:      #0d1f11;
+  --bg-footer:      #18181b;
+  --bg-suggestion:  #27272a;
+  --bg-tab:         transparent;
+  --bg-tab-active:  rgba(255,255,255,0.12);
+
+  --text-primary:   #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted:     #71717a;
+  --text-bot:       #e4e4e7;
+  --text-user:      #ffffff;
+  --text-chip:      #d4d4d8;
+  --text-chip-h:    #ffffff;
+  --text-link:      #34d399;
+  --text-footer:    #52525b;
+
+  --border-bubble:  rgba(255,255,255,0.06);
+  --border-input:   #3f3f46;
+  --border-chip:    #3f3f46;
+  --border-window:  rgba(255,255,255,0.06);
+  --border-footer:  #27272a;
+
+  --accent-light:   rgba(5,150,105,0.18);
+  --shadow-window:
+    0 0 0 1px var(--border-window),
+    0 4px 16px rgba(0,0,0,0.3),
+    0 24px 64px rgba(0,0,0,0.4);
+
+  --shadow-bubble-bot:
+    0 0 0 1px rgba(255,255,255,0.05),
+    0 1px 4px rgba(0,0,0,0.2);
+}
 
 /* ── WIDGET SHELL ─────────────────────────────────────────── */
 
@@ -25,128 +131,95 @@
 
 .acu-window {
   width: min(400px, calc(100vw - 48px));
-  height: min(620px, calc(100vh - 110px));
+  height: min(640px, calc(100vh - 110px));
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
+  border-radius: var(--radius-window);
   overflow: hidden;
-  background: #ffffff;
-
-  /* Çok katmanlı gölge — derinlik hissi */
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.05),
-    0 2px 4px rgba(0, 0, 0, 0.03),
-    0 12px 24px rgba(0, 0, 0, 0.08),
-    0 32px 64px rgba(0, 0, 0, 0.10),
-    0 64px 120px rgba(0, 0, 0, 0.07);
-
-  animation: windowIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: var(--bg-window);
+  box-shadow: var(--shadow-window);
+  animation: windowIn 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
   transform-origin: bottom right;
+  transition: background 0.2s;
 }
 
 @keyframes windowIn {
-  from { opacity: 0; transform: scale(0.92) translateY(16px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+  from { opacity: 0; transform: scale(0.90) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
 }
 
 /* ── HEADER ───────────────────────────────────────────────── */
 
 .acu-header {
-  padding: 16px 18px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #0b2e17;
+  background: var(--bg-header);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
 }
 
-/* Aurora arka plan efekti */
 .acu-header-glow {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 120px 80px at 15% 50%, rgba(16, 185, 129, 0.3) 0%, transparent 100%),
-    radial-gradient(ellipse 80px 100px at 80% -20%, rgba(52, 211, 153, 0.2) 0%, transparent 100%),
-    radial-gradient(ellipse 60px 60px at 95% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 100%);
+    radial-gradient(ellipse 140px 90px at 10% 50%, rgba(16,185,129,0.28) 0%, transparent 100%),
+    radial-gradient(ellipse 90px 120px at 85% -20%, rgba(52,211,153,0.18) 0%, transparent 100%),
+    radial-gradient(ellipse 70px 70px at 95% 90%, rgba(6,182,212,0.12) 0%, transparent 100%);
   pointer-events: none;
+  animation: glowShift 8s ease-in-out infinite alternate;
+}
+
+@keyframes glowShift {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
 }
 
 .acu-header-left {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  position: relative;
-  z-index: 1;
+  display: flex; align-items: center; gap: 10px;
+  position: relative; z-index: 1;
 }
 
-/* Avatar */
 .acu-avatar {
   position: relative;
-  width: 40px; height: 40px;
+  width: 38px; height: 38px;
   background: linear-gradient(135deg, #064e1c, #10b981);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  box-shadow:
-    0 0 0 1.5px rgba(255,255,255,0.12),
-    0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.3);
   flex-shrink: 0;
 }
 
 .acu-badge {
-  position: absolute;
-  bottom: -2px; right: -2px;
+  position: absolute; bottom: -2px; right: -2px;
   width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 2px solid #0b2e17;
+  border-radius: 50%; border: 2px solid var(--bg-header);
 }
 .acu-badge.on  { background: #34d399; }
 .acu-badge.off { background: #f87171; }
 
-.acu-title-group { display: flex; flex-direction: column; gap: 2px; }
+.acu-title-group { display: flex; flex-direction: column; gap: 1px; }
+.acu-title { font-weight: 700; font-size: 0.9rem; color: #fff; letter-spacing: -0.01em; line-height: 1; }
+.acu-subtitle { font-size: 0.68rem; color: #6ee7b7; font-weight: 500; }
 
-.acu-title {
-  font-weight: 700;
-  font-size: 0.93rem;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-  line-height: 1;
-}
-
-.acu-subtitle {
-  font-size: 0.7rem;
-  color: #6ee7b7;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.acu-header-right {
-  display: flex;
-  gap: 5px;
-  position: relative;
-  z-index: 1;
-}
+.acu-header-right { display: flex; gap: 4px; position: relative; z-index: 1; }
 
 .acu-icon-btn {
   width: 30px; height: 30px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.07);
-  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.65);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
 .acu-icon-btn:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.14);
   color: #fff;
-  border-color: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.18);
 }
 
 /* ── MESSAGE LOG ──────────────────────────────────────────── */
@@ -154,113 +227,176 @@
 .acu-log {
   flex: 1;
   overflow-y: auto;
-  padding: 16px 14px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
   gap: 2px;
-
-  /* Çok ince nokta ızgara arka planı — Notion / Linear tarzı */
-  background-color: #fafafa;
-  background-image: radial-gradient(circle, #e4e4e7 1px, transparent 1px);
+  background-color: var(--bg-log);
+  background-image: radial-gradient(circle, var(--bg-log-dot) 1px, transparent 1px);
   background-size: 22px 22px;
+  scroll-behavior: smooth;
 }
 
 .acu-log::-webkit-scrollbar { width: 3px; }
-.acu-log::-webkit-scrollbar-thumb { background: #e4e7ec; border-radius: 99px; }
+.acu-log::-webkit-scrollbar-thumb { background: var(--border-chip); border-radius: 99px; }
 
-/* Mesaj satırı */
+/* Message row */
 .acu-msg {
   display: flex;
   align-items: flex-end;
   gap: 8px;
-  animation: msgIn 0.2s ease-out both;
+  animation: msgIn 0.22s ease-out both;
   margin-bottom: 4px;
 }
 .acu-msg--cont { margin-bottom: 1px; }
 
 @keyframes msgIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Bot mesajı — sola */
-.acu-msg--bot { flex-direction: row; }
+.acu-msg--bot  { flex-direction: row; }
+.acu-msg--user { flex-direction: row-reverse; }
 
-/* Kullanıcı mesajı — sağa */
-.acu-msg--user {
-  flex-direction: row-reverse;
-}
-
-/* Avatar */
+/* Avatars */
 .acu-msg-avatar {
-  width: 28px; height: 28px;
-  border-radius: 8px;
+  width: 26px; height: 26px;
+  border-radius: 7px;
   background: linear-gradient(135deg, #064e1c, #10b981);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   margin-bottom: 2px;
 }
-
-.acu-msg-avatar-spacer {
-  width: 28px;
-  flex-shrink: 0;
-}
+.acu-msg-avatar-spacer { width: 26px; flex-shrink: 0; }
 
 .acu-msg-body {
   display: flex;
   flex-direction: column;
-  max-width: calc(100% - 44px);
+  max-width: calc(100% - 42px);
 }
-
 .acu-msg--user .acu-msg-body { align-items: flex-end; }
 
-/* Baloncuk */
+/* Bubble */
 .acu-bubble {
-  padding: 10px 14px;
-  border-radius: 16px;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  letter-spacing: 0.008em;
+  padding: 9px 13px;
+  border-radius: var(--radius-bubble);
+  font-size: 0.865rem;
+  line-height: 1.62;
+  letter-spacing: 0.007em;
   word-break: break-word;
   position: relative;
+  transition: background 0.2s;
 }
 
-/* Bot baloncuğu */
 .acu-msg--bot .acu-bubble {
-  background: #ffffff;
-  color: #18181b;
-  border-radius: 4px 16px 16px 16px;
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.06),
-    0 2px 8px rgba(0,0,0,0.06);
+  background: var(--bg-bubble-bot);
+  color: var(--text-bot);
+  border-radius: 4px 18px 18px 18px;
+  box-shadow: var(--shadow-bubble-bot);
 }
 
-/* Kullanıcı baloncuğu */
 .acu-msg--user .acu-bubble {
-  background: linear-gradient(145deg, #065f46, #059669);
-  color: #ffffff;
-  border-radius: 16px 16px 4px 16px;
-  box-shadow:
-    0 4px 12px rgba(5, 150, 105, 0.3),
-    0 1px 3px rgba(0,0,0,0.1);
+  background: var(--bg-bubble-user);
+  color: var(--text-user);
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 4px 14px rgba(5,150,105,0.28), 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Ardışık mesajlar — köşeleri değiştir */
-.acu-msg--cont.acu-msg--bot .acu-bubble  { border-radius: 4px 16px 16px 16px; }
-.acu-msg--cont.acu-msg--user .acu-bubble { border-radius: 16px 4px 16px 16px; }
+.acu-msg--cont.acu-msg--bot  .acu-bubble { border-radius: 4px 18px 18px 18px; }
+.acu-msg--cont.acu-msg--user .acu-bubble { border-radius: 18px 4px 18px 18px; }
 
-/* Zaman */
-.acu-time {
-  font-size: 0.65rem;
-  color: #a1a1aa;
+/* Bullet rendering */
+.acu-bullet {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+.acu-bullet-dot {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+/* Code inline */
+.acu-code {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.8em;
+}
+
+/* Footer row */
+.acu-msg-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 3px;
   padding: 0 2px;
+}
+
+.acu-time {
+  font-size: 0.63rem;
+  color: var(--text-muted);
   letter-spacing: 0.02em;
 }
+
+/* Actions (copy + feedback) */
+.acu-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+.acu-msg--bot:hover .acu-actions { opacity: 1; }
+
+.acu-copy-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted);
+  padding: 2px 4px;
+  border-radius: 5px;
+  display: flex; align-items: center;
+  transition: background 0.14s, color 0.14s;
+}
+.acu-copy-btn:hover { background: var(--bg-chip); color: var(--accent); }
+
+.acu-feedback { display: flex; gap: 2px; }
+
+.acu-fb-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 0.72rem; padding: 2px 4px;
+  border-radius: 6px;
+  transition: background 0.14s, transform 0.1s;
+  line-height: 1;
+}
+.acu-fb-btn:hover { background: var(--bg-chip); transform: scale(1.18); }
+.acu-fb-btn.active-up   { background: #dcfce7; }
+.acu-fb-btn.active-down { background: #fee2e2; }
+
+/* Link */
+.acu-link {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+  transition: color 0.14s;
+}
+.acu-link:hover { color: var(--accent-dark); }
+
+/* Streaming cursor */
+.acu-cursor {
+  display: inline-block;
+  animation: blink 0.7s step-start infinite;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-left: 1px;
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 
 /* ── TYPING INDICATOR ─────────────────────────────────────── */
 
@@ -268,123 +404,244 @@
   display: flex !important;
   align-items: center !important;
   gap: 5px !important;
-  padding: 14px 16px !important;
-  width: 60px !important;
+  padding: 13px 16px !important;
+  width: 58px !important;
 }
-
 .acu-typing span {
   width: 6px; height: 6px;
-  background: #a1a1aa;
-  border-radius: 50%;
-  display: block;
+  background: var(--text-muted);
+  border-radius: 50%; display: block;
   animation: dot 1.4s infinite ease-in-out;
 }
-.acu-typing span:nth-child(1) { animation-delay: 0s;    }
+.acu-typing span:nth-child(1) { animation-delay: 0s; }
 .acu-typing span:nth-child(2) { animation-delay: 0.18s; }
 .acu-typing span:nth-child(3) { animation-delay: 0.36s; }
 
 @keyframes dot {
-  0%, 60%, 100% { transform: translateY(0);    background: #d4d4d8; }
-  30%            { transform: translateY(-6px); background: #71717a; }
+  0%,60%,100% { transform: translateY(0);    background: var(--border-chip); }
+  30%          { transform: translateY(-6px); background: var(--text-secondary); }
 }
 
-/* ── QUICK REPLY CHIPS ────────────────────────────────────── */
+/* ── QUICK REPLY TABS ─────────────────────────────────────── */
+
+.acu-quick-wrap {
+  padding: 10px 0 6px;
+}
+
+.acu-quick-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-chip);
+}
+
+.acu-tab {
+  background: var(--bg-tab);
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+.acu-tab:hover { color: var(--text-primary); background: var(--bg-chip); }
+.acu-tab.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: rgba(5,150,105,0.2);
+}
 
 .acu-quick {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 8px 0 4px;
+  padding: 2px 0;
 }
 
 .acu-chip {
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
-  color: #3f3f46;
-  border-radius: 99px;
-  padding: 7px 14px;
-  font-size: 0.78rem;
+  background: var(--bg-chip);
+  border: 1px solid var(--border-chip);
+  color: var(--text-chip);
+  border-radius: var(--radius-chip);
+  padding: 6px 13px;
+  font-size: 0.76rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.16s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  letter-spacing: 0.01em;
+  transition: all 0.17s ease;
+  box-shadow: var(--shadow-chip);
 }
 .acu-chip:hover {
-  background: #052e16;
-  border-color: #052e16;
-  color: #ffffff;
+  background: var(--bg-chip-hover);
+  border-color: var(--bg-chip-hover);
+  color: var(--text-chip-h);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(5, 46, 22, 0.25);
+  box-shadow: 0 6px 16px rgba(5,46,22,0.22);
 }
+.acu-chip:active { transform: translateY(0); }
+
+/* ── SCROLL TO BOTTOM ─────────────────────────────────────── */
+
+.acu-scroll-btn {
+  position: absolute;
+  bottom: 130px;
+  right: 16px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-chip);
+  background: var(--bg-window);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: all 0.18s;
+  animation: fadeIn 0.2s ease;
+  z-index: 10;
+}
+.acu-scroll-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+@keyframes fadeIn { from { opacity:0; transform:scale(0.8); } to { opacity:1; transform:scale(1); } }
 
 /* ── ERROR BAR ────────────────────────────────────────────── */
 
 .acu-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: #fffbeb;
   border-top: 1px solid #fde68a;
-  padding: 8px 16px;
-  font-size: 0.78rem;
+  padding: 8px 14px;
+  font-size: 0.77rem;
   color: #78350f;
   font-weight: 500;
   flex-shrink: 0;
 }
+.acu-error-close {
+  background: none; border: none; cursor: pointer;
+  color: #92400e; font-size: 0.75rem; padding: 2px 4px;
+  border-radius: 4px; transition: background 0.14s;
+}
+.acu-error-close:hover { background: #fde68a; }
+
+/* ── SUGGESTIONS ──────────────────────────────────────────── */
+
+.acu-suggestions {
+  background: var(--bg-suggestion);
+  border-top: 1px solid var(--border-input);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+  flex-shrink: 0;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.acu-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 9px 14px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: background 0.12s;
+}
+.acu-suggestion-item:hover,
+.acu-suggestion-item.selected { background: var(--accent-light); color: var(--accent); }
+
+.acu-suggest-icon { color: var(--text-muted); flex-shrink: 0; }
 
 /* ── INPUT BAR ────────────────────────────────────────────── */
 
 .acu-input-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 14px;
-  background: #ffffff;
-  border-top: 1px solid #f4f4f5;
+  gap: 7px;
+  padding: 10px 12px;
+  background: var(--bg-window);
+  border-top: 1px solid var(--border-footer);
   flex-shrink: 0;
+  transition: background 0.2s;
 }
 
-.acu-input-bar input {
+.acu-input-wrap {
   flex: 1;
-  border: 1.5px solid #e4e4e7;
-  border-radius: 12px;
-  padding: 10px 15px;
-  font-size: 0.875rem;
-  font-family: inherit;
-  background: #fafafa;
-  color: #18181b;
-  outline: none;
-  transition: all 0.18s;
-  letter-spacing: 0.008em;
-}
-.acu-input-bar input:focus {
-  border-color: #059669;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
-}
-.acu-input-bar input::placeholder {
-  color: #a1a1aa;
-  font-size: 0.85rem;
-}
-
-/* Mikrofon */
-.acu-mic {
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  border: 1.5px solid #e4e4e7;
-  background: #fafafa;
-  color: #71717a;
-  cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+
+.acu-input-wrap input {
+  width: 100%;
+  border: 1.5px solid var(--border-input);
+  border-radius: var(--radius-input);
+  padding: 9px 32px 9px 13px;
+  font-size: 0.865rem;
+  font-family: inherit;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.18s;
+  letter-spacing: 0.007em;
+}
+.acu-input-wrap input:focus {
+  border-color: var(--accent);
+  background: var(--bg-input-focus);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.acu-input-wrap input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+.acu-input-wrap input:disabled { opacity: 0.5; }
+
+.acu-input-clear {
+  position: absolute;
+  right: 10px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted);
+  display: flex; align-items: center;
+  padding: 2px;
+  border-radius: 4px;
+  transition: color 0.14s;
+}
+.acu-input-clear:hover { color: var(--text-primary); }
+
+.acu-char-count {
+  position: absolute;
+  right: 32px;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  user-select: none;
+}
+.acu-char-count.over { color: #ef4444; font-weight: 600; }
+
+/* Mic button */
+.acu-mic {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-btn);
+  border: 1.5px solid var(--border-input);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
   transition: all 0.16s;
   flex-shrink: 0;
 }
 .acu-mic:hover:not(:disabled) {
-  border-color: #059669;
-  background: #f0fdf4;
-  color: #059669;
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
 }
 .acu-mic.active {
   background: #fff1f2;
@@ -392,38 +649,56 @@
   color: #ef4444;
   animation: micGlow 1s infinite;
 }
-.acu-mic:disabled { opacity: 0.3; cursor: not-allowed; }
+.acu-mic:disabled { opacity: 0.35; cursor: not-allowed; }
 
 @keyframes micGlow {
   0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); }
   50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
 }
 
-/* Gönder */
+/* Send button */
 .acu-send {
   width: 38px; height: 38px;
-  border-radius: 10px;
+  border-radius: var(--radius-btn);
   border: none;
   background: linear-gradient(145deg, #047857, #059669);
   color: white;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: all 0.18s;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(5,150,105,0.35);
+  box-shadow: var(--shadow-send);
 }
 .acu-send:hover:not(:disabled) {
   transform: translateY(-1px) scale(1.04);
-  box-shadow: 0 6px 16px rgba(5,150,105,0.42);
+  box-shadow: 0 6px 18px rgba(5,150,105,0.44);
 }
 .acu-send:active:not(:disabled) { transform: scale(0.96); }
 .acu-send:disabled {
-  background: #f4f4f5;
-  color: #a1a1aa;
+  background: var(--bg-input);
+  color: var(--text-muted);
   box-shadow: none;
   cursor: not-allowed;
+}
+
+/* Spinner */
+.acu-spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+
+.acu-footer {
+  padding: 5px 14px 6px;
+  font-size: 0.62rem;
+  color: var(--text-footer);
+  text-align: center;
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-footer);
+  flex-shrink: 0;
+  letter-spacing: 0.01em;
+  transition: background 0.2s;
 }
 
 /* ── LAUNCHER BUTTON ──────────────────────────────────────── */
@@ -436,26 +711,27 @@
   background: linear-gradient(145deg, #064e1c, #059669);
   color: white;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.26s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow:
     0 4px 8px rgba(0,0,0,0.15),
-    0 10px 24px rgba(5, 150, 105, 0.4),
-    inset 0 1px 0 rgba(255,255,255,0.15);
+    0 10px 26px rgba(5,150,105,0.42),
+    inset 0 1px 0 rgba(255,255,255,0.14);
 }
-
 .acu-launcher:hover {
   transform: scale(1.08) translateY(-2px);
   border-radius: 18px;
   box-shadow:
     0 8px 16px rgba(0,0,0,0.18),
-    0 18px 36px rgba(5, 150, 105, 0.48),
+    0 20px 40px rgba(5,150,105,0.5),
     inset 0 1px 0 rgba(255,255,255,0.2);
 }
-
 .acu-launcher:active { transform: scale(0.96); }
+
+.acu-launcher-icon {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.acu-launcher-icon.rotated { transform: rotate(90deg); }
 
 /* Unread badge */
 .acu-unread {
@@ -463,19 +739,16 @@
   top: -6px; right: -6px;
   background: #ef4444;
   color: white;
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   font-weight: 700;
   min-width: 18px; height: 18px;
   border-radius: 99px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   padding: 0 4px;
   border: 2px solid #fff;
   font-family: inherit;
   animation: badgePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
 @keyframes badgePop {
   from { transform: scale(0); }
   to   { transform: scale(1); }
@@ -490,16 +763,18 @@
     width: 100%;
     height: calc(100svh - 72px);
     border-radius: 20px 20px 0 0;
-    animation: mobileIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: mobileIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   @keyframes mobileIn {
-    from { transform: translateY(100%); opacity: 0.5; }
-    to   { transform: translateY(0);    opacity: 1;   }
+    from { transform: translateY(100%); opacity: 0.6; }
+    to   { transform: translateY(0);   opacity: 1; }
   }
 
   .acu-launcher {
     position: fixed;
-    bottom: 18px; right: 18px;
+    bottom: 16px; right: 16px;
   }
+
+  .acu-scroll-btn { bottom: 120px; right: 12px; }
 }

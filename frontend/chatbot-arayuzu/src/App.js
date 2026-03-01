@@ -111,8 +111,8 @@ function renderMarkdown(text) {
 
   return text.split('\n').map((line, i, arr) => {
     // Bullet points
-    if (line.match(/^[•\-\*] /)) {
-      const content = line.replace(/^[•\-\*] /, '');
+    if (line.match(/^[•\-*] /)) {
+      const content = line.replace(/^[•\-*] /, '');
       return (
         <React.Fragment key={i}>
           <span className="acu-bullet">
