@@ -14,9 +14,7 @@ WORKDIR /app
 # Install Python dependencies with minimal overhead
 COPY backend/requirements.txt .
 RUN pip install --upgrade pip && \
-    pip install --default-timeout=1000 -r requirements.txt && \
-    find /usr/local/lib/python3.11 -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null; true && \
-    find /usr/local/lib/python3.11 -type f \( -name "*.pyc" -o -name "*.pyo" \) -delete 2>/dev/null; true
+    pip install --no-compile --default-timeout=1000 -r requirements.txt
 
 COPY backend/app /app/app
 
