@@ -13,48 +13,38 @@ import string
 import logging
 from typing import Optional
 
-from zemberek import (
-    TurkishMorphology,
-    TurkishSpellChecker,
-    TurkishSentenceNormalizer
-)
-
-
-# ============================================================================
-# LOGGING CONFIGURATION
-# ============================================================================
-
 logger: logging.Logger = logging.getLogger(__name__)
+
+# Lazy import — zemberek Python 3.12+ ile uyumsuz olabilir (antlr4-python3-runtime 4.8)
+try:
+    from zemberek import TurkishMorphology
+    ZEMBEREK_AVAILABLE = True
+except Exception as _zemberek_err:
+    logger.warning(f"⚠️  Zemberek yüklenemedi, basit tokenization kullanılacak: {_zemberek_err}")
+    TurkishMorphology = None
+    ZEMBEREK_AVAILABLE = False
 
 
 # ============================================================================
 # GLOBAL STATE - SINGLETON PATTERN
 # ============================================================================
 
-# Zemberek TurkishMorphology örneği (lazily initialized)
-# JVM başlatılması pahalı (2-3 saniye) olduğu için singleton kullanırız
-MORPHOLOGY: Optional[TurkishMorphology] = None
+MORPHOLOGY: Optional[any] = None
 
 
 # ============================================================================
 # MORPHOLOGY INITIALIZATION
 # ============================================================================
 
-def get_morphology() -> TurkishMorphology:
+def get_morphology() -> Optional[any]:
     """
     Zemberek TurkishMorphology'yi singleton pattern ile yükle.
-
-    Behavior:
-      - İlk çağrıda: Yükle (2-3 saniye, JVM başlatılması)
-      - Sonraki çağrılarda: Cache'den döndür
-
-    Returns:
-        TurkishMorphology: Zemberek morfoloji analiz nesnesi
-
-    Raises:
-        Exception: Zemberek yüklenemezse
+    Zemberek mevcut değilse None döndürür (fallback aktif olur).
     """
     global MORPHOLOGY
+
+    if not ZEMBEREK_AVAILABLE:
+        return None
 
     if MORPHOLOGY is not None:
         return MORPHOLOGY
@@ -66,8 +56,8 @@ def get_morphology() -> TurkishMorphology:
         return MORPHOLOGY
 
     except Exception as e:
-        logger.error(f"❌ Zemberek yükleme KRİTİK HATASI: {e}")
-        raise
+        logger.warning(f"⚠️  Zemberek yüklenemedi, fallback kullanılıyor: {e}")
+        return None
 
 
 # ============================================================================
@@ -115,7 +105,7 @@ def _tokenize_text(text: str) -> list[str]:
     return text.split()
 
 
-def _analyze_word(word: str, morphology: TurkishMorphology) -> str:
+def _analyze_word(word: str, morphology: any) -> str:
     """
     Tek bir kelimeyi Zemberek ile analiz et ve kökünü (stem) döndür.
 

@@ -22,7 +22,7 @@ if _SENTRY_DSN:
         profiles_sample_rate=0.1, # %10 profil izleme
         send_default_pii=False,
     )
-    print("✅ Sentry hata izleme aktif.")
+    print("[OK] Sentry hata izleme aktif.")
 
 from .api.endpoints import chat as chat_router
 from .core.classifier import load_intent_data
@@ -43,53 +43,52 @@ scheduler: AsyncIOScheduler = AsyncIOScheduler()
 # ============================================================================
 
 async def _load_nlp_module() -> None:
-    print("⚙️  NLP motoru yükleniyor (Zemberek JVM)...")
+    print("[*] NLP motoru yukleniyor...")
     from .core.nlp import get_morphology
     await asyncio.to_thread(get_morphology)
-    print("✅ NLP motoru yüklendi.")
+    print("[OK] NLP motoru yuklendi.")
 
 
 async def _load_intent_data_module() -> None:
-    print("📚 Intent verileri yükleniyor...")
+    print("[*] Intent verileri yukleniyor...")
     await asyncio.to_thread(load_intent_data)
-    print("✅ Intent verileri yüklendi.")
+    print("[OK] Intent verileri yuklendi.")
 
 
 async def _load_device_registry() -> None:
-    print("🔧 Cihaz veritabanı yükleniyor...")
+    print("[*] Cihaz veritabani yukleniyor...")
     await asyncio.to_thread(initialize_device_db)
-    print("✅ Cihaz veritabanı yüklendi.")
+    print("[OK] Cihaz veritabani yuklendi.")
 
 
 async def _load_menu_data() -> None:
-    print("🍽️  Yemek listesi güncelleniyor...")
+    print("[*] Yemek listesi guncelleniyor...")
     await asyncio.to_thread(update_system_data_fast)
-    print("✅ Yemek listesi güncellendi.")
+    print("[OK] Yemek listesi guncellendi.")
 
 
 def _setup_scheduled_jobs() -> None:
     scheduler.add_job(update_device_database, 'interval', hours=24, id='update_devices')
     scheduler.add_job(update_system_data, 'interval', hours=6, id='update_system_data')
     scheduler.start()
-    print("⏰ Zamanlayıcılar başlatıldı: Cihazlar 24h, Web verileri 6h")
+    print("[OK] Zamanlayicilar baslatildi: Cihazlar 24h, Web verileri 6h")
 
 
 async def _background_initialization() -> None:
     """
-    Startup'ta ağır initialization'ı arka planda yap.
-    NLP + Intent sıralı (bağımlı), ardından Cihaz + Yemek paralel.
+    Startup'ta agir initialization'i arka planda yap.
+    NLP + Intent siralı (bagimli), ardindan Cihaz + Yemek paralel.
     """
     try:
         await _load_nlp_module()
         await _load_intent_data_module()
-        # Cihaz ve yemek birbirinden bağımsız — paralel çalıştır
         await asyncio.gather(
             _load_device_registry(),
             _load_menu_data(),
         )
         _setup_scheduled_jobs()
     except Exception as e:
-        print(f"❌ Background initialization hatası: {e}")
+        print(f"[ERR] Background initialization hatasi: {e}")
 
 
 # ============================================================================
@@ -99,15 +98,15 @@ async def _background_initialization() -> None:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    print("⚡ Uygulama başlatıldı, background yükleme devam ediyor...")
+    print("Uygulama baslatildi, background yukleme devam ediyor...")
     asyncio.create_task(_background_initialization())
     yield
     # Shutdown
     try:
         scheduler.shutdown()
-        print("✅ Scheduler kapatıldı.")
+        print("Scheduler kapatildi.")
     except Exception as e:
-        print(f"⚠️  Scheduler kapatma hatası: {e}")
+        print(f"Scheduler kapatma hatasi: {e}")
 
 
 # ============================================================================
