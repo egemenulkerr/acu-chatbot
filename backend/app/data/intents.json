@@ -5,17 +5,44 @@
     {
       "intent_name": "selamlasma",
       "keywords": {
-        "merhaba": 6, "selam": 6, "nasılsın": 5, "hey": 3, "günaydın": 6,
-        "tünaydın": 6, "iyi sabahlar": 7, "iyi günler": 6, "iyi akşamlar": 6,
-        "nasıl gidiyor": 7, "hello": 5, "naber": 6, "hoş geldin": 6,
-        "selamun": 5, "aleyküm": 4, "salam": 6, "kolay gelsin": 7,
-        "hayırlı": 5, "hayırlı sabahlar": 7, "hayırlı günler": 7,
-        "merhaba nasılsın": 8, "selam bot": 7, "hi": 4, "heyy": 4
+        "merhaba": 6,
+        "selam": 6,
+        "nasılsın": 5,
+        "hey": 3,
+        "günaydın": 6,
+        "tünaydın": 6,
+        "iyi sabahlar": 7,
+        "iyi günler": 6,
+        "iyi akşamlar": 6,
+        "nasıl gidiyor": 7,
+        "hello": 5,
+        "naber": 6,
+        "hoş geldin": 6,
+        "selamun": 5,
+        "aleyküm": 4,
+        "salam": 6,
+        "kolay gelsin": 7,
+        "hayırlı": 5,
+        "hayırlı sabahlar": 7,
+        "hayırlı günler": 7,
+        "merhaba nasılsın": 8,
+        "selam bot": 7,
+        "hi": 4,
+        "heyy": 4
       },
       "examples": [
-        "merhaba", "selam bot", "nasılsın nasıl gidiyor", "merhabalar kolay gelsin",
-        "selamun aleyküm", "naber nasılsın", "hoş geldin", "hey bot",
-        "günaydın", "iyi sabahlar", "iyi öğlenler", "hayırlı sabahlar"
+        "merhaba",
+        "selam bot",
+        "nasılsın nasıl gidiyor",
+        "merhabalar kolay gelsin",
+        "selamun aleyküm",
+        "naber nasılsın",
+        "hoş geldin",
+        "hey bot",
+        "günaydın",
+        "iyi sabahlar",
+        "iyi öğlenler",
+        "hayırlı sabahlar"
       ],
       "response_type": "RANDOM_TEXT",
       "response_content": [
@@ -34,14 +61,30 @@
     {
       "intent_name": "kimim_ben",
       "keywords": {
-        "kimsin": 8, "nesin": 7, "ne yaparsın": 7, "nasıl çalışırsın": 7,
-        "bot musun": 8, "yapay zeka": 7, "asistan mısın": 8, "seni kim yaptı": 8,
-        "hakkında": 5, "bilgi ver kendinden": 8, "sen kimsin": 9,
-        "nasıl bir sistemsin": 8, "acü chatbot": 8, "acu bot": 8
+        "kimsin": 8,
+        "nesin": 7,
+        "ne yaparsın": 7,
+        "nasıl çalışırsın": 7,
+        "bot musun": 8,
+        "yapay zeka": 7,
+        "asistan mısın": 8,
+        "seni kim yaptı": 8,
+        "hakkında": 5,
+        "bilgi ver kendinden": 8,
+        "sen kimsin": 9,
+        "nasıl bir sistemsin": 8,
+        "acü chatbot": 8,
+        "acu bot": 8
       },
       "examples": [
-        "sen kimsin", "ne yaparsın", "nasıl çalışırsın", "bot musun",
-        "yapay zeka mısın", "hakkında bilgi ver", "kim yazdı seni", "acü asistan nedir"
+        "sen kimsin",
+        "ne yaparsın",
+        "nasıl çalışırsın",
+        "bot musun",
+        "yapay zeka mısın",
+        "hakkında bilgi ver",
+        "kim yazdı seni",
+        "acü asistan nedir"
       ],
       "response_type": "TEXT",
       "response_content": "Merhaba! Ben **AÇÜ Asistan** — Artvin Çoruh Üniversitesi öğrencileri için geliştirilmiş bir yapay zeka chatbotuyum.\n\n🎓 **Neler yapabilirim?**\n• Günlük yemek menüsü\n• Akademik takvim ve sınav tarihleri\n• Kampüs, yurt, burs bilgileri\n• Kütüphane, ulaşım, laboratuvar bilgileri\n• Ders kaydı, OBS, staj rehberi\n• Güncel duyurular ve hava durumu\n\nSormaktan çekinme, yardımcı olmaya hazırım!"
@@ -49,19 +92,52 @@
     {
       "intent_name": "yemek_listesi",
       "keywords": {
-        "yemek": 7, "liste": 5, "menü": 6, "bugün": 4, "sks": 5,
-        "açım": 5, "çorba": 6, "ana yemek": 6, "tatlı": 5, "öğle": 5,
-        "kahvaltı": 5, "öğle yemeği": 7, "akşam yemeği": 6, "yemekhane": 7,
-        "aç": 5, "karnım": 6, "ne var": 5, "tabldot": 7, "kafeterya": 6,
-        "kantin": 5, "yemek ücreti": 6, "yemek fiyatı": 6, "kalorisi": 4,
-        "beslenme": 4, "salata": 5, "pilav": 5, "meze": 5, "et": 3,
-        "tavuk": 5, "balık": 5, "sebze": 4, "vejetaryen": 5
+        "yemek": 7,
+        "liste": 5,
+        "menü": 6,
+        "bugün": 4,
+        "sks": 5,
+        "açım": 5,
+        "çorba": 6,
+        "ana yemek": 6,
+        "tatlı": 5,
+        "öğle": 5,
+        "kahvaltı": 5,
+        "öğle yemeği": 7,
+        "akşam yemeği": 6,
+        "yemekhane": 7,
+        "aç": 5,
+        "karnım": 6,
+        "ne var": 5,
+        "tabldot": 7,
+        "kafeterya": 6,
+        "kantin": 5,
+        "yemek ücreti": 6,
+        "yemek fiyatı": 6,
+        "kalorisi": 4,
+        "beslenme": 4,
+        "salata": 5,
+        "pilav": 5,
+        "meze": 5,
+        "et": 3,
+        "tavuk": 5,
+        "balık": 5,
+        "sebze": 4,
+        "vejetaryen": 5
       },
       "examples": [
-        "karnım çok aç", "bugün ne yesem acaba", "öğle yemeği çıktı mı",
-        "yemek listesi", "bugünün menüsü nedir", "yemekhane açık mı",
-        "ne tatlı var", "bugün çorba var mı", "yemekte ne var",
-        "akşam ne yesek", "tabldot menüsü", "kafeteryada ne var"
+        "karnım çok aç",
+        "bugün ne yesem acaba",
+        "öğle yemeği çıktı mı",
+        "yemek listesi",
+        "bugünün menüsü nedir",
+        "yemekhane açık mı",
+        "ne tatlı var",
+        "bugün çorba var mı",
+        "yemekte ne var",
+        "akşam ne yesek",
+        "tabldot menüsü",
+        "kafeteryada ne var"
       ],
       "response_type": "TEXT",
       "response_content": "🍽️ **Hafta Sonu:** Yemekhane bugün kapalı. Pazartesi görüşmek üzere! 😊"
@@ -69,19 +145,48 @@
     {
       "intent_name": "akademik_takvim",
       "keywords": {
-        "akademik": 6, "takvim": 6, "sınav": 5, "tarih": 4, "final": 5,
-        "dönem": 5, "ders": 4, "ara tatil": 7, "tatil": 5, "kapanış": 4,
-        "açılış": 4, "kayıt": 5, "başlama": 4, "bitiş": 4, "vize": 6,
-        "midterm": 5, "yaz tatili": 7, "kış tatili": 7, "bahar": 3,
-        "güz": 3, "sömestr": 6, "sınav haftası": 7, "dönem sonu": 7,
-        "okullar ne zaman": 7, "dönüş tarihi": 7, "ders başlıyor": 7,
-        "tatil ne zaman": 6, "okul açılıyor": 7, "yarıyıl": 6
+        "akademik": 6,
+        "takvim": 6,
+        "sınav": 5,
+        "tarih": 4,
+        "final": 5,
+        "dönem": 5,
+        "ders": 4,
+        "ara tatil": 7,
+        "tatil": 5,
+        "kapanış": 4,
+        "açılış": 4,
+        "kayıt": 5,
+        "başlama": 4,
+        "bitiş": 4,
+        "vize": 6,
+        "midterm": 5,
+        "yaz tatili": 7,
+        "kış tatili": 7,
+        "bahar": 3,
+        "güz": 3,
+        "sömestr": 6,
+        "sınav haftası": 7,
+        "dönem sonu": 7,
+        "okullar ne zaman": 7,
+        "dönüş tarihi": 7,
+        "ders başlıyor": 7,
+        "tatil ne zaman": 6,
+        "okul açılıyor": 7,
+        "yarıyıl": 6
       },
       "examples": [
-        "okullar ne zaman kapanıyor", "yaz tatili ne zaman başlıyor",
-        "akademik takvim nedir", "sınav tarihleri ne zaman", "final sınav tarihi",
-        "ara tatil ne zaman", "dersler ne zaman başlıyor", "dönüş tarihi nedir",
-        "bahar dönemi ne zaman", "sömestr tatili ne zaman", "sınav haftası"
+        "okullar ne zaman kapanıyor",
+        "yaz tatili ne zaman başlıyor",
+        "akademik takvim nedir",
+        "sınav tarihleri ne zaman",
+        "final sınav tarihi",
+        "ara tatil ne zaman",
+        "dersler ne zaman başlıyor",
+        "dönüş tarihi nedir",
+        "bahar dönemi ne zaman",
+        "sömestr tatili ne zaman",
+        "sınav haftası"
       ],
       "response_type": "URL",
       "response_content": "https://www.artvin.edu.tr/uploads/www.artvin.edu.tr/userfiles/files/v5-2025-2026_Akademik_Takvim_10_09_2025.pdf",
@@ -108,15 +213,37 @@
     {
       "intent_name": "veda",
       "keywords": {
-        "güle güle": 8, "hoşça kal": 8, "görüşürüz": 8, "bye": 7,
-        "goodbye": 7, "teşekkür": 5, "teşekkürler": 6, "sağol": 6,
-        "eyvallah": 7, "çıkıyorum": 6, "kapatıyorum": 5, "iyi geceler": 7,
-        "iyi akşamlar": 6, "bay bay": 7, "çao": 7, "görüşmek": 5,
-        "elveda": 8, "teşekkür ederim": 7, "yardımcı oldun": 7
+        "güle güle": 8,
+        "hoşça kal": 8,
+        "görüşürüz": 8,
+        "bye": 7,
+        "goodbye": 7,
+        "teşekkür": 5,
+        "teşekkürler": 6,
+        "sağol": 6,
+        "eyvallah": 7,
+        "çıkıyorum": 6,
+        "kapatıyorum": 5,
+        "iyi geceler": 7,
+        "iyi akşamlar": 6,
+        "bay bay": 7,
+        "çao": 7,
+        "görüşmek": 5,
+        "elveda": 8,
+        "teşekkür ederim": 7,
+        "yardımcı oldun": 7
       },
       "examples": [
-        "görüşürüz", "hoşça kal", "bye bye", "teşekkürler çok yardımcı oldun",
-        "sağol", "güle güle", "eyvallah", "teşekkür ederim", "iyi günler", "bay bay"
+        "görüşürüz",
+        "hoşça kal",
+        "bye bye",
+        "teşekkürler çok yardımcı oldun",
+        "sağol",
+        "güle güle",
+        "eyvallah",
+        "teşekkür ederim",
+        "iyi günler",
+        "bay bay"
       ],
       "response_type": "RANDOM_TEXT",
       "response_content": [
@@ -130,17 +257,37 @@
     {
       "intent_name": "iletisim",
       "keywords": {
-        "iletişim": 7, "telefon": 6, "numara": 5, "email": 6, "mail": 6,
-        "adres": 5, "nerede": 3, "rektör": 6, "rektörlük": 7,
-        "öğrenci işleri": 8, "dekan": 6, "fakülte": 4, "birim": 4,
-        "ulaş": 5, "faks": 5, "web sitesi": 5, "bölüm başkanı": 7,
-        "sekreter": 5, "arayabilir miyim": 6, "telefon numarası": 7,
-        "iletişime geçmek": 7, "sormak istiyorum": 4
+        "iletişim": 7,
+        "telefon": 6,
+        "numara": 5,
+        "email": 6,
+        "mail": 6,
+        "adres": 5,
+        "nerede": 3,
+        "rektör": 6,
+        "rektörlük": 7,
+        "öğrenci işleri": 8,
+        "dekan": 6,
+        "fakülte": 4,
+        "birim": 4,
+        "ulaş": 5,
+        "faks": 5,
+        "web sitesi": 5,
+        "bölüm başkanı": 7,
+        "sekreter": 5,
+        "arayabilir miyim": 6,
+        "telefon numarası": 7,
+        "iletişime geçmek": 7,
+        "sormak istiyorum": 4
       },
       "examples": [
-        "üniversitenin telefon numarası ne", "öğrenci işleri iletişim",
-        "rektörlük nerede", "bölümün mail adresi", "fakülte telefonu",
-        "üniversiteye nasıl ulaşırım", "iletişim bilgileri"
+        "üniversitenin telefon numarası ne",
+        "öğrenci işleri iletişim",
+        "rektörlük nerede",
+        "bölümün mail adresi",
+        "fakülte telefonu",
+        "üniversiteye nasıl ulaşırım",
+        "iletişim bilgileri"
       ],
       "response_type": "TEXT",
       "response_content": "📞 **AÇÜ İletişim Bilgileri**\n\n🏛️ **Rektörlük**\nTel: +90 (466) 215 10 00\nFaks: +90 (466) 215 10 03\nE-posta: rektorluk@artvin.edu.tr\n\n🎓 **Öğrenci İşleri Dairesi**\nTel: +90 (466) 215 10 00 (Dahili: 1350)\nE-posta: ogrenciisleri@artvin.edu.tr\n\n📍 **Adres:** AÇÜ Şehir Yerleşkesi, 08000 Artvin Merkez\n\n🌐 **Web:** https://www.artvin.edu.tr"
@@ -148,15 +295,30 @@
     {
       "intent_name": "obs_sistemi",
       "keywords": {
-        "obs": 9, "öğrenci bilgi sistemi": 9, "obs giriş": 9, "obs şifre": 9,
-        "portal": 6, "sisteme giremiyorum": 8, "şifre unuttum": 8,
-        "şifre sıfırla": 8, "obs kullanıcı adı": 8, "e-öğrenci": 7,
-        "obs not": 7, "obs ders": 7, "obs transkript": 7, "obs kayıt": 7,
-        "öğrenci numarası": 6, "obs açılmıyor": 8, "sisteme giremiyorum": 9
+        "obs": 9,
+        "öğrenci bilgi sistemi": 9,
+        "obs giriş": 9,
+        "obs şifre": 9,
+        "portal": 6,
+        "sisteme giremiyorum": 9,
+        "şifre unuttum": 8,
+        "şifre sıfırla": 8,
+        "obs kullanıcı adı": 8,
+        "e-öğrenci": 7,
+        "obs not": 7,
+        "obs ders": 7,
+        "obs transkript": 7,
+        "obs kayıt": 7,
+        "öğrenci numarası": 6,
+        "obs açılmıyor": 8
       },
       "examples": [
-        "obs şifresini unuttum", "obs'ye nasıl giriş yaparım", "öğrenci bilgi sistemi",
-        "obs sistemine giremiyorum", "şifremi sıfırlamak istiyorum", "obs not görme"
+        "obs şifresini unuttum",
+        "obs'ye nasıl giriş yaparım",
+        "öğrenci bilgi sistemi",
+        "obs sistemine giremiyorum",
+        "şifremi sıfırlamak istiyorum",
+        "obs not görme"
       ],
       "response_type": "TEXT",
       "response_content": "💻 **OBS (Öğrenci Bilgi Sistemi)**\n\n🌐 **Giriş:** https://obs.artvin.edu.tr\n\n**Şifre Sorunları**\n🔑 Şifreni unuttuysan **\"Şifremi Unuttum\"** bağlantısını kullan.\nAlternatif olarak:\n📧 ogrenciisleri@artvin.edu.tr adresine öğrenci numaranla yazabilirsin.\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1350)\n\n**OBS ile yapabileceklerin:**\n• Not ve transkript görüntüleme\n• Ders kaydı / ders silme\n• Sınav programı görüntüleme\n• Belge talep etme"
@@ -164,16 +326,29 @@
     {
       "intent_name": "transkript_belge",
       "keywords": {
-        "transkript": 9, "öğrenci belgesi": 9, "not belgesi": 8, "belge al": 7,
-        "resmi belge": 7, "mezuniyet belgesi": 8, "geçici mezuniyet": 8,
-        "disiplin belgesi": 8, "öğrenci durum belgesi": 9, "belge nereden": 7,
-        "belge nasıl alınır": 8, "e-devlet belge": 7, "belge ücreti": 7,
-        "öğrenim belgesi": 9, "belgem": 7
+        "transkript": 9,
+        "öğrenci belgesi": 9,
+        "not belgesi": 8,
+        "belge al": 7,
+        "resmi belge": 7,
+        "mezuniyet belgesi": 8,
+        "geçici mezuniyet": 8,
+        "disiplin belgesi": 8,
+        "öğrenci durum belgesi": 9,
+        "belge nereden": 7,
+        "belge nasıl alınır": 8,
+        "e-devlet belge": 7,
+        "belge ücreti": 7,
+        "öğrenim belgesi": 9,
+        "belgem": 7
       },
       "examples": [
-        "transkript nasıl alınır", "öğrenci belgesi nereden alınır",
-        "resmi belge istiyorum", "e-devletten belge alabilir miyim",
-        "transkript ücreti var mı", "öğrenim belgesi lazım"
+        "transkript nasıl alınır",
+        "öğrenci belgesi nereden alınır",
+        "resmi belge istiyorum",
+        "e-devletten belge alabilir miyim",
+        "transkript ücreti var mı",
+        "öğrenim belgesi lazım"
       ],
       "response_type": "TEXT",
       "response_content": "📄 **Belge Alma Rehberi**\n\n**1. OBS Üzerinden (Online)**\n🌐 https://obs.artvin.edu.tr → Belge Talepleri\n• Öğrenci belgesi / öğrenim belgesi\n• Transkript (not belgesi)\n• Disiplin durumu belgesi\n\n**2. E-Devlet Üzerinden**\n🌐 https://www.turkiye.gov.tr → \"Öğrenci Belgesi\" ara\nÖğrenci numarası ve e-devlet şifresiyle erişebilirsin.\n\n**3. Öğrenci İşleri Direkten**\n📍 Yerleşke idari binası\n⏰ Pzt-Cum: 08:30 – 17:00\n📞 +90 (466) 215 10 00 (Dahili: 1350)\n\n💡 Çoğu belge ücretsizdir. Apostil gerekiyorsa Noterlik gerekebilir."
@@ -181,15 +356,31 @@
     {
       "intent_name": "sinav_sonuclari",
       "keywords": {
-        "not": 5, "notum": 6, "sınav sonucu": 8, "harf notu": 7, "gno": 7,
-        "agno": 7, "genel not ortalaması": 8, "notlar açıklandı": 8,
-        "sonuçlar": 5, "kaldım mı": 7, "geçtim mi": 7, "bağıl değerlendirme": 7,
-        "notuma itiraz": 8, "not itirazı": 8, "sınav kağıdı": 7,
-        "kopya istiyorum": 7, "notum yanlış": 8, "not düzeltme": 8
+        "not": 5,
+        "notum": 6,
+        "sınav sonucu": 8,
+        "harf notu": 7,
+        "gno": 7,
+        "agno": 7,
+        "genel not ortalaması": 8,
+        "notlar açıklandı": 8,
+        "sonuçlar": 5,
+        "kaldım mı": 7,
+        "geçtim mi": 7,
+        "bağıl değerlendirme": 7,
+        "notuma itiraz": 8,
+        "not itirazı": 8,
+        "sınav kağıdı": 7,
+        "kopya istiyorum": 7,
+        "notum yanlış": 8,
+        "not düzeltme": 8
       },
       "examples": [
-        "notlarım açıklandı mı", "harf notum nerede görünür", "gno nasıl hesaplanır",
-        "sınav sonucuma itiraz edebilir miyim", "sınav kağıdımı görmek istiyorum",
+        "notlarım açıklandı mı",
+        "harf notum nerede görünür",
+        "gno nasıl hesaplanır",
+        "sınav sonucuma itiraz edebilir miyim",
+        "sınav kağıdımı görmek istiyorum",
         "final notum yanlış girilmiş"
       ],
       "response_type": "TEXT",
@@ -198,14 +389,29 @@
     {
       "intent_name": "harc_odeme",
       "keywords": {
-        "harç": 8, "ücret": 6, "ödeme": 7, "banka": 5, "fatura": 6,
-        "harç yatırma": 9, "harç miktarı": 9, "harç ne kadar": 9,
-        "kayıt ücreti": 8, "taksit": 6, "gecikme": 5, "ödedim": 5,
-        "harç ödeme tarihi": 9, "ödeme yapamadım": 8, "muafiyet": 6
+        "harç": 8,
+        "ücret": 6,
+        "ödeme": 7,
+        "banka": 5,
+        "fatura": 6,
+        "harç yatırma": 9,
+        "harç miktarı": 9,
+        "harç ne kadar": 9,
+        "kayıt ücreti": 8,
+        "taksit": 6,
+        "gecikme": 5,
+        "ödedim": 5,
+        "harç ödeme tarihi": 9,
+        "ödeme yapamadım": 8,
+        "muafiyet": 6
       },
       "examples": [
-        "harç ne kadar", "harç ödeme nasıl yapılır", "harç miktarı",
-        "harç ödeme tarihi", "ödeme yapamadım ne olur", "harçtan muafiyet"
+        "harç ne kadar",
+        "harç ödeme nasıl yapılır",
+        "harç miktarı",
+        "harç ödeme tarihi",
+        "ödeme yapamadım ne olur",
+        "harçtan muafiyet"
       ],
       "response_type": "TEXT",
       "response_content": "💳 **Harç Ödeme Bilgileri**\n\n**Ödeme Kanalları**\n🏦 PTT, Halkbank, Ziraat Bankası veya e-Devlet üzerinden yapılabilir.\n🌐 Detay: https://www.artvin.edu.tr\n\n**Harç Miktarları**\nYıllık harç miktarları Yükseköğretim Kurulu (YÖK) tarafından belirlenir.\nGüncel miktar için OBS'deki ödeme modülünü kontrol et.\n\n**Ödeme Yapamadıysan**\nGeç ödeme faiz uygulamasına tabi olabilir.\nMuafiyet (engel durumu, şehit yakını vb.) için Öğrenci İşleri'ne başvur.\n\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -213,15 +419,28 @@
     {
       "intent_name": "erasmus_degisim",
       "keywords": {
-        "erasmus": 9, "değişim programı": 9, "yurt dışı": 7, "avrupa": 5,
-        "farabi": 8, "mevlana": 8, "uluslararası": 6, "yurt dışı staj": 8,
-        "erasmus başvurusu": 9, "değişim öğrencisi": 8, "partner üniversite": 7,
-        "dil puanı": 6, "yabancı üniversite": 7, "çift anadal": 7,
+        "erasmus": 9,
+        "değişim programı": 9,
+        "yurt dışı": 7,
+        "avrupa": 5,
+        "farabi": 8,
+        "mevlana": 8,
+        "uluslararası": 6,
+        "yurt dışı staj": 8,
+        "erasmus başvurusu": 9,
+        "değişim öğrencisi": 8,
+        "partner üniversite": 7,
+        "dil puanı": 6,
+        "yabancı üniversite": 7,
+        "çift anadal": 7,
         "yurt dışında okumak": 8
       },
       "examples": [
-        "erasmus başvurusu nasıl yapılır", "yurt dışında okuyabilir miyim",
-        "farabi programı nedir", "mevlana değişim programı", "erasmus burs miktarı",
+        "erasmus başvurusu nasıl yapılır",
+        "yurt dışında okuyabilir miyim",
+        "farabi programı nedir",
+        "mevlana değişim programı",
+        "erasmus burs miktarı",
         "hangi ülkelere gidebilirim erasmus ile"
       ],
       "response_type": "TEXT",
@@ -230,15 +449,25 @@
     {
       "intent_name": "yatay_gecis",
       "keywords": {
-        "yatay geçiş": 9, "dikey geçiş": 8, "transfer": 6, "üniversite değiştirmek": 8,
-        "bölüm değiştirmek": 8, "başka üniversiteden": 8, "çapraz kayıt": 7,
-        "yatay geçiş şartları": 9, "yatay geçiş başvurusu": 9,
-        "başka üniversiteye geçmek": 8, "yatay geçiş tarihleri": 9
+        "yatay geçiş": 9,
+        "dikey geçiş": 8,
+        "transfer": 6,
+        "üniversite değiştirmek": 8,
+        "bölüm değiştirmek": 8,
+        "başka üniversiteden": 8,
+        "çapraz kayıt": 7,
+        "yatay geçiş şartları": 9,
+        "yatay geçiş başvurusu": 9,
+        "başka üniversiteye geçmek": 8,
+        "yatay geçiş tarihleri": 9
       },
       "examples": [
-        "yatay geçiş nasıl yapılır", "başka üniversiteden geçebilir miyim",
-        "bölüm değiştirmek istiyorum", "yatay geçiş şartları neler",
-        "yatay geçiş başvurusu nereye", "dikey geçiş nasıl yapılır"
+        "yatay geçiş nasıl yapılır",
+        "başka üniversiteden geçebilir miyim",
+        "bölüm değiştirmek istiyorum",
+        "yatay geçiş şartları neler",
+        "yatay geçiş başvurusu nereye",
+        "dikey geçiş nasıl yapılır"
       ],
       "response_type": "TEXT",
       "response_content": "🔄 **Yatay / Dikey Geçiş**\n\n**Yatay Geçiş (Üniversiteler Arası)**\n📋 Şartlar: GNO ≥ 2.00 (bölüme göre farklılık gösterebilir), uygun kontenjan.\n📅 Başvuru: Her dönem başı (Temmuz-Ağustos ve Ocak-Şubat)\n📄 Gerekli belgeler: Transkript, öğrenci belgesi, disiplin belgesi.\n\n**Kurum İçi Yatay Geçiş**\nAÇÜ içinde bölüm değiştirmek için bölüm/fakülte yönetim kuruluna başvurulur.\n\n**Dikey Geçiş (MYO → Lisans)**\nDGS (Dikey Geçiş Sınavı) ile. ÖSYM'den başvuru yapılır.\n\n🌐 Detay: https://www.artvin.edu.tr/tr/ogrenci-isleri\n📞 Öğrenci İşleri: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -246,14 +475,28 @@
     {
       "intent_name": "kulup_topluluk",
       "keywords": {
-        "kulüp": 8, "topluluk": 7, "öğrenci konseyi": 8, "öğrenci kulübü": 9,
-        "etkinlik": 6, "sosyal etkinlik": 7, "müzik kulübü": 7, "spor kulübü": 7,
-        "tiyatro": 6, "gönüllülük": 6, "sertifika": 4, "topluluk başvurusu": 8,
-        "hangi kulüpler": 8, "kültürel": 5, "öğrenci topluluğu": 8
+        "kulüp": 8,
+        "topluluk": 7,
+        "öğrenci konseyi": 8,
+        "öğrenci kulübü": 9,
+        "etkinlik": 6,
+        "sosyal etkinlik": 7,
+        "müzik kulübü": 7,
+        "spor kulübü": 7,
+        "tiyatro": 6,
+        "gönüllülük": 6,
+        "sertifika": 4,
+        "topluluk başvurusu": 8,
+        "hangi kulüpler": 8,
+        "kültürel": 5,
+        "öğrenci topluluğu": 8
       },
       "examples": [
-        "hangi kulüpler var", "bir kulübe nasıl katılırım", "öğrenci konseyi nasıl çalışır",
-        "tiyatro kulübü var mı", "etkinliklere nasıl katılırım"
+        "hangi kulüpler var",
+        "bir kulübe nasıl katılırım",
+        "öğrenci konseyi nasıl çalışır",
+        "tiyatro kulübü var mı",
+        "etkinliklere nasıl katılırım"
       ],
       "response_type": "TEXT",
       "response_content": "🎭 **Öğrenci Kulüpleri ve Topluluklar**\n\nAÇÜ'de öğrenci toplulukları SKS (Sağlık, Kültür ve Spor Daire Başkanlığı) bünyesinde faaliyet gösterir.\n\n**Popüler Topluluklar**\n• Müzik ve Sanat Topluluğu\n• Tiyatro Topluluğu\n• Doğa Sporları Kulübü\n• Kariyer ve Girişimcilik Kulübü\n• Gönüllülük ve Sosyal Sorumluluk\n• Fotoğrafçılık Topluluğu\n\n**Nasıl Katılırsın?**\nSKS Daire Başkanlığı'na başvur veya topluluk koordinatörleriyle iletişime geç.\n\n📞 SKS: +90 (466) 215 10 00\n🌐 https://www.artvin.edu.tr/tr/sks"
@@ -261,14 +504,30 @@
     {
       "intent_name": "saglik_merkezi",
       "keywords": {
-        "sağlık": 6, "poliklinik": 8, "revir": 8, "doktor": 7, "hemşire": 7,
-        "hasta": 5, "ilaç": 5, "acil": 6, "muayene": 7, "sağlık merkezi": 9,
-        "sağlık birimi": 9, "sağlık raporu": 7, "reçete": 6, "eczane": 6,
-        "rapor": 5, "özürlü raporu": 7, "psikolog": 7
+        "sağlık": 6,
+        "poliklinik": 8,
+        "revir": 8,
+        "doktor": 7,
+        "hemşire": 7,
+        "hasta": 5,
+        "ilaç": 5,
+        "acil": 6,
+        "muayene": 7,
+        "sağlık merkezi": 9,
+        "sağlık birimi": 9,
+        "sağlık raporu": 7,
+        "reçete": 6,
+        "eczane": 6,
+        "rapor": 5,
+        "özürlü raporu": 7,
+        "psikolog": 7
       },
       "examples": [
-        "sağlık merkezi nerede", "poliklinik saatleri", "doktora nasıl görünürüm",
-        "kampüste sağlık hizmetleri var mı", "sağlık raporu nasıl alınır"
+        "sağlık merkezi nerede",
+        "poliklinik saatleri",
+        "doktora nasıl görünürüm",
+        "kampüste sağlık hizmetleri var mı",
+        "sağlık raporu nasıl alınır"
       ],
       "response_type": "TEXT",
       "response_content": "🏥 **AÇÜ Sağlık, Kültür ve Spor Dairesi — Sağlık Bölümü**\n\n📍 Kampüs İdari Binası, Zemin Kat\n⏰ Pzt–Cum: 08:30 – 17:00\n\n**Sunulan Hizmetler**\n• Genel muayene (pratisyen hekim)\n• Psikolojik danışmanlık\n• İlk yardım ve acil müdahale\n• Sağlık raporu düzenleme\n\n**Acil Durumlarda**\n🚨 Artvin Devlet Hastanesi: 112 / 0466 212 10 15\n\n💡 Öğrenciler yeşil kart veya SGK ile devlet hastanelerinden faydalanabilir.\n📞 SKS: +90 (466) 215 10 00"
@@ -276,14 +535,29 @@
     {
       "intent_name": "psikolojik_destek",
       "keywords": {
-        "psikolojik": 8, "psikoloji": 7, "ruh sağlığı": 8, "psikolojik danışman": 9,
-        "danışmanlık": 7, "rehberlik": 7, "stres": 6, "bunalım": 7, "kaygı": 6,
-        "depresyon": 7, "yalnız": 5, "anksiyete": 7, "terapi": 7, "destek": 5,
-        "konuşmak istiyorum": 7, "kendimi iyi hissetmiyorum": 8
+        "psikolojik": 8,
+        "psikoloji": 7,
+        "ruh sağlığı": 8,
+        "psikolojik danışman": 9,
+        "danışmanlık": 7,
+        "rehberlik": 7,
+        "stres": 6,
+        "bunalım": 7,
+        "kaygı": 6,
+        "depresyon": 7,
+        "yalnız": 5,
+        "anksiyete": 7,
+        "terapi": 7,
+        "destek": 5,
+        "konuşmak istiyorum": 7,
+        "kendimi iyi hissetmiyorum": 8
       },
       "examples": [
-        "psikolojik destek alabiliyor muyum", "psikolojik danışman var mı",
-        "stresle nasıl başa çıkarım", "ruh sağlığı desteği", "biriyle konuşmak istiyorum"
+        "psikolojik destek alabiliyor muyum",
+        "psikolojik danışman var mı",
+        "stresle nasıl başa çıkarım",
+        "ruh sağlığı desteği",
+        "biriyle konuşmak istiyorum"
       ],
       "response_type": "TEXT",
       "response_content": "💙 **Psikolojik Danışmanlık ve Rehberlik**\n\nAÇÜ öğrencilerine **ücretsiz** psikolojik danışmanlık hizmeti sunulmaktadır.\n\n📍 SKS Dairesi, Sağlık Birimi\n⏰ Pzt–Cum: 08:30–17:00 (randevulu)\n\n**Randevu İçin**\n📞 +90 (466) 215 10 00\n📧 sks@artvin.edu.tr\n\nKendini iyi hissetmiyorsan lütfen destek almaktan çekinme. Yalnız değilsin. 💚\n\n**Acil Psikolojik Destek**\n📞 ALO 182 (Psikolojik Destek Hattı) — 7/24 ücretsiz"
@@ -291,14 +565,31 @@
     {
       "intent_name": "spor_tesisleri",
       "keywords": {
-        "spor": 7, "spor salonu": 8, "fitness": 7, "halısaha": 8, "futbol": 6,
-        "basketbol": 6, "voleybol": 6, "yüzme": 6, "havuz": 6, "tenis": 6,
-        "masa tenisi": 7, "spor tesisi": 8, "jimnastik": 6, "koşu": 5,
-        "spor merkezi": 8, "egzersiz": 5, "antrenman": 6
+        "spor": 7,
+        "spor salonu": 8,
+        "fitness": 7,
+        "halısaha": 8,
+        "futbol": 6,
+        "basketbol": 6,
+        "voleybol": 6,
+        "yüzme": 6,
+        "havuz": 6,
+        "tenis": 6,
+        "masa tenisi": 7,
+        "spor tesisi": 8,
+        "jimnastik": 6,
+        "koşu": 5,
+        "spor merkezi": 8,
+        "egzersiz": 5,
+        "antrenman": 6
       },
       "examples": [
-        "spor salonu var mı", "fitness salonu nerede", "halısaha rezervasyonu",
-        "yüzme havuzu açık mı", "basketbol sahası", "spor tesisleri nerede"
+        "spor salonu var mı",
+        "fitness salonu nerede",
+        "halısaha rezervasyonu",
+        "yüzme havuzu açık mı",
+        "basketbol sahası",
+        "spor tesisleri nerede"
       ],
       "response_type": "TEXT",
       "response_content": "🏋️ **AÇÜ Spor Tesisleri**\n\n**Mevcut Tesisler**\n⚽ Halısaha (rezervasyon gerekli)\n🏀 Basketbol ve Voleybol Sahaları\n🏓 Masa Tenisi Masaları\n🏃 Koşu Pisti\n💪 Spor Salonu\n\n**Kullanım**\nÖğrenci kimliğiyle ücretsiz veya uygun ücretli.\nRezervasyonlar SKS Dairesi'nden yapılır.\n\n📍 Kampüs Spor Merkezi\n⏰ Pzt–Cum: 08:00–22:00 / Hft: 09:00–18:00\n📞 SKS: +90 (466) 215 10 00"
@@ -306,13 +597,25 @@
     {
       "intent_name": "internet_wifi",
       "keywords": {
-        "wifi": 8, "internet": 7, "bağlantı": 5, "eduroam": 9, "kampüs ağı": 8,
-        "internet bağlanamıyorum": 9, "şifre wifi": 7, "ağ": 5, "kablosuz": 7,
-        "internet yavaş": 7, "kampüs interneti": 8, "eduroam nasıl": 8
+        "wifi": 8,
+        "internet": 7,
+        "bağlantı": 5,
+        "eduroam": 9,
+        "kampüs ağı": 8,
+        "internet bağlanamıyorum": 9,
+        "şifre wifi": 7,
+        "ağ": 5,
+        "kablosuz": 7,
+        "internet yavaş": 7,
+        "kampüs interneti": 8,
+        "eduroam nasıl": 8
       },
       "examples": [
-        "kampüste wifi var mı", "eduroam nasıl kurulur", "internet bağlantısı nasıl yapılır",
-        "wifi şifresi ne", "eduroam şifremi unuttum"
+        "kampüste wifi var mı",
+        "eduroam nasıl kurulur",
+        "internet bağlantısı nasıl yapılır",
+        "wifi şifresi ne",
+        "eduroam şifremi unuttum"
       ],
       "response_type": "TEXT",
       "response_content": "📶 **Kampüs İnternet / Wi-Fi**\n\n**Eduroam Ağı**\nAÇÜ kampüsünde **eduroam** kablosuz ağı kullanılmaktadır.\nAvrupa ve dünya genelindeki üniversitelerde de geçerlidir.\n\n**Bağlanmak İçin**\n• Kullanıcı adı: `ogrenci_numarasi@artvin.edu.tr`\n• Şifre: OBS / e-posta şifrenle aynıdır\n\n**Sorun Yaşıyorsan**\n📧 bilgi@artvin.edu.tr\n📞 Bilgi İşlem Dairesi: +90 (466) 215 10 00\n\n💡 Eduroam kurulum kılavuzu: https://www.eduroam.org/support/"
@@ -320,13 +623,24 @@
     {
       "intent_name": "fotokopi_baski",
       "keywords": {
-        "fotokopi": 9, "baskı": 7, "print": 7, "yazdırma": 7, "tarama": 6,
-        "scan": 6, "kopyalama": 7, "fotokopi nerede": 9, "yazıcı": 7,
-        "kağıt baskı": 7, "belge yazdır": 7
+        "fotokopi": 9,
+        "baskı": 7,
+        "print": 7,
+        "yazdırma": 7,
+        "tarama": 6,
+        "scan": 6,
+        "kopyalama": 7,
+        "fotokopi nerede": 9,
+        "yazıcı": 7,
+        "kağıt baskı": 7,
+        "belge yazdır": 7
       },
       "examples": [
-        "fotokopi nerede çektirebilirim", "yazıcı kullanabilir miyim",
-        "baskı hizmeti var mı", "tarama hizmeti", "fotokopi ücreti"
+        "fotokopi nerede çektirebilirim",
+        "yazıcı kullanabilir miyim",
+        "baskı hizmeti var mı",
+        "tarama hizmeti",
+        "fotokopi ücreti"
       ],
       "response_type": "TEXT",
       "response_content": "🖨️ **Fotokopi ve Baskı Hizmetleri**\n\n**Kütüphane**\n📍 Merkez Kütüphane — fotokopi ve tarayıcı hizmeti mevcut.\n⏰ Pzt–Cum: 08:00–21:00\n\n**Kampüs İçi**\nYerleşke içinde çeşitli kırtasiye ve fotokopi noktaları bulunmaktadır.\n\n**Kütüphane Bilgisayar Salonu**\nBelge yazdırma işlemleri ücret karşılığı yapılabilir.\n\n📞 Kütüphane: +90 (466) 215 10 00 (Dahili: 1200)"
@@ -334,13 +648,22 @@
     {
       "intent_name": "mazeret_sinavi",
       "keywords": {
-        "mazeret": 8, "mazeretli": 8, "mazeret sınavı": 9, "sınava giremedin": 8,
-        "sınava giremedim": 9, "hastalık raporu": 7, "rapor ibrazı": 7,
-        "sınav hakkı": 8, "devamsızlık": 6, "mazeretli sayılmak": 8
+        "mazeret": 8,
+        "mazeretli": 8,
+        "mazeret sınavı": 9,
+        "sınava giremedin": 8,
+        "sınava giremedim": 9,
+        "hastalık raporu": 7,
+        "rapor ibrazı": 7,
+        "sınav hakkı": 8,
+        "devamsızlık": 6,
+        "mazeretli sayılmak": 8
       },
       "examples": [
-        "mazeret sınavına nasıl girerim", "sınava hasta olduğum için giremedim",
-        "mazeret dilekçesi nasıl verilir", "mazeretli sınav hakkım var mı"
+        "mazeret sınavına nasıl girerim",
+        "sınava hasta olduğum için giremedim",
+        "mazeret dilekçesi nasıl verilir",
+        "mazeretli sınav hakkım var mı"
       ],
       "response_type": "TEXT",
       "response_content": "📋 **Mazeret Sınavı**\n\nGeçerli bir mazerete bağlı olarak sınava giremeyen öğrenciler **mazeret sınavı** hakkından yararlanabilir.\n\n**Kabul Edilen Mazeretler**\n• Hastalık (hastane raporu)\n• Birinci derece yakın kaybı\n• Resmi görev veya mahkeme celbi\n\n**Başvuru Süreci**\n1️⃣ Mazeretin sona ermesinden itibaren **5 iş günü** içinde bölüm sekreterliğine başvur\n2️⃣ Resmi mazeret belgeni ekle (hastane raporu vb.)\n3️⃣ Bölüm/Fakülte Yönetim Kurulu karar verir\n\n📍 Başvuru yeri: Bölüm sekreterliği\n📞 Öğrenci İşleri: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -348,13 +671,23 @@
     {
       "intent_name": "ek_sinav",
       "keywords": {
-        "ek sınav": 9, "bütünleme": 8, "bütünleme sınavı": 9, "ff aldım": 8,
-        "dersten kaldım": 8, "telafi sınavı": 8, "ikinci sınav": 7,
-        "sınav hakkı": 6, "tekrar sınava girmek": 8, "bütünleme tarihi": 8
+        "ek sınav": 9,
+        "bütünleme": 8,
+        "bütünleme sınavı": 9,
+        "ff aldım": 8,
+        "dersten kaldım": 8,
+        "telafi sınavı": 8,
+        "ikinci sınav": 7,
+        "sınav hakkı": 6,
+        "tekrar sınava girmek": 8,
+        "bütünleme tarihi": 8
       },
       "examples": [
-        "bütünleme sınavı ne zaman", "ff aldım ne yapacağım", "ek sınav hakkım var mı",
-        "dersten kaldım bütünlemeye girebilir miyim", "bütünleme sınavı nasıl"
+        "bütünleme sınavı ne zaman",
+        "ff aldım ne yapacağım",
+        "ek sınav hakkım var mı",
+        "dersten kaldım bütünlemeye girebilir miyim",
+        "bütünleme sınavı nasıl"
       ],
       "response_type": "TEXT",
       "response_content": "📝 **Bütünleme (Ek) Sınavı**\n\n**Kimler Girebilir?**\n• Final sınavında FF, FD veya YZ (yetersiz) alan öğrenciler\n• Akademik takvimde belirtilen koşulları sağlayanlar\n\n**Bütünleme Tarihleri (2025-2026)**\n📅 Güz Dönemi Bütünleme: 19–23 Ocak 2026\n📅 Bahar Dönemi Bütünleme: Haziran 2026 (kesin tarih akademik takvimde)\n\n**Dikkat**\n⚠️ Bütünleme sınavı hakkı tüm dersler için geçerli olmayabilir.\nBölüm koordinatörünle kontrol et.\n\n🌐 Akademik Takvim: https://www.artvin.edu.tr"
@@ -362,31 +695,68 @@
     {
       "intent_name": "ulasim_servis",
       "keywords": {
-        "servis": 7, "ulaşım": 6, "ring": 7, "otobüs": 6, "minibüs": 6,
-        "kampüs": 4, "kalkış": 6, "gidiyor": 4, "yerleşke": 5, "dolmuş": 6,
-        "şehir": 3, "merkez": 3, "taşıma": 5, "güzergah": 7, "durak": 5,
-        "ne zaman kalkıyor": 6, "servis saatleri": 8, "kampüse nasıl gidilir": 8,
-        "otogar": 6, "taksi": 5, "yürüyüş mesafesi": 6
+        "servis": 7,
+        "ulaşım": 6,
+        "ring": 7,
+        "otobüs": 6,
+        "minibüs": 6,
+        "kampüs": 4,
+        "kalkış": 6,
+        "gidiyor": 4,
+        "yerleşke": 5,
+        "dolmuş": 6,
+        "şehir": 3,
+        "merkez": 3,
+        "taşıma": 5,
+        "güzergah": 7,
+        "durak": 5,
+        "ne zaman kalkıyor": 6,
+        "servis saatleri": 8,
+        "kampüse nasıl gidilir": 8,
+        "otogar": 6,
+        "taksi": 5,
+        "yürüyüş mesafesi": 6
       },
       "examples": [
-        "kampüs servisi kaçta kalkıyor", "ring servisi saatleri",
-        "üniversiteye nasıl gidilir", "şehir merkezine servis var mı", "kampüse ulaşım"
+        "kampüs servisi kaçta kalkıyor",
+        "ring servisi saatleri",
+        "üniversiteye nasıl gidilir",
+        "şehir merkezine servis var mı",
+        "kampüse ulaşım"
       ],
       "response_type": "TEXT",
-      "response_content": "🚌 **AÇÜ Kampüs Ulaşım Bilgileri**\n\n**Şehir Yerleşkesi ↔ Merkez Ring Servisi**\n⏰ Sabah: 08:00 — 08:30 — 09:00\n⏰ Öğlen: 12:00 — 13:00\n⏰ Akşam: 17:00 — 17:30 — 18:00\n\n**Orman Fakültesi Yerleşkesi ↔ Şehir**\n⏰ Sabah: 08:15 — 09:15\n⏰ Akşam: 17:15 — 18:15\n\n💡 Saatler değişebilir. Kesin bilgi için Öğrenci İşleri: +90 (466) 215 10 00\n🚕 Artvin şehir içi taksi ve dolmuş hizmeti de mevcuttur."
+      "response_content": "🚌 **AÇÜ Kampüs Ulaşım**\n\nRing servisi ve kampüs ulaşım saatleri dönemsel olarak değişebilmektedir.\n\n📞 **Güncel servis saatleri için:**\nÖğrenci İşleri: +90 (466) 215 10 00\n\n🌐 **Resmi site:** https://www.artvin.edu.tr\n\n🚕 Artvin şehir içinde taksi ve dolmuş hizmeti de mevcuttur."
     },
     {
       "intent_name": "kutuphane",
       "keywords": {
-        "kütüphane": 8, "kitap": 6, "kaynak": 5, "ödünç": 7, "iade": 6,
-        "veritabanı": 6, "e-kaynak": 7, "dergi": 5, "makale": 5, "tez": 6,
-        "okuma salonu": 7, "bilgi merkezi": 7, "katalog": 6, "borç": 4,
-        "uzatma": 5, "kütüphane saatleri": 8, "kütüphane kartı": 7,
-        "kitap geciktirme": 7, "ceza": 4, "rezervasyon": 5
+        "kütüphane": 8,
+        "kitap": 6,
+        "kaynak": 5,
+        "ödünç": 7,
+        "iade": 6,
+        "veritabanı": 6,
+        "e-kaynak": 7,
+        "dergi": 5,
+        "makale": 5,
+        "tez": 6,
+        "okuma salonu": 7,
+        "bilgi merkezi": 7,
+        "katalog": 6,
+        "borç": 4,
+        "uzatma": 5,
+        "kütüphane saatleri": 8,
+        "kütüphane kartı": 7,
+        "kitap geciktirme": 7,
+        "ceza": 4,
+        "rezervasyon": 5
       },
       "examples": [
-        "kütüphane saat kaçta açılıyor", "kitap ödünç almak istiyorum",
-        "e-kaynaklara nasıl erişebilirim", "tez veritabanı", "kitap iade tarihi"
+        "kütüphane saat kaçta açılıyor",
+        "kitap ödünç almak istiyorum",
+        "e-kaynaklara nasıl erişebilirim",
+        "tez veritabanı",
+        "kitap iade tarihi"
       ],
       "response_type": "TEXT",
       "response_content": "📚 **AÇÜ Merkez Kütüphanesi**\n\n⏰ **Çalışma Saatleri**\nPazartesi – Cuma: 08:00 – 21:00\nCumartesi: 09:00 – 17:00\nPazar: Kapalı\n\n📖 **Ödünç Alma**\nÖğrenciler: 7 gün (3 kitaba kadar)\nAkademisyenler: 30 gün (10 kitaba kadar)\nUzatma: Kütüphane web portalı veya gişe\n\n💻 **E-Kaynaklar**\n🔗 https://kutuphane.artvin.edu.tr\nYÖK Tez Merkezi, EBSCO, Springer, Science Direct vb.\n\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1200)"
@@ -394,15 +764,33 @@
     {
       "intent_name": "yurt_bilgisi",
       "keywords": {
-        "yurt": 8, "konut": 5, "barınak": 4, "kalacak": 5, "kyk": 8,
-        "yatakhane": 6, "oda": 4, "konaklama": 5, "ücret": 4, "başvuru": 4,
-        "öğrenci evi": 6, "apart": 4, "pansiyon": 4, "kira": 5,
-        "yurt başvurusu": 8, "kyk başvurusu": 8, "yurt ücretleri": 8,
-        "yurt kapasitesi": 7, "çift kişilik": 7, "tek kişilik": 7
+        "yurt": 8,
+        "konut": 5,
+        "barınak": 4,
+        "kalacak": 5,
+        "kyk": 8,
+        "yatakhane": 6,
+        "oda": 4,
+        "konaklama": 5,
+        "ücret": 4,
+        "başvuru": 4,
+        "öğrenci evi": 6,
+        "apart": 4,
+        "pansiyon": 4,
+        "kira": 5,
+        "yurt başvurusu": 8,
+        "kyk başvurusu": 8,
+        "yurt ücretleri": 8,
+        "yurt kapasitesi": 7,
+        "çift kişilik": 7,
+        "tek kişilik": 7
       },
       "examples": [
-        "yurt başvurusu nasıl yapılır", "kyk yurt ücretleri", "öğrenci yurdu nerede",
-        "barınma imkanları", "kyk başvurusu ne zaman"
+        "yurt başvurusu nasıl yapılır",
+        "kyk yurt ücretleri",
+        "öğrenci yurdu nerede",
+        "barınma imkanları",
+        "kyk başvurusu ne zaman"
       ],
       "response_type": "TEXT",
       "response_content": "🏠 **AÇÜ Yurt Bilgileri**\n\n**KYK (Kredi Yurtlar Kurumu) Yurtları**\n📍 Artvin KYK Yurdu şehir merkezinde hizmet vermektedir.\n💰 Güncel ücretler: https://www.kyk.gov.tr\n\n**Başvuru**\n📅 Her yıl Ağustos–Eylül aylarında açılır\n🌐 https://basvuru.kyk.gov.tr\n\n**Özel Yurtlar ve Apart Daireler**\nŞehir merkezinde çeşitli özel yurt ve apart seçenekleri mevcuttur.\nFiyatlar 2.000–5.000 TL/ay aralığında değişmektedir (güncel değildir, araştır).\n\n💡 Öğrenci Konseyi veya Öğrenci İşleri sana daha fazla yardımcı olabilir.\n📞 +90 (466) 215 10 00 (Dahili: 1350)"
@@ -410,14 +798,30 @@
     {
       "intent_name": "burs_bilgisi",
       "keywords": {
-        "burs": 8, "destek": 4, "maddi": 5, "finansal": 4, "yardım": 4,
-        "tübitak": 6, "vakıf": 5, "başarı bursu": 7, "ihtiyaç bursu": 7,
-        "kredi": 5, "devlet bursu": 8, "burs başvurusu": 9, "burs miktarı": 8,
-        "burs ne zaman yatar": 8, "öğrenim kredisi": 7, "burs şartları": 8
+        "burs": 8,
+        "destek": 4,
+        "maddi": 5,
+        "finansal": 4,
+        "yardım": 4,
+        "tübitak": 6,
+        "vakıf": 5,
+        "başarı bursu": 7,
+        "ihtiyaç bursu": 7,
+        "kredi": 5,
+        "devlet bursu": 8,
+        "burs başvurusu": 9,
+        "burs miktarı": 8,
+        "burs ne zaman yatar": 8,
+        "öğrenim kredisi": 7,
+        "burs şartları": 8
       },
       "examples": [
-        "burs başvurusu nasıl yapılır", "hangi burslar var", "TÜBİTAK bursu",
-        "devlet bursu şartları", "maddi destek imkanları", "vakıf bursu"
+        "burs başvurusu nasıl yapılır",
+        "hangi burslar var",
+        "TÜBİTAK bursu",
+        "devlet bursu şartları",
+        "maddi destek imkanları",
+        "vakıf bursu"
       ],
       "response_type": "TEXT",
       "response_content": "💰 **Burs İmkanları**\n\n**1. Devlet Bursu (KYK)**\n🔗 https://basvuru.kyk.gov.tr\n📅 Başvuru: Her yıl Eylül–Ekim\nÖğrenim kredisi veya burs seçeneği mevcuttur.\n\n**2. TÜBİTAK Bursu**\n🔬 2205 — Lisans Burs Programı\n🔗 https://e-bideb.tubitak.gov.tr\n\n**3. AÇÜ Başarı Bursu**\nBölümde ilk 3'e giren öğrencilere ödül niteliğinde burs.\nDetay: Öğrenci İşleri Dairesi\n\n**4. Vakıf ve Belediye Bursları**\n• Türkiye Diyanet Vakfı, TBMM Vakfı\n• Artvin Belediyesi öğrenci bursları\n\n📞 Danışmanlık: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -425,15 +829,34 @@
     {
       "intent_name": "ders_kaydi",
       "keywords": {
-        "ders kaydı": 9, "kayıt": 5, "danışman": 6, "onay": 5, "müfredat": 6,
-        "ders seçimi": 8, "obs": 7, "kredi": 5, "seçmeli": 5, "zorunlu ders": 6,
-        "ekle": 4, "ders bırakma": 7, "ders ekleme": 7, "kontenjan": 6,
-        "ders programı": 7, "haftalık ders": 6, "ders saati": 5,
-        "akts": 6, "ders danışmanı": 7, "onaylatmak": 6
+        "ders kaydı": 9,
+        "kayıt": 5,
+        "danışman": 6,
+        "onay": 5,
+        "müfredat": 6,
+        "ders seçimi": 8,
+        "obs": 7,
+        "kredi": 5,
+        "seçmeli": 5,
+        "zorunlu ders": 6,
+        "ekle": 4,
+        "ders bırakma": 7,
+        "ders ekleme": 7,
+        "kontenjan": 6,
+        "ders programı": 7,
+        "haftalık ders": 6,
+        "ders saati": 5,
+        "akts": 6,
+        "ders danışmanı": 7,
+        "onaylatmak": 6
       },
       "examples": [
-        "ders kaydı nasıl yapılır", "danışman onayı gerekli mi", "obs ders ekleme",
-        "seçmeli ders nasıl seçilir", "kontenjan doldu ne yapayım", "ders bırakma süresi"
+        "ders kaydı nasıl yapılır",
+        "danışman onayı gerekli mi",
+        "obs ders ekleme",
+        "seçmeli ders nasıl seçilir",
+        "kontenjan doldu ne yapayım",
+        "ders bırakma süresi"
       ],
       "response_type": "TEXT",
       "response_content": "📝 **Ders Kaydı Rehberi**\n\n**1. OBS'ye Giriş**\n🌐 https://obs.artvin.edu.tr\nÖğrenci numarası ve şifrenle giriş yap.\n\n**2. Ders Seçimi**\n• Danışmanının açtığı dersleri görüntüle\n• Zorunlu dersleri önce ekle\n• Kredi limitine dikkat et (genellikle 30–45 AKTS)\n\n**3. Danışman Onayı**\nSeçimlerini tamamladıktan sonra danışmanının onaylaması gerekir.\n\n**4. Süreler**\n📅 Ders ekleme: Dönem başı ilk **2 hafta**\n📅 Ders bırakma: Dönem başı ilk **4 hafta**\n\n⚠️ Süreler akademik takvimde yayınlanır!"
@@ -441,14 +864,29 @@
     {
       "intent_name": "mezuniyet",
       "keywords": {
-        "mezuniyet": 8, "mezun": 8, "diploma": 7, "tören": 5, "bitirme": 6,
-        "şart": 4, "son sınıf": 6, "akts": 5, "transkript": 6,
-        "çıkış belgesi": 7, "sertifika": 5, "gno": 5, "cüppe": 7,
-        "mezuniyet töreni": 8, "mezuniyet fotoğrafı": 7, "diploma teslimi": 7
+        "mezuniyet": 8,
+        "mezun": 8,
+        "diploma": 7,
+        "tören": 5,
+        "bitirme": 6,
+        "şart": 4,
+        "son sınıf": 6,
+        "akts": 5,
+        "transkript": 6,
+        "çıkış belgesi": 7,
+        "sertifika": 5,
+        "gno": 5,
+        "cüppe": 7,
+        "mezuniyet töreni": 8,
+        "mezuniyet fotoğrafı": 7,
+        "diploma teslimi": 7
       },
       "examples": [
-        "mezuniyet şartları neler", "diploma nasıl alınır", "mezuniyet töreni ne zaman",
-        "GNO kaç olmalı mezun olmak için", "transkript nasıl alınır"
+        "mezuniyet şartları neler",
+        "diploma nasıl alınır",
+        "mezuniyet töreni ne zaman",
+        "GNO kaç olmalı mezun olmak için",
+        "transkript nasıl alınır"
       ],
       "response_type": "TEXT",
       "response_content": "🎓 **Mezuniyet Bilgileri**\n\n**Genel Şartlar**\n✅ Tüm zorunlu ve seçmeli dersleri tamamlamak\n✅ Minimum AKTS kredisini doldurmak (bölüme göre 240 AKTS)\n✅ GNO: **2.00 ve üzeri**\n✅ Bitirme projesi / tezi (bölüme göre)\n\n**Diploma**\n📄 Diploma mezuniyeti takip eden 6 ay içinde hazırlanır.\nGeçici mezuniyet belgesi aynı gün alınabilir.\n\n**Mezuniyet Töreni**\n📅 Her yıl Haziran–Temmuz aylarında düzenlenir.\n\n**Başvuru**\nSon dönemde Öğrenci İşleri'ne dilekçe ver.\n📞 +90 (466) 215 10 00 (Dahili: 1350)"
@@ -456,15 +894,31 @@
     {
       "intent_name": "staj",
       "keywords": {
-        "staj": 8, "stajyer": 7, "pratik": 4, "işyeri eğitimi": 7, "sgk": 5,
-        "sigorta": 4, "staj defteri": 7, "zorunlu staj": 8, "staj yeri": 7,
-        "staj süresi": 7, "kabul formu": 5, "staj başvurusu": 8,
-        "yaz stajı": 8, "staj raporu": 8, "staj koordinatörü": 8,
-        "staj yeri bulma": 8, "staj belgesi": 8
+        "staj": 8,
+        "stajyer": 7,
+        "pratik": 4,
+        "işyeri eğitimi": 7,
+        "sgk": 5,
+        "sigorta": 4,
+        "staj defteri": 7,
+        "zorunlu staj": 8,
+        "staj yeri": 7,
+        "staj süresi": 7,
+        "kabul formu": 5,
+        "staj başvurusu": 8,
+        "yaz stajı": 8,
+        "staj raporu": 8,
+        "staj koordinatörü": 8,
+        "staj yeri bulma": 8,
+        "staj belgesi": 8
       },
       "examples": [
-        "staj nasıl yapılır", "zorunlu staj süresi ne kadar", "staj yeri nasıl bulunur",
-        "staj belgesi nereden alınır", "sgk staj sigortası", "staj defteri"
+        "staj nasıl yapılır",
+        "zorunlu staj süresi ne kadar",
+        "staj yeri nasıl bulunur",
+        "staj belgesi nereden alınır",
+        "sgk staj sigortası",
+        "staj defteri"
       ],
       "response_type": "TEXT",
       "response_content": "💼 **Staj Rehberi**\n\n**Süreç**\n1️⃣ Staj yapacağın kurumdan **kabul belgesi** al\n2️⃣ Bölüm Staj Komisyonu'na onaylat\n3️⃣ Üniversite SGK iş kazası sigortanı başlatır\n4️⃣ Staj boyunca **staj defteri** tut\n5️⃣ Staj sonunda defteri ve değerlendirme formunu teslim et\n\n**Süreler**\nBölüme göre 20–60 iş günü (bölüm koordinatöründen öğren)\n\n**Staj Yeri Bulmak İçin**\n• Kariyer fuarları ve üniversite iş ilanları\n• LinkedIn, Kariyer.net\n• Bölüm hocalarından öneri\n\n📋 Detaylı bilgi için **bölüm sekreterliğine** danış."
@@ -472,14 +926,31 @@
     {
       "intent_name": "duyurular",
       "keywords": {
-        "duyuru": 8, "haber": 6, "güncel": 5, "son": 4, "yeni": 4,
-        "bilgilendirme": 6, "ilan": 7, "açıklama": 5, "etkinlik": 5,
-        "toplantı": 4, "konferans": 5, "seminer": 6, "ne var": 4,
-        "neler var": 4, "acil duyuru": 8, "resmi duyuru": 8, "workshop": 5
+        "duyuru": 8,
+        "haber": 6,
+        "güncel": 5,
+        "son": 4,
+        "yeni": 4,
+        "bilgilendirme": 6,
+        "ilan": 7,
+        "açıklama": 5,
+        "etkinlik": 5,
+        "toplantı": 4,
+        "konferans": 5,
+        "seminer": 6,
+        "ne var": 4,
+        "neler var": 4,
+        "acil duyuru": 8,
+        "resmi duyuru": 8,
+        "workshop": 5
       },
       "examples": [
-        "son duyurular neler", "üniversitede ne var", "güncel haberler",
-        "yeni ilan var mı", "etkinlik duyuruları", "bugün bir şey var mı"
+        "son duyurular neler",
+        "üniversitede ne var",
+        "güncel haberler",
+        "yeni ilan var mı",
+        "etkinlik duyuruları",
+        "bugün bir şey var mı"
       ],
       "response_type": "TEXT",
       "response_content": "📢 Güncel duyurular için resmi siteyi ziyaret edebilirsiniz:\nhttps://www.artvin.edu.tr/tr/duyurular"
@@ -487,15 +958,35 @@
     {
       "intent_name": "hava_durumu",
       "keywords": {
-        "hava": 7, "hava durumu": 9, "sıcaklık": 6, "derece": 5, "yağmur": 6,
-        "yağış": 6, "kar": 5, "güneşli": 5, "bulutlu": 5, "rüzgar": 5,
-        "nem": 5, "fırtına": 6, "soğuk": 4, "sıcak": 4, "sis": 5,
-        "meteoroloji": 6, "bugün hava": 8, "artvin hava": 9,
-        "şemsiye": 6, "mont": 4, "hava nasıl": 7
+        "hava": 7,
+        "hava durumu": 9,
+        "sıcaklık": 6,
+        "derece": 5,
+        "yağmur": 6,
+        "yağış": 6,
+        "kar": 5,
+        "güneşli": 5,
+        "bulutlu": 5,
+        "rüzgar": 5,
+        "nem": 5,
+        "fırtına": 6,
+        "soğuk": 4,
+        "sıcak": 4,
+        "sis": 5,
+        "meteoroloji": 6,
+        "bugün hava": 8,
+        "artvin hava": 9,
+        "şemsiye": 6,
+        "mont": 4,
+        "hava nasıl": 7
       },
       "examples": [
-        "artvin hava durumu", "bugün hava nasıl", "yağmur yağacak mı",
-        "dışarısı soğuk mu", "hava kaç derece", "kar yağıyor mu"
+        "artvin hava durumu",
+        "bugün hava nasıl",
+        "yağmur yağacak mı",
+        "dışarısı soğuk mu",
+        "hava kaç derece",
+        "kar yağıyor mu"
       ],
       "response_type": "CUSTOM_LOGIC",
       "response_content": "WEATHER_LIVE"
@@ -503,18 +994,44 @@
     {
       "intent_name": "cihaz_bilgisi",
       "keywords": {
-        "cihaz": 7, "özellik": 4, "stok": 4, "mikroskop": 6, "laboratuvar": 5,
-        "etüv": 6, "mevcut": 3, "spektrofotometre": 6, "terazi": 5,
-        "santrifüj": 6, "alet": 5, "makinesi": 4, "test": 4, "ölçüm": 5,
-        "analiz": 4, "deney": 4, "distilasyon": 6, "inkübatör": 6,
-        "otoklav": 6, "ph metre": 6, "manyetik karıştırıcı": 7,
-        "vorteks": 6, "ultrasonik": 6, "dondurma cihazı": 6,
-        "ekipman": 5, "araç gereç": 5, "cihazlar": 7
+        "cihaz": 7,
+        "özellik": 4,
+        "stok": 4,
+        "mikroskop": 6,
+        "laboratuvar": 5,
+        "etüv": 6,
+        "mevcut": 3,
+        "spektrofotometre": 6,
+        "terazi": 5,
+        "santrifüj": 6,
+        "alet": 5,
+        "makinesi": 4,
+        "test": 4,
+        "ölçüm": 5,
+        "analiz": 4,
+        "deney": 4,
+        "distilasyon": 6,
+        "inkübatör": 6,
+        "otoklav": 6,
+        "ph metre": 6,
+        "manyetik karıştırıcı": 7,
+        "vorteks": 6,
+        "ultrasonik": 6,
+        "dondurma cihazı": 6,
+        "ekipman": 5,
+        "araç gereç": 5,
+        "cihazlar": 7
       },
       "examples": [
-        "mikroskop var mı", "laboratuvarda hangi cihazlar var", "etüv cihazı",
-        "spektrofotometre nerede", "cihaz kullanabilirim mi", "laboratuvar ekipmanları",
-        "santrifüj nerede", "terazi var mı", "deney malzemeleri"
+        "mikroskop var mı",
+        "laboratuvarda hangi cihazlar var",
+        "etüv cihazı",
+        "spektrofotometre nerede",
+        "cihaz kullanabilirim mi",
+        "laboratuvar ekipmanları",
+        "santrifüj nerede",
+        "terazi var mı",
+        "deney malzemeleri"
       ],
       "response_type": "CUSTOM_LOGIC",
       "response_content": "DEVICE_REGISTRY"
@@ -522,14 +1039,28 @@
     {
       "intent_name": "yabanci_dil",
       "keywords": {
-        "yabancı dil": 8, "ingilizce": 7, "dil kursu": 8, "tömer": 8,
-        "dil sınavı": 7, "yds": 7, "yokdil": 7, "toefl": 7, "ielts": 7,
-        "dil eğitimi": 7, "İngilizce öğrenmek": 8, "dil hazırlık": 7,
-        "hazırlık okulu": 7, "dil puanı": 7
+        "yabancı dil": 8,
+        "ingilizce": 7,
+        "dil kursu": 8,
+        "tömer": 8,
+        "dil sınavı": 7,
+        "yds": 7,
+        "yokdil": 7,
+        "toefl": 7,
+        "ielts": 7,
+        "dil eğitimi": 7,
+        "İngilizce öğrenmek": 8,
+        "dil hazırlık": 7,
+        "hazırlık okulu": 7,
+        "dil puanı": 7
       },
       "examples": [
-        "ingilizce kursu var mı", "TÖMER nerede", "yabancı dil sınavı",
-        "dil hazırlık programı", "YDS nasıl hazırlanılır", "dil eğitimi"
+        "ingilizce kursu var mı",
+        "TÖMER nerede",
+        "yabancı dil sınavı",
+        "dil hazırlık programı",
+        "YDS nasıl hazırlanılır",
+        "dil eğitimi"
       ],
       "response_type": "TEXT",
       "response_content": "🌍 **Yabancı Dil Eğitimi**\n\n**AÇÜ Dil Okulu / Yabancı Diller Yüksekokulu**\nİngilizce başta olmak üzere çeşitli dil kursları ve hazırlık programları sunulmaktadır.\n\n**Dil Sınavları**\n• YDS / YÖKDİL: ÖSYM tarafından yılda 2 kez\n• TOEFL / IELTS: Uluslararası geçerliliği olan sınavlar\n\n**TÖMER**\nYabancı dil eğitimi için TÖMER merkezleri büyükşehirlerde yer almaktadır.\n\n**AÇÜ Dil Bölümü İletişim**\n🌐 https://www.artvin.edu.tr\n📞 +90 (466) 215 10 00"
