@@ -79,20 +79,22 @@ def _get_model() -> Optional[genai.GenerativeModel]:
             and 'gemini' in m.name
         ]
 
-        model_name = "models/gemini-1.5-flash"
+        env_model = os.getenv("GEMINI_MODEL", "").strip()
+        model_name = env_model if env_model else "models/gemini-1.5-flash"
 
-        for m in gemini_models:
-            if 'flash' in m.name:
-                model_name = m.name
-                break
-        else:
+        if not env_model:
             for m in gemini_models:
-                if 'pro' in m.name:
+                if 'flash' in m.name:
                     model_name = m.name
                     break
             else:
-                if gemini_models:
-                    model_name = gemini_models[0].name
+                for m in gemini_models:
+                    if 'pro' in m.name:
+                        model_name = m.name
+                        break
+                else:
+                    if gemini_models:
+                        model_name = gemini_models[0].name
 
         logger.info(f"✅ Gemini modeli seçildi ve cache'lendi: {model_name}")
         _CACHED_MODEL = genai.GenerativeModel(

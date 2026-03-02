@@ -7,6 +7,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +15,7 @@ logger = logging.getLogger(__name__)
 MIN_EXPECTED_DEVICES = 10
 
 
+@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=2, max=8), reraise=False)
 def scrape_lab_devices():
     url = 'https://www.artvin.edu.tr/laboratuvar-cihazlari'
     device_db = {}
@@ -26,9 +28,11 @@ def scrape_lab_devices():
         opsiyonlar.add_argument("--headless")
         opsiyonlar.add_argument("--no-sandbox")
         opsiyonlar.add_argument("--disable-dev-shm-usage")
-        opsiyonlar.binary_location = "/usr/bin/firefox-esr"
 
-        geckodriver_path = "/usr/local/bin/geckodriver"
+        firefox_bin = os.getenv("FIREFOX_BIN", "/usr/bin/firefox-esr")
+        opsiyonlar.binary_location = firefox_bin
+
+        geckodriver_path = os.getenv("GECKODRIVER_PATH", "/usr/local/bin/geckodriver")
         if not os.path.exists(geckodriver_path):
             geckodriver_path = "geckodriver"
 

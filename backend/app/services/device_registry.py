@@ -23,6 +23,10 @@ DATA_FILE: Path = Path(__file__).parent.parent / "data" / "devices.json"
 
 DEVICE_DB: dict[str, dict] = {}
 
+# Semantic search: cihaz adı embeddinglari (startup'ta hesaplanır)
+_DEVICE_EMBEDDINGS: dict[str, "any"] = {}
+_SEMANTIC_THRESHOLD: float = 0.60
+
 
 # ============================================================================
 # DATABASE INITIALIZATION & MANAGEMENT
@@ -89,15 +93,47 @@ def update_device_database() -> bool:
         return False
 
 
+def _build_device_embeddings() -> None:
+    """
+    Mevcut DEVICE_DB için cihaz adı embedding'lerini oluşturur.
+    Sadece USE_EMBEDDINGS=true ise çalışır; MODEL yüklü olmalıdır.
+    """
+    global _DEVICE_EMBEDDINGS
+
+    use_embeddings = os.getenv("USE_EMBEDDINGS", "true").lower() == "true"
+    if not use_embeddings or not DEVICE_DB:
+        return
+
+    try:
+        from ..core.classifier import MODEL
+        if MODEL is None:
+            logger.debug("Semantic model henüz yüklenmedi, cihaz embedding'i atlandı.")
+            return
+
+        import numpy as np
+        device_names = list(DEVICE_DB.keys())
+        logger.info(f"📊 {len(device_names)} cihaz için semantic embedding oluşturuluyor...")
+        embeddings = list(MODEL.embed(device_names))
+        _DEVICE_EMBEDDINGS = {
+            name: np.array(emb)
+            for name, emb in zip(device_names, embeddings)
+        }
+        logger.info(f"✅ Cihaz semantic embedding hazır ({len(_DEVICE_EMBEDDINGS)} cihaz).")
+    except Exception as e:
+        logger.warning(f"Cihaz embedding oluşturulamadı: {e}")
+
+
 def initialize_device_db() -> None:
     logger.info("🔧 Cihaz veritabanı başlatılıyor...")
 
     if load_devices_from_disk():
         logger.info(f"✅ Veritabanı hazır ({len(DEVICE_DB)} cihaz).")
+        _build_device_embeddings()
     else:
         logger.warning("⚠️  Disk boş! İlk tarama başlatılıyor...")
         if update_device_database():
             logger.info(f"✅ İlk tarama başarılı ({len(DEVICE_DB)} cihaz).")
+            _build_device_embeddings()
         else:
             logger.error("❌ İlk tarama başarısız oldu.")
 
@@ -110,6 +146,7 @@ def search_device(user_message: str) -> Optional[dict]:
     if not DEVICE_DB:
         initialize_device_db()
 
+    # 1. Substring eşleşme (hızlı yol)
     message_lower = user_message.lower()
     for device_key, device_data in DEVICE_DB.items():
         if device_key in message_lower:
@@ -117,7 +154,51 @@ def search_device(user_message: str) -> Optional[dict]:
                 "name": device_data.get("original_name", device_key.title()),
                 "info": device_data
             }
-    return None
+
+    # 2. Semantic search (yavaş ama hassas)
+    return search_device_semantic(user_message)
+
+
+def search_device_semantic(query: str) -> Optional[dict]:
+    """
+    MiniLM embedding'leri ile cosine similarity tabanlı cihaz arama.
+    Substring eşleşmesi başarısız olduğunda devreye girer.
+    """
+    if not _DEVICE_EMBEDDINGS:
+        return None
+
+    try:
+        import numpy as np
+        from ..core.classifier import MODEL
+        if MODEL is None:
+            return None
+
+        query_emb = np.array(list(MODEL.embed([query])))[0]
+        query_norm = query_emb / (np.linalg.norm(query_emb) + 1e-10)
+
+        best_sim = -1.0
+        best_key: Optional[str] = None
+
+        for device_key, device_emb in _DEVICE_EMBEDDINGS.items():
+            norm = np.linalg.norm(device_emb) + 1e-10
+            sim = float(np.dot(device_emb / norm, query_norm))
+            if sim > best_sim:
+                best_sim = sim
+                best_key = device_key
+
+        if best_key and best_sim >= _SEMANTIC_THRESHOLD:
+            logger.info(f"✅ Semantic cihaz eşleşmesi: '{best_key}' (sim={best_sim:.3f})")
+            device_data = DEVICE_DB[best_key]
+            return {
+                "name": device_data.get("original_name", best_key.title()),
+                "info": device_data
+            }
+
+        return None
+
+    except Exception as e:
+        logger.warning(f"Semantic cihaz arama hatası: {e}")
+        return None
 
 
 _DEVICE_SEARCH_STOPWORDS: set[str] = {

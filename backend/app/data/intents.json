@@ -318,7 +318,13 @@
         "öğrenci bilgi sistemi",
         "obs sistemine giremiyorum",
         "şifremi sıfırlamak istiyorum",
-        "obs not görme"
+        "obs not görme",
+        "öğrenci bilgi sistemine giriş",
+        "obs şifre değiştirme",
+        "obs mobil uygulaması",
+        "obs transkript indirme",
+        "obs devamsızlık görme",
+        "obs ders programı"
       ],
       "response_type": "TEXT",
       "response_content": "💻 **OBS (Öğrenci Bilgi Sistemi)**\n\n🌐 **Giriş:** https://obs.artvin.edu.tr\n\n**Şifre Sorunları**\n🔑 Şifreni unuttuysan **\"Şifremi Unuttum\"** bağlantısını kullan.\nAlternatif olarak:\n📧 ogrenciisleri@artvin.edu.tr adresine öğrenci numaranla yazabilirsin.\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1350)\n\n**OBS ile yapabileceklerin:**\n• Not ve transkript görüntüleme\n• Ders kaydı / ders silme\n• Sınav programı görüntüleme\n• Belge talep etme"
@@ -348,7 +354,13 @@
         "resmi belge istiyorum",
         "e-devletten belge alabilir miyim",
         "transkript ücreti var mı",
-        "öğrenim belgesi lazım"
+        "öğrenim belgesi lazım",
+        "not döküm belgesi",
+        "öğrenci durum belgesi",
+        "transkript ingilizce",
+        "bitirme belgesi nasıl alınır",
+        "belge talep formu",
+        "kayıt silme belgesi"
       ],
       "response_type": "TEXT",
       "response_content": "📄 **Belge Alma Rehberi**\n\n**1. OBS Üzerinden (Online)**\n🌐 https://obs.artvin.edu.tr → Belge Talepleri\n• Öğrenci belgesi / öğrenim belgesi\n• Transkript (not belgesi)\n• Disiplin durumu belgesi\n\n**2. E-Devlet Üzerinden**\n🌐 https://www.turkiye.gov.tr → \"Öğrenci Belgesi\" ara\nÖğrenci numarası ve e-devlet şifresiyle erişebilirsin.\n\n**3. Öğrenci İşleri Direkten**\n📍 Yerleşke idari binası\n⏰ Pzt-Cum: 08:30 – 17:00\n📞 +90 (466) 215 10 00 (Dahili: 1350)\n\n💡 Çoğu belge ücretsizdir. Apostil gerekiyorsa Noterlik gerekebilir."
@@ -381,7 +393,13 @@
         "gno nasıl hesaplanır",
         "sınav sonucuma itiraz edebilir miyim",
         "sınav kağıdımı görmek istiyorum",
-        "final notum yanlış girilmiş"
+        "final notum yanlış girilmiş",
+        "vize notum ne zaman girer",
+        "bütünleme sonucu",
+        "harf notu dönüşümü",
+        "genel not ortalaması",
+        "kredi notu hesaplama",
+        "dönem sonu sonuçları"
       ],
       "response_type": "TEXT",
       "response_content": "📊 **Sınav Sonuçları ve Not Bilgileri**\n\n**Not Görme**\n🌐 OBS → https://obs.artvin.edu.tr → Notlarım\nNotlar sınav bitiminden en geç 15 gün içinde girilir.\n\n**Harf Notu Sistemi**\n| Harf | Puan | Katsayı |\n|------|------|---------|\n| AA | 90-100 | 4.00 |\n| BA | 85-89 | 3.50 |\n| BB | 75-84 | 3.00 |\n| CB | 65-74 | 2.50 |\n| CC | 60-64 | 2.00 |\n| DC | 55-59 | 1.50 |\n| DD | 50-54 | 1.00 |\n| FF | 0-49 | 0.00 |\n\n**Not İtirazı**\n📝 Notun açıklanmasından itibaren **5 iş günü** içinde bölüm sekreterine dilekçe verebilirsin.\n📞 Öğrenci İşleri: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -411,7 +429,13 @@
         "harç miktarı",
         "harç ödeme tarihi",
         "ödeme yapamadım ne olur",
-        "harçtan muafiyet"
+        "harçtan muafiyet",
+        "harç iadesi nasıl yapılır",
+        "öğrenci katkı payı",
+        "harç ödeme ekranı",
+        "taksitle harç ödenebilir mi",
+        "burs harç indirim",
+        "yabancı uyruklu harç"
       ],
       "response_type": "TEXT",
       "response_content": "💳 **Harç Ödeme Bilgileri**\n\n**Ödeme Kanalları**\n🏦 PTT, Halkbank, Ziraat Bankası veya e-Devlet üzerinden yapılabilir.\n🌐 Detay: https://www.artvin.edu.tr\n\n**Harç Miktarları**\nYıllık harç miktarları Yükseköğretim Kurulu (YÖK) tarafından belirlenir.\nGüncel miktar için OBS'deki ödeme modülünü kontrol et.\n\n**Ödeme Yapamadıysan**\nGeç ödeme faiz uygulamasına tabi olabilir.\nMuafiyet (engel durumu, şehit yakını vb.) için Öğrenci İşleri'ne başvur.\n\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -441,7 +465,13 @@
         "farabi programı nedir",
         "mevlana değişim programı",
         "erasmus burs miktarı",
-        "hangi ülkelere gidebilirim erasmus ile"
+        "hangi ülkelere gidebilirim erasmus ile",
+        "erasmus koordinatörü kimdir",
+        "öğrenci değişimi ne zaman başvurulur",
+        "erasmus ders kredisi tanıma",
+        "ifmsa programı",
+        "ulusal ajans burs",
+        "değişim programı başvuru belgeleri"
       ],
       "response_type": "TEXT",
       "response_content": "✈️ **Uluslararası Değişim Programları**\n\n**Erasmus+** (Avrupa)\nAvrupa'daki partner üniversitelerde bir dönem/yıl eğitim veya staj.\n📅 Başvuru: Kasım–Ocak (güz dönemi için)\n📋 Gereksinimler: Dil sınavı (genellikle YDS/YÖKDİL ≥ 60)\n\n**Farabi** (Türkiye içi)\nTürkiye'deki başka üniversitelerde değişim.\n\n**Mevlana** (Uluslararası)\nTürkiye dışındaki ülkelerle ikili anlaşmalar.\n\n**Başvuru Ofisi**\n📍 AÇÜ Uluslararası Ofisi — İdari Bina\n🌐 https://www.artvin.edu.tr/tr/uluslararasi-iliskiler\n📞 +90 (466) 215 10 00"
@@ -467,7 +497,13 @@
         "bölüm değiştirmek istiyorum",
         "yatay geçiş şartları neler",
         "yatay geçiş başvurusu nereye",
-        "dikey geçiş nasıl yapılır"
+        "dikey geçiş nasıl yapılır",
+        "merkezi yatay geçiş tarihleri",
+        "kurumlar arası yatay geçiş",
+        "yatay geçiş kontenjanları",
+        "intibak dersleri",
+        "bölüm değişikliği dilekçe",
+        "ön lisanstan lisansa geçiş"
       ],
       "response_type": "TEXT",
       "response_content": "🔄 **Yatay / Dikey Geçiş**\n\n**Yatay Geçiş (Üniversiteler Arası)**\n📋 Şartlar: GNO ≥ 2.00 (bölüme göre farklılık gösterebilir), uygun kontenjan.\n📅 Başvuru: Her dönem başı (Temmuz-Ağustos ve Ocak-Şubat)\n📄 Gerekli belgeler: Transkript, öğrenci belgesi, disiplin belgesi.\n\n**Kurum İçi Yatay Geçiş**\nAÇÜ içinde bölüm değiştirmek için bölüm/fakülte yönetim kuruluna başvurulur.\n\n**Dikey Geçiş (MYO → Lisans)**\nDGS (Dikey Geçiş Sınavı) ile. ÖSYM'den başvuru yapılır.\n\n🌐 Detay: https://www.artvin.edu.tr/tr/ogrenci-isleri\n📞 Öğrenci İşleri: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -496,7 +532,14 @@
         "bir kulübe nasıl katılırım",
         "öğrenci konseyi nasıl çalışır",
         "tiyatro kulübü var mı",
-        "etkinliklere nasıl katılırım"
+        "etkinliklere nasıl katılırım",
+        "müzik topluluğuna nasıl üye olurum",
+        "üniversitede sosyal etkinlikler neler",
+        "öğrenci topluluğu nasıl kurulur",
+        "fotoğrafçılık kulübü",
+        "spor kulübüne katılmak istiyorum",
+        "öğrenci konseyi başvurusu",
+        "gönüllülük faaliyetleri"
       ],
       "response_type": "TEXT",
       "response_content": "🎭 **Öğrenci Kulüpleri ve Topluluklar**\n\nAÇÜ'de öğrenci toplulukları SKS (Sağlık, Kültür ve Spor Daire Başkanlığı) bünyesinde faaliyet gösterir.\n\n**Popüler Topluluklar**\n• Müzik ve Sanat Topluluğu\n• Tiyatro Topluluğu\n• Doğa Sporları Kulübü\n• Kariyer ve Girişimcilik Kulübü\n• Gönüllülük ve Sosyal Sorumluluk\n• Fotoğrafçılık Topluluğu\n\n**Nasıl Katılırsın?**\nSKS Daire Başkanlığı'na başvur veya topluluk koordinatörleriyle iletişime geç.\n\n📞 SKS: +90 (466) 215 10 00\n🌐 https://www.artvin.edu.tr/tr/sks"
@@ -527,7 +570,14 @@
         "poliklinik saatleri",
         "doktora nasıl görünürüm",
         "kampüste sağlık hizmetleri var mı",
-        "sağlık raporu nasıl alınır"
+        "sağlık raporu nasıl alınır",
+        "revir var mı kampüste",
+        "üniversitede doktor var mı",
+        "ilaç almak istiyorum",
+        "hastalandım ne yapayım",
+        "hemşireye görünmek istiyorum",
+        "acil durum nereye başvurayım",
+        "eczane kampüste var mı"
       ],
       "response_type": "TEXT",
       "response_content": "🏥 **AÇÜ Sağlık, Kültür ve Spor Dairesi — Sağlık Bölümü**\n\n📍 Kampüs İdari Binası, Zemin Kat\n⏰ Pzt–Cum: 08:30 – 17:00\n\n**Sunulan Hizmetler**\n• Genel muayene (pratisyen hekim)\n• Psikolojik danışmanlık\n• İlk yardım ve acil müdahale\n• Sağlık raporu düzenleme\n\n**Acil Durumlarda**\n🚨 Artvin Devlet Hastanesi: 112 / 0466 212 10 15\n\n💡 Öğrenciler yeşil kart veya SGK ile devlet hastanelerinden faydalanabilir.\n📞 SKS: +90 (466) 215 10 00"
@@ -557,7 +607,14 @@
         "psikolojik danışman var mı",
         "stresle nasıl başa çıkarım",
         "ruh sağlığı desteği",
-        "biriyle konuşmak istiyorum"
+        "biriyle konuşmak istiyorum",
+        "kendimi çok kötü hissediyorum",
+        "kaygılanıyorum nasıl yardım alırım",
+        "üniversitede rehber danışman var mı",
+        "depresyon hissediyorum",
+        "anksiyete ile nasıl başa çıkayım",
+        "yalnız hissediyorum destek almak istiyorum",
+        "öğrenci psikolojik danışmanlık servisi"
       ],
       "response_type": "TEXT",
       "response_content": "💙 **Psikolojik Danışmanlık ve Rehberlik**\n\nAÇÜ öğrencilerine **ücretsiz** psikolojik danışmanlık hizmeti sunulmaktadır.\n\n📍 SKS Dairesi, Sağlık Birimi\n⏰ Pzt–Cum: 08:30–17:00 (randevulu)\n\n**Randevu İçin**\n📞 +90 (466) 215 10 00\n📧 sks@artvin.edu.tr\n\nKendini iyi hissetmiyorsan lütfen destek almaktan çekinme. Yalnız değilsin. 💚\n\n**Acil Psikolojik Destek**\n📞 ALO 182 (Psikolojik Destek Hattı) — 7/24 ücretsiz"
@@ -589,7 +646,13 @@
         "halısaha rezervasyonu",
         "yüzme havuzu açık mı",
         "basketbol sahası",
-        "spor tesisleri nerede"
+        "spor tesisleri nerede",
+        "tenis kortu",
+        "voleybol sahası nerede",
+        "jimnastik salonu",
+        "kampüs koşu pisti",
+        "spor tesisi üyelik",
+        "serbest ağırlık salonu"
       ],
       "response_type": "TEXT",
       "response_content": "🏋️ **AÇÜ Spor Tesisleri**\n\n**Mevcut Tesisler**\n⚽ Halısaha (rezervasyon gerekli)\n🏀 Basketbol ve Voleybol Sahaları\n🏓 Masa Tenisi Masaları\n🏃 Koşu Pisti\n💪 Spor Salonu\n\n**Kullanım**\nÖğrenci kimliğiyle ücretsiz veya uygun ücretli.\nRezervasyonlar SKS Dairesi'nden yapılır.\n\n📍 Kampüs Spor Merkezi\n⏰ Pzt–Cum: 08:00–22:00 / Hft: 09:00–18:00\n📞 SKS: +90 (466) 215 10 00"
@@ -615,7 +678,14 @@
         "eduroam nasıl kurulur",
         "internet bağlantısı nasıl yapılır",
         "wifi şifresi ne",
-        "eduroam şifremi unuttum"
+        "eduroam şifremi unuttum",
+        "internete bağlanamıyorum",
+        "kampüs ağına nasıl girilir",
+        "wifi çalışmıyor ne yapayım",
+        "eduroam hesabı nasıl açılır",
+        "kablosuz internet kampüste",
+        "üniversite internet hızı yavaş",
+        "vpn kullanabilir miyim kampüste"
       ],
       "response_type": "TEXT",
       "response_content": "📶 **Kampüs İnternet / Wi-Fi**\n\n**Eduroam Ağı**\nAÇÜ kampüsünde **eduroam** kablosuz ağı kullanılmaktadır.\nAvrupa ve dünya genelindeki üniversitelerde de geçerlidir.\n\n**Bağlanmak İçin**\n• Kullanıcı adı: `ogrenci_numarasi@artvin.edu.tr`\n• Şifre: OBS / e-posta şifrenle aynıdır\n\n**Sorun Yaşıyorsan**\n📧 bilgi@artvin.edu.tr\n📞 Bilgi İşlem Dairesi: +90 (466) 215 10 00\n\n💡 Eduroam kurulum kılavuzu: https://www.eduroam.org/support/"
@@ -640,7 +710,14 @@
         "yazıcı kullanabilir miyim",
         "baskı hizmeti var mı",
         "tarama hizmeti",
-        "fotokopi ücreti"
+        "fotokopi ücreti",
+        "kağıt yazdırmak istiyorum",
+        "printer nerede var kampüste",
+        "fotokopi merkezi",
+        "belge çıktısı almak istiyorum",
+        "renkli baskı yapılabilir mi",
+        "scanner nasıl kullanılır",
+        "ödev baskısı nerede yapılır"
       ],
       "response_type": "TEXT",
       "response_content": "🖨️ **Fotokopi ve Baskı Hizmetleri**\n\n**Kütüphane**\n📍 Merkez Kütüphane — fotokopi ve tarayıcı hizmeti mevcut.\n⏰ Pzt–Cum: 08:00–21:00\n\n**Kampüs İçi**\nYerleşke içinde çeşitli kırtasiye ve fotokopi noktaları bulunmaktadır.\n\n**Kütüphane Bilgisayar Salonu**\nBelge yazdırma işlemleri ücret karşılığı yapılabilir.\n\n📞 Kütüphane: +90 (466) 215 10 00 (Dahili: 1200)"
@@ -663,7 +740,15 @@
         "mazeret sınavına nasıl girerim",
         "sınava hasta olduğum için giremedim",
         "mazeret dilekçesi nasıl verilir",
-        "mazeretli sınav hakkım var mı"
+        "mazeretli sınav hakkım var mı",
+        "sınava giremedim hastalık raporum var",
+        "mazeret sınavı başvurusu nereye yapılır",
+        "mazeret ne kadar sürede bildirilmeli",
+        "sınav mazeretimi kabul edecekler mi",
+        "raporum var mazeret için yeterli mi",
+        "mazeret sınavı ne zaman yapılır",
+        "mazeretli sayılmak için ne gerekli",
+        "annemi kaybettim sınava giremedim"
       ],
       "response_type": "TEXT",
       "response_content": "📋 **Mazeret Sınavı**\n\nGeçerli bir mazerete bağlı olarak sınava giremeyen öğrenciler **mazeret sınavı** hakkından yararlanabilir.\n\n**Kabul Edilen Mazeretler**\n• Hastalık (hastane raporu)\n• Birinci derece yakın kaybı\n• Resmi görev veya mahkeme celbi\n\n**Başvuru Süreci**\n1️⃣ Mazeretin sona ermesinden itibaren **5 iş günü** içinde bölüm sekreterliğine başvur\n2️⃣ Resmi mazeret belgeni ekle (hastane raporu vb.)\n3️⃣ Bölüm/Fakülte Yönetim Kurulu karar verir\n\n📍 Başvuru yeri: Bölüm sekreterliği\n📞 Öğrenci İşleri: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -687,7 +772,14 @@
         "ff aldım ne yapacağım",
         "ek sınav hakkım var mı",
         "dersten kaldım bütünlemeye girebilir miyim",
-        "bütünleme sınavı nasıl"
+        "bütünleme sınavı nasıl",
+        "fd aldım bütünlemeye girebilir miyim",
+        "sınav hakkımı kullandım ikinci sınav var mı",
+        "bütünleme kaç gün sonra",
+        "telafi sınavı ne zaman",
+        "ek sınav hakkını kimler kullanabilir",
+        "bütünleme sınavından geçebilir miyim",
+        "bütünleme sonucu ne zaman açıklanır"
       ],
       "response_type": "TEXT",
       "response_content": "📝 **Bütünleme (Ek) Sınavı**\n\n**Kimler Girebilir?**\n• Final sınavında FF, FD veya YZ (yetersiz) alan öğrenciler\n• Akademik takvimde belirtilen koşulları sağlayanlar\n\n**Bütünleme Tarihleri (2025-2026)**\n📅 Güz Dönemi Bütünleme: 19–23 Ocak 2026\n📅 Bahar Dönemi Bütünleme: Haziran 2026 (kesin tarih akademik takvimde)\n\n**Dikkat**\n⚠️ Bütünleme sınavı hakkı tüm dersler için geçerli olmayabilir.\nBölüm koordinatörünle kontrol et.\n\n🌐 Akademik Takvim: https://www.artvin.edu.tr"
@@ -722,7 +814,14 @@
         "ring servisi saatleri",
         "üniversiteye nasıl gidilir",
         "şehir merkezine servis var mı",
-        "kampüse ulaşım"
+        "kampüse ulaşım",
+        "otobüs hangi duraktan kalkıyor",
+        "kampüse dolmuşla gidilir mi",
+        "servis programı nereden öğrenilir",
+        "taksiyle kampüse ne kadar sürer",
+        "artvin merkezden kampüse nasıl gidilir",
+        "minibüs saatleri",
+        "okula nasıl gelinir"
       ],
       "response_type": "TEXT",
       "response_content": "🚌 **AÇÜ Kampüs Ulaşım**\n\nRing servisi ve kampüs ulaşım saatleri dönemsel olarak değişebilmektedir.\n\n📞 **Güncel servis saatleri için:**\nÖğrenci İşleri: +90 (466) 215 10 00\n\n🌐 **Resmi site:** https://www.artvin.edu.tr\n\n🚕 Artvin şehir içinde taksi ve dolmuş hizmeti de mevcuttur."
@@ -756,7 +855,14 @@
         "kitap ödünç almak istiyorum",
         "e-kaynaklara nasıl erişebilirim",
         "tez veritabanı",
-        "kitap iade tarihi"
+        "kitap iade tarihi",
+        "kütüphanede çalışma yeri var mı",
+        "kütüphane hafta sonu açık mı",
+        "kaynakları online inceleyebilir miyim",
+        "kütüphane kataloguna nasıl bakılır",
+        "üniversite kütüphanesi nerede",
+        "makale erişimi nasıl sağlanır",
+        "kitabın gecikme cezası var mı"
       ],
       "response_type": "TEXT",
       "response_content": "📚 **AÇÜ Merkez Kütüphanesi**\n\n⏰ **Çalışma Saatleri**\nPazartesi – Cuma: 08:00 – 21:00\nCumartesi: 09:00 – 17:00\nPazar: Kapalı\n\n📖 **Ödünç Alma**\nÖğrenciler: 7 gün (3 kitaba kadar)\nAkademisyenler: 30 gün (10 kitaba kadar)\nUzatma: Kütüphane web portalı veya gişe\n\n💻 **E-Kaynaklar**\n🔗 https://kutuphane.artvin.edu.tr\nYÖK Tez Merkezi, EBSCO, Springer, Science Direct vb.\n\n📞 Tel: +90 (466) 215 10 00 (Dahili: 1200)"
@@ -790,7 +896,14 @@
         "kyk yurt ücretleri",
         "öğrenci yurdu nerede",
         "barınma imkanları",
-        "kyk başvurusu ne zaman"
+        "kyk başvurusu ne zaman",
+        "yurt kapasite var mı",
+        "apart daire kiralayabilir miyim",
+        "kız yurdu nerede",
+        "erkek yurdu kaç TL",
+        "yurt bağvurusu reddedildi ne yapayım",
+        "üniversitede konaklama seçenekleri",
+        "yurtta yer var mı"
       ],
       "response_type": "TEXT",
       "response_content": "🏠 **AÇÜ Yurt Bilgileri**\n\n**KYK (Kredi Yurtlar Kurumu) Yurtları**\n📍 Artvin KYK Yurdu şehir merkezinde hizmet vermektedir.\n💰 Güncel ücretler: https://www.kyk.gov.tr\n\n**Başvuru**\n📅 Her yıl Ağustos–Eylül aylarında açılır\n🌐 https://basvuru.kyk.gov.tr\n\n**Özel Yurtlar ve Apart Daireler**\nŞehir merkezinde çeşitli özel yurt ve apart seçenekleri mevcuttur.\nFiyatlar 2.000–5.000 TL/ay aralığında değişmektedir (güncel değildir, araştır).\n\n💡 Öğrenci Konseyi veya Öğrenci İşleri sana daha fazla yardımcı olabilir.\n📞 +90 (466) 215 10 00 (Dahili: 1350)"
@@ -821,7 +934,13 @@
         "TÜBİTAK bursu",
         "devlet bursu şartları",
         "maddi destek imkanları",
-        "vakıf bursu"
+        "vakıf bursu",
+        "burs ne zaman yatar",
+        "burs miktarı ne kadar",
+        "öğrenim kredisi başvurusu",
+        "ihtiyaç bazlı burs var mı",
+        "burs için başarı şartı ne",
+        "kyk burs veya kredi"
       ],
       "response_type": "TEXT",
       "response_content": "💰 **Burs İmkanları**\n\n**1. Devlet Bursu (KYK)**\n🔗 https://basvuru.kyk.gov.tr\n📅 Başvuru: Her yıl Eylül–Ekim\nÖğrenim kredisi veya burs seçeneği mevcuttur.\n\n**2. TÜBİTAK Bursu**\n🔬 2205 — Lisans Burs Programı\n🔗 https://e-bideb.tubitak.gov.tr\n\n**3. AÇÜ Başarı Bursu**\nBölümde ilk 3'e giren öğrencilere ödül niteliğinde burs.\nDetay: Öğrenci İşleri Dairesi\n\n**4. Vakıf ve Belediye Bursları**\n• Türkiye Diyanet Vakfı, TBMM Vakfı\n• Artvin Belediyesi öğrenci bursları\n\n📞 Danışmanlık: +90 (466) 215 10 00 (Dahili: 1350)"
@@ -856,7 +975,13 @@
         "obs ders ekleme",
         "seçmeli ders nasıl seçilir",
         "kontenjan doldu ne yapayım",
-        "ders bırakma süresi"
+        "ders bırakma süresi",
+        "ders müfredatı nerede",
+        "zorunlu dersleri nasıl görürüm",
+        "kredi limitim kaç",
+        "ders programı açıklandı mı",
+        "hangi dersleri almam gerekiyor",
+        "akts hesaplama"
       ],
       "response_type": "TEXT",
       "response_content": "📝 **Ders Kaydı Rehberi**\n\n**1. OBS'ye Giriş**\n🌐 https://obs.artvin.edu.tr\nÖğrenci numarası ve şifrenle giriş yap.\n\n**2. Ders Seçimi**\n• Danışmanının açtığı dersleri görüntüle\n• Zorunlu dersleri önce ekle\n• Kredi limitine dikkat et (genellikle 30–45 AKTS)\n\n**3. Danışman Onayı**\nSeçimlerini tamamladıktan sonra danışmanının onaylaması gerekir.\n\n**4. Süreler**\n📅 Ders ekleme: Dönem başı ilk **2 hafta**\n📅 Ders bırakma: Dönem başı ilk **4 hafta**\n\n⚠️ Süreler akademik takvimde yayınlanır!"
@@ -886,7 +1011,14 @@
         "diploma nasıl alınır",
         "mezuniyet töreni ne zaman",
         "GNO kaç olmalı mezun olmak için",
-        "transkript nasıl alınır"
+        "transkript nasıl alınır",
+        "son sınıfım ne yapmam lazım",
+        "mezun oldum diploma ne zaman gelir",
+        "mezuniyet belgesi nereden alınır",
+        "cüppe giymek için başvuru nasıl",
+        "mezuniyet fotoğrafı çekimi",
+        "tüm derslerimi bitirdim mezun olur muyum",
+        "mezuniyet başvurusu nereye yapılır"
       ],
       "response_type": "TEXT",
       "response_content": "🎓 **Mezuniyet Bilgileri**\n\n**Genel Şartlar**\n✅ Tüm zorunlu ve seçmeli dersleri tamamlamak\n✅ Minimum AKTS kredisini doldurmak (bölüme göre 240 AKTS)\n✅ GNO: **2.00 ve üzeri**\n✅ Bitirme projesi / tezi (bölüme göre)\n\n**Diploma**\n📄 Diploma mezuniyeti takip eden 6 ay içinde hazırlanır.\nGeçici mezuniyet belgesi aynı gün alınabilir.\n\n**Mezuniyet Töreni**\n📅 Her yıl Haziran–Temmuz aylarında düzenlenir.\n\n**Başvuru**\nSon dönemde Öğrenci İşleri'ne dilekçe ver.\n📞 +90 (466) 215 10 00 (Dahili: 1350)"
@@ -918,7 +1050,13 @@
         "staj yeri nasıl bulunur",
         "staj belgesi nereden alınır",
         "sgk staj sigortası",
-        "staj defteri"
+        "staj defteri",
+        "staj başvurusu ne zaman",
+        "staj kabul formu nereden alınır",
+        "staj günü sayısı",
+        "yaz stajı nasıl yapılır",
+        "staj raporu nasıl yazılır",
+        "stajımı nereye teslim edeceğim"
       ],
       "response_type": "TEXT",
       "response_content": "💼 **Staj Rehberi**\n\n**Süreç**\n1️⃣ Staj yapacağın kurumdan **kabul belgesi** al\n2️⃣ Bölüm Staj Komisyonu'na onaylat\n3️⃣ Üniversite SGK iş kazası sigortanı başlatır\n4️⃣ Staj boyunca **staj defteri** tut\n5️⃣ Staj sonunda defteri ve değerlendirme formunu teslim et\n\n**Süreler**\nBölüme göre 20–60 iş günü (bölüm koordinatöründen öğren)\n\n**Staj Yeri Bulmak İçin**\n• Kariyer fuarları ve üniversite iş ilanları\n• LinkedIn, Kariyer.net\n• Bölüm hocalarından öneri\n\n📋 Detaylı bilgi için **bölüm sekreterliğine** danış."
@@ -950,7 +1088,13 @@
         "güncel haberler",
         "yeni ilan var mı",
         "etkinlik duyuruları",
-        "bugün bir şey var mı"
+        "bugün bir şey var mı",
+        "duyuru listesi",
+        "resmi açıklama var mı",
+        "üniversiteden ne duyuruldu",
+        "seminer veya konferans var mı",
+        "acil duyuru",
+        "önemli bilgilendirme var mı"
       ],
       "response_type": "TEXT",
       "response_content": "📢 Güncel duyurular için resmi siteyi ziyaret edebilirsiniz:\nhttps://www.artvin.edu.tr/tr/duyuru/tumu"
@@ -986,7 +1130,13 @@
         "yağmur yağacak mı",
         "dışarısı soğuk mu",
         "hava kaç derece",
-        "kar yağıyor mu"
+        "kar yağıyor mu",
+        "haftalık hava tahmini",
+        "artvin sıcaklık",
+        "fırtına var mı",
+        "hava durumu beş günlük",
+        "artvin sis var mı",
+        "don tehlikesi"
       ],
       "response_type": "CUSTOM_LOGIC",
       "response_content": "WEATHER_LIVE"
@@ -1037,6 +1187,73 @@
       "response_content": "DEVICE_REGISTRY"
     },
     {
+      "intent_name": "sks_etkinlik",
+      "keywords": {
+        "sks": 8,
+        "etkinlik": 7,
+        "faaliyet": 7,
+        "spor etkinliği": 8,
+        "kültürel etkinlik": 8,
+        "öğrenci etkinlikleri": 9,
+        "konser": 6,
+        "festival": 7,
+        "gezi": 5,
+        "şenlik": 7,
+        "bahar şenliği": 8,
+        "kutlama": 5,
+        "organizasyon": 6,
+        "program": 4,
+        "etkinlik programı": 8
+      },
+      "examples": [
+        "bu hafta etkinlik var mı",
+        "üniversitede neler oluyor",
+        "sks etkinlikleri",
+        "bahar şenliği ne zaman",
+        "öğrenci etkinlik programı",
+        "konser veya festival var mı",
+        "kültürel etkinlikler neler",
+        "sks organizasyonları",
+        "kampüste ne tür etkinlikler düzenleniyor",
+        "etkinlik takvimi",
+        "öğrenci faaliyetleri neler",
+        "spor etkinlikleri programı"
+      ],
+      "response_type": "CUSTOM_LOGIC",
+      "response_content": "SKS_LIVE"
+    },
+    {
+      "intent_name": "guncel_haberler",
+      "keywords": {
+        "güncel haber": 9,
+        "son haberler": 8,
+        "üniversite haberi": 8,
+        "son dakika": 7,
+        "basın bülteni": 7,
+        "yeni haber": 8,
+        "haberler": 7,
+        "ne oldu": 5,
+        "gelişmeler": 6,
+        "haber listesi": 7
+      },
+      "examples": [
+        "güncel haberler neler",
+        "son haberler",
+        "üniversitede ne oldu",
+        "bu hafta haberler",
+        "son gelişmeler",
+        "üniversite basın bülteni",
+        "yeni haber var mı",
+        "haberleri görmek istiyorum",
+        "kampüs haberleri",
+        "üniversite güncel",
+        "ne yeni var üniversitede",
+        "haberler listesi"
+      ],
+      "response_type": "CUSTOM_LOGIC",
+      "response_content": "NEWS_LIVE"
+    },
+    {
       "intent_name": "yabanci_dil",
       "keywords": {
         "yabancı dil": 8,
@@ -1060,7 +1277,13 @@
         "yabancı dil sınavı",
         "dil hazırlık programı",
         "YDS nasıl hazırlanılır",
-        "dil eğitimi"
+        "dil eğitimi",
+        "yabancı dil muafiyet sınavı",
+        "hazırlık sınıfı atlatma",
+        "dil yeterlik belgesi",
+        "İngilizce B1 sınavı",
+        "çevrimiçi dil kursu",
+        "dil hazırlık sınıfı kayıt"
       ],
       "response_type": "TEXT",
       "response_content": "🌍 **Yabancı Dil Eğitimi**\n\n**AÇÜ Dil Okulu / Yabancı Diller Yüksekokulu**\nİngilizce başta olmak üzere çeşitli dil kursları ve hazırlık programları sunulmaktadır.\n\n**Dil Sınavları**\n• YDS / YÖKDİL: ÖSYM tarafından yılda 2 kez\n• TOEFL / IELTS: Uluslararası geçerliliği olan sınavlar\n\n**TÖMER**\nYabancı dil eğitimi için TÖMER merkezleri büyükşehirlerde yer almaktadır.\n\n**AÇÜ Dil Bölümü İletişim**\n🌐 https://www.artvin.edu.tr\n📞 +90 (466) 215 10 00"

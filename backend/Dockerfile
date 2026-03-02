@@ -3,11 +3,13 @@ FROM python:3.11-slim
 # Install dependencies (minimal - only what's needed)
 ENV GECKODRIVER_VERSION=0.33.0
 ENV PYTHONUNBUFFERED=1
+ENV FIREFOX_BIN=/usr/bin/firefox-esr
+ENV GECKODRIVER_PATH=/usr/local/bin/geckodriver
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     openjdk-21-jre-headless \
-    firefox-esr \
+    "firefox-esr=115.*" \
     wget \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/* && \
@@ -16,6 +18,9 @@ RUN apt-get update && \
     tar -xzf geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz -C /usr/local/bin/ && \
     rm geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz && \
     chmod +x /usr/local/bin/geckodriver
+
+# Create non-root user
+RUN adduser --disabled-password --gecos '' appuser
 
 WORKDIR /app
 
@@ -27,6 +32,9 @@ RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt &
     find /usr/local/lib/python3.11/site-packages -type f -name "*.pyo" -delete
 
 COPY ./app /app/app
+RUN chown -R appuser /app
+
+USER appuser
 
 EXPOSE 8080
 

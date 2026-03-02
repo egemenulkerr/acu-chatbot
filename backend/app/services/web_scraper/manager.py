@@ -24,7 +24,7 @@ logger: logging.Logger = logging.getLogger(__name__)
 DATA_FILE: Path = Path(__file__).parent.parent.parent / "data" / "intents.json"
 
 # JSON dosyasına eş zamanlı erişimi önleyen kilit
-_json_lock = threading.Lock()
+_json_lock = threading.RLock()
 
 
 # ============================================================================

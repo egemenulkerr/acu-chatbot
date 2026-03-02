@@ -2,8 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 from datetime import datetime
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 logger = logging.getLogger(__name__)
+
+
+@retry(
+    retry=retry_if_exception_type((requests.RequestException, ConnectionError)),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=4),
+    reraise=False,
+)
+def _fetch_menu_page(url: str, timeout: int = 10):
+    r = requests.get(url, timeout=timeout)
+    r.raise_for_status()
+    return r
 
 
 def scrape_daily_menu():
@@ -26,10 +39,9 @@ def scrape_daily_menu():
 
     try:
         logger.info("Yemek listesi taranıyor...")
-        r = requests.get(url, timeout=10)
-
-        if r.status_code != 200:
-            logger.error(f"Siteye ulaşılamadı. Kod: {r.status_code}")
+        r = _fetch_menu_page(url)
+        if r is None:
+            logger.error("Yemek sayfası 3 denemede de alınamadı.")
             return None
 
         soup = BeautifulSoup(r.content, "html.parser")

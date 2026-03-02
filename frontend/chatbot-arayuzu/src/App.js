@@ -439,7 +439,7 @@ export default function App() {
 
       {/* ── CHAT WINDOW ── */}
       {open && (
-        <div className="acu-window">
+        <div className="acu-window" id="acu-chat-window" role="dialog" aria-label="AÇÜ Asistan sohbet penceresi">
 
           {/* Header */}
           <header className="acu-header">
@@ -459,23 +459,41 @@ export default function App() {
                 className="acu-icon-btn"
                 onClick={() => setDarkMode(d => !d)}
                 title={darkMode ? 'Açık mod' : 'Koyu mod'}
+                aria-label={darkMode ? 'Açık moda geç' : 'Koyu moda geç'}
               >
                 {darkMode
                   ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                   : <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 }
               </button>
-              <button className="acu-icon-btn" onClick={clearChat} title="Sohbeti temizle">
+              <button 
+                className="acu-icon-btn" 
+                onClick={clearChat} 
+                title="Sohbeti temizle"
+                aria-label="Sohbet geçmişini temizle"
+              >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
               </button>
-              <button className="acu-icon-btn" onClick={() => setOpen(false)} title="Kapat">
+              <button 
+                className="acu-icon-btn" 
+                onClick={() => setOpen(false)} 
+                title="Kapat"
+                aria-label="Chatbot penceresini kapat"
+              >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
           </header>
 
           {/* Messages */}
-          <div className="acu-log" ref={logRef} onScroll={handleScroll}>
+          <div 
+            className="acu-log" 
+            ref={logRef} 
+            onScroll={handleScroll}
+            role="log"
+            aria-live="polite"
+            aria-label="Mesajlar"
+          >
             {groupedMessages.map((m) => (
               <div
                 key={m.id}
@@ -593,6 +611,8 @@ export default function App() {
                 disabled={loading}
                 maxLength={MAX_CHARS + 50}
                 autoComplete="off"
+                aria-label="Mesaj girişi"
+                aria-describedby={showCharWarning ? "char-count" : undefined}
               />
               {input && (
                 <button
@@ -605,7 +625,12 @@ export default function App() {
                 </button>
               )}
               {showCharWarning && (
-                <span className={`acu-char-count${charCount > MAX_CHARS ? ' over' : ''}`}>
+                <span 
+                  id="char-count"
+                  className={`acu-char-count${charCount > MAX_CHARS ? ' over' : ''}`}
+                  role="status"
+                  aria-live="polite"
+                >
                   {charCount}/{MAX_CHARS}
                 </span>
               )}
@@ -618,6 +643,8 @@ export default function App() {
                 onClick={toggleMic}
                 disabled={loading}
                 title={listening ? 'Durdur' : 'Sesle yaz'}
+                aria-label={listening ? 'Ses tanımayı durdur' : 'Sesle mesaj yaz'}
+                aria-pressed={listening}
               >
                 {listening
                   ? <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
@@ -628,9 +655,10 @@ export default function App() {
 
             <button
               type="submit"
-              className="acu-send"
+              className={`acu-send ${loading ? 'sending' : ''}`}
               disabled={loading || listening || !input.trim() || charCount > MAX_CHARS}
               title="Gönder"
+              aria-label="Mesaj gönder"
             >
               {loading
                 ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="acu-spin"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -651,7 +679,9 @@ export default function App() {
       <button
         className="acu-launcher"
         onClick={() => setOpen(o => !o)}
-        aria-label="Chatbot aç/kapat"
+        aria-label={open ? "Chatbot'u kapat" : "Chatbot'u aç"}
+        aria-expanded={open}
+        aria-controls="acu-chat-window"
       >
         <div className={`acu-launcher-icon${open ? ' rotated' : ''}`}>
           {open

@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 from typing import Optional
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,18 @@ HEADERS = {
 }
 
 
+@retry(
+    retry=retry_if_exception_type((requests.RequestException, ConnectionError)),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=4),
+    reraise=False,
+)
+def _fetch_announcements_page(url: str, headers: dict, timeout: int = 12):
+    r = requests.get(url, timeout=timeout, headers=headers)
+    r.raise_for_status()
+    return r
+
+
 def scrape_announcements() -> Optional[str]:
     """
     AÇÜ duyurular sayfasından son MAX_DUYURU kadar duyuruyu çeker.
@@ -25,9 +38,9 @@ def scrape_announcements() -> Optional[str]:
     """
     try:
         logger.info("Duyurular sayfası taranıyor...")
-        r = requests.get(DUYURULAR_URL, timeout=12, headers=HEADERS)
-        if r.status_code != 200:
-            logger.error(f"Duyurular sayfasına ulaşılamadı: {r.status_code}")
+        r = _fetch_announcements_page(DUYURULAR_URL, HEADERS)
+        if r is None:
+            logger.error("Duyurular sayfası 3 denemede de alınamadı.")
             return None
 
         soup = BeautifulSoup(r.content, "html.parser")

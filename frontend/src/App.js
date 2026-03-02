@@ -10,7 +10,6 @@ const MAX_CHARS = 500;
 const INITIAL_BOT_MESSAGE = {
   id: 1, sender: 'bot', feedback: null, streaming: false,
   text: 'Merhaba! Ben **AÇÜ Asistan**\'ım.\n\nYemek menüsü, akademik takvim, lab cihazları, burs, yurt, OBS ve daha fazlası için buradayım. 👋',
-  timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
 };
 
 const QUICK_REPLY_CATEGORIES = [
@@ -175,7 +174,7 @@ function initSpeech(onResult, onListening, onError) {
 
 // ── Streaming fetch ───────────────────────────────────────────────────────────
 
-async function streamMessage(message, sessionId, history, onToken, onDone, onError) {
+async function streamMessage(message, sessionId, history, onToken, onDone, onError, signal) {
   try {
     const res = await fetch(`${BACKEND_URL}/api/chat/stream`, {
       method: 'POST',
@@ -185,6 +184,7 @@ async function streamMessage(message, sessionId, history, onToken, onDone, onErr
         session_id: sessionId,
         history: history.slice(-10).map(m => ({ role: m.sender === 'user' ? 'user' : 'bot', text: m.text })),
       }),
+      signal,
     });
 
     if (res.status === 429) { onError('RATE_LIMIT'); return; }
@@ -210,7 +210,10 @@ async function streamMessage(message, sessionId, history, onToken, onDone, onErr
       }
     }
     onDone();
-  } catch { onError('API_ERROR'); }
+  } catch (err) {
+    if (err.name === 'AbortError') return;
+    onError('API_ERROR');
+  }
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -259,8 +262,7 @@ function CopyButton({ text }) {
 // ── Main Component ─────────────────────────────────────────────────────────────
 
 export default function App() {
-  const stored = loadHistory();
-  const [messages, setMessages] = useState(stored || [INITIAL_BOT_MESSAGE]);
+  const [messages, setMessages] = useState(() => loadHistory() || [{ ...INITIAL_BOT_MESSAGE, timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) }]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
@@ -281,6 +283,8 @@ export default function App() {
   const logRef = useRef(null);
   const inputRef = useRef(null);
   const sessionRef = useRef(getOrCreateSessionId());
+  const isMobile = useRef(typeof window !== 'undefined' && window.innerWidth <= 480);
+  const abortRef = useRef(null);
 
   // Theme
   useEffect(() => {
@@ -288,8 +292,61 @@ export default function App() {
     localStorage.setItem(LS_THEME, darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
-  // LocalStorage sync
-  useEffect(() => { saveHistory(messages); }, [messages]);
+  // Visual Viewport API: klavye açıkken pencere yüksekliğini güncelle
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+
+    const onResize = () => {
+      // Klavye açıldığında visual viewport daralır; bunu CSS değişkenine yansıt
+      document.documentElement.style.setProperty(
+        '--acu-window-height',
+        `${vv.height}px`
+      );
+      // Açık pencerede log'u scroll et
+      if (open && logRef.current) {
+        setTimeout(() => {
+          logRef.current.scrollTop = logRef.current.scrollHeight;
+        }, 100);
+      }
+    };
+
+    vv.addEventListener('resize', onResize);
+    return () => vv.removeEventListener('resize', onResize);
+  }, [open]);
+
+  // Body scroll lock: chat açıkken sayfanın kaymasını engelle (iOS)
+  useEffect(() => {
+    if (!isMobile.current) return;
+    if (open) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      const top = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (top) window.scrollTo(0, -parseInt(top, 10));
+    }
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  // LocalStorage sync — debounced to avoid per-token saves during streaming
+  useEffect(() => {
+    const isStreaming = messages.some(m => m.streaming);
+    if (isStreaming) return;
+    const t = setTimeout(() => saveHistory(messages), 300);
+    return () => clearTimeout(t);
+  }, [messages]);
 
   // Auto-scroll
   useEffect(() => {
@@ -321,11 +378,22 @@ export default function App() {
   }, []);
 
   useEffect(() => { if (input) setError(''); }, [input]);
-  useEffect(() => { if (open) setUnread(0); }, [open]);
-
-  // Open → focus input
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 80);
+    if (open) setUnread(0);
+    // Pencere kapanırken aktif stream'i durdur
+    if (!open && abortRef.current) {
+      abortRef.current.abort();
+      abortRef.current = null;
+      setLoading(false);
+    }
+  }, [open]);
+
+  // Open → focus input (mobilede klavye settle için daha uzun delay)
+  useEffect(() => {
+    if (open) {
+      const delay = isMobile.current ? 300 : 80;
+      setTimeout(() => inputRef.current?.focus(), delay);
+    }
   }, [open]);
 
   // Suggestions filter
@@ -344,9 +412,21 @@ export default function App() {
 
   // ── Feedback ──
   const handleFeedback = useCallback((msgId, value) => {
-    setMessages(prev => prev.map(m =>
-      m.id === msgId ? { ...m, feedback: m.feedback === value ? null : value } : m
-    ));
+    setMessages(prev => {
+      const updated = prev.map(m =>
+        m.id === msgId ? { ...m, feedback: m.feedback === value ? null : value } : m
+      );
+      const msg = updated.find(m => m.id === msgId);
+      if (msg) {
+        const newValue = msg.feedback;
+        fetch(`${BACKEND_URL}/api/feedback`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Session-Id': sessionRef.current },
+          body: JSON.stringify({ msg_id: msgId, value: newValue, text: msg.text }),
+        }).catch(() => {});
+      }
+      return updated;
+    });
   }, []);
 
   // ── Send ──
@@ -356,6 +436,11 @@ export default function App() {
     if (t.length > MAX_CHARS) { setError(ERROR_MESSAGES.TOO_LONG); return; }
     setError('');
     setShowSuggestions(false);
+
+    // Önceki stream varsa iptal et
+    if (abortRef.current) abortRef.current.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     const userMsg = { id: Date.now(), sender: 'user', text: t, timestamp: nowTime(), feedback: null, streaming: false };
     const botId = Date.now() + 1;
@@ -372,16 +457,19 @@ export default function App() {
       [...messages, userMsg],
       (token) => setMessages(prev => prev.map(m => m.id === botId ? { ...m, text: m.text + token } : m)),
       () => {
+        abortRef.current = null;
         setMessages(prev => prev.map(m => m.id === botId ? { ...m, streaming: false } : m));
         setLoading(false);
         if (!open) setUnread(n => n + 1);
         setAtBottom(true);
       },
       (errKey) => {
+        abortRef.current = null;
         const msg = ERROR_MESSAGES[errKey] || ERROR_MESSAGES.API_ERROR;
-        setMessages(prev => prev.map(m => m.id === botId ? { ...m, text: `⚠️ ${msg}`, streaming: false } : m));
+        setMessages(prev => prev.map(m => m.id === botId ? { ...m, text: `⚠️ ${msg}`, streaming: false, error: true } : m));
         setLoading(false);
-      }
+      },
+      controller.signal,
     );
   }, [messages, open, input]);
 
@@ -452,7 +540,13 @@ export default function App() {
 
       {/* ── CHAT WINDOW ── */}
       {open && (
-        <div className="acu-window">
+        <div
+          id="acu-chat-window"
+          className="acu-window"
+          role="dialog"
+          aria-label="AÇÜ Asistan sohbet penceresi"
+          aria-modal="true"
+        >
 
           {/* Header */}
           <header className="acu-header">
@@ -473,6 +567,7 @@ export default function App() {
                   className="acu-icon-btn"
                   onClick={goToMenu}
                   title="Ana Menü"
+                  aria-label="Ana menüye git"
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
@@ -481,23 +576,32 @@ export default function App() {
                 className="acu-icon-btn"
                 onClick={() => setDarkMode(d => !d)}
                 title={darkMode ? 'Açık mod' : 'Koyu mod'}
+                aria-label={darkMode ? 'Açık moda geç' : 'Koyu moda geç'}
+                aria-pressed={darkMode}
               >
                 {darkMode
                   ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                   : <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 }
               </button>
-              <button className="acu-icon-btn" onClick={clearChat} title="Sohbeti temizle">
+              <button className="acu-icon-btn" onClick={clearChat} title="Sohbeti temizle" aria-label="Sohbeti temizle">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
               </button>
-              <button className="acu-icon-btn" onClick={() => setOpen(false)} title="Kapat">
+              <button className="acu-icon-btn" onClick={() => setOpen(false)} title="Kapat" aria-label="Sohbeti kapat">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
           </header>
 
           {/* Messages */}
-          <div className="acu-log" ref={logRef} onScroll={handleScroll}>
+          <div
+            className="acu-log"
+            ref={logRef}
+            onScroll={handleScroll}
+            role="log"
+            aria-live="polite"
+            aria-label="Sohbet mesajları"
+          >
             {groupedMessages.map((m) => (
               <div
                 key={m.id}
@@ -524,19 +628,32 @@ export default function App() {
                     <span className="acu-time">{m.timestamp}</span>
                     {m.sender === 'bot' && !m.streaming && m.text && (
                       <div className="acu-actions">
-                        <CopyButton text={m.text} />
-                        <div className="acu-feedback">
+                        {m.error ? (
                           <button
-                            className={`acu-fb-btn${m.feedback === 'up' ? ' active-up' : ''}`}
-                            onClick={() => handleFeedback(m.id, 'up')}
-                            title="Yardımcı oldu"
-                          >👍</button>
-                          <button
-                            className={`acu-fb-btn${m.feedback === 'down' ? ' active-down' : ''}`}
-                            onClick={() => handleFeedback(m.id, 'down')}
-                            title="Yardımcı olmadı"
-                          >👎</button>
-                        </div>
+                            className="acu-retry-btn"
+                            onClick={() => {
+                              const lastUser = [...messages].reverse().find(msg => msg.sender === 'user');
+                              if (lastUser) send(lastUser.text);
+                            }}
+                            title="Tekrar dene"
+                          >↺ Tekrar Dene</button>
+                        ) : (
+                          <>
+                            <CopyButton text={m.text} />
+                            <div className="acu-feedback">
+                              <button
+                                className={`acu-fb-btn${m.feedback === 'up' ? ' active-up' : ''}`}
+                                onClick={() => handleFeedback(m.id, 'up')}
+                                title="Yardımcı oldu"
+                              >👍</button>
+                              <button
+                                className={`acu-fb-btn${m.feedback === 'down' ? ' active-down' : ''}`}
+                                onClick={() => handleFeedback(m.id, 'down')}
+                                title="Yardımcı olmadı"
+                              >👎</button>
+                            </div>
+                          </>
+                        )}
                       </div>
                     )}
                   </div>
@@ -572,7 +689,7 @@ export default function App() {
                 <div className="acu-quick">
                   {currentCategory.items.map(q => (
                     <button key={q.text} className="acu-chip" onClick={() => send(q.text)}>
-                      {q.label}
+                      <span>{q.label}</span>
                     </button>
                   ))}
                 </div>
@@ -601,7 +718,8 @@ export default function App() {
                 <button
                   key={s}
                   className={`acu-suggestion-item${i === selectedSuggestion ? ' selected' : ''}`}
-                  onMouseDown={() => { setInput(s); setShowSuggestions(false); }}
+                  onMouseDown={e => { e.preventDefault(); setInput(s); setShowSuggestions(false); }}
+                  onTouchEnd={e => { e.preventDefault(); setInput(s); setShowSuggestions(false); inputRef.current?.focus(); }}
                 >
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="acu-suggest-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                   {s}
@@ -623,6 +741,9 @@ export default function App() {
                 disabled={loading}
                 maxLength={MAX_CHARS + 50}
                 autoComplete="off"
+                aria-label="Mesaj yaz"
+                aria-autocomplete="list"
+                aria-expanded={showSuggestions}
               />
               {input && (
                 <button
@@ -635,7 +756,11 @@ export default function App() {
                 </button>
               )}
               {showCharWarning && (
-                <span className={`acu-char-count${charCount > MAX_CHARS ? ' over' : ''}`}>
+                <span
+                  className={`acu-char-count${charCount > MAX_CHARS ? ' over' : ''}`}
+                  role="status"
+                  aria-live="polite"
+                >
                   {charCount}/{MAX_CHARS}
                 </span>
               )}
@@ -648,6 +773,8 @@ export default function App() {
                 onClick={toggleMic}
                 disabled={loading}
                 title={listening ? 'Durdur' : 'Sesle yaz'}
+                aria-label={listening ? 'Sesi durdur' : 'Sesle mesaj yaz'}
+                aria-pressed={listening}
               >
                 {listening
                   ? <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
@@ -658,9 +785,10 @@ export default function App() {
 
             <button
               type="submit"
-              className="acu-send"
+              className={`acu-send${loading ? ' sending' : ''}`}
               disabled={loading || listening || !input.trim() || charCount > MAX_CHARS}
               title="Gönder"
+              aria-label="Mesajı gönder"
             >
               {loading
                 ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="acu-spin"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -681,7 +809,9 @@ export default function App() {
       <button
         className="acu-launcher"
         onClick={() => setOpen(o => !o)}
-        aria-label="Chatbot aç/kapat"
+        aria-label={open ? 'Chatbotu kapat' : 'Chatbotu aç'}
+        aria-expanded={open}
+        aria-controls="acu-chat-window"
       >
         <div className={`acu-launcher-icon${open ? ' rotated' : ''}`}>
           {open
