@@ -10,7 +10,7 @@ zemberek-python==0.2.3
 slowapi>=0.1.9
 requests>=2.28.0
 sentry-sdk>=1.40.0
-fastembed>=0.2.0
+fastembed==0.5.1
 tenacity>=8.0.0
 redis>=5.0.0  # Opsiyonel: REDIS_URL env var tanımlandığında kullanılır
 pytest>=8.0.0

@@ -36,7 +36,7 @@ COPY ./app /app/app
 # fastembed modelini build sırasında indir — runtime'da HF isteği atılmaz
 # Model cache'i /app/.cache altına yazılır; appuser erişebilir
 ENV FASTEMBED_CACHE_PATH=/app/.cache/fastembed
-RUN pip install --no-cache-dir --quiet fastembed && \
+RUN pip install --no-cache-dir --quiet "fastembed==0.5.1" && \
     python3 -c "from fastembed import TextEmbedding; list(TextEmbedding('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2').embed(['warmup']))" && \
     echo "fastembed modeli hazir"
 
