@@ -35,6 +35,9 @@ USE_EMBEDDINGS=true
 - **CPU**: 1 vCPU (minimum)
 - **Memory**: 1 GB (minimum)
 - **Instance count**: 1 (can scale to 3)
+- **Health check timeout**: En az **60 saniye** olacak şekilde ayarlayın; uygulama
+  başlarken NLP + intent verileri yüklenene kadar ilk yanıt birkaç saniye
+  gecikebilir.
 
 ### Step 5: Deploy
 Click "Create App" → Wait for build & deployment
@@ -59,7 +62,20 @@ docker run -p 8080:8080 \
 ### Test Health Check
 ```bash
 curl http://localhost:8080/health
-# Should return: {"status":"ok","startup_complete":true}
+# Örnek çıktı:
+# {
+#   "status": "ok",
+#   "version": "1.1.0",
+#   "components": {
+#     "nlp": true,
+#     "embeddings": true,
+#     "intents_loaded": 30,
+#     "devices_loaded": 120,
+#     "gemini_configured": true,
+#     "zemberek_available": true
+#   },
+#   "use_embeddings": true
+# }
 ```
 
 ---

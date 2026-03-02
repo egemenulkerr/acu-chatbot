@@ -67,22 +67,44 @@ def load_intent_data() -> None:
     global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS
 
     if USE_EMBEDDINGS and MODEL is None:
-        load_model()
+        # Model yükleme hatası intent JSON'un okunmasını engellememeli.
+        try:
+            load_model()
+        except Exception as e:  # Güvenlik için ekstra katman; load_model zaten logluyor.
+            logger.error(f"❌ load_model beklenmeyen hata: {e}", exc_info=True)
 
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             data: dict = json.load(f)
 
-        INTENTS_DATA = data.get("intents", [])
-        KEYWORD_THRESHOLD = data.get("keyword_threshold", 8.0)
-        SIMILARITY_THRESHOLD = data.get("similarity_threshold", 0.65)
+    except FileNotFoundError:
+        logger.error(f"❌ {DATA_FILE} dosyası bulunamadı!")
+        INTENTS_DATA = []
+        INTENT_EMBEDDINGS = {}
+    except json.JSONDecodeError as e:
+        logger.error(f"❌ JSON parse hatası: {e}")
+        INTENTS_DATA = []
+        INTENT_EMBEDDINGS = {}
+    except Exception as e:
+        logger.error(f"❌ Intent data okuma hatası: {e}", exc_info=True)
+        INTENTS_DATA = []
+        INTENT_EMBEDDINGS = {}
+        return
 
-        logger.info(
-            f"⚙️  Config: keyword_threshold={KEYWORD_THRESHOLD}, "
-            f"similarity_threshold={SIMILARITY_THRESHOLD}"
-        )
+    INTENTS_DATA = data.get("intents", [])
+    KEYWORD_THRESHOLD = data.get("keyword_threshold", 8.0)
+    SIMILARITY_THRESHOLD = data.get("similarity_threshold", 0.65)
 
-        if USE_EMBEDDINGS and MODEL:
+    logger.info(
+        f"⚙️  Config: keyword_threshold={KEYWORD_THRESHOLD}, "
+        f"similarity_threshold={SIMILARITY_THRESHOLD}"
+    )
+
+    # Her yüklemede sıfırla; embedding oluşturma sırasında hata olursa kirli state kalmasın.
+    INTENT_EMBEDDINGS = {}
+
+    if USE_EMBEDDINGS and MODEL:
+        try:
             import numpy as np
             logger.info("📊 Intent embedding'leri oluşturuluyor...")
             for intent in INTENTS_DATA:
@@ -91,18 +113,10 @@ def load_intent_data() -> None:
                 if examples:
                     INTENT_EMBEDDINGS[intent_name] = np.array(list(MODEL.embed(examples)))
             logger.info(f"✅ {len(INTENT_EMBEDDINGS)} intent embedding'i oluşturuldu.")
+        except Exception as e:
+            logger.error(f"❌ Intent embedding olusturma hatası: {e}", exc_info=True)
 
-        logger.info(f"✅ {len(INTENTS_DATA)} intent yüklendi.")
-
-    except FileNotFoundError:
-        logger.error(f"❌ {DATA_FILE} dosyası bulunamadı!")
-        INTENTS_DATA = []
-    except json.JSONDecodeError as e:
-        logger.error(f"❌ JSON parse hatası: {e}")
-        INTENTS_DATA = []
-    except Exception as e:
-        logger.error(f"❌ Intent data yükleme hatası: {e}")
-        INTENTS_DATA = []
+    logger.info(f"✅ {len(INTENTS_DATA)} intent yüklendi.")
 
 
 # ============================================================================

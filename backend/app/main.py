@@ -108,18 +108,52 @@ def _setup_scheduled_jobs() -> None:
 
 
 async def _background_initialization() -> None:
-    """Tüm ağır yüklemeleri arka planda yap; app hemen /health ile yanıt verebilsin (504 önlenir)."""
+    """
+    Kritik bileşenleri (session DB, NLP, intent + model) yükler.
+
+    Bu fonksiyon lifespan içinde **await** edilerek çağrılır; uygulama istek kabul
+    etmeye başlamadan önce en azından intent verisi ve (etkinse) embedding modeli
+    hazır olur. Böylece /health ve ilk istekler "boş" global state görmez.
+    """
+    from .core.classifier import INTENTS_DATA, MODEL
     try:
         init_session_db()
         await _load_nlp_module()
         await _load_intent_data_module()
+        intents_count = len(INTENTS_DATA)
+        has_model = MODEL is not None
+        logger.info(
+            "Kritik baslangic tamamlandi: intents=%s, embeddings=%s",
+            intents_count,
+            has_model,
+        )
+    except Exception as e:
+        logger.error("Kritik baslangic hatasi: %s", e, exc_info=True)
+
+
+async def _post_startup_initialization() -> None:
+    """
+    Cihaz veritabanı, yemek listesi ve zamanlayıcıları arka planda hazırlar.
+
+    Bu fonksiyon lifespan içinde, kritik başlangıç tamamlandıktan sonra
+    `asyncio.create_task` ile tetiklenir; böylece ağır olmayan ama isteğe
+    bağımlı olmayan işler uygulama çalışırken tamamlanır.
+    """
+    from .services.device_registry import DEVICE_DB
+
+    try:
         await asyncio.gather(
             _load_device_registry(),
             _load_menu_data(),
         )
         _setup_scheduled_jobs()
+        devices_count = len(DEVICE_DB)
+        logger.info(
+            "Arka plan baslangici tamamlandi: devices=%s",
+            devices_count,
+        )
     except Exception as e:
-        logger.error(f"Background initialization hatasi: {e}", exc_info=True)
+        logger.error("Arka plan baslangic hatasi: %s", e, exc_info=True)
 
 
 # ============================================================================
@@ -128,8 +162,10 @@ async def _background_initialization() -> None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Uygulama baslatildi; NLP/Intent arka planda yukleniyor...")
-    asyncio.create_task(_background_initialization())
+    logger.info("Uygulama baslatiliyor; kritik bilesenler yukleniyor (NLP + intent + model)...")
+    await _background_initialization()
+    logger.info("Kritik bilesenler yüklendi; istekler kabul ediliyor. Cihaz/yemek arka planda yuklenecek.")
+    asyncio.create_task(_post_startup_initialization())
     yield
     try:
         scheduler.shutdown()
