@@ -11,6 +11,10 @@ services:
   envs:
   - key: GOOGLE_API_KEY
     scope: RUN_TIME
+  # Frontend: egemenulker.com (+ www, http yönlendirmeleri için)
+  - key: ALLOWED_ORIGINS
+    value: "https://egemenulker.com,https://www.egemenulker.com,http://egemenulker.com,http://www.egemenulker.com,https://king-prawn-app-t5y4u.ondigitalocean.app"
+    scope: RUN_TIME
   - key: ENVIRONMENT
     value: production
     scope: RUN_TIME

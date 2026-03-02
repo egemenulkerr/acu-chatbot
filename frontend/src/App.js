@@ -362,13 +362,29 @@ export default function App() {
     setAtBottom(scrollHeight - scrollTop - clientHeight < 60);
   }, []);
 
-  // Health check
+  // Health check — uzun timeout + ilk yüklemede birkaç deneme (backend soğuk başlangıç için)
+  const HEALTH_TIMEOUT_MS = 10000;
+  const HEALTH_INTERVAL_MS = 30000;
   useEffect(() => {
-    const check = () => fetch(`${BACKEND_URL}/health`, { signal: AbortSignal.timeout(3000) })
-      .then(r => setOnline(r.ok)).catch(() => setOnline(false));
-    check();
-    const t = setInterval(check, 30000);
-    return () => clearInterval(t);
+    let cancelled = false;
+    const doCheck = (retries = 2) => {
+      if (cancelled) return;
+      const ctrl = new AbortController();
+      const to = setTimeout(() => ctrl.abort(), HEALTH_TIMEOUT_MS);
+      fetch(`${BACKEND_URL}/health`, { signal: ctrl.signal })
+        .then(r => {
+          if (!cancelled) setOnline(r.ok);
+        })
+        .catch(() => {
+          if (cancelled) return;
+          if (retries > 0) setTimeout(() => doCheck(retries - 1), 2000);
+          else setOnline(false);
+        })
+        .finally(() => clearTimeout(to));
+    };
+    doCheck();
+    const t = setInterval(() => doCheck(0), HEALTH_INTERVAL_MS);
+    return () => { cancelled = true; clearInterval(t); };
   }, []);
 
   // Speech

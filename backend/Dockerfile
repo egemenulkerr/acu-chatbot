@@ -3,6 +3,8 @@ FROM python:3.11-slim
 # Install dependencies (minimal - only what's needed)
 ENV GECKODRIVER_VERSION=0.33.0
 ENV PYTHONUNBUFFERED=1
+# Pip root-user uyarısını kapat (Docker/build ve platform pip adımlarında root normal)
+ENV PIP_ROOT_USER_ACTION=ignore
 ENV FIREFOX_BIN=/usr/bin/firefox-esr
 ENV GECKODRIVER_PATH=/usr/local/bin/geckodriver
 

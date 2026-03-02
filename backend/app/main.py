@@ -5,6 +5,7 @@
 import asyncio
 import logging
 import os
+import re
 from contextlib import asynccontextmanager
 
 import sentry_sdk
@@ -107,10 +108,7 @@ def _setup_scheduled_jobs() -> None:
 
 
 async def _background_initialization() -> None:
-    """
-    Startup'ta agir initialization'i arka planda yap.
-    NLP + Intent siralı (bagimli), ardindan Cihaz + Yemek paralel.
-    """
+    """Tüm ağır yüklemeleri arka planda yap; app hemen /health ile yanıt verebilsin (504 önlenir)."""
     try:
         init_session_db()
         await _load_nlp_module()
@@ -130,7 +128,7 @@ async def _background_initialization() -> None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Uygulama baslatildi, background yukleme devam ediyor...")
+    logger.info("Uygulama baslatildi; NLP/Intent arka planda yukleniyor...")
     asyncio.create_task(_background_initialization())
     yield
     try:
@@ -179,6 +177,57 @@ app.add_middleware(
     allow_headers=["*"],
     max_age=86400,
 )
+
+# DigitalOcean App Platform: *.ondigitalocean.app origin'lerini de kabul et (CORS).
+# Böylece frontend farklı bir DO app URL'inde olsa bile chat istekleri engellenmez.
+_DO_ORIGIN_RE = re.compile(r"^https://[a-z0-9-]+\.ondigitalocean\.app$", re.I)
+
+
+async def _do_cors_middleware(app, scope, receive, send):
+    origin = None
+    if scope.get("type") == "http":
+        for name, value in scope.get("headers", []):
+            if name == b"origin":
+                origin = value.decode()
+                break
+
+    # OPTIONS (preflight): DO origin ise 200 + CORS header'ları dön; yoksa devam et
+    if (
+        scope.get("type") == "http"
+        and scope.get("method") == "OPTIONS"
+        and origin
+        and _DO_ORIGIN_RE.fullmatch(origin)
+    ):
+        await send({
+            "type": "http.response.start",
+            "status": 200,
+            "headers": [
+                (b"access-control-allow-origin", origin.encode()),
+                (b"access-control-allow-methods", b"GET, POST, PUT, DELETE, OPTIONS"),
+                (b"access-control-allow-headers", b"*"),
+                (b"access-control-allow-credentials", b"true"),
+                (b"access-control-max-age", b"86400"),
+            ],
+        })
+        await send({"type": "http.response.body", "body": b""})
+        return
+
+    async def send_wrapper(message):
+        if (
+            message.get("type") == "http.response.start"
+            and origin
+            and _DO_ORIGIN_RE.fullmatch(origin)
+        ):
+            headers = list(message.get("headers", []))
+            if not any(h[0].lower() == b"access-control-allow-origin" for h in headers):
+                headers.append((b"access-control-allow-origin", origin.encode()))
+            message = {**message, "headers": headers}
+        await send(message)
+
+    await app(scope, receive, send_wrapper)
+
+
+app.add_middleware(_do_cors_middleware)
 
 
 # ============================================================================
