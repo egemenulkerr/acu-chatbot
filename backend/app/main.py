@@ -257,20 +257,44 @@ def read_root() -> dict:
 
 @app.get("/health", tags=["health"])
 def health_check() -> dict:
-    from .core.classifier import INTENTS_DATA as _intents, MODEL as _model
-    from .services.device_registry import DEVICE_DB as _devices
-    from .core.nlp import MORPHOLOGY as _morph, ZEMBEREK_AVAILABLE as _zemb
-    from .services.llm_client import GOOGLE_API_KEY as _gkey
-    return {
+    """
+    Her zaman 200 döner; frontend 'çevrimiçi' sadece backend erişilebilir olduğunda gösterilir.
+    Bileşenler (Gemini, NLP vb.) hazır olmasa bile 200 dönülür — aksi halde 500 olur ve
+    kullanıcı sürekli 'çevrimdışı' görür.
+    """
+    out = {
         "status": "ok",
         "version": "1.1.0",
         "components": {
-            "nlp": _morph is not None or not _zemb,
-            "embeddings": _model is not None,
-            "intents_loaded": len(_intents),
-            "devices_loaded": len(_devices),
-            "gemini_configured": bool(_gkey),
-            "zemberek_available": _zemb,
+            "nlp": False,
+            "embeddings": False,
+            "intents_loaded": 0,
+            "devices_loaded": 0,
+            "gemini_configured": False,
+            "zemberek_available": False,
         },
         "use_embeddings": os.getenv("USE_EMBEDDINGS", "true").lower() == "true",
     }
+    try:
+        from .core.classifier import INTENTS_DATA as _intents, MODEL as _model
+        out["components"]["intents_loaded"] = len(_intents)
+        out["components"]["embeddings"] = _model is not None
+    except Exception:
+        pass
+    try:
+        from .services.device_registry import DEVICE_DB as _devices
+        out["components"]["devices_loaded"] = len(_devices)
+    except Exception:
+        pass
+    try:
+        from .core.nlp import MORPHOLOGY as _morph, ZEMBEREK_AVAILABLE as _zemb
+        out["components"]["nlp"] = _morph is not None or not _zemb
+        out["components"]["zemberek_available"] = _zemb
+    except Exception:
+        pass
+    try:
+        from .services.llm_client import GOOGLE_API_KEY as _gkey
+        out["components"]["gemini_configured"] = bool(_gkey)
+    except Exception:
+        pass
+    return out
