@@ -540,79 +540,83 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
 
     async def event_stream():
         nonlocal t_start
-
-        # Onay kontrolü
-        if pending_device:
-            positive = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
-            cache_set(f"pending_device:{user_id}", None, ttl=1)
-            if any(ans in message for ans in positive):
-                conf = _get_confirmation_response(pending_device)
-                if conf:
-                    yield _sse(conf.response, done=True)
+        try:
+            # Onay kontrolü
+            if pending_device:
+                positive = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
+                cache_set(f"pending_device:{user_id}", None, ttl=1)
+                if any(ans in message for ans in positive):
+                    conf = _get_confirmation_response(pending_device)
+                    if conf:
+                        yield _sse(conf.response, done=True)
+                        return
+                else:
+                    yield _sse("Anlaşıldı, başka bir konuda yardımcı olabilir miyim?", done=True)
                     return
-            else:
-                yield _sse("Anlaşıldı, başka bir konuda yardımcı olabilir miyim?", done=True)
+
+            intent: Optional[dict] = classify_intent(body.message)
+
+            if intent:
+                intent_name = intent["intent_name"]
+                if intent_name == "akademik_takvim":
+                    r = _handle_academic_calendar(intent, body.message)
+                elif intent_name == "yemek_listesi":
+                    r = await _handle_food_query()
+                elif intent_name == "cihaz_bilgisi":
+                    r = _handle_device_query(body.message, user_id)
+                elif intent_name == "duyurular":
+                    r = await _handle_duyurular_query()
+                elif intent_name == "hava_durumu":
+                    r = await _handle_weather_query()
+                elif intent_name in ("kutuphane", "kütüphane"):
+                    r = await _handle_library_query()
+                elif intent_name in ("sks_etkinlik", "kulup_topluluk", "spor_tesisleri"):
+                    r = await _handle_sks_query()
+                elif intent_name == "guncel_haberler":
+                    r = await _handle_news_query()
+                else:
+                    r = _handle_generic_intent(intent)
+
+                _log_analytics(body.message, r.intent_name, r.source, (time() - t_start) * 1000)
+                save_message(body.session_id, "user", body.message)
+                save_message(body.session_id, "bot", r.response)
+                yield _sse(r.response, done=True)
                 return
 
-        intent: Optional[dict] = classify_intent(body.message)
+            # LLM Streaming
+            queue: asyncio.Queue = asyncio.Queue()
 
-        if intent:
-            intent_name = intent["intent_name"]
-            if intent_name == "akademik_takvim":
-                r = _handle_academic_calendar(intent, body.message)
-            elif intent_name == "yemek_listesi":
-                r = await _handle_food_query()
-            elif intent_name == "cihaz_bilgisi":
-                r = _handle_device_query(body.message, user_id)
-            elif intent_name == "duyurular":
-                r = await _handle_duyurular_query()
-            elif intent_name == "hava_durumu":
-                r = await _handle_weather_query()
-            elif intent_name in ("kutuphane", "kütüphane"):
-                r = await _handle_library_query()
-            elif intent_name in ("sks_etkinlik", "kulup_topluluk", "spor_tesisleri"):
-                r = await _handle_sks_query()
-            elif intent_name == "guncel_haberler":
-                r = await _handle_news_query()
-            else:
-                r = _handle_generic_intent(intent)
+            def _run_stream():
+                try:
+                    for token in stream_llm_response(body.message, history):
+                        queue.put_nowait(token)
+                except Exception as e:
+                    logger.error(f"Stream thread hatası: {e}")
+                finally:
+                    queue.put_nowait(None)  # sentinel
 
-            _log_analytics(body.message, r.intent_name, r.source, (time() - t_start) * 1000)
-            save_message(body.session_id, "user", body.message)
-            save_message(body.session_id, "bot", r.response)
-            yield _sse(r.response, done=True)
-            return
+            asyncio.get_running_loop().run_in_executor(None, _run_stream)
 
-        # LLM Streaming
-        queue: asyncio.Queue = asyncio.Queue()
-
-        def _run_stream():
+            accumulated = ""
             try:
-                for token in stream_llm_response(body.message, history):
-                    queue.put_nowait(token)
-            except Exception as e:
-                logger.error(f"Stream thread hatası: {e}")
-            finally:
-                queue.put_nowait(None)  # sentinel
+                while True:
+                    token = await asyncio.wait_for(queue.get(), timeout=25.0)
+                    if token is None:
+                        break
+                    accumulated += token
+                    yield _sse(token, done=False)
+            except asyncio.TimeoutError:
+                yield _sse("\n\n⏱️ Zaman aşımı.", done=True)
+                return
 
-        asyncio.get_running_loop().run_in_executor(None, _run_stream)
+            _log_analytics(body.message, "genel_sohbet", "Gemini AI (stream)", (time() - t_start) * 1000)
+            save_message(body.session_id, "user", body.message)
+            save_message(body.session_id, "bot", accumulated)
+            yield _sse("", done=True)
 
-        accumulated = ""
-        try:
-            while True:
-                token = await asyncio.wait_for(queue.get(), timeout=25.0)
-                if token is None:
-                    break
-                accumulated += token
-                yield _sse(token, done=False)
-        except asyncio.TimeoutError:
-            yield _sse("\n\n⏱️ Zaman aşımı.", done=True)
-            return
-
-        _log_analytics(body.message, "genel_sohbet", "Gemini AI (stream)", (time() - t_start) * 1000)
-        save_message(body.session_id, "user", body.message)
-        save_message(body.session_id, "bot", accumulated)
-        yield _sse("", done=True)
+        except Exception as e:
+            logger.error(f"❌ Stream generator hatası: {e}", exc_info=True)
+            yield _sse("⚠️ Bir hata oluştu, lütfen tekrar deneyin.", done=True)
 
     return StreamingResponse(event_stream(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})

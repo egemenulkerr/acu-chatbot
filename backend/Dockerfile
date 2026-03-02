@@ -32,9 +32,20 @@ RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt &
     find /usr/local/lib/python3.11/site-packages -type f -name "*.pyo" -delete
 
 COPY ./app /app/app
+
+# fastembed modelini build sırasında indir — runtime'da HF isteği atılmaz
+# Model cache'i /app/.cache altına yazılır; appuser erişebilir
+ENV FASTEMBED_CACHE_PATH=/app/.cache/fastembed
+RUN pip install --no-cache-dir --quiet fastembed && \
+    python3 -c "from fastembed import TextEmbedding; list(TextEmbedding('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2').embed(['warmup']))" && \
+    echo "fastembed modeli hazir"
+
 RUN chown -R appuser /app
 
 USER appuser
+
+# Aynı cache path'i runtime'da da kullan
+ENV FASTEMBED_CACHE_PATH=/app/.cache/fastembed
 
 EXPOSE 8080
 

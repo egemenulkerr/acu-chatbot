@@ -173,7 +173,10 @@
         "ders başlıyor": 7,
         "tatil ne zaman": 6,
         "okul açılıyor": 7,
-        "yarıyıl": 6
+        "yarıyıl": 6,
+        "akademi": 5,
+        "ders takvim": 7,
+        "okul takvim": 7
       },
       "examples": [
         "okullar ne zaman kapanıyor",
