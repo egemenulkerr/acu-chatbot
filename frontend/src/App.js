@@ -713,10 +713,12 @@ export default function App() {
 
           {/* Suggestions dropdown */}
           {showSuggestions && (
-            <div className="acu-suggestions">
+            <div className="acu-suggestions" id="acu-suggestions-list" role="listbox">
               {filteredSuggestions.map((s, i) => (
                 <button
                   key={s}
+                  role="option"
+                  aria-selected={i === selectedSuggestion}
                   className={`acu-suggestion-item${i === selectedSuggestion ? ' selected' : ''}`}
                   onMouseDown={e => { e.preventDefault(); setInput(s); setShowSuggestions(false); }}
                   onTouchEnd={e => { e.preventDefault(); setInput(s); setShowSuggestions(false); inputRef.current?.focus(); }}
@@ -741,9 +743,12 @@ export default function App() {
                 disabled={loading}
                 maxLength={MAX_CHARS + 50}
                 autoComplete="off"
+                role="combobox"
                 aria-label="Mesaj yaz"
                 aria-autocomplete="list"
                 aria-expanded={showSuggestions}
+                aria-controls="acu-suggestions-list"
+                aria-haspopup="listbox"
               />
               {input && (
                 <button
