@@ -541,6 +541,8 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
     async def event_stream():
         nonlocal t_start
         try:
+            # İlk byte'ı hemen gönder; gateway/proxy timeout (504) önlenir
+            yield _sse("", done=False)
             # Onay kontrolü
             if pending_device:
                 positive = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
