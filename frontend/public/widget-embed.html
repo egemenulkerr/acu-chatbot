@@ -1,0 +1,18 @@
+<!--
+  AÇÜ Chatbot - Ana sitede (egemenulker.com) sadece widget göstermek için
+  Bu dosya referans; asıl kullanım aşağıdaki kodu kendi sayfanıza yapıştırmaktır.
+-->
+
+<!-- Seçenek 1: Script ile (chatbot /chatbot path'inde deploy edildiyse) -->
+<script>
+  window.ACU_CHATBOT_WIDGET = {
+    chatbotUrl: 'https://egemenulker.com/chatbot',  // tam sayfa chatbot adresi
+    position: 'bottom-right',   // veya 'bottom-left'
+    buttonLabel: 'Chat',
+    zIndex: 999999
+  };
+</script>
+<script src="https://egemenulker.com/chatbot/chatbot-widget.js"></script>
+
+<!-- Seçenek 2: Inline (script dosyası yüklenemezse) -->
+<!-- chatbot-widget.js dosyasının içeriğini kopyalayıp <script>...</script> arasına yapıştırın -->

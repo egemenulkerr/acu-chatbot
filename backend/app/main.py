@@ -179,55 +179,59 @@ app.add_middleware(
 )
 
 # DigitalOcean App Platform: *.ondigitalocean.app origin'lerini de kabul et (CORS).
-# Böylece frontend farklı bir DO app URL'inde olsa bile chat istekleri engellenmez.
 _DO_ORIGIN_RE = re.compile(r"^https://[a-z0-9-]+\.ondigitalocean\.app$", re.I)
 
 
-async def _do_cors_middleware(app, scope, receive, send):
-    origin = None
-    if scope.get("type") == "http":
-        for name, value in scope.get("headers", []):
-            if name == b"origin":
-                origin = value.decode()
-                break
+class _DOCorsMiddleware:
+    """Starlette uyumlu sınıf: *.ondigitalocean.app origin'lerine CORS header ekler."""
 
-    # OPTIONS (preflight): DO origin ise 200 + CORS header'ları dön; yoksa devam et
-    if (
-        scope.get("type") == "http"
-        and scope.get("method") == "OPTIONS"
-        and origin
-        and _DO_ORIGIN_RE.fullmatch(origin)
-    ):
-        await send({
-            "type": "http.response.start",
-            "status": 200,
-            "headers": [
-                (b"access-control-allow-origin", origin.encode()),
-                (b"access-control-allow-methods", b"GET, POST, PUT, DELETE, OPTIONS"),
-                (b"access-control-allow-headers", b"*"),
-                (b"access-control-allow-credentials", b"true"),
-                (b"access-control-max-age", b"86400"),
-            ],
-        })
-        await send({"type": "http.response.body", "body": b""})
-        return
+    def __init__(self, app):
+        self.app = app
 
-    async def send_wrapper(message):
+    async def __call__(self, scope, receive, send):
+        origin = None
+        if scope.get("type") == "http":
+            for name, value in scope.get("headers", []):
+                if name == b"origin":
+                    origin = value.decode()
+                    break
+
         if (
-            message.get("type") == "http.response.start"
+            scope.get("type") == "http"
+            and scope.get("method") == "OPTIONS"
             and origin
             and _DO_ORIGIN_RE.fullmatch(origin)
         ):
-            headers = list(message.get("headers", []))
-            if not any(h[0].lower() == b"access-control-allow-origin" for h in headers):
-                headers.append((b"access-control-allow-origin", origin.encode()))
-            message = {**message, "headers": headers}
-        await send(message)
+            await send({
+                "type": "http.response.start",
+                "status": 200,
+                "headers": [
+                    (b"access-control-allow-origin", origin.encode()),
+                    (b"access-control-allow-methods", b"GET, POST, PUT, DELETE, OPTIONS"),
+                    (b"access-control-allow-headers", b"*"),
+                    (b"access-control-allow-credentials", b"true"),
+                    (b"access-control-max-age", b"86400"),
+                ],
+            })
+            await send({"type": "http.response.body", "body": b""})
+            return
 
-    await app(scope, receive, send_wrapper)
+        async def send_wrapper(message):
+            if (
+                message.get("type") == "http.response.start"
+                and origin
+                and _DO_ORIGIN_RE.fullmatch(origin)
+            ):
+                headers = list(message.get("headers", []))
+                if not any(h[0].lower() == b"access-control-allow-origin" for h in headers):
+                    headers.append((b"access-control-allow-origin", origin.encode()))
+                message = {**message, "headers": headers}
+            await send(message)
+
+        await self.app(scope, receive, send_wrapper)
 
 
-app.add_middleware(_do_cors_middleware)
+app.add_middleware(_DOCorsMiddleware)
 
 
 # ============================================================================
