@@ -7,12 +7,12 @@
 #   yeniden oluşturulmaz. Konuşma geçmişini destekler.
 # ============================================================================
 
-import os
 import logging
 from typing import Optional
 
-from dotenv import load_dotenv
 import google.generativeai as genai
+
+from ..config import settings
 
 
 # ============================================================================
@@ -21,8 +21,7 @@ import google.generativeai as genai
 
 logger: logging.Logger = logging.getLogger(__name__)
 
-load_dotenv()
-GOOGLE_API_KEY: Optional[str] = os.getenv("GOOGLE_API_KEY")
+GOOGLE_API_KEY: Optional[str] = settings.google_api_key
 
 SYSTEM_PROMPT: str = """
 Sen Artvin Çoruh Üniversitesi (AÇÜ) resmi asistanısın.
@@ -64,7 +63,7 @@ def _get_model() -> Optional[genai.GenerativeModel]:
         return _CACHED_MODEL
 
     if not GOOGLE_API_KEY:
-        logger.error("❌ GOOGLE_API_KEY environment variable eksik!")
+        logger.error("❌ GOOGLE_API_KEY yapılandırılmamış!")
         return None
 
     try:
@@ -79,7 +78,7 @@ def _get_model() -> Optional[genai.GenerativeModel]:
             and 'gemini' in m.name
         ]
 
-        env_model = os.getenv("GEMINI_MODEL", "").strip()
+        env_model = (settings.gemini_model or "").strip()
         model_name = env_model if env_model else "models/gemini-1.5-flash"
 
         if not env_model:

@@ -5,15 +5,15 @@
 # OPENWEATHER_API_KEY env var gerektirir (ücretsiz plan yeterli).
 # ============================================================================
 
-import os
 import logging
 import requests
 from typing import Optional
+from ..config import settings
 
 
 logger = logging.getLogger(__name__)
 
-OPENWEATHER_API_KEY: Optional[str] = os.getenv("OPENWEATHER_API_KEY", "")
+OPENWEATHER_API_KEY: Optional[str] = settings.openweather_api_key or ""
 
 CITY_ID = "321895"        # Artvin, TR (OpenWeatherMap city ID)
 CITY_NAME = "Artvin,TR"

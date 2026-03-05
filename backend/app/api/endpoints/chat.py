@@ -3,7 +3,6 @@
 # ============================================================================
 
 import re
-import os
 import asyncio
 import logging
 import random
@@ -13,7 +12,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Header, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel as _BaseModel
 
@@ -36,6 +35,7 @@ from ...services.device_registry import (
     get_device_info,
     get_all_devices,
 )
+from ...security import require_admin
 
 
 # ============================================================================
@@ -106,17 +106,6 @@ def _set_pending_device(session_id: str, device_name: str) -> None:
 # ============================================================================
 # AUTH: /api/update-data için admin token
 # ============================================================================
-
-async def _verify_admin_token(x_admin_token: str = Header(...)) -> None:
-    """
-    X-Admin-Token header'ını doğrula.
-    ADMIN_SECRET_TOKEN env var ile karşılaştır.
-    """
-    expected = os.getenv("ADMIN_SECRET_TOKEN", "")
-    if not expected:
-        raise HTTPException(status_code=503, detail="Admin token yapılandırılmamış.")
-    if x_admin_token != expected:
-        raise HTTPException(status_code=403, detail="Yetkisiz erişim.")
 
 
 # ============================================================================
@@ -631,10 +620,10 @@ def _sse(data: str, done: bool) -> str:
     return f"data: {payload}\n\n"
 
 
-@router.post("/update-data", dependencies=[Depends(_verify_admin_token)])
+@router.post("/update-data", dependencies=[Depends(require_admin)])
 async def trigger_data_update() -> dict:
     """
-    Manuel veri güncelleme — X-Admin-Token header gerektirir.
+    Manuel veri güncelleme — admin token gerektirir.
     """
     logger.info("🔄 Manuel veri güncelleme başlatıldı...")
     result: dict = await asyncio.to_thread(update_system_data)

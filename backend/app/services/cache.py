@@ -14,13 +14,13 @@
 
 import json
 import logging
-import os
 import time
 from typing import Optional, Any
 
+from ..config import settings
+
 logger = logging.getLogger(__name__)
 
-_REDIS_URL = os.getenv("REDIS_URL", "")
 _redis_client = None
 _dict_cache: dict[str, tuple[Any, float]] = {}  # key → (value, expires_at)
 
@@ -34,14 +34,15 @@ def _get_redis():
     if _redis_client is not None:
         return _redis_client
 
-    if not _REDIS_URL:
+    redis_url = settings.redis_url
+    if not redis_url:
         return None
 
     try:
         import redis
-        _redis_client = redis.from_url(_REDIS_URL, decode_responses=True, socket_timeout=2)
+        _redis_client = redis.from_url(redis_url, decode_responses=True, socket_timeout=2)
         _redis_client.ping()
-        logger.info(f"Redis bağlantısı kuruldu: {_REDIS_URL}")
+        logger.info("Redis bağlantısı kuruldu.")
         return _redis_client
     except Exception as e:
         logger.warning(f"Redis bağlantısı kurulamadı, dict cache kullanılacak: {e}")

@@ -4,14 +4,14 @@
 
 import json
 import logging
-import os
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import APIRouter, Depends, HTTPException, Query
+
+from ...security import require_admin
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -25,14 +25,6 @@ security = HTTPBearer(auto_error=False)
 # ============================================================================
 # AUTH HELPER
 # ============================================================================
-
-def _require_admin(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> None:
-    """Admin token doğrulama. Token yoksa veya yanlışsa 401 döner."""
-    if not _ADMIN_TOKEN:
-        raise HTTPException(status_code=503, detail="Admin token yapılandırılmamış.")
-    if credentials is None or credentials.credentials != _ADMIN_TOKEN:
-        raise HTTPException(status_code=401, detail="Geçersiz veya eksik admin token.")
-
 
 # ============================================================================
 # HELPERS
@@ -135,7 +127,7 @@ def analytics_summary(
 @router.get("/recent", tags=["analytics"])
 def analytics_recent(
     limit: int = Query(50, ge=1, le=500, description="Döndürülecek maksimum kayıt sayısı"),
-    _: None = Depends(_require_admin),
+    _: None = Depends(require_admin),
 ):
     """
     Son N analytics kaydını döndürür. **Admin token gerektirir.**
