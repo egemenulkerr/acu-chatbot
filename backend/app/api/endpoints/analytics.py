@@ -17,15 +17,6 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 _ANALYTICS_FILE = Path(__file__).parent.parent.parent / "data" / "analytics.jsonl"
-_ADMIN_TOKEN = os.getenv("ADMIN_SECRET_TOKEN", "")
-
-security = HTTPBearer(auto_error=False)
-
-
-# ============================================================================
-# AUTH HELPER
-# ============================================================================
-
 # ============================================================================
 # HELPERS
 # ============================================================================
