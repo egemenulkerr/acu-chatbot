@@ -3,7 +3,7 @@
 # ============================================================================
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 
 class ChatRequest(BaseModel):
@@ -50,6 +50,25 @@ class ChatRequest(BaseModel):
         }
 
 
+class ChatOption(BaseModel):
+    """
+    Kullanıcıya sunulacak opsiyonel seçimler (ör. butonlar / quick reply).
+    """
+
+    id: str = Field(
+        ...,
+        title="Seçenek ID",
+        description="Frontend tarafından seçimi tanımlamak için kullanılan içsel id",
+        example="device_search_by_name",
+    )
+    label: str = Field(
+        ...,
+        title="Görünen Etiket",
+        description="Kullanıcıya gösterilecek metin",
+        example="Cihaz adına göre",
+    )
+
+
 class ChatResponse(BaseModel):
     """
     POST /api/chat endpoint'ından dönen response body modeli.
@@ -76,11 +95,23 @@ class ChatResponse(BaseModel):
         example="yemek_listesi"
     )
 
+    options: Optional[List[ChatOption]] = Field(
+        default=None,
+        title="Seçilebilir Seçenekler",
+        description="Kullanıcıya sunulan (varsa) buton/seçim listesi",
+    )
+
     class Config:
         json_schema_extra = {
             "example": {
                 "response": "Merhaba! AÇÜ Asistan'a hoş geldin.",
                 "source": "Hızlı Yol",
-                "intent_name": "selamlasma"
+                "intent_name": "selamlasma",
+                "options": [
+                    {
+                        "id": "device_search_by_name",
+                        "label": "Cihaz adına göre",
+                    }
+                ],
             }
         }
