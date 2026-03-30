@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hmac
 from typing import Optional
 
 from fastapi import Depends, HTTPException
@@ -21,6 +22,6 @@ def require_admin(credentials: Optional[HTTPAuthorizationCredentials] = Depends(
     if not token:
         raise HTTPException(status_code=503, detail="Admin token yapılandırılmamış.")
 
-    if credentials is None or credentials.credentials != token:
+    if credentials is None or not hmac.compare_digest(credentials.credentials, token):
         raise HTTPException(status_code=401, detail="Geçersiz veya eksik admin token.")
 

@@ -1,0 +1,136 @@
+[
+  {"query": "merhaba", "expected": "selamlasma"},
+  {"query": "selam bot", "expected": "selamlasma"},
+  {"query": "günaydın", "expected": "selamlasma"},
+  {"query": "naber nasılsın", "expected": "selamlasma"},
+  {"query": "iyi akşamlar herkese", "expected": "selamlasma"},
+
+  {"query": "sen kimsin", "expected": "kimim_ben"},
+  {"query": "bot musun", "expected": "kimim_ben"},
+  {"query": "ne yaparsın sen", "expected": "kimim_ben"},
+  {"query": "seni kim yaptı", "expected": "kimim_ben"},
+
+  {"query": "bugün yemekte ne var", "expected": "yemek_listesi"},
+  {"query": "yemek menüsü", "expected": "yemek_listesi"},
+  {"query": "yemekhane açık mı", "expected": "yemek_listesi"},
+  {"query": "karnım çok aç", "expected": "yemek_listesi"},
+  {"query": "öğle yemeği ne", "expected": "yemek_listesi"},
+
+  {"query": "akademik takvim", "expected": "akademik_takvim"},
+  {"query": "okullar ne zaman kapanıyor", "expected": "akademik_takvim"},
+  {"query": "final sınavı ne zaman", "expected": "akademik_takvim"},
+  {"query": "vize haftası", "expected": "akademik_takvim"},
+  {"query": "sömestr tatili ne zaman", "expected": "akademik_takvim"},
+
+  {"query": "görüşürüz", "expected": "veda"},
+  {"query": "teşekkür ederim", "expected": "veda"},
+  {"query": "güle güle", "expected": "veda"},
+  {"query": "sağol yardımcı oldun", "expected": "veda"},
+
+  {"query": "telefon numarası ne", "expected": "iletisim"},
+  {"query": "öğrenci işleri iletişim", "expected": "iletisim"},
+  {"query": "rektörlük mail adresi", "expected": "iletisim"},
+
+  {"query": "obs şifremi unuttum", "expected": "obs_sistemi"},
+  {"query": "obs'ye nasıl giriş yaparım", "expected": "obs_sistemi"},
+  {"query": "öğrenci bilgi sistemi", "expected": "obs_sistemi"},
+  {"query": "sisteme giremiyorum", "expected": "obs_sistemi"},
+
+  {"query": "transkript nasıl alınır", "expected": "transkript_belge"},
+  {"query": "öğrenci belgesi nereden alınır", "expected": "transkript_belge"},
+  {"query": "e-devletten belge alabilir miyim", "expected": "transkript_belge"},
+
+  {"query": "notlarım açıklandı mı", "expected": "sinav_sonuclari"},
+  {"query": "gno nasıl hesaplanır", "expected": "sinav_sonuclari"},
+  {"query": "sınav sonucuma itiraz etmek istiyorum", "expected": "sinav_sonuclari"},
+
+  {"query": "harç ne kadar", "expected": "harc_odeme"},
+  {"query": "harç ödeme nasıl yapılır", "expected": "harc_odeme"},
+
+  {"query": "erasmus başvurusu nasıl yapılır", "expected": "erasmus_degisim"},
+  {"query": "yurt dışında okumak istiyorum", "expected": "erasmus_degisim"},
+  {"query": "farabi değişim programı", "expected": "erasmus_degisim"},
+
+  {"query": "yatay geçiş nasıl yapılır", "expected": "yatay_gecis"},
+  {"query": "bölüm değiştirmek istiyorum", "expected": "yatay_gecis"},
+
+  {"query": "hangi kulüpler var", "expected": "kulup_topluluk"},
+  {"query": "tiyatro kulübüne katılmak istiyorum", "expected": "kulup_topluluk"},
+
+  {"query": "kampüste sağlık merkezi nerede", "expected": "saglik_merkezi"},
+  {"query": "hastalandım ne yapmalıyım", "expected": "saglik_merkezi"},
+
+  {"query": "psikolojik danışmanlık hizmeti var mı", "expected": "psikolojik_destek"},
+  {"query": "kendimi kötü hissediyorum", "expected": "psikolojik_destek"},
+  {"query": "stresle başa çıkmak istiyorum", "expected": "psikolojik_destek"},
+
+  {"query": "spor salonu nerede", "expected": "spor_tesisleri"},
+  {"query": "halısaha rezervasyonu", "expected": "spor_tesisleri"},
+
+  {"query": "eduroam nasıl bağlanılır", "expected": "internet_wifi"},
+  {"query": "wifi şifresi ne", "expected": "internet_wifi"},
+  {"query": "internete bağlanamıyorum", "expected": "internet_wifi"},
+
+  {"query": "fotokopi nerede çektirebilirim", "expected": "fotokopi_baski"},
+  {"query": "yazıcı kullanmak istiyorum", "expected": "fotokopi_baski"},
+
+  {"query": "mazeret sınavı nasıl olur", "expected": "mazeret_sinavi"},
+  {"query": "sınava giremedim raporum var", "expected": "mazeret_sinavi"},
+
+  {"query": "bütünleme sınavı ne zaman", "expected": "ek_sinav"},
+  {"query": "ff aldım ne yapacağım", "expected": "ek_sinav"},
+
+  {"query": "kampüs servisi kaçta", "expected": "ulasim_servis"},
+  {"query": "üniversiteye nasıl gidilir", "expected": "ulasim_servis"},
+
+  {"query": "kütüphane saat kaçta açılıyor", "expected": "kutuphane"},
+  {"query": "kitap ödünç almak istiyorum", "expected": "kutuphane"},
+
+  {"query": "yurt başvurusu nasıl yapılır", "expected": "yurt_bilgisi"},
+  {"query": "kyk yurt ücretleri", "expected": "yurt_bilgisi"},
+
+  {"query": "burs başvurusu nasıl yapılır", "expected": "burs_bilgisi"},
+  {"query": "tübitak bursu", "expected": "burs_bilgisi"},
+
+  {"query": "ders kaydı nasıl yapılır", "expected": "ders_kaydi"},
+  {"query": "seçmeli ders nasıl seçilir", "expected": "ders_kaydi"},
+  {"query": "danışman onayı lazım mı", "expected": "ders_kaydi"},
+
+  {"query": "mezuniyet şartları neler", "expected": "mezuniyet"},
+  {"query": "diploma nasıl alınır", "expected": "mezuniyet"},
+
+  {"query": "staj nasıl yapılır", "expected": "staj"},
+  {"query": "zorunlu staj süresi ne kadar", "expected": "staj"},
+
+  {"query": "son duyurular neler", "expected": "duyurular"},
+  {"query": "üniversitede yeni duyuru var mı", "expected": "duyurular"},
+
+  {"query": "artvin hava durumu", "expected": "hava_durumu"},
+  {"query": "bugün hava nasıl", "expected": "hava_durumu"},
+  {"query": "yağmur yağacak mı", "expected": "hava_durumu"},
+  {"query": "hava kaç derece", "expected": "hava_durumu"},
+
+  {"query": "laboratuvarda hangi cihazlar var", "expected": "cihaz_bilgisi"},
+  {"query": "mikroskop mevcut mu", "expected": "cihaz_bilgisi"},
+
+  {"query": "bu hafta etkinlik var mı", "expected": "sks_etkinlik"},
+  {"query": "bahar şenliği ne zaman", "expected": "sks_etkinlik"},
+
+  {"query": "güncel haberler neler", "expected": "guncel_haberler"},
+  {"query": "son haberler", "expected": "guncel_haberler"},
+
+  {"query": "ingilizce kursu var mı", "expected": "yabanci_dil"},
+  {"query": "yabancı dil hazırlık programı", "expected": "yabanci_dil"},
+
+  {"query": "fakülte nerede", "expected": "kampus_harita"},
+  {"query": "kampüs haritası", "expected": "kampus_harita"},
+
+  {"query": "bilgisayarım çalışmıyor", "expected": "teknik_destek"},
+  {"query": "bilgi işlem telefon numarası", "expected": "teknik_destek"},
+
+  {"query": "kayıt dondurmak istiyorum", "expected": "kayit_dondurma"},
+  {"query": "dönem dondurma nasıl yapılır", "expected": "kayit_dondurma"},
+
+  {"query": "çift anadal başvurusu", "expected": "cifte_anadal_yandal"},
+  {"query": "yan dal programı nasıl", "expected": "cifte_anadal_yandal"}
+]

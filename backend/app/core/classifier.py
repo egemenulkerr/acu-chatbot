@@ -27,6 +27,7 @@ MODEL: Optional[any] = None
 INTENTS_DATA: list[dict] = []
 INTENT_EMBEDDINGS: dict[str, any] = {}
 STEM_INTENT_WEIGHTS: dict[str, dict[str, float]] = {}
+PHRASE_INTENT_WEIGHTS: dict[str, dict[str, float]] = {}
 INTENT_NEGATIVE_KEYWORDS: dict[str, set[str]] = {}
 
 USE_EMBEDDINGS: bool = settings.use_embeddings
@@ -85,7 +86,7 @@ def load_model() -> None:
 # ============================================================================
 
 def load_intent_data() -> None:
-    global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS, STEM_INTENT_WEIGHTS, INTENT_NEGATIVE_KEYWORDS
+    global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS, STEM_INTENT_WEIGHTS, PHRASE_INTENT_WEIGHTS, INTENT_NEGATIVE_KEYWORDS
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             data: dict = json.load(f)
@@ -99,26 +100,25 @@ def load_intent_data() -> None:
             f"similarity_threshold={SIMILARITY_THRESHOLD}"
         )
 
-        # Keyword → intent ağırlık haritalarını hazırla
         STEM_INTENT_WEIGHTS = {}
+        PHRASE_INTENT_WEIGHTS = {}
         INTENT_NEGATIVE_KEYWORDS = {}
         for intent in INTENTS_DATA:
             intent_name: str = intent.get("intent_name", "")
             kw: dict = intent.get("keywords", {}) or {}
-            neg_kw: dict | list | None = intent.get("negative_keywords")  # opsiyonel
+            neg_kw: dict | list | None = intent.get("negative_keywords")
 
-            # Pozitif keyword'ler (tek kelime ve ifade)
             for key, weight in kw.items():
                 if not isinstance(key, str):
                     continue
                 stem = key.strip().lower()
                 if not stem:
                     continue
-                # Sadece tek kelimelik anahtarları stem tabanlı map'e koy
-                if " " not in stem:
+                if " " in stem:
+                    PHRASE_INTENT_WEIGHTS.setdefault(stem, {})[intent_name] = float(weight)
+                else:
                     STEM_INTENT_WEIGHTS.setdefault(stem, {})[intent_name] = float(weight)
 
-            # Negatif keyword'ler: küçük harfe çevir, set olarak sakla
             neg_set: set[str] = set()
             if isinstance(neg_kw, dict):
                 neg_set = {k.strip().lower() for k in neg_kw.keys() if k.strip()}
@@ -126,6 +126,11 @@ def load_intent_data() -> None:
                 neg_set = {str(k).strip().lower() for k in neg_kw if str(k).strip()}
             if neg_set:
                 INTENT_NEGATIVE_KEYWORDS[intent_name] = neg_set
+
+        logger.info(
+            f"📊 Keyword maps: {len(STEM_INTENT_WEIGHTS)} stems, "
+            f"{len(PHRASE_INTENT_WEIGHTS)} phrases"
+        )
 
         # Semantic embedding'leri yeniden hazırla
         INTENT_EMBEDDINGS = {}
@@ -157,57 +162,111 @@ def load_intent_data() -> None:
 # HELPERS
 # ============================================================================
 
+_STOPWORDS: frozenset[str] = frozenset({
+    "ve", "ile", "de", "da", "mi", "mı", "mu", "mü", "ki", "ya",
+    "ama", "fakat", "lakin", "veya", "şu", "bu", "o", "bir", "ben",
+    "sen", "bana", "sana", "için", "ne", "nasıl", "var", "yok",
+})
+
+
 def _classify_by_keywords(user_message: str) -> Optional[dict]:
     """
-    Keyword tabanlı intent sınıflandırma.
+    Keyword + phrase (bigram/trigram) tabanlı intent sınıflandırma.
 
-    Optimizasyonlar:
-      - preprocess_text çıktısı bir kez hesaplanır
-      - stem → {intent: weight} map'i üzerinden O(nStem) zamanda skorlanır
-      - negative_keywords içeren intent'ler, ilgili kelime metinde geçiyorsa diskalifiye edilir
+    1) Çok kelimeli ifadeleri (phrase) normalize metin üzerinde arar
+    2) Tek kelime stem'leri STEM_INTENT_WEIGHTS'ten skorlar
+    3) Mesaj uzunluğuna göre normalize eder (kısa mesaj avantajsız olmasın)
+    4) Negatif keyword filtreleme uygular
+    5) İlk iki aday yakınsa semantic tie-breaking yapar
     """
     stems: list[str] = preprocess_text(user_message)
-    if not stems or not STEM_INTENT_WEIGHTS:
+    if not stems:
         return None
 
-    # Basit Türkçe stopword listesi — keyword skoruna katkı vermesin
-    STOPWORDS: set[str] = {
-        "ve", "ile", "de", "da", "mi", "mı", "mu", "mü", "ki", "ya", "ya da",
-        "ama", "fakat", "lakin", "veya", "ya da", "şu", "bu", "o",
-    }
-
     scores: dict[str, float] = {}
+    text_lower: str = user_message.lower()
+
+    # --- Phase 1: Multi-word phrase matching on raw lowered text ---
+    for phrase, intent_weights in PHRASE_INTENT_WEIGHTS.items():
+        if phrase in text_lower:
+            for intent_name, w in intent_weights.items():
+                scores[intent_name] = scores.get(intent_name, 0.0) + w
+
+    # --- Phase 2: Single-stem matching ---
+    meaningful_count = 0
     for stem in stems:
         s = stem.strip().lower()
-        if not s or s in STOPWORDS:
+        if not s or s in _STOPWORDS:
             continue
+        meaningful_count += 1
         intent_weights = STEM_INTENT_WEIGHTS.get(s)
         if not intent_weights:
             continue
         for intent_name, w in intent_weights.items():
-            scores[intent_name] = scores.get(intent_name, 0.0) + float(w)
+            scores[intent_name] = scores.get(intent_name, 0.0) + w
 
     if not scores:
         return None
 
-    # Negatif keyword'ler: eğer mesajda geçiyorsa ilgili intent'i ele
-    text_lower = user_message.lower()
+    # --- Phase 3: Score normalization ---
+    # Long messages accumulate more hits; normalize so short messages
+    # aren't penalized. Uses log-based dampening.
+    if meaningful_count > 3:
+        import math
+        factor = 1.0 + 0.3 * math.log(meaningful_count / 3.0)
+        scores = {k: v / factor for k, v in scores.items()}
+
+    # --- Phase 4: Negative keyword filtering ---
     for intent_name, neg_set in INTENT_NEGATIVE_KEYWORDS.items():
-        if any(neg in text_lower for neg in neg_set):
+        if intent_name in scores and any(neg in text_lower for neg in neg_set):
             scores.pop(intent_name, None)
 
     if not scores:
         return None
 
-    best_intent_name = max(scores, key=scores.get)
-    best_score = scores[best_intent_name]
+    sorted_intents = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    best_intent_name, best_score = sorted_intents[0]
 
-    best_intent = next((i for i in INTENTS_DATA if i.get("intent_name") == best_intent_name), None)
+    logger.debug(f"Keyword scores (top-3): {sorted_intents[:3]}")
+
+    if best_score < KEYWORD_THRESHOLD:
+        return None
+
+    # --- Phase 5: Tie-breaking via semantic similarity ---
+    if (
+        len(sorted_intents) >= 2
+        and USE_EMBEDDINGS
+        and MODEL
+        and sorted_intents[1][1] >= best_score * 0.85
+    ):
+        tie_candidates = [
+            name for name, sc in sorted_intents[:3] if sc >= best_score * 0.80
+        ]
+        logger.debug(f"Tie-break candidates: {tie_candidates}")
+        try:
+            user_emb = _encode_user_message(user_message)
+            tie_best_sim = -1.0
+            tie_winner = best_intent_name
+            for cand in tie_candidates:
+                if cand in INTENT_EMBEDDINGS:
+                    sim = _cosine_similarity(user_emb, INTENT_EMBEDDINGS[cand])
+                    if sim > tie_best_sim:
+                        tie_best_sim = sim
+                        tie_winner = cand
+            if tie_winner != best_intent_name:
+                logger.info(
+                    f"🔀 Tie-break: {best_intent_name} → {tie_winner} "
+                    f"(sim={tie_best_sim:.4f})"
+                )
+                best_intent_name = tie_winner
+        except Exception as e:
+            logger.debug(f"Tie-break semantic error (ignored): {e}")
+
+    best_intent = next(
+        (i for i in INTENTS_DATA if i.get("intent_name") == best_intent_name), None
+    )
     if best_intent:
-        logger.debug(f"Keyword: intent={best_intent_name}, score={best_score}")
-
-    if best_intent and best_score >= KEYWORD_THRESHOLD:
-        logger.info(f"✅ Intent (Keyword): {best_intent_name}")
+        logger.info(f"✅ Intent (Keyword): {best_intent_name} (score={best_score:.1f})")
         return best_intent
 
     return None

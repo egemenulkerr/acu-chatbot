@@ -19,8 +19,17 @@ MIN_EXPECTED_DEVICES = 10
 def scrape_lab_devices():
     url = 'https://www.artvin.edu.tr/laboratuvar-cihazlari'
     device_db = {}
+    skipped_rows = 0
 
     logger.info("Laboratuvar cihazları taranıyor (Selenium)...")
+
+    firefox_bin = os.getenv("FIREFOX_BIN", "/usr/bin/firefox-esr")
+    geckodriver_path = os.getenv("GECKODRIVER_PATH", "/usr/local/bin/geckodriver")
+    if not os.path.exists(geckodriver_path):
+        geckodriver_path = "geckodriver"
+    if not os.path.exists(firefox_bin):
+        logger.error(f"Firefox binary bulunamadı: {firefox_bin}")
+        return {}
 
     browser = None
     try:
@@ -28,16 +37,11 @@ def scrape_lab_devices():
         opsiyonlar.add_argument("--headless")
         opsiyonlar.add_argument("--no-sandbox")
         opsiyonlar.add_argument("--disable-dev-shm-usage")
-
-        firefox_bin = os.getenv("FIREFOX_BIN", "/usr/bin/firefox-esr")
         opsiyonlar.binary_location = firefox_bin
-
-        geckodriver_path = os.getenv("GECKODRIVER_PATH", "/usr/local/bin/geckodriver")
-        if not os.path.exists(geckodriver_path):
-            geckodriver_path = "geckodriver"
 
         service = Service(geckodriver_path)
         browser = webdriver.Firefox(service=service, options=opsiyonlar)
+        browser.set_page_load_timeout(30)
         browser.get(url)
 
         # Tabloyu genişlet: absolute XPath yerine CSS/attribute-based selectors kullan
@@ -88,10 +92,14 @@ def scrape_lab_devices():
                         "stock": f"Adet: {adet}"
                     }
             except Exception as e:
-                logger.warning(f"Satır parse hatası (atlanıyor): {e}")
+                skipped_rows += 1
+                if skipped_rows <= 3:
+                    logger.warning(f"Satır parse hatası (atlanıyor): {e}")
                 continue
 
-        # Veri kalite kontrolü — minimum cihaz sayısını kontrol et
+        if skipped_rows > 3:
+            logger.warning(f"Toplam {skipped_rows} satır atlandı (ilk 3 hatayı yukarıda görebilirsiniz).")
+
         if len(device_db) < MIN_EXPECTED_DEVICES:
             logger.warning(
                 f"⚠️  Beklenen minimum cihaz sayısına ({MIN_EXPECTED_DEVICES}) ulaşılamadı. "

@@ -8,6 +8,7 @@
 # ============================================================================
 
 import logging
+import re
 from typing import Optional
 
 import google.generativeai as genai
@@ -108,6 +109,25 @@ def _get_model() -> Optional[genai.GenerativeModel]:
 
 
 # ============================================================================
+# INPUT SANITIZATION
+# ============================================================================
+
+_INJECTION_PATTERNS = re.compile(
+    r"(ignore\s+(previous|above|all)\s+(instructions?|prompts?|rules?))"
+    r"|(system\s*prompt)"
+    r"|(you\s+are\s+now)"
+    r"|(act\s+as\s+(?:a\s+)?(?:different|new))"
+    r"|(forget\s+(everything|your\s+instructions?))",
+    re.IGNORECASE,
+)
+
+
+def _sanitize_for_llm(text: str) -> str:
+    """Bilinen prompt injection kalıplarını zararsız hale getirir."""
+    return _INJECTION_PATTERNS.sub("[filtered]", text)
+
+
+# ============================================================================
 # MAIN LLM FUNCTION
 # ============================================================================
 
@@ -122,16 +142,17 @@ def stream_llm_response(user_message: str, history: Optional[list] = None):
         return
 
     try:
+        safe_message = _sanitize_for_llm(user_message)
         gemini_history = []
         if history:
             for msg in history[-10:]:
                 role = "user" if msg.get("role") == "user" else "model"
-                text = msg.get("text", "").strip()
+                text = _sanitize_for_llm(msg.get("text", "").strip())
                 if text:
                     gemini_history.append({"role": role, "parts": [text]})
 
         chat = model.start_chat(history=gemini_history)
-        response = chat.send_message(user_message, stream=True)
+        response = chat.send_message(safe_message, stream=True)
         for chunk in response:
             if chunk.text:
                 yield chunk.text
@@ -159,17 +180,17 @@ def get_llm_response(user_message: str, history: Optional[list] = None) -> str:
         return "⚙️ Sistem yapılandırma hatası: AI servisi başlatılamadı. Lütfen yöneticiye başvurun."
 
     try:
-        # Geçmişi Gemini'nin beklediği formata dönüştür
+        safe_message = _sanitize_for_llm(user_message)
         gemini_history = []
         if history:
-            for msg in history[-10:]:  # Son 5 tur (10 mesaj)
+            for msg in history[-10:]:
                 role = "user" if msg.get("role") == "user" else "model"
-                text = msg.get("text", "").strip()
+                text = _sanitize_for_llm(msg.get("text", "").strip())
                 if text:
                     gemini_history.append({"role": role, "parts": [text]})
 
         chat = model.start_chat(history=gemini_history)
-        response = chat.send_message(user_message)
+        response = chat.send_message(safe_message)
         response_text = response.text.strip()
 
         logger.info(f"✅ LLM yanıtı oluşturuldu ({len(response_text)} karakter)")

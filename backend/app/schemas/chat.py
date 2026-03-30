@@ -2,18 +2,25 @@
 # backend/app/schemas/chat.py - Pydantic Data Models
 # ============================================================================
 
-from pydantic import BaseModel, Field
+import re
+
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
+
+_SESSION_RE = re.compile(r"^[a-zA-Z0-9_\-]{1,64}$")
+_VALID_ROLES = {"user", "bot", "model"}
+_MAX_HISTORY_ITEMS = 20
+_MAX_HISTORY_TEXT_LEN = 2000
+
+
+class HistoryItem(BaseModel):
+    role: str = Field(..., pattern=r"^(user|bot|model)$")
+    text: str = Field(..., max_length=_MAX_HISTORY_TEXT_LEN)
 
 
 class ChatRequest(BaseModel):
     """
     POST /api/chat endpoint'ine gelen request body modeli.
-
-    Fields:
-        message    : Kullanıcı mesajı
-        session_id : Opsiyonel session identifier (cihaz onay akışı için)
-        history    : Son konuşma geçmişi — LLM'e bağlam sağlar
     """
 
     message: str = Field(
@@ -21,21 +28,29 @@ class ChatRequest(BaseModel):
         title="Kullanıcı Mesajı",
         description="Chatbot'a gönderilecek metin",
         min_length=1,
-        max_length=1000
+        max_length=1000,
     )
 
     session_id: Optional[str] = Field(
         None,
         title="Session ID",
         description="Kullanıcı session'ı takip etmek için",
-        max_length=100
+        max_length=64,
     )
 
-    history: list[dict] = Field(
+    history: List[HistoryItem] = Field(
         default_factory=list,
         title="Konuşma Geçmişi",
-        description='Son mesajlar [{role: "user"|"bot", text: "..."}] — max 20 öğe',
+        description="Son mesajlar — max 20 öğe",
+        max_length=_MAX_HISTORY_ITEMS,
     )
+
+    @field_validator("session_id")
+    @classmethod
+    def validate_session_id(cls, v: Optional[str]) -> Optional[str]:
+        if v is not None and not _SESSION_RE.match(v):
+            raise ValueError("session_id yalnızca harf, rakam, _ ve - içerebilir (max 64 karakter)")
+        return v
 
     class Config:
         json_schema_extra = {
@@ -45,7 +60,7 @@ class ChatRequest(BaseModel):
                 "history": [
                     {"role": "user", "text": "Merhaba"},
                     {"role": "bot", "text": "Merhaba! Size nasıl yardımcı olabilirim?"}
-                ]
+                ],
             }
         }
 

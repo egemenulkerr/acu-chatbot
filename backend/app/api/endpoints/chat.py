@@ -16,7 +16,7 @@ from fastapi import APIRouter, Depends, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel as _BaseModel
 
-from ...schemas.chat import ChatRequest, ChatResponse, ChatOption
+from ...schemas.chat import ChatRequest, ChatResponse
 from ...core.classifier import classify_intent
 from ...core.limiter import limiter, llm_limiter
 from ...services.web_scraper.manager import update_system_data, _format_menu_message
@@ -29,14 +29,15 @@ from ...services.web_scraper.library_site_scraper import scrape_library_info, fo
 from ...services.web_scraper.sks_scrapper import scrape_sks_events, format_sks_response
 from ...services.web_scraper.main_site_scrapper import scrape_main_site_news, format_main_news_response
 from ...services.cache import cache_get, cache_set
-from ...services.device_registry import (
-    search_device,
-    suggest_device,
-    get_device_info,
-    get_all_devices,
-    search_devices_by_field,
-)
 from ...security import require_admin
+
+from .chat_device import (
+    cleanup_expired_confirmations,
+    get_confirmation_response,
+    get_pending_device,
+    handle_device_query,
+    handle_device_search_flow,
+)
 
 
 # ============================================================================
@@ -47,11 +48,31 @@ logger: logging.Logger = logging.getLogger("uvicorn")
 
 # Analytics logu: her soru → hangi intent, kaynak, süre
 _ANALYTICS_FILE = Path(__file__).parent.parent.parent / "data" / "analytics.jsonl"
+_ANALYTICS_MAX_BYTES = 50 * 1024 * 1024  # 50 MB
+
+
+def _rotate_analytics_if_needed() -> None:
+    """Dosya boyutu limiti aşıldığında eski kayıtların yarısını silerek küçültür."""
+    try:
+        if not _ANALYTICS_FILE.exists():
+            return
+        size = _ANALYTICS_FILE.stat().st_size
+        if size < _ANALYTICS_MAX_BYTES:
+            return
+        with open(_ANALYTICS_FILE, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        keep = lines[len(lines) // 2:]
+        with open(_ANALYTICS_FILE, "w", encoding="utf-8") as f:
+            f.writelines(keep)
+        logger.info(f"Analytics rotate: {len(lines)} → {len(keep)} satır.")
+    except Exception:
+        pass
 
 
 def _log_analytics(message: str, intent_name: str, source: str, elapsed_ms: float) -> None:
     """Her chat isteğini analytics dosyasına JSONL formatında yaz."""
     try:
+        _rotate_analytics_if_needed()
         entry = {
             "ts": datetime.now(timezone.utc).isoformat(),
             "q": message[:120],
@@ -62,7 +83,7 @@ def _log_analytics(message: str, intent_name: str, source: str, elapsed_ms: floa
         with open(_ANALYTICS_FILE, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except Exception:
-        pass  # Analytics logu asla ana akışı bozmasın
+        pass
 
 
 # ============================================================================
@@ -73,14 +94,7 @@ router: APIRouter = APIRouter()
 
 
 # ============================================================================
-# STATE: PENDING CONFIRMATIONS (cache.py üzerinden — multi-worker safe)
-# ============================================================================
-
-CONFIRMATION_TTL: int = 300  # 5 dakika (saniye cinsinden, cache TTL olarak kullanılır)
-DEVICE_SEARCH_TTL: int = 300
-
-# ============================================================================
-# CACHE KEYS & TTL CONSTANTS
+# CACHE KEYS & TTL CONSTANTS (scrape / dış servis yanıtları)
 # ============================================================================
 
 _FOOD_CACHE_TTL: int = 86400    # 24 saat (gün bazlı key zaten unique)
@@ -91,59 +105,9 @@ _SKS_CACHE_TTL: int = 21600     # 6 saat
 _NEWS_CACHE_TTL: int = 3600     # 1 saat
 
 
-def _cleanup_expired_confirmations() -> None:
-    """Cache TTL tarafından otomatik yapıldığından bu fonksiyon artık no-op."""
-    pass
-
-
-def _get_pending_device(session_id: str) -> Optional[str]:
-    """Aktif ve süresi geçmemiş bir onay bekliyorsa cihaz adını döndür."""
-    return cache_get(f"pending_device:{session_id}")
-
-
-def _set_pending_device(session_id: str, device_name: str) -> None:
-    cache_set(f"pending_device:{session_id}", device_name, ttl=CONFIRMATION_TTL)
-
-
-def _get_device_search_state(session_id: str) -> Optional[dict]:
-    """Cihaz arama adımına dair state'i oku."""
-    return cache_get(f"device_search:{session_id}")
-
-
-def _set_device_search_state(session_id: str, state: dict) -> None:
-    """Cihaz arama state'ini güncelle."""
-    cache_set(f"device_search:{session_id}", state, ttl=DEVICE_SEARCH_TTL)
-
-
-def _clear_device_search_state(session_id: str) -> None:
-    cache_set(f"device_search:{session_id}", None, ttl=1)
-
-
-# ============================================================================
-# AUTH: /api/update-data için admin token
-# ============================================================================
-
-
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
-
-def _get_confirmation_response(device_name: str) -> Optional[ChatResponse]:
-    device_data: Optional[dict] = get_device_info(device_name)
-    if device_data:
-        info = device_data.get("info", {})
-        return ChatResponse(
-            response=(
-                f"Anlaşıldı. İşte bilgiler:\n\n"
-                f"**{device_data['name']}**\n\n"
-                f"{info.get('description', '')}\n\n"
-                f"{info.get('stock', '')}"
-            ),
-            source="Cihaz Katalogu (Onaylı)",
-            intent_name="cihaz_bilgisi"
-        )
-    return None
-
 
 def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
     msg_lower = message.lower()
@@ -208,246 +172,6 @@ def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
         source="Hızlı Yol",
         intent_name="akademik_takvim"
     )
-
-
-_GENERAL_DEVICE_KEYWORDS: list[str] = [
-    "cihazlar", "cihazları", "tüm cihaz", "hangi cihaz", "mevcut cihaz",
-    "laboratuvar cihaz", "lab cihaz", "ne var", "neler var", "listele"
-]
-
-
-def _list_all_devices() -> ChatResponse:
-    """Tüm kayıtlı cihazları listelemek yerine say ve arama seçenekleri sun."""
-    devices = get_all_devices()
-    if not devices:
-        return ChatResponse(
-            response="Cihaz veritabanı henüz yüklenmedi. Lütfen biraz sonra tekrar deneyin.",
-            source="Sistem",
-            intent_name="cihaz_bilgisi_hata"
-        )
-    count = len(devices)
-
-    # Kullanıcıdan hangi özellikle aramak istediğini seçmesini iste.
-    options = [
-        ChatOption(id="device_search_by_name", label="Cihaz adına göre"),
-        ChatOption(id="device_search_by_unit", label="Birim / fakülteye göre"),
-        ChatOption(id="device_search_by_lab", label="Laboratuvar adına göre"),
-        ChatOption(id="device_search_by_owner", label="Sorumlu kişiye göre"),
-    ]
-
-    _set_device_search_state(
-        "__broadcast__",  # gerçek session id handle_chat içinde set edilecek
-        {"stage": "choose_filter"},
-    )
-
-    return ChatResponse(
-        response=(
-            f"Şu anda katalogda **{count}** adet kayıtlı laboratuvar cihazı var.\n\n"
-            "Aradığınız cihazı **hangi özellikle** aramak istersiniz?"
-        ),
-        source="Cihaz Katalogu",
-        intent_name="cihaz_arama_secim",
-        options=options,
-    )
-
-
-def _handle_device_query(message: str, user_id: str) -> ChatResponse:
-    msg_lower = message.lower()
-
-    # Genel liste sorusu mu?
-    if any(kw in msg_lower for kw in _GENERAL_DEVICE_KEYWORDS):
-        # State'i gerçek session_id ile bağla
-        _set_device_search_state(user_id, {"stage": "choose_filter"})
-        base_response = _list_all_devices()
-        return base_response
-
-    device_data: Optional[dict] = search_device(message)
-    if device_data:
-        info = device_data.get("info", {})
-        return ChatResponse(
-            response=(
-                f"**{device_data['name']}**\n\n"
-                f"{info.get('description', '')}\n\n"
-                f"{info.get('stock', '')}"
-            ),
-            source="Cihaz Katalogu",
-            intent_name="cihaz_bilgisi"
-        )
-
-    suggestion: Optional[str] = suggest_device(message)
-    if suggestion:
-        _set_pending_device(user_id, suggestion)
-        return ChatResponse(
-            response=f"Tam bulamadım ama şunu mu demek istediniz: **{suggestion.title()}**? (Evet/Hayır)",
-            source="Akıllı Öneri Sistemi",
-            intent_name="cihaz_bilgisi_onay"
-        )
-
-    return ChatResponse(
-        response="Maalesef o cihazı bulamadım. Kayıtlı tüm cihazları görmek için 'cihazları listele' yazabilirsiniz.",
-        source="Hata",
-        intent_name="cihaz_bilgisi_hata"
-    )
-
-
-def _handle_device_search_flow(user_id: str, raw_message: str) -> Optional[ChatResponse]:
-    """
-    Cihaz arama için çok adımlı akışı yönet:
-      1. Kullanıcıya filtre türünü sor (ad/birim/lab/sorumlu).
-      2. Seçime göre detay sor.
-      3. Değere göre cihaz(lar)ı bul ve detayları göster.
-    """
-    state = _get_device_search_state(user_id)
-    if not state:
-        return None
-
-    message = raw_message.strip()
-    msg_lower = message.lower()
-    stage = state.get("stage")
-
-    # 1. Aşama: filtre seçimi
-    if stage == "choose_filter":
-        if "ad" in msg_lower or "isim" in msg_lower:
-            _set_device_search_state(user_id, {"stage": "provide_value", "filter": "name"})
-            return ChatResponse(
-                response="Tamam, cihaz adını yazar mısınız?",
-                source="Cihaz Katalogu",
-                intent_name="cihaz_arama_ad"
-            )
-        if "birim" in msg_lower or "fakülte" in msg_lower or "fakulte" in msg_lower:
-            _set_device_search_state(user_id, {"stage": "provide_value", "filter": "unit"})
-            return ChatResponse(
-                response="Tamam, aradığınız cihazın bağlı olduğu **birim/fakülte** adını yazar mısınız?",
-                source="Cihaz Katalogu",
-                intent_name="cihaz_arama_birim"
-            )
-        if "lab" in msg_lower or "laboratuvar" in msg_lower:
-            _set_device_search_state(user_id, {"stage": "provide_value", "filter": "lab"})
-            return ChatResponse(
-                response="Tamam, aradığınız cihazın bulunduğu **laboratuvar** adını yazar mısınız?",
-                source="Cihaz Katalogu",
-                intent_name="cihaz_arama_lab"
-            )
-        if "sorumlu" in msg_lower or "hoca" in msg_lower or "öğretim" in msg_lower or "ogretim" in msg_lower:
-            _set_device_search_state(user_id, {"stage": "provide_value", "filter": "owner"})
-            return ChatResponse(
-                response="Tamam, cihazdan sorumlu olduğunu düşündüğünüz **kişi adını** yazar mısınız?",
-                source="Cihaz Katalogu",
-                intent_name="cihaz_arama_sorumlu"
-            )
-
-        # Anlaşılamayan seçim → seçenekleri tekrar göster
-        options = [
-            ChatOption(id="device_search_by_name", label="Cihaz adına göre"),
-            ChatOption(id="device_search_by_unit", label="Birim / fakülteye göre"),
-            ChatOption(id="device_search_by_lab", label="Laboratuvar adına göre"),
-            ChatOption(id="device_search_by_owner", label="Sorumlu kişiye göre"),
-        ]
-        return ChatResponse(
-            response=(
-                "Nasıl aramak istediğinizi anlayamadım.\n\n"
-                "Lütfen şu seçeneklerden birini yazın:\n"
-                "- Cihaz adına göre\n"
-                "- Birim / fakülteye göre\n"
-                "- Laboratuvar adına göre\n"
-                "- Sorumlu kişiye göre"
-            ),
-            source="Cihaz Katalogu",
-            intent_name="cihaz_arama_secim",
-            options=options,
-        )
-
-    # 2. Aşama: değer verme ve arama
-    if stage == "provide_value":
-        filter_type = state.get("filter")
-        devices = get_all_devices()
-        matches: list[tuple[str, dict]] = []
-        q = msg_lower
-
-        if filter_type == "name":
-            device = search_device(message)
-            _clear_device_search_state(user_id)
-            if not device:
-                return ChatResponse(
-                    response="Bu ada yakın bir cihaz bulamadım. İsmi biraz daha net yazmayı deneyebilir misiniz?",
-                    source="Cihaz Katalogu",
-                    intent_name="cihaz_bilgisi_hata"
-                )
-            info = device.get("info", {})
-            desc = info.get("description", "")
-            stock = info.get("stock", "")
-            price = info.get("price", "")
-            return ChatResponse(
-                response=(
-                    f"**{device['name']}**\n\n"
-                    f"{desc}\n\n"
-                    f"{stock}\n{price}"
-                ),
-                source="Cihaz Katalogu",
-                intent_name="cihaz_bilgisi"
-            )
-
-        # Diğer filtreler için description içinden ayrıştırılmış alanları kullan
-        field_map = {
-            "unit": "unit",
-            "lab": "lab",
-            "owner": "responsible",
-        }
-        field = field_map.get(filter_type or "")
-        if field:
-            raw_matches = search_devices_by_field(field, message)
-            matches = list(raw_matches.items())
-        else:
-            # Güvenlik için eski davranışa geri dön (tamamen tanımsız bir filtre tipi gelirse)
-            for key, data in devices.items():
-                desc = str(data.get("description", "")).lower()
-                if desc and q in desc:
-                    matches.append((key, data))
-
-        _clear_device_search_state(user_id)
-
-        if not matches:
-            return ChatResponse(
-                response="Bu kriterlere uyan kayıtlı bir cihaz bulamadım. Farklı bir anahtar kelimeyle tekrar deneyebilirsiniz.",
-                source="Cihaz Katalogu",
-                intent_name="cihaz_bilgisi_hata"
-            )
-
-        if len(matches) == 1:
-            key, data = matches[0]
-            name = data.get("original_name", key.title())
-            desc = data.get("description", "")
-            stock = data.get("stock", "")
-            price = data.get("price", "")
-            return ChatResponse(
-                response=(
-                    f"**{name}**\n\n"
-                    f"{desc}\n\n"
-                    f"{stock}\n{price}"
-                ),
-                source="Cihaz Katalogu",
-                intent_name="cihaz_bilgisi"
-            )
-
-        # Birden fazla sonuç: kısa özet listesi
-        lines = ["Birden fazla cihaz bulundu:\n"]
-        for key, data in matches[:10]:
-            name = data.get("original_name", key.title())
-            desc = data.get("description", "")
-            lines.append(f"- {name} — {desc}")
-        if len(matches) > 10:
-            lines.append(f"\n(toplam {len(matches)} sonuçtan ilk 10 tanesi gösterildi)")
-        lines.append("\nBelirli bir cihaz hakkında detay için cihaz adını yazabilirsiniz.")
-
-        return ChatResponse(
-            response="\n".join(lines),
-            source="Cihaz Katalogu",
-            intent_name="cihaz_bilgisi_liste"
-        )
-
-    # Tanınmayan state -> temizle ve normal akışa bırak
-    _clear_device_search_state(user_id)
-    return None
 
 
 async def _handle_food_query() -> ChatResponse:
@@ -637,22 +361,23 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
       4. Intent handler'ını çağır
       5. LLM fallback (async, 20s timeout)
     """
-    _cleanup_expired_confirmations()
+    cleanup_expired_confirmations()
 
     user_id: str = body.session_id or "default_user"
     message: str = body.message.lower().strip()
-    history: list[dict] = get_or_fallback(body.session_id, body.history or [])
+    client_history = [{"role": h.role, "text": h.text} for h in body.history]
+    history: list[dict] = get_or_fallback(body.session_id, client_history)
     t_start = time()
 
     logger.info(f"📨 Gelen Mesaj: {body.message[:80]}")
 
     # -------- ADIM 1: CONFIRMATION KONTROLÜ --------
-    pending_device = _get_pending_device(user_id)
+    pending_device = get_pending_device(user_id)
     if pending_device:
         positive_answers = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
         cache_set(f"pending_device:{user_id}", None, ttl=1)
         if any(ans in message for ans in positive_answers):
-            response = _get_confirmation_response(pending_device)
+            response = get_confirmation_response(pending_device)
             if response:
                 _log_analytics(body.message, response.intent_name, response.source, (time() - t_start) * 1000)
                 return response
@@ -666,7 +391,7 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
             return result
 
     # -------- ADIM 2: CIHAZ ARAMA AKIŞI (VARSA) --------
-    device_search_response = _handle_device_search_flow(user_id, body.message)
+    device_search_response = handle_device_search_flow(user_id, body.message)
     if device_search_response is not None:
         save_message(body.session_id, "user", body.message)
         save_message(body.session_id, "bot", device_search_response.response)
@@ -685,7 +410,7 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
         elif intent_name == "yemek_listesi":
             result = await _handle_food_query()
         elif intent_name == "cihaz_bilgisi":
-            result = _handle_device_query(body.message, user_id)
+            result = handle_device_query(body.message, user_id)
         elif intent_name == "duyurular":
             result = await _handle_duyurular_query()
         elif intent_name == "hava_durumu":
@@ -721,12 +446,12 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
     """
     user_id: str = body.session_id or "default_user"
     message: str = body.message.lower().strip()
-    history: list[dict] = get_or_fallback(body.session_id, body.history or [])
+    client_history = [{"role": h.role, "text": h.text} for h in body.history]
+    history: list[dict] = get_or_fallback(body.session_id, client_history)
     t_start = time()
 
-    # Lokal intent kontrolü
-    _cleanup_expired_confirmations()
-    pending_device = _get_pending_device(user_id)
+    cleanup_expired_confirmations()
+    pending_device = get_pending_device(user_id)
 
     async def event_stream():
         nonlocal t_start
@@ -738,7 +463,7 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
                 positive = ["evet", "aynen", "he", "hıhı", "onayla", "yes", "doğru", "tabi"]
                 cache_set(f"pending_device:{user_id}", None, ttl=1)
                 if any(ans in message for ans in positive):
-                    conf = _get_confirmation_response(pending_device)
+                    conf = get_confirmation_response(pending_device)
                     if conf:
                         yield _sse(conf.response, done=True)
                         return
@@ -747,7 +472,7 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
                     return
 
             # Cihaz arama akışı (varsa) — streaming için de tek parça cevap döneriz.
-            device_search_response = _handle_device_search_flow(user_id, body.message)
+            device_search_response = handle_device_search_flow(user_id, body.message)
             if device_search_response is not None:
                 _log_analytics(body.message, device_search_response.intent_name or "cihaz_arama", device_search_response.source, (time() - t_start) * 1000)
                 save_message(body.session_id, "user", body.message)
@@ -764,7 +489,7 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
                 elif intent_name == "yemek_listesi":
                     r = await _handle_food_query()
                 elif intent_name == "cihaz_bilgisi":
-                    r = _handle_device_query(body.message, user_id)
+                    r = handle_device_query(body.message, user_id)
                 elif intent_name == "duyurular":
                     r = await _handle_duyurular_query()
                 elif intent_name == "hava_durumu":
@@ -844,11 +569,12 @@ async def trigger_data_update() -> dict:
 
 class _FeedbackRequest(_BaseModel):
     msg_id: int
-    value: Optional[str] = None
-    text: str = ""
+    value: Optional[str] = Field(None, max_length=10)
+    text: str = Field("", max_length=500)
 
 
 @router.post("/feedback")
+@limiter.limit("10/minute")
 async def submit_feedback(body: _FeedbackRequest, request: Request) -> dict:
     """
     Kullanıcı geri bildirimini analytics.jsonl'a kaydet.

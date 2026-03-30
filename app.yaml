@@ -24,6 +24,8 @@ services:
   - key: USE_EMBEDDINGS
     value: "true"
     scope: RUN_TIME
+  - key: OPENWEATHER_API_KEY
+    scope: RUN_TIME
   
   health_check:
     http_path: /health

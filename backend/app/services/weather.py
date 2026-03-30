@@ -80,7 +80,7 @@ def get_weather() -> str:
             f"🌡️ Sıcaklık: **{temp}°C** (Hissedilen: {feels_like}°C)\n"
             f"🌤️ Durum: {condition_tr.capitalize()}\n"
             f"💧 Nem: %{humidity}\n"
-            f"💨 Rüzgar: {wind_speed} km/s\n"
+            f"💨 Rüzgar: {wind_speed} km/h\n"
             f"☁️ Bulutluluk: %{cloud_pct}\n\n"
             f"📊 Detaylı tahmin: https://www.mgm.gov.tr"
         )
