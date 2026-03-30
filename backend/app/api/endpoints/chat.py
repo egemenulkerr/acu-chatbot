@@ -14,7 +14,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel as _BaseModel
+from pydantic import BaseModel as _BaseModel, Field
 
 from ...schemas.chat import ChatRequest, ChatResponse
 from ...core.classifier import classify_intent
