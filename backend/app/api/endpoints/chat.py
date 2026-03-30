@@ -34,6 +34,7 @@ from ...services.device_registry import (
     suggest_device,
     get_device_info,
     get_all_devices,
+    search_devices_by_field,
 )
 from ...security import require_admin
 
@@ -386,13 +387,22 @@ def _handle_device_search_flow(user_id: str, raw_message: str) -> Optional[ChatR
                 intent_name="cihaz_bilgisi"
             )
 
-        # Diğer filtreler description üzerinden substring ile aranır
-        for key, data in devices.items():
-            desc = str(data.get("description", "")).lower()
-            if not desc:
-                continue
-            if q in desc:
-                matches.append((key, data))
+        # Diğer filtreler için description içinden ayrıştırılmış alanları kullan
+        field_map = {
+            "unit": "unit",
+            "lab": "lab",
+            "owner": "responsible",
+        }
+        field = field_map.get(filter_type or "")
+        if field:
+            raw_matches = search_devices_by_field(field, message)
+            matches = list(raw_matches.items())
+        else:
+            # Güvenlik için eski davranışa geri dön (tamamen tanımsız bir filtre tipi gelirse)
+            for key, data in devices.items():
+                desc = str(data.get("description", "")).lower()
+                if desc and q in desc:
+                    matches.append((key, data))
 
         _clear_device_search_state(user_id)
 

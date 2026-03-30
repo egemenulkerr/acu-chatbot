@@ -16,6 +16,7 @@ from slowapi.errors import RateLimitExceeded
 from .config import settings
 from .api.endpoints import chat as chat_router
 from .api.endpoints import analytics as analytics_router
+from .api.endpoints import admin_intents as admin_intents_router
 from .core.classifier import load_intent_data
 from .core.limiter import limiter, llm_limiter
 from .services.device_registry import initialize_device_db, update_device_database
@@ -169,6 +170,7 @@ app.add_middleware(
 
 app.include_router(chat_router.router, prefix="/api", tags=["chat"])
 app.include_router(analytics_router.router, prefix="/api/analytics", tags=["analytics"])
+app.include_router(admin_intents_router.router, prefix="/api/admin", tags=["admin-intents"])
 
 
 # ============================================================================

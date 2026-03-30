@@ -251,3 +251,50 @@ def get_device_info(device_name_key: str) -> Optional[dict]:
 
     logger.debug(f"⚠️  Cihaz bulunamadı: '{device_name_key}'")
     return None
+
+
+def _parse_description_fields(description: str) -> dict[str, str]:
+    """
+    Serbest metin description içinden temel alanları çekmeye çalış.
+
+    Beklenen tipik format:
+        \"Birim: X, Lab: Y, Marka: Z, Sorumlu: Q\"
+    """
+    if not description:
+        return {}
+    parts = [p.strip() for p in description.split(",")]
+    result: dict[str, str] = {}
+    for part in parts:
+        if ":" not in part:
+            continue
+        key, value = part.split(":", 1)
+        key = key.strip().lower()
+        value = value.strip()
+        if key.startswith("birim"):
+            result["unit"] = value
+        elif key.startswith("lab"):
+            result["lab"] = value
+        elif key.startswith("marka"):
+            result["brand"] = value
+        elif key.startswith("sorumlu"):
+            result["responsible"] = value
+    return result
+
+
+def search_devices_by_field(field: str, query: str) -> dict[str, dict]:
+    """
+    unit/lab/responsible gibi alanlara göre cihaz ara.
+    Basit case-insensitive substring eşleşmesi kullanır.
+    """
+    if not DEVICE_DB:
+        initialize_device_db()
+
+    q = query.lower()
+    results: dict[str, dict] = {}
+    for key, data in DEVICE_DB.items():
+        desc = str(data.get("description", ""))
+        parsed = _parse_description_fields(desc)
+        value = parsed.get(field, "").lower()
+        if value and q in value:
+            results[key] = data
+    return results

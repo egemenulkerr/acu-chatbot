@@ -74,11 +74,15 @@ def _build_summary(entries: list[dict]) -> dict:
     intent_dist = {k: {"count": v, "pct": round(v / total * 100, 1)} for k, v in intent_counts.most_common()}
     source_dist = {k: {"count": v, "pct": round(v / total * 100, 1)} for k, v in source_counts.most_common()}
 
+    # En çok kullanılan ilk 10 intent'i ayrıca döndür
+    top_intents = list(intent_counts.most_common(10))
+
     return {
         "total_messages": total,
         "intent_distribution": intent_dist,
         "source_distribution": source_dist,
         "avg_response_ms": avg_ms,
+        "top_intents": top_intents,
     }
 
 
@@ -130,6 +134,27 @@ def analytics_recent(
     recent.reverse()
 
     return {
+        "count": len(recent),
+        "entries": recent,
+    }
+
+
+@router.get("/intent/{intent_name}", tags=["analytics"])
+def analytics_for_intent(
+    intent_name: str,
+    limit: int = Query(50, ge=1, le=500, description="Döndürülecek maksimum kayıt sayısı"),
+    _: None = Depends(require_admin),
+) -> dict:
+    """
+    Belirli bir intent için son N kaydı döndürür (admin).
+    """
+    entries = _load_entries()
+    filtered = [e for e in entries if e.get("intent") == intent_name]
+    recent = filtered[-limit:] if len(filtered) > limit else filtered
+    recent.reverse()
+
+    return {
+        "intent": intent_name,
         "count": len(recent),
         "entries": recent,
     }
