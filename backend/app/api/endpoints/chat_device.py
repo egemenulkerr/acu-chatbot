@@ -29,7 +29,10 @@ DEVICE_FILTER_OPTIONS: list[ChatOption] = [
 
 _GENERAL_DEVICE_KEYWORDS: list[str] = [
     "cihazlar", "cihazları", "tüm cihaz", "hangi cihaz", "mevcut cihaz",
-    "laboratuvar cihaz", "lab cihaz", "ne var", "neler var", "listele",
+    "laboratuvar cihaz", "lab cihaz",  "listele",
+    "cihaz ara", "cihaz aramak", "cihaz bulmak", "cihaz listesi",
+    "bir cihaz", "cihaz sorgula", "cihaz var mı",
+    "hangi aletler", "hangi ekipman",
 ]
 
 
@@ -96,10 +99,24 @@ def list_all_devices_response() -> ChatResponse:
     )
 
 
+_VAGUE_QUERY_WORDS: set[str] = {
+    "aramak", "arama", "bulmak", "sorgula", "istiyorum", "bakmak",
+    "görmek", "listele", "listesinde", "katalog",
+}
+
+
+def _is_vague_device_query(msg_lower: str) -> bool:
+    """Mesaj spesifik bir cihaz adı değil, genel bir arama niyeti mi?"""
+    words = set(msg_lower.split())
+    vague_count = len(words & _VAGUE_QUERY_WORDS)
+    has_cihaz = "cihaz" in msg_lower or "ekipman" in msg_lower or "alet" in msg_lower
+    return has_cihaz and vague_count >= 1
+
+
 def handle_device_query(message: str, user_id: str) -> ChatResponse:
     msg_lower = message.lower()
 
-    if any(kw in msg_lower for kw in _GENERAL_DEVICE_KEYWORDS):
+    if any(kw in msg_lower for kw in _GENERAL_DEVICE_KEYWORDS) or _is_vague_device_query(msg_lower):
         set_device_search_state(user_id, {"stage": "choose_filter"})
         return list_all_devices_response()
 
