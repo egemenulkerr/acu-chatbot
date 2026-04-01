@@ -338,7 +338,7 @@ async def _dispatch_intent(intent: dict, raw_message: str, user_id: str) -> Chat
         return await _handle_weather_query()
     if intent_name in ("kutuphane", "kütüphane"):
         return await _handle_library_query()
-    if intent_name in ("sks_etkinlik", "kulup_topluluk", "spor_tesisleri"):
+    if intent_name in ("sks_etkinlik", "kulup_topluluk"):
         return await _handle_sks_query()
     if intent_name == "guncel_haberler":
         return await _handle_news_query()
