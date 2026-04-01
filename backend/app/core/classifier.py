@@ -29,6 +29,7 @@ INTENT_EMBEDDINGS: dict[str, any] = {}
 STEM_INTENT_WEIGHTS: dict[str, dict[str, float]] = {}
 PHRASE_INTENT_WEIGHTS: dict[str, dict[str, float]] = {}
 INTENT_NEGATIVE_KEYWORDS: dict[str, set[str]] = {}
+INTENT_EXAMPLE_MAP: dict[str, str] = {}  # normalized example → intent_name
 
 USE_EMBEDDINGS: bool = settings.use_embeddings
 
@@ -86,7 +87,7 @@ def load_model() -> None:
 # ============================================================================
 
 def load_intent_data() -> None:
-    global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS, STEM_INTENT_WEIGHTS, PHRASE_INTENT_WEIGHTS, INTENT_NEGATIVE_KEYWORDS
+    global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS, STEM_INTENT_WEIGHTS, PHRASE_INTENT_WEIGHTS, INTENT_NEGATIVE_KEYWORDS, INTENT_EXAMPLE_MAP
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             data: dict = json.load(f)
@@ -132,6 +133,15 @@ def load_intent_data() -> None:
             f"{len(PHRASE_INTENT_WEIGHTS)} phrases"
         )
 
+        INTENT_EXAMPLE_MAP = {}
+        for intent in INTENTS_DATA:
+            intent_name = intent.get("intent_name", "")
+            for ex in intent.get("examples", []) or []:
+                normalized = _normalize_for_match(ex)
+                if normalized:
+                    INTENT_EXAMPLE_MAP[normalized] = intent_name
+        logger.info(f"📊 Exact example map: {len(INTENT_EXAMPLE_MAP)} entries")
+
         INTENT_EMBEDDINGS = {}
         if USE_EMBEDDINGS and MODEL:
             import numpy as np
@@ -176,6 +186,31 @@ def load_intent_data() -> None:
 # ============================================================================
 # HELPERS
 # ============================================================================
+
+import re as _re
+
+def _normalize_for_match(text: str) -> str:
+    """Exact match için normalize: lowercase, noktalamasız, tek boşluk."""
+    t = text.lower().strip()
+    t = _re.sub(r'[^\w\s]', '', t, flags=_re.UNICODE)
+    return ' '.join(t.split())
+
+
+def _classify_by_exact_example(user_message: str) -> Optional[dict]:
+    """Kısa mesajlarda (~1-5 kelime) exact/near-exact örnek eşleşmesi."""
+    normalized = _normalize_for_match(user_message)
+    if not normalized:
+        return None
+
+    intent_name = INTENT_EXAMPLE_MAP.get(normalized)
+    if intent_name:
+        intent = next((i for i in INTENTS_DATA if i.get("intent_name") == intent_name), None)
+        if intent:
+            logger.info(f"✅ Intent (Exact Example): {intent_name}")
+            return intent
+
+    return None
+
 
 _STOPWORDS: frozenset[str] = frozenset({
     "ve", "ile", "de", "da", "mi", "mı", "mu", "mü", "ki", "ya",
@@ -353,10 +388,14 @@ def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
 # ============================================================================
 
 def classify_intent(user_message: str) -> Optional[dict]:
-    """3-aşamalı intent sınıflandırma: Keyword → Semantic → None (LLM fallback)."""
+    """4-aşamalı intent sınıflandırma: Exact → Keyword → Semantic → None (LLM fallback)."""
     if not INTENTS_DATA:
         logger.warning("⚠️  Intent data yüklenmedi!")
         return None
+
+    intent = _classify_by_exact_example(user_message)
+    if intent:
+        return intent
 
     intent = _classify_by_keywords(user_message)
     if intent:
