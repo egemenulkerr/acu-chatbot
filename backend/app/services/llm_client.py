@@ -9,9 +9,11 @@
 
 import logging
 import re
+import threading
 from typing import Optional
 
 import google.generativeai as genai
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 from ..config import settings
 
@@ -46,66 +48,84 @@ YAPMA:
 - Uzun, maddeli, gereksiz liste cevaplar
 """
 
-# Module-level singleton — model yalnızca bir kez başlatılır
 _CACHED_MODEL: Optional[genai.GenerativeModel] = None
+_INIT_LOCK = threading.Lock()
+_INIT_FAILED = False
 
 
 # ============================================================================
-# MODEL INITIALIZATION (CACHED)
+# MODEL INITIALIZATION (CACHED, THREAD-SAFE)
 # ============================================================================
 
 def _get_model() -> Optional[genai.GenerativeModel]:
     """
     Gemini model örneğini döndür. İlk çağrıda başlatır, sonrasında cache'den verir.
+    Thread-safe; başarısız init tekrar denenmez (negatif cache).
     """
-    global _CACHED_MODEL
+    global _CACHED_MODEL, _INIT_FAILED
 
     if _CACHED_MODEL is not None:
         return _CACHED_MODEL
-
-    if not GOOGLE_API_KEY:
-        logger.error("❌ GOOGLE_API_KEY yapılandırılmamış!")
+    if _INIT_FAILED:
         return None
 
-    try:
-        genai.configure(api_key=GOOGLE_API_KEY)
+    with _INIT_LOCK:
+        if _CACHED_MODEL is not None:
+            return _CACHED_MODEL
+        if _INIT_FAILED:
+            return None
 
-        logger.info("🔍 Gemini modelleri aranıyor...")
-        available_models = list(genai.list_models())
+        if not GOOGLE_API_KEY:
+            logger.error("❌ GOOGLE_API_KEY yapılandırılmamış!")
+            _INIT_FAILED = True
+            return None
 
-        gemini_models = [
-            m for m in available_models
-            if 'generateContent' in m.supported_generation_methods
-            and 'gemini' in m.name
-        ]
+        try:
+            genai.configure(api_key=GOOGLE_API_KEY)
 
-        env_model = (settings.gemini_model or "").strip()
-        model_name = env_model if env_model else "models/gemini-1.5-flash"
+            logger.info("🔍 Gemini modelleri aranıyor...")
+            available_models = list(genai.list_models())
 
-        if not env_model:
-            for m in gemini_models:
-                if 'flash' in m.name:
-                    model_name = m.name
-                    break
-            else:
+            gemini_models = [
+                m for m in available_models
+                if 'generateContent' in m.supported_generation_methods
+                and 'gemini' in m.name
+            ]
+
+            env_model = (settings.gemini_model or "").strip()
+            model_name = env_model if env_model else "models/gemini-1.5-flash"
+
+            if not env_model:
                 for m in gemini_models:
-                    if 'pro' in m.name:
+                    if 'flash' in m.name:
                         model_name = m.name
                         break
                 else:
-                    if gemini_models:
-                        model_name = gemini_models[0].name
+                    for m in gemini_models:
+                        if 'pro' in m.name:
+                            model_name = m.name
+                            break
+                    else:
+                        if gemini_models:
+                            model_name = gemini_models[0].name
 
-        logger.info(f"✅ Gemini modeli seçildi ve cache'lendi: {model_name}")
-        _CACHED_MODEL = genai.GenerativeModel(
-            model_name,
-            system_instruction=SYSTEM_PROMPT
-        )
-        return _CACHED_MODEL
+            logger.info(f"✅ Gemini modeli seçildi ve cache'lendi: {model_name}")
+            _CACHED_MODEL = genai.GenerativeModel(
+                model_name,
+                system_instruction=SYSTEM_PROMPT,
+                safety_settings={
+                    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+                    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                },
+            )
+            return _CACHED_MODEL
 
-    except Exception as e:
-        logger.error(f"❌ Model başlatma hatası: {e}", exc_info=True)
-        return None
+        except Exception as e:
+            logger.error(f"❌ Model başlatma hatası: {e}", exc_info=True)
+            _INIT_FAILED = True
+            return None
 
 
 # ============================================================================

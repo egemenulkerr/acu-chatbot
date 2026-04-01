@@ -3,33 +3,15 @@
 # ============================================================================
 
 import logging
-import requests
-from bs4 import BeautifulSoup
 from typing import Optional
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+from bs4 import BeautifulSoup
+
+from .http_utils import fetch_with_retry
 
 logger = logging.getLogger(__name__)
 
 LIBRARY_BASE_URL = "https://kutuphane.artvin.edu.tr"
-
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    )
-}
-
-
-@retry(
-    retry=retry_if_exception_type((requests.RequestException, ConnectionError)),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=1, max=4),
-    reraise=False,
-)
-def _fetch_page(url: str, timeout: int = 10):
-    r = requests.get(url, timeout=timeout, headers=HEADERS)
-    r.raise_for_status()
-    return r
 
 
 def scrape_library_info() -> Optional[dict]:
@@ -51,7 +33,7 @@ def scrape_library_info() -> Optional[dict]:
 
     try:
         logger.info(f"Kütüphane sitesi taranıyor: {LIBRARY_BASE_URL}")
-        r = _fetch_page(LIBRARY_BASE_URL)
+        r = fetch_with_retry(LIBRARY_BASE_URL, timeout=10)
         if r is None:
             logger.error("Kütüphane sitesi 3 denemede de alınamadı.")
             return None

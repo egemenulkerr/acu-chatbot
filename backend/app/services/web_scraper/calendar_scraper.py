@@ -1,9 +1,10 @@
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 import logging
 import re
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from urllib.parse import urljoin
+
+from bs4 import BeautifulSoup
+
+from .http_utils import fetch_with_retry
 
 logger = logging.getLogger(__name__)
 
@@ -49,16 +50,6 @@ def _parse_key_dates_from_html(soup: BeautifulSoup) -> dict[str, str]:
     return key_dates
 
 
-@retry(
-    retry=retry_if_exception_type((requests.RequestException, ConnectionError)),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=1, max=4),
-    reraise=False,
-)
-def _fetch_calendar_page(url: str, timeout: int = 10):
-    r = requests.get(url, timeout=timeout)
-    r.raise_for_status()
-    return r
 
 
 def scrape_all_calendars() -> dict:
@@ -71,7 +62,7 @@ def scrape_all_calendars() -> dict:
 
     try:
         logger.info(f"Takvim arşivi taranıyor: {BASE_URL}")
-        response = _fetch_calendar_page(BASE_URL)
+        response = fetch_with_retry(BASE_URL, timeout=10)
         if response is None:
             logger.error("Takvim sayfası 3 denemede de alınamadı.")
             return {}

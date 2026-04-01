@@ -110,6 +110,7 @@ _WEATHER_CACHE_TTL: int = 1800  # 30 dakika
 _LIBRARY_CACHE_TTL: int = 21600 # 6 saat
 _SKS_CACHE_TTL: int = 21600     # 6 saat
 _NEWS_CACHE_TTL: int = 3600     # 1 saat
+_ERROR_CACHE_TTL: int = 120     # 2 dakika — hata yanıtları kısa süre cache'lenir
 
 
 # ============================================================================
@@ -209,11 +210,12 @@ async def _handle_food_query() -> ChatResponse:
         daily_menu = None
 
     formatted: str = _format_menu_message(daily_menu)
-    cache_set(cache_key, formatted, ttl=_FOOD_CACHE_TTL)
+    ttl = _FOOD_CACHE_TTL if daily_menu else _ERROR_CACHE_TTL
+    cache_set(cache_key, formatted, ttl=ttl)
 
     return ChatResponse(
         response=formatted,
-        source="Yemek Servisi",
+        source="Yemek Servisi" if daily_menu else "Yemek Servisi (hata)",
         intent_name="yemek_listesi"
     )
 
@@ -249,6 +251,7 @@ async def _handle_weather_query() -> ChatResponse:
     if cached:
         return ChatResponse(response=cached, source="Hava Durumu (cache)", intent_name="hava_durumu")
 
+    weather_ok = True
     try:
         result: str = await asyncio.wait_for(
             asyncio.to_thread(get_weather), timeout=10.0
@@ -256,9 +259,10 @@ async def _handle_weather_query() -> ChatResponse:
     except (asyncio.TimeoutError, Exception) as e:
         logger.warning(f"Hava durumu hatası: {e}")
         result = "🌤️ Hava durumu bilgisi alınamadı. https://www.mgm.gov.tr"
+        weather_ok = False
 
-    cache_set("weather:artvin", result, ttl=_WEATHER_CACHE_TTL)
-    return ChatResponse(response=result, source="Hava Durumu", intent_name="hava_durumu")
+    cache_set("weather:artvin", result, ttl=_WEATHER_CACHE_TTL if weather_ok else _ERROR_CACHE_TTL)
+    return ChatResponse(response=result, source="Hava Durumu" if weather_ok else "Hava Durumu (hata)", intent_name="hava_durumu")
 
 
 async def _handle_library_query() -> ChatResponse:
@@ -274,8 +278,8 @@ async def _handle_library_query() -> ChatResponse:
         info = None
 
     result = format_library_response(info)
-    cache_set("library", result, ttl=_LIBRARY_CACHE_TTL)
-    return ChatResponse(response=result, source="Kütüphane Sitesi", intent_name="kutuphane")
+    cache_set("library", result, ttl=_LIBRARY_CACHE_TTL if info else _ERROR_CACHE_TTL)
+    return ChatResponse(response=result, source="Kütüphane Sitesi" if info else "Kütüphane (hata)", intent_name="kutuphane")
 
 
 async def _handle_sks_query() -> ChatResponse:
@@ -291,8 +295,8 @@ async def _handle_sks_query() -> ChatResponse:
         info = None
 
     result = format_sks_response(info)
-    cache_set("sks_events", result, ttl=_SKS_CACHE_TTL)
-    return ChatResponse(response=result, source="SKS Sitesi", intent_name="sks_etkinlik")
+    cache_set("sks_events", result, ttl=_SKS_CACHE_TTL if info else _ERROR_CACHE_TTL)
+    return ChatResponse(response=result, source="SKS Sitesi" if info else "SKS (hata)", intent_name="sks_etkinlik")
 
 
 async def _handle_news_query() -> ChatResponse:
@@ -308,8 +312,8 @@ async def _handle_news_query() -> ChatResponse:
         news = None
 
     result = format_main_news_response(news)
-    cache_set("main_news", result, ttl=_NEWS_CACHE_TTL)
-    return ChatResponse(response=result, source="Ana Site", intent_name="guncel_haberler")
+    cache_set("main_news", result, ttl=_NEWS_CACHE_TTL if news else _ERROR_CACHE_TTL)
+    return ChatResponse(response=result, source="Ana Site" if news else "Haberler (hata)", intent_name="guncel_haberler")
 
 
 def _handle_generic_intent(intent: dict) -> ChatResponse:

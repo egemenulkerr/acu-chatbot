@@ -1,114 +1,75 @@
-# chatbot-uni
+# AÇÜ Chatbot
 
-Graduation project – simple full-stack chatbot demo.
+Artvin Çoruh Üniversitesi için yapay zeka destekli chatbot — Bitirme Projesi.
 
 ## 📋 Ön Gereksinimler
 
-**Tek seferlik kurulumlar (yeni bilgisayarda):**
+- **Python 3.11+**
+- **Java (OpenJDK 21)** — Zemberek NLP kütüphanesi için
+- **Node.js 18+** — Frontend geliştirme için
+- **Docker** — Container ile çalıştırmak isteyenler için
 
-- **Python 3.11+** (backend için)
-- **Java (OpenJDK 21)** - Zemberek NLP kütüphanesi için gerekli
-- **Node.js 18+** (frontend için)
+## 🚀 Kurulum
 
-Bu araçlar kuruluysa devam edebilirsiniz.
-
-## 🚀 Kurulum Adımları
-
-### 1. Projeyi İndirin
+### 1. Projeyi Klonlayın / Güncelleyin
 
 ```bash
+git clone https://github.com/<user>/acu-chatbot.git
+cd acu-chatbot
+# veya mevcut klonu güncelle:
 git pull
 ```
 
-### 2. Backend Kurulumu
+### 2. Backend
 
 ```bash
 cd backend
 
-# Virtual environment oluştur (ilk kurulumda)
 python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# Virtual environment'ı aktifleştir
-# Linux/Mac:
-source .venv/bin/activate
-# Windows:
-# .venv\Scripts\activate
-
-# Bağımlılıkları yükle
 pip install -r requirements.txt
 ```
 
 ### 3. Backend Environment Variables
 
-`.env` dosyası git'te yok, elle oluşturmanız gerekiyor:
+`backend/.env` dosyası oluşturun (git'e dahil değildir):
 
-**Yöntem 1:** `.env.example` dosyasını kopyalayın:
 ```bash
 cp backend/.env.example backend/.env
 ```
 
-**Yöntem 2:** Manuel olarak `backend/.env` dosyasını oluşturun:
+veya manuel:
 
-```bash
+```dotenv
 GOOGLE_API_KEY=senin_api_keyin
 ENVIRONMENT=development
 USE_EMBEDDINGS=true
 LOG_LEVEL=INFO
 ```
 
-Sonra dosyayı düzenleyip `GOOGLE_API_KEY` değerini kendi API key'inizle değiştirin.
-
-**Opsiyonel değişkenler:**
-- `GEMINI_MODEL` - Model adı, varsayılan: `gemini-1.5-flash`
-- `ALLOWED_ORIGINS` - CORS için izin verilen origin'ler (virgülle ayrılmış)
-- `ADMIN_SECRET_TOKEN` - `/api/update-data` endpoint'i için admin token
-- `OPENWEATHER_API_KEY` - Hava durumu servisi için (opsiyonel)
-- `SENTRY_DSN` - Hata izleme için Sentry DSN (opsiyonel)
-
-**Not:** API key yoksa backend rule-based intent classifier'a geri döner.
-
 ### 4. Backend'i Çalıştır
 
 ```bash
-# Development modu (hot reload ile)
+cd backend
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-# Veya root dizinden:
-uvicorn backend.main:app --reload
 ```
 
-Backend `http://localhost:8000` adresinde çalışacak.
+Backend `http://localhost:8000` adresinde çalışacak.  
+API dökümantasyonu: `http://localhost:8000/docs`
 
-### 5. Frontend Kurulumu
+### 5. Frontend
 
 ```bash
 cd frontend
-
-# Bağımlılıkları yükle (node_modules git'te yok)
 npm install
 ```
 
-### 6. Frontend Environment Variables
+`frontend/.env` dosyası (gerekirse):
 
-`.env` dosyası git'te yok, elle oluşturmanız gerekiyor:
-
-**Yöntem 1:** `.env.example` dosyasını kopyalayın:
-```bash
-cp frontend/chatbot-arayuzu/.env.example frontend/chatbot-arayuzu/.env
-```
-
-**Yöntem 2:** Manuel olarak `frontend/chatbot-arayuzu/.env` dosyasını oluşturun:
-
-```bash
+```dotenv
 REACT_APP_BACKEND_URL=http://localhost:8000
 ```
-
-**Production için:**
-```bash
-REACT_APP_BACKEND_URL=https://your-backend-url.com
-```
-
-### 7. Frontend'i Çalıştır
 
 ```bash
 npm start
@@ -116,56 +77,44 @@ npm start
 
 Frontend `http://localhost:3000` adresinde açılacak.
 
-## 📝 Hızlı Kurulum Özeti
-
-Mevcut bir bilgisayarda (ön gereksinimler kuruluysa):
+## 🐳 Docker ile Çalıştırma
 
 ```bash
-# 1. Projeyi güncelle
-git pull
-
-# 2. Backend
-cd backend
-pip install -r requirements.txt
-cp .env.example .env  # .env dosyasını oluştur ve düzenle
-
-# 3. Frontend
-cd ../frontend
-npm install
-cp chatbot-arayuzu/.env.example chatbot-arayuzu/.env  # .env dosyasını oluştur
+docker build -t acu-chatbot .
+docker run -p 8080:8080 \
+  -e GOOGLE_API_KEY=senin_api_keyin \
+  -e USE_EMBEDDINGS=true \
+  acu-chatbot
 ```
 
-## 🔧 Environment Variables Detayları
+Backend `http://localhost:8080` adresinde çalışacak.
+
+## ☁️ DigitalOcean App Platform
+
+Proje `app.yaml` üzerinden DigitalOcean App Platform'a otomatik deploy edilir.  
+GitHub `main` branch'ine push yapıldığında auto-deploy tetiklenir.
+
+Environment variable'lar DigitalOcean dashboard'undan yönetilir.
+
+## 🔧 Environment Variables
 
 ### Backend (`backend/.env`)
 
 | Değişken | Açıklama | Zorunlu |
 |----------|----------|---------|
-| `GOOGLE_API_KEY` | Google AI Studio / Gemini API key | Hayır (fallback var) |
+| `GOOGLE_API_KEY` | Gemini API key | Hayır (fallback var) |
 | `ENVIRONMENT` | `development` veya `production` | Hayır |
-| `USE_EMBEDDINGS` | Semantic similarity için embeddings kullan | Hayır (varsayılan: `true`) |
-| `LOG_LEVEL` | Log seviyesi (`DEBUG`, `INFO`, `WARNING`, `ERROR`) | Hayır |
+| `USE_EMBEDDINGS` | Semantic similarity embeddings | Hayır (varsayılan: `true`) |
+| `LOG_LEVEL` | `DEBUG`, `INFO`, `WARNING`, `ERROR` | Hayır |
 | `GEMINI_MODEL` | Gemini model adı | Hayır |
-| `ALLOWED_ORIGINS` | CORS için izin verilen origin'ler | Hayır |
-| `ADMIN_SECRET_TOKEN` | Admin endpoint için token | Hayır |
+| `ALLOWED_ORIGINS` | CORS origin'leri (virgülle ayrılmış) | Hayır |
+| `ADMIN_SECRET_TOKEN` | Admin endpoint token | Hayır |
 | `OPENWEATHER_API_KEY` | Hava durumu API key | Hayır |
-| `SENTRY_DSN` | Sentry hata izleme DSN | Hayır |
+| `SENTRY_DSN` | Sentry DSN | Hayır |
+| `REDIS_URL` | Redis bağlantı URL'i | Hayır |
 
 ### Frontend (`frontend/.env`)
 
 | Değişken | Açıklama | Zorunlu |
 |----------|----------|---------|
 | `REACT_APP_BACKEND_URL` | Backend API URL'i | Hayır (varsayılan: `http://localhost:8000`) |
-
-## 🐳 Docker ile Çalıştırma
-
-```bash
-docker-compose up
-```
-
-Backend `http://localhost:8080` adresinde çalışacak.
-
-## 📚 Daha Fazla Bilgi
-
-- Production deployment için: `DEPLOYMENT.md`
-- Backend API dokümantasyonu: `http://localhost:8000/docs` (çalışırken)

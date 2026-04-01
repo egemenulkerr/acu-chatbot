@@ -104,12 +104,18 @@ function saveHistory(messages) {
   } catch { /* QuotaExceededError */ }
 }
 
+function isSafeUrl(url) {
+  try {
+    const u = new URL(url);
+    return u.protocol === 'http:' || u.protocol === 'https:';
+  } catch { return false; }
+}
+
 function renderMarkdown(text) {
   if (!text) return null;
   const URL_RE = /(https?:\/\/[^\s]+)/g;
 
   return text.split('\n').map((line, i, arr) => {
-    // Bullet points
     if (line.match(/^[•\-*] /)) {
       const content = line.replace(/^[•\-*] /, '');
       return (
@@ -122,7 +128,6 @@ function renderMarkdown(text) {
         </React.Fragment>
       );
     }
-    // Numbered lists
     if (line.match(/^\d+[️⃣]? /)) {
       return (
         <React.Fragment key={i}>
@@ -148,6 +153,7 @@ function renderMarkdown(text) {
         return <code key={j} className="acu-code">{token.slice(1, -1)}</code>;
       if (URL_RE.test(token)) {
         URL_RE.lastIndex = 0;
+        if (!isSafeUrl(token)) return token;
         const label = token.length > 45 ? token.slice(0, 45) + '…' : token;
         return (
           <a key={j} href={token} target="_blank" rel="noopener noreferrer" className="acu-link">
@@ -415,6 +421,26 @@ export default function App() {
     }
   }, [open]);
 
+  // Focus trap + Escape to close
+  const windowRef = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const handleTrap = (e) => {
+      if (e.key === 'Escape') { setOpen(false); return; }
+      if (e.key !== 'Tab') return;
+      const container = windowRef.current;
+      if (!container) return;
+      const focusable = container.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', handleTrap);
+    return () => document.removeEventListener('keydown', handleTrap);
+  }, [open]);
+
   // Suggestions filter
   useEffect(() => {
     if (!input.trim() || input.length < 2) {
@@ -562,6 +588,7 @@ export default function App() {
         <div
           id="acu-chat-window"
           className="acu-window"
+          ref={windowRef}
           role="dialog"
           aria-label="AÇÜ Asistan sohbet penceresi"
           aria-modal="true"

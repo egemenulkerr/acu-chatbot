@@ -2,8 +2,10 @@
 # backend/app/services/device_registry.py - Cihaz Katalogu Yönetimi
 # ============================================================================
 
-import logging
 import json
+import logging
+import tempfile
+import threading
 from pathlib import Path
 from typing import Optional
 from difflib import get_close_matches
@@ -21,8 +23,8 @@ logger: logging.Logger = logging.getLogger(__name__)
 DATA_FILE: Path = Path(__file__).parent.parent / "data" / "devices.json"
 
 DEVICE_DB: dict[str, dict] = {}
+_DB_LOCK = threading.Lock()
 
-# Semantic search: cihaz adı embeddinglari (startup'ta hesaplanır)
 _DEVICE_EMBEDDINGS: dict[str, "any"] = {}
 _SEMANTIC_THRESHOLD: float = 0.60
 
@@ -40,7 +42,10 @@ def load_devices_from_disk() -> bool:
             return False
 
         with open(DATA_FILE, "r", encoding="utf-8") as f:
-            DEVICE_DB = json.load(f)
+            data = json.load(f)
+
+        with _DB_LOCK:
+            DEVICE_DB = data
 
         logger.info(f"✅ Cihaz verisi diskten yüklendi. Toplam {len(DEVICE_DB)} cihaz.")
         return True
@@ -54,11 +59,20 @@ def load_devices_from_disk() -> bool:
 
 
 def save_devices_to_disk(data: dict[str, dict]) -> bool:
+    """Atomic write: önce temp dosyaya yaz, sonra rename ile değiştir."""
     try:
         DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-        with open(DATA_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+        fd, tmp_path = tempfile.mkstemp(
+            dir=DATA_FILE.parent, suffix=".tmp", prefix="devices_"
+        )
+        try:
+            with open(fd, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            Path(tmp_path).replace(DATA_FILE)
+        except Exception:
+            Path(tmp_path).unlink(missing_ok=True)
+            raise
 
         logger.info(f"✅ Cihaz veritabanı disk'e kaydedildi ({len(data)} cihaz)")
         return True
@@ -83,7 +97,8 @@ def update_device_database() -> bool:
         if not save_devices_to_disk(new_data):
             return False
 
-        DEVICE_DB = new_data
+        with _DB_LOCK:
+            DEVICE_DB = new_data
         logger.info("✅ Cihaz veritabanı başarıyla güncellendi.")
         return True
 

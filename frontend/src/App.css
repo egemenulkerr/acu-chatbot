@@ -1062,3 +1062,50 @@
   .acu-avatar { animation: none; }
   .acu-header-glow { animation: none; }
 }
+
+/* ── REDUCED MOTION ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── DARK MODE ERROR BAR ─────────────────────────────────── */
+
+[data-theme="dark"] .acu-error,
+.acu-widget.dark .acu-error {
+  background: #422006;
+  border-top-color: #854d0e;
+  color: #fde68a;
+}
+[data-theme="dark"] .acu-error-close,
+.acu-widget.dark .acu-error-close {
+  color: #fde68a;
+}
+[data-theme="dark"] .acu-error-close:hover,
+.acu-widget.dark .acu-error-close:hover {
+  background: #854d0e;
+}
+
+/* ── FOCUS-VISIBLE ───────────────────────────────────────── */
+
+.acu-icon-btn:focus-visible,
+.acu-tab:focus-visible,
+.acu-chip:focus-visible,
+.acu-send:focus-visible,
+.acu-mic:focus-visible,
+.acu-launcher:focus-visible,
+.acu-fb-btn:focus-visible,
+.acu-copy-btn:focus-visible,
+.acu-scroll-btn:focus-visible,
+.acu-suggestion-item:focus-visible,
+.acu-quick-close:focus-visible,
+.acu-retry-btn:focus-visible,
+.acu-input-clear:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

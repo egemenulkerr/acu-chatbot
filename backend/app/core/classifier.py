@@ -4,9 +4,13 @@
 
 import json
 import logging
+import math
+import re
 from functools import lru_cache
 from pathlib import Path
 from typing import Optional
+
+import numpy as np
 
 from .nlp import preprocess_text
 from ..config import settings
@@ -30,6 +34,7 @@ STEM_INTENT_WEIGHTS: dict[str, dict[str, float]] = {}
 PHRASE_INTENT_WEIGHTS: dict[str, dict[str, float]] = {}
 INTENT_NEGATIVE_KEYWORDS: dict[str, set[str]] = {}
 INTENT_EXAMPLE_MAP: dict[str, str] = {}  # normalized example → intent_name
+INTENT_BY_NAME: dict[str, dict] = {}     # intent_name → intent dict (O(1) lookup)
 
 USE_EMBEDDINGS: bool = settings.use_embeddings
 
@@ -39,15 +44,14 @@ SIMILARITY_THRESHOLD: float = 0.65
 # Dosya yolu — modüle göre relative (CWD'den bağımsız)
 DATA_FILE: Path = Path(__file__).parent.parent / "data" / "intents.json"
 
-# Module import edildiğinde intent verisini bir kez yüklemeyi dene.
+# Modül seviyesinde sadece raw JSON yükle; index/embedding build load_intent_data()'da yapılır.
 try:
     with open(DATA_FILE, "r", encoding="utf-8") as _f:
         _data: dict = json.load(_f)
     INTENTS_DATA = _data.get("intents", [])
-    # Çok agresif eşiklerin basit mesajları (\"merhaba\" vb.) kaçırmaması için
-    # üst sınırı 6.0'da tutuyoruz.
     KEYWORD_THRESHOLD = min(_data.get("keyword_threshold", KEYWORD_THRESHOLD), 6.0)
     SIMILARITY_THRESHOLD = _data.get("similarity_threshold", SIMILARITY_THRESHOLD)
+    INTENT_BY_NAME = {i["intent_name"]: i for i in INTENTS_DATA if "intent_name" in i}
     logger.info(
         f"⚙️  Initial config: keyword_threshold={KEYWORD_THRESHOLD}, "
         f"similarity_threshold={SIMILARITY_THRESHOLD}, intents={len(INTENTS_DATA)}"
@@ -87,7 +91,7 @@ def load_model() -> None:
 # ============================================================================
 
 def load_intent_data() -> None:
-    global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS, STEM_INTENT_WEIGHTS, PHRASE_INTENT_WEIGHTS, INTENT_NEGATIVE_KEYWORDS, INTENT_EXAMPLE_MAP
+    global INTENTS_DATA, KEYWORD_THRESHOLD, SIMILARITY_THRESHOLD, INTENT_EMBEDDINGS, STEM_INTENT_WEIGHTS, PHRASE_INTENT_WEIGHTS, INTENT_NEGATIVE_KEYWORDS, INTENT_EXAMPLE_MAP, INTENT_BY_NAME
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             data: dict = json.load(f)
@@ -95,6 +99,7 @@ def load_intent_data() -> None:
         INTENTS_DATA = data.get("intents", [])
         KEYWORD_THRESHOLD = min(data.get("keyword_threshold", KEYWORD_THRESHOLD), 6.0)
         SIMILARITY_THRESHOLD = data.get("similarity_threshold", 0.65)
+        INTENT_BY_NAME = {i["intent_name"]: i for i in INTENTS_DATA if "intent_name" in i}
 
         logger.info(
             f"⚙️  Config: keyword_threshold={KEYWORD_THRESHOLD}, "
@@ -144,7 +149,6 @@ def load_intent_data() -> None:
 
         INTENT_EMBEDDINGS = {}
         if USE_EMBEDDINGS and MODEL:
-            import numpy as np
             logger.info("📊 Intent embedding'leri oluşturuluyor (batch)...")
 
             all_examples: list[str] = []
@@ -187,12 +191,10 @@ def load_intent_data() -> None:
 # HELPERS
 # ============================================================================
 
-import re as _re
-
 def _normalize_for_match(text: str) -> str:
     """Exact match için normalize: lowercase, noktalamasız, tek boşluk."""
     t = text.lower().strip()
-    t = _re.sub(r'[^\w\s]', '', t, flags=_re.UNICODE)
+    t = re.sub(r'[^\w\s]', '', t, flags=re.UNICODE)
     return ' '.join(t.split())
 
 
@@ -204,7 +206,7 @@ def _classify_by_exact_example(user_message: str) -> Optional[dict]:
 
     intent_name = INTENT_EXAMPLE_MAP.get(normalized)
     if intent_name:
-        intent = next((i for i in INTENTS_DATA if i.get("intent_name") == intent_name), None)
+        intent = INTENT_BY_NAME.get(intent_name)
         if intent:
             logger.info(f"✅ Intent (Exact Example): {intent_name}")
             return intent
@@ -262,7 +264,6 @@ def _classify_by_keywords(user_message: str) -> Optional[dict]:
     # Long messages accumulate more hits; normalize so short messages
     # aren't penalized. Uses log-based dampening.
     if meaningful_count > 3:
-        import math
         factor = 1.0 + 0.3 * math.log(meaningful_count / 3.0)
         scores = {k: v / factor for k, v in scores.items()}
 
@@ -312,9 +313,7 @@ def _classify_by_keywords(user_message: str) -> Optional[dict]:
         except Exception as e:
             logger.debug(f"Tie-break semantic error (ignored): {e}")
 
-    best_intent = next(
-        (i for i in INTENTS_DATA if i.get("intent_name") == best_intent_name), None
-    )
+    best_intent = INTENT_BY_NAME.get(best_intent_name)
     if best_intent:
         logger.info(f"✅ Intent (Keyword): {best_intent_name} (score={best_score:.1f})")
         return best_intent
@@ -325,13 +324,11 @@ def _classify_by_keywords(user_message: str) -> Optional[dict]:
 @lru_cache(maxsize=256)
 def _encode_user_message(message: str):
     """Kullanıcı mesajı vektörünü cache'le — aynı mesaj tekrar encode edilmez."""
-    import numpy as np
     return np.array(list(MODEL.embed([message])))[0]
 
 
 def _cosine_similarity(a, b_matrix) -> float:
     """a: (dim,), b_matrix: (n, dim) — maksimum cosine similarity döndürür."""
-    import numpy as np
     a_norm = a / (np.linalg.norm(a) + 1e-10)
     norms = np.linalg.norm(b_matrix, axis=1, keepdims=True) + 1e-10
     b_normed = b_matrix / norms

@@ -4,36 +4,18 @@
 # ============================================================================
 
 import logging
-import requests
-from bs4 import BeautifulSoup
-from typing import Optional
 from datetime import datetime, timezone
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from typing import Optional
+
+from bs4 import BeautifulSoup
+
+from .http_utils import fetch_with_retry
 
 logger = logging.getLogger(__name__)
 
 SKS_BASE_URL = "https://www.artvin.edu.tr"
 SKS_ETKINLIK_URL = f"{SKS_BASE_URL}/tr/sks"
 SKS_KULUP_URL = f"{SKS_BASE_URL}/tr/ogrenci-topluluk"
-
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    )
-}
-
-
-@retry(
-    retry=retry_if_exception_type((requests.RequestException, ConnectionError)),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=1, max=4),
-    reraise=False,
-)
-def _fetch_page(url: str, timeout: int = 10):
-    r = requests.get(url, timeout=timeout, headers=HEADERS)
-    r.raise_for_status()
-    return r
 
 
 def scrape_sks_events() -> Optional[dict]:
@@ -53,7 +35,7 @@ def scrape_sks_events() -> Optional[dict]:
     # -- Etkinlikler --
     try:
         logger.info(f"SKS etkinlik sayfası taranıyor: {SKS_ETKINLIK_URL}")
-        r = _fetch_page(SKS_ETKINLIK_URL)
+        r = fetch_with_retry(SKS_ETKINLIK_URL, timeout=10)
         if r is not None:
             soup = BeautifulSoup(r.content, "html.parser")
             events = _parse_event_links(soup, SKS_BASE_URL)
@@ -67,7 +49,7 @@ def scrape_sks_events() -> Optional[dict]:
     # -- Öğrenci toplulukları --
     try:
         logger.info(f"SKS kulüp sayfası taranıyor: {SKS_KULUP_URL}")
-        r = _fetch_page(SKS_KULUP_URL)
+        r = fetch_with_retry(SKS_KULUP_URL, timeout=10)
         if r is not None:
             soup = BeautifulSoup(r.content, "html.parser")
             clubs = _parse_clubs(soup, SKS_BASE_URL)

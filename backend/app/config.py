@@ -10,6 +10,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()
 
+APP_VERSION: str = "1.2.0"
+
 
 class Settings(BaseSettings):
     """Uygulama genelinde kullanılan konfigürasyon değerleri."""

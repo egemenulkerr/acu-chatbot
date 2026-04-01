@@ -72,9 +72,15 @@ def init_db() -> None:
 # PUBLIC API
 # ============================================================================
 
+_VALID_ROLES = frozenset({"user", "bot"})
+
+
 def save_message(session_id: str, role: str, text: str) -> None:
-    """Tek bir mesajı kaydeder. Eski kayıt temizleme prune_old_sessions() tarafından yapılır."""
+    """Tek bir mesajı kaydeder ve oturum başına _MAX_HISTORY limitini uygular."""
     if not session_id:
+        return
+    if role not in _VALID_ROLES:
+        logger.warning("Geçersiz role='%s', mesaj kaydedilmedi.", role)
         return
     ts = datetime.now(timezone.utc).isoformat()
     try:
@@ -83,6 +89,13 @@ def save_message(session_id: str, role: str, text: str) -> None:
             conn.execute(
                 "INSERT INTO messages (session_id, role, text, ts) VALUES (?, ?, ?, ?)",
                 (session_id, role, text[:2000], ts),
+            )
+            conn.execute(
+                """DELETE FROM messages WHERE id IN (
+                    SELECT id FROM messages WHERE session_id = ?
+                    ORDER BY id DESC LIMIT -1 OFFSET ?
+                )""",
+                (session_id, _MAX_HISTORY),
             )
             conn.commit()
     except Exception as e:

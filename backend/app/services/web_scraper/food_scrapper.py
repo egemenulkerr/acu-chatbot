@@ -1,22 +1,11 @@
-import requests
-from bs4 import BeautifulSoup
 import logging
 from datetime import datetime
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+from bs4 import BeautifulSoup
+
+from .http_utils import fetch_with_retry
 
 logger = logging.getLogger(__name__)
-
-
-@retry(
-    retry=retry_if_exception_type((requests.RequestException, ConnectionError)),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=1, max=4),
-    reraise=False,
-)
-def _fetch_menu_page(url: str, timeout: int = 10):
-    r = requests.get(url, timeout=timeout)
-    r.raise_for_status()
-    return r
 
 
 def scrape_daily_menu():
@@ -39,7 +28,7 @@ def scrape_daily_menu():
 
     try:
         logger.info("Yemek listesi taranıyor...")
-        r = _fetch_menu_page(url)
+        r = fetch_with_retry(url, timeout=10)
         if r is None:
             logger.error("Yemek sayfası 3 denemede de alınamadı.")
             return None
@@ -60,7 +49,7 @@ def scrape_daily_menu():
                 if candidate and "hafta sonu" not in candidate.lower():
                     menu_text = candidate
                     logger.info(f"Tarih eşleşmesi bulundu (td[{i}]): {cell_text}")
-                break
+                    break
 
         # Tarihe göre bulunamadıysa, ilk çifti dene (sitenin ilk satırı genellikle bugün)
         if not menu_text and len(tds) > 1:

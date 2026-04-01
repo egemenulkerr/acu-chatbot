@@ -13,7 +13,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from .config import settings
+from .config import settings, APP_VERSION
 from .api.endpoints import chat as chat_router
 from .api.endpoints import analytics as analytics_router
 from .api.endpoints import admin_intents as admin_intents_router
@@ -156,7 +156,7 @@ async def lifespan(app: FastAPI):
 app: FastAPI = FastAPI(
     title="AÇÜ Chatbot API",
     description="Artvin Çoruh Üniversitesi Asistan Chatbotu",
-    version="1.1.0",
+    version=APP_VERSION,
     lifespan=lifespan
 )
 
@@ -192,7 +192,7 @@ app.include_router(admin_intents_router.router, prefix="/api/admin", tags=["admi
 def read_root() -> dict:
     return {
         "proje": "AÇÜ Hibrit Sohbet Robotu API",
-        "versiyon": "1.1.0",
+        "versiyon": APP_VERSION,
         "durum": "Hazır"
     }
 
@@ -208,7 +208,7 @@ def health_check():
 
     body = {
         "status": "ready" if _APP_READY else "initializing",
-        "version": "1.1.0",
+        "version": APP_VERSION,
         "components": {
             "nlp": _morph is not None or not _zemb,
             "embeddings": _model is not None,
