@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 
 OPENWEATHER_API_KEY: Optional[str] = settings.openweather_api_key or ""
 
-CITY_ID = "321895"        # Artvin, TR (OpenWeatherMap city ID)
-CITY_NAME = "Artvin,TR"
+ARTVIN_LAT = 41.1828      # Artvin şehir merkezi
+ARTVIN_LON = 41.8183
 API_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 WEATHER_ICONS = {
@@ -50,10 +50,10 @@ def get_weather() -> str:
         resp = requests.get(
             API_URL,
             params={
-                "q": CITY_NAME,
+                "lat": ARTVIN_LAT,
+                "lon": ARTVIN_LON,
                 "appid": OPENWEATHER_API_KEY,
                 "units": "metric",
-                "lang": "tr",
             },
             timeout=8,
         )
@@ -66,7 +66,7 @@ def get_weather() -> str:
         clouds = data.get("clouds", {})
 
         condition_en = weather.get("description", "").lower()
-        condition_tr = WEATHER_TR.get(condition_en, weather.get("description", ""))
+        condition_tr = WEATHER_TR.get(condition_en, condition_en.replace(" ", " "))
         icon = WEATHER_ICONS.get(weather.get("main", ""), "🌡️")
 
         temp = round(main["temp"])

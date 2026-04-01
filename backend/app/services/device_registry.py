@@ -4,7 +4,6 @@
 
 import logging
 import json
-import os
 from pathlib import Path
 from typing import Optional
 from difflib import get_close_matches
@@ -100,8 +99,8 @@ def _build_device_embeddings() -> None:
     """
     global _DEVICE_EMBEDDINGS
 
-    use_embeddings = os.getenv("USE_EMBEDDINGS", "true").lower() == "true"
-    if not use_embeddings or not DEVICE_DB:
+    from ..config import settings
+    if not settings.use_embeddings or not DEVICE_DB:
         return
 
     try:

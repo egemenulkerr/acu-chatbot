@@ -17,7 +17,7 @@ from .config import settings
 from .api.endpoints import chat as chat_router
 from .api.endpoints import analytics as analytics_router
 from .api.endpoints import admin_intents as admin_intents_router
-from .core.classifier import load_intent_data
+from .core.classifier import load_model as load_embedding_model, load_intent_data
 from .core.limiter import limiter, llm_limiter
 from .services.device_registry import initialize_device_db, update_device_database
 from .services.session_store import init_db as init_session_db, prune_old_sessions
@@ -65,6 +65,7 @@ logger = _configure_logging()
 # ============================================================================
 
 scheduler: AsyncIOScheduler = AsyncIOScheduler()
+_APP_READY: bool = False
 
 
 # ============================================================================
@@ -76,6 +77,12 @@ async def _load_nlp_module() -> None:
     from .core.nlp import get_morphology
     await asyncio.to_thread(get_morphology)
     logger.info("NLP motoru yuklendi.")
+
+
+async def _load_semantic_model() -> None:
+    logger.info("Semantic embedding modeli yukleniyor...")
+    await asyncio.to_thread(load_embedding_model)
+    logger.info("Semantic embedding modeli yuklendi.")
 
 
 async def _load_intent_data_module() -> None:
@@ -107,17 +114,21 @@ def _setup_scheduled_jobs() -> None:
 async def _background_initialization() -> None:
     """
     Startup'ta agir initialization'i arka planda yap.
-    NLP + Intent siralı (bagimli), ardindan Cihaz + Yemek paralel.
+    NLP + Embedding + Intent siralı (bagimli), ardindan Cihaz + Yemek paralel.
     """
+    global _APP_READY
     try:
         init_session_db()
         await _load_nlp_module()
+        await _load_semantic_model()
         await _load_intent_data_module()
         await asyncio.gather(
             _load_device_registry(),
             _load_menu_data(),
         )
         _setup_scheduled_jobs()
+        _APP_READY = True
+        logger.info("Uygulama hazir — tum bilesenler yuklendi.")
     except Exception as e:
         logger.error(f"Background initialization hatasi: {e}", exc_info=True)
 
@@ -187,14 +198,16 @@ def read_root() -> dict:
 
 
 @app.get("/health", tags=["health"])
-def health_check() -> dict:
+def health_check():
+    from fastapi.responses import JSONResponse
     from .core.classifier import INTENTS_DATA as _intents, MODEL as _model
     from .services.device_registry import DEVICE_DB as _devices
     from .core.nlp import MORPHOLOGY as _morph, ZEMBEREK_AVAILABLE as _zemb
     from .services.llm_client import GOOGLE_API_KEY as _gkey
     from .config import settings as _settings
-    return {
-        "status": "ok",
+
+    body = {
+        "status": "ready" if _APP_READY else "initializing",
         "version": "1.1.0",
         "components": {
             "nlp": _morph is not None or not _zemb,
@@ -206,3 +219,7 @@ def health_check() -> dict:
         },
         "use_embeddings": _settings.use_embeddings,
     }
+
+    if not _APP_READY:
+        return JSONResponse(content=body, status_code=503)
+    return body

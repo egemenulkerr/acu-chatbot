@@ -17,6 +17,13 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel as _BaseModel, Field
 
 from ...schemas.chat import ChatRequest, ChatResponse
+
+
+def _current_academic_year() -> str:
+    """Mevcut tarihten akademik yılı hesapla (ör. Eylül 2025 → '2025-2026')."""
+    today = date.today()
+    start = today.year if today.month >= 9 else today.year - 1
+    return f"{start}-{start + 1}"
 from ...core.classifier import classify_intent
 from ...core.limiter import limiter, llm_limiter
 from ...services.web_scraper.manager import update_system_data, _format_menu_message
@@ -138,7 +145,7 @@ def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
 
         # "ne zaman" gibi genel soru → önemli tarihlerin özeti
         if any(kw in msg_lower for kw in ["ne zaman", "tarih", "takvim"]):
-            lines = ["📅 **2025-2026 Önemli Tarihler**\n"]
+            lines = [f"📅 **{_current_academic_year()} Önemli Tarihler**\n"]
             for label, date_val in key_dates.items():
                 lines.append(f"• **{label}:** {date_val}")
             lines.append(f"\n🔗 Tam takvim: {calendars.get('current', intent['response_content'])}")
@@ -168,7 +175,7 @@ def _handle_academic_calendar(intent: dict, message: str) -> ChatResponse:
         )
 
     return ChatResponse(
-        response=f"📅 **Güncel Akademik Takvim (2025-2026)**\n{intent['response_content']}",
+        response=f"📅 **Güncel Akademik Takvim ({_current_academic_year()})**\n{intent['response_content']}",
         source="Hızlı Yol",
         intent_name="akademik_takvim"
     )
@@ -315,6 +322,29 @@ def _handle_generic_intent(intent: dict) -> ChatResponse:
     )
 
 
+async def _dispatch_intent(intent: dict, raw_message: str, user_id: str) -> ChatResponse:
+    """Ortak intent dispatch — hem normal hem stream endpoint'i bu fonksiyonu kullanır."""
+    intent_name: str = intent["intent_name"]
+
+    if intent_name == "akademik_takvim":
+        return _handle_academic_calendar(intent, raw_message)
+    if intent_name == "yemek_listesi":
+        return await _handle_food_query()
+    if intent_name == "cihaz_bilgisi":
+        return handle_device_query(raw_message, user_id)
+    if intent_name == "duyurular":
+        return await _handle_duyurular_query()
+    if intent_name == "hava_durumu":
+        return await _handle_weather_query()
+    if intent_name in ("kutuphane", "kütüphane"):
+        return await _handle_library_query()
+    if intent_name in ("sks_etkinlik", "kulup_topluluk", "spor_tesisleri"):
+        return await _handle_sks_query()
+    if intent_name == "guncel_haberler":
+        return await _handle_news_query()
+    return _handle_generic_intent(intent)
+
+
 async def _fallback_to_llm(message: str, history: list[dict]) -> ChatResponse:
     """Intent bulunamadığında Gemini'ye yönlendir. asyncio.to_thread ile event loop'u bloke etmez."""
     logger.warning("⚠️  Yerel eşleşme yok. LLM'e yönlendiriliyor...")
@@ -403,27 +433,7 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
 
     if intent:
         logger.info(f"✅ Intent: {intent['intent_name']}")
-        intent_name: str = intent["intent_name"]
-
-        if intent_name == "akademik_takvim":
-            result = _handle_academic_calendar(intent, body.message)
-        elif intent_name == "yemek_listesi":
-            result = await _handle_food_query()
-        elif intent_name == "cihaz_bilgisi":
-            result = handle_device_query(body.message, user_id)
-        elif intent_name == "duyurular":
-            result = await _handle_duyurular_query()
-        elif intent_name == "hava_durumu":
-            result = await _handle_weather_query()
-        elif intent_name in ("kutuphane", "kütüphane"):
-            result = await _handle_library_query()
-        elif intent_name in ("sks_etkinlik", "kulup_topluluk", "spor_tesisleri"):
-            result = await _handle_sks_query()
-        elif intent_name == "guncel_haberler":
-            result = await _handle_news_query()
-        else:
-            result = _handle_generic_intent(intent)
-
+        result = await _dispatch_intent(intent, body.message, user_id)
         save_message(body.session_id, "user", body.message)
         save_message(body.session_id, "bot", result.response)
         _log_analytics(body.message, result.intent_name, result.source, (time() - t_start) * 1000)
@@ -439,6 +449,7 @@ async def handle_chat_message(request: Request, body: ChatRequest) -> ChatRespon
 
 @router.post("/chat/stream")
 @limiter.limit("20/minute")
+@llm_limiter.limit("10/minute")
 async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingResponse:
     """
     Streaming chat endpoint — Gemini cevabını SSE (text/event-stream) olarak akıtır.
@@ -483,26 +494,7 @@ async def stream_chat_message(request: Request, body: ChatRequest) -> StreamingR
             intent: Optional[dict] = classify_intent(body.message)
 
             if intent:
-                intent_name = intent["intent_name"]
-                if intent_name == "akademik_takvim":
-                    r = _handle_academic_calendar(intent, body.message)
-                elif intent_name == "yemek_listesi":
-                    r = await _handle_food_query()
-                elif intent_name == "cihaz_bilgisi":
-                    r = handle_device_query(body.message, user_id)
-                elif intent_name == "duyurular":
-                    r = await _handle_duyurular_query()
-                elif intent_name == "hava_durumu":
-                    r = await _handle_weather_query()
-                elif intent_name in ("kutuphane", "kütüphane"):
-                    r = await _handle_library_query()
-                elif intent_name in ("sks_etkinlik", "kulup_topluluk", "spor_tesisleri"):
-                    r = await _handle_sks_query()
-                elif intent_name == "guncel_haberler":
-                    r = await _handle_news_query()
-                else:
-                    r = _handle_generic_intent(intent)
-
+                r = await _dispatch_intent(intent, body.message, user_id)
                 _log_analytics(body.message, r.intent_name, r.source, (time() - t_start) * 1000)
                 save_message(body.session_id, "user", body.message)
                 save_message(body.session_id, "bot", r.response)

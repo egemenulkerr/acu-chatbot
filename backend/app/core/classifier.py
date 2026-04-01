@@ -132,17 +132,32 @@ def load_intent_data() -> None:
             f"{len(PHRASE_INTENT_WEIGHTS)} phrases"
         )
 
-        # Semantic embedding'leri yeniden hazırla
         INTENT_EMBEDDINGS = {}
         if USE_EMBEDDINGS and MODEL:
             import numpy as np
-            logger.info("📊 Intent embedding'leri oluşturuluyor...")
+            logger.info("📊 Intent embedding'leri oluşturuluyor (batch)...")
+
+            all_examples: list[str] = []
+            index_map: list[tuple[str, int, int]] = []
             for intent in INTENTS_DATA:
                 intent_name = intent.get("intent_name", "")
+                if intent.get("use_semantic") is False:
+                    continue
                 examples: list[str] = intent.get("examples", []) or []
                 if examples:
-                    INTENT_EMBEDDINGS[intent_name] = np.array(list(MODEL.embed(examples)))
-            logger.info(f"✅ {len(INTENT_EMBEDDINGS)} intent embedding'i oluşturuldu.")
+                    start = len(all_examples)
+                    all_examples.extend(examples)
+                    index_map.append((intent_name, start, start + len(examples)))
+
+            if all_examples:
+                all_vectors = np.array(list(MODEL.embed(all_examples)))
+                for intent_name, start, end in index_map:
+                    INTENT_EMBEDDINGS[intent_name] = all_vectors[start:end]
+
+            logger.info(
+                f"✅ {len(INTENT_EMBEDDINGS)} intent embedding'i oluşturuldu "
+                f"({len(all_examples)} örnek, tek batch)."
+            )
 
         logger.info(f"✅ {len(INTENTS_DATA)} intent yüklendi.")
 

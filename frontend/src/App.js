@@ -178,7 +178,10 @@ async function streamMessage(message, sessionId, history, onToken, onDone, onErr
   try {
     const res = await fetch(`${BACKEND_URL}/api/chat/stream`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Session-Id': sessionId,
+      },
       body: JSON.stringify({
         message,
         session_id: sessionId,

@@ -73,7 +73,7 @@ def init_db() -> None:
 # ============================================================================
 
 def save_message(session_id: str, role: str, text: str) -> None:
-    """Tek bir mesajı kaydeder. Ardından eski kayıtları _MAX_HISTORY'ye kırpar."""
+    """Tek bir mesajı kaydeder. Eski kayıt temizleme prune_old_sessions() tarafından yapılır."""
     if not session_id:
         return
     ts = datetime.now(timezone.utc).isoformat()
@@ -83,16 +83,6 @@ def save_message(session_id: str, role: str, text: str) -> None:
             conn.execute(
                 "INSERT INTO messages (session_id, role, text, ts) VALUES (?, ?, ?, ?)",
                 (session_id, role, text[:2000], ts),
-            )
-            conn.execute(
-                """
-                DELETE FROM messages
-                WHERE session_id = ? AND id NOT IN (
-                    SELECT id FROM messages WHERE session_id = ?
-                    ORDER BY id DESC LIMIT ?
-                )
-                """,
-                (session_id, session_id, _MAX_HISTORY),
             )
             conn.commit()
     except Exception as e:
