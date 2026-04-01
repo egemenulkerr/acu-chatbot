@@ -338,7 +338,22 @@ def _cosine_similarity(a, b_matrix) -> float:
     return float(np.dot(b_normed, a_norm).max())
 
 
-_SEMANTIC_FLOOR: float = 0.55
+_SEMANTIC_FLOOR: float = 0.65
+
+
+def _has_known_vocabulary(user_message: str) -> bool:
+    """Mesajda bilinen intent kelime dağarcığından en az bir eşleşme var mı?"""
+    text_lower = user_message.lower()
+    for phrase in PHRASE_INTENT_WEIGHTS:
+        if phrase in text_lower:
+            return True
+    stems = preprocess_text(user_message)
+    for stem in stems:
+        s = stem.strip().lower()
+        if s and s not in _STOPWORDS and s in STEM_INTENT_WEIGHTS:
+            return True
+    return False
+
 
 def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
     if not USE_EMBEDDINGS or not MODEL:
@@ -406,9 +421,12 @@ def classify_intent(user_message: str) -> Optional[dict]:
     if intent:
         return intent
 
-    intent = _classify_by_semantic_similarity(user_message)
-    if intent:
-        return intent
+    if _has_known_vocabulary(user_message):
+        intent = _classify_by_semantic_similarity(user_message)
+        if intent:
+            return intent
+    else:
+        logger.info("⚠️  Bilinen kelime dağarcığı yok, semantic atlanıyor.")
 
     logger.info("⚠️  Intent sınıflandırılamadı. LLM'e yönlendiriliyor...")
     return None
