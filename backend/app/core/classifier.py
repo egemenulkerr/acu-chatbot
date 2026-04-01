@@ -338,6 +338,8 @@ def _cosine_similarity(a, b_matrix) -> float:
     return float(np.dot(b_normed, a_norm).max())
 
 
+_SEMANTIC_FLOOR: float = 0.55
+
 def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
     if not USE_EMBEDDINGS or not MODEL:
         return None
@@ -353,7 +355,6 @@ def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
             if intent_name not in INTENT_EMBEDDINGS:
                 continue
 
-            # Intent bazlı semantic kullanım flag'i
             use_semantic_flag = intent.get("use_semantic")
             if use_semantic_flag is False:
                 continue
@@ -366,12 +367,16 @@ def _classify_by_semantic_similarity(user_message: str) -> Optional[dict]:
 
         if best_intent:
             logger.debug(f"Semantic: intent={best_intent['intent_name']}, sim={best_similarity:.4f}")
-        # Intent'e özel eşik tanımlanmışsa onu kullan
+
+        if best_similarity < _SEMANTIC_FLOOR:
+            logger.info(f"⚠️  Semantic floor altında (sim={best_similarity:.4f} < {_SEMANTIC_FLOOR}), eşleşme reddedildi.")
+            return None
+
         intent_specific_threshold = None
         if best_intent is not None:
             intent_specific_threshold = best_intent.get("semantic_threshold")
 
-        threshold = float(intent_specific_threshold or SIMILARITY_THRESHOLD)
+        threshold = max(float(intent_specific_threshold or SIMILARITY_THRESHOLD), _SEMANTIC_FLOOR)
         if best_intent is not None and best_similarity >= threshold:
             logger.info(f"✅ Intent (Semantic): {best_intent['intent_name']} (sim={best_similarity:.4f}, th={threshold})")
             return best_intent
